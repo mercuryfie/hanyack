@@ -1,0 +1,960 @@
+DEBUG - 2025-04-21 00:47:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 00:47:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 00:47:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 00:51:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 00:51:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 00:51:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 00:51:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:04:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:04:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:04:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:04:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:04:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:04:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:06:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:06:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:06:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:07:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:07:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:07:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 01:07:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:05:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:05:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:05:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:12:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:12:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:34:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 02:34:35 --> ErrorException: Undefined array key "hn_isok"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 131.
+ 1 APPPATH/Views/web/herbListMaster_View.php(131): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "hn_isok"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 131)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(278): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 02:34:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 02:34:35 --> ErrorException: Undefined array key "hn_isok"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 131.
+ 1 APPPATH/Views/web/herbListMaster_View.php(131): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "hn_isok"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 131)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(278): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 02:34:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:34:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 02:34:48 --> ErrorException: Undefined array key "hn_isok"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 131.
+ 1 APPPATH/Views/web/herbListMaster_View.php(131): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "hn_isok"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 131)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(278): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 02:34:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:35:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:35:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:35:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 02:35:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:58:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 04:58:52 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: Mypage/orderList]
+in APPPATH/Libraries/Utils.php on line 11.
+ 1 APPPATH/Controllers/HerbController.php(18): App\Libraries\Utils->Check_Auth('master')
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(903): App\Controllers\HerbController->__construct()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 04:58:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 04:58:52 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: Mypage/orderList]
+in APPPATH/Libraries/Utils.php on line 11.
+ 1 APPPATH/Controllers/HerbController.php(18): App\Libraries\Utils->Check_Auth('master')
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(903): App\Controllers\HerbController->__construct()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 04:59:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 04:59:23 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: Mypage/orderList]
+in APPPATH/Libraries/Utils.php on line 11.
+ 1 APPPATH/Controllers/HerbController.php(18): App\Libraries\Utils->Check_Auth('master')
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(903): App\Controllers\HerbController->__construct()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 04:59:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 04:59:23 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: Mypage/orderList]
+in APPPATH/Libraries/Utils.php on line 11.
+ 1 APPPATH/Controllers/HerbController.php(18): App\Libraries\Utils->Check_Auth('master')
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(903): App\Controllers\HerbController->__construct()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 04:59:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 04:59:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:01:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:01:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:01:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:01:03 --> ErrorException: Undefined array key "hn_isok"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 131.
+ 1 APPPATH/Views/web/herbListMaster_View.php(131): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "hn_isok"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 131)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(287): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:01:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:01:25 --> ErrorException: Undefined array key "hn_isok"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 131.
+ 1 APPPATH/Views/web/herbListMaster_View.php(131): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "hn_isok"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 131)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(287): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:01:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:01:25 --> ErrorException: Undefined array key "hn_isok"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 131.
+ 1 APPPATH/Views/web/herbListMaster_View.php(131): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "hn_isok"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 131)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(287): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:02:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:03:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:03:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:03:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:03:52 --> ErrorException: Trying to access array offset on false
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 131.
+ 1 APPPATH/Views/web/herbListMaster_View.php(131): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on false', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 131)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(287): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:03:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:03:52 --> ErrorException: Trying to access array offset on false
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 131.
+ 1 APPPATH/Views/web/herbListMaster_View.php(131): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on false', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 131)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(287): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:03:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:29:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:29:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:29:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:29:54 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: Mypage/herbList/%ED%85%8C]
+in APPPATH/Libraries/Utils.php on line 11.
+ 1 APPPATH/Controllers/HerbController.php(18): App\Libraries\Utils->Check_Auth('master')
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(903): App\Controllers\HerbController->__construct()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:29:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:29:54 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: Mypage/herbList/%ED%85%8C]
+in APPPATH/Libraries/Utils.php on line 11.
+ 1 APPPATH/Controllers/HerbController.php(18): App\Libraries\Utils->Check_Auth('master')
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(903): App\Controllers\HerbController->__construct()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:29:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:29:56 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: Mypage/herbList/%ED%85%8C]
+in APPPATH/Libraries/Utils.php on line 11.
+ 1 APPPATH/Controllers/HerbController.php(18): App\Libraries\Utils->Check_Auth('master')
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(903): App\Controllers\HerbController->__construct()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:29:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:29:56 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: Mypage/herbList/%ED%85%8C]
+in APPPATH/Libraries/Utils.php on line 11.
+ 1 APPPATH/Controllers/HerbController.php(18): App\Libraries\Utils->Check_Auth('master')
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(903): App\Controllers\HerbController->__construct()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:29:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:29:57 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Libraries/Utils.php on line 11.
+ 1 APPPATH/Controllers/HerbController.php(18): App\Libraries\Utils->Check_Auth('master')
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(903): App\Controllers\HerbController->__construct()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:29:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:29:58 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: Mypage/herbReg]
+in APPPATH/Libraries/Utils.php on line 11.
+ 1 APPPATH/Controllers/HerbController.php(18): App\Libraries\Utils->Check_Auth('master')
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(903): App\Controllers\HerbController->__construct()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:30:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:30:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:30:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:30:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:30:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:30:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:30:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:30:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:31:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:31:26 --> ParseError: syntax error, unexpected end of file, expecting "elseif" or "else" or "endif"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 233.
+ 1 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 2 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 3 APPPATH/Controllers/HerbController.php(287): view('web/herbListMaster_View', [...])
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:33:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:33:26 --> ParseError: syntax error, unexpected end of file, expecting "elseif" or "else" or "endif"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 189.
+ 1 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 2 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 3 APPPATH/Controllers/HerbController.php(287): view('web/herbListMaster_View', [...])
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:33:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:33:26 --> ParseError: syntax error, unexpected end of file, expecting "elseif" or "else" or "endif"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 189.
+ 1 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 2 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 3 APPPATH/Controllers/HerbController.php(287): view('web/herbListMaster_View', [...])
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:33:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:33:27 --> ParseError: syntax error, unexpected end of file, expecting "elseif" or "else" or "endif"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 189.
+ 1 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 2 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 3 APPPATH/Controllers/HerbController.php(287): view('web/herbListMaster_View', [...])
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:34:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:34:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:34:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:34:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:37:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:37:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:40:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:40:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 05:40:59 --> ParseError: syntax error, unexpected token "public"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Controllers/HerbController.php on line 84.
+ 1 VENDORPATH/composer/ClassLoader.php(427): {closure:Composer\Autoload\ClassLoader::initializeIncludeClosure():575}('/Users/djmedi_mac/Documents/repos/NewHanyack/vendor/composer/../../app/Controllers/HerbController.php')
+ 2 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controllers\\HerbController')
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(885): class_exists('\\App\\Controllers\\HerbController', true)
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->startController()
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-21 05:40:59 --> ParseError: syntax error, unexpected token "public"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Controllers/HerbController.php on line 84.
+ 1 VENDORPATH/composer/ClassLoader.php(427): {closure:Composer\Autoload\ClassLoader::initializeIncludeClosure():575}('/Users/djmedi_mac/Documents/repos/NewHanyack/vendor/composer/../../app/Controllers/HerbController.php')
+ 2 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controllers\\HerbController')
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(885): class_exists('\\App\\Controllers\\HerbController', true)
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->startController()
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 05:41:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:41:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:57:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:57:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:57:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:57:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:57:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:59:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:59:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:59:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 05:59:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:17:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:17:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:17:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:18:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:18:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:18:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:18:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:28:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:28:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:28:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:28:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:28:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:28:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:28:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:28:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:31:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:31:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:31:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:31:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:34:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:34:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:35:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:35:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:35:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:35:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:49:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:49:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:49:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:49:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:49:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:51:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:51:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:52:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:52:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:52:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:53:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:53:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:53:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:53:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:53:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:53:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:53:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:54:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:54:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:55:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 06:55:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 07:08:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 07:08:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 07:08:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 07:08:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 07:08:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 07:08:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 07:35:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:35:05 --> ErrorException: Undefined variable $item
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 87.
+ 1 APPPATH/Views/web/herbListMaster_View.php(87): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $item', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 87)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:35:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:35:05 --> ErrorException: Undefined variable $item
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 87.
+ 1 APPPATH/Views/web/herbListMaster_View.php(87): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $item', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 87)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:40:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 07:40:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 07:45:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:45:36 --> ErrorException: Undefined variable $item
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 87.
+ 1 APPPATH/Views/web/herbListMaster_View.php(87): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $item', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 87)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:45:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:45:36 --> ErrorException: Undefined variable $item
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 87.
+ 1 APPPATH/Views/web/herbListMaster_View.php(87): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $item', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 87)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:46:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:46:44 --> ErrorException: Undefined variable $list
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 65.
+ 1 APPPATH/Views/web/herbListMaster_View.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $list', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 65)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:46:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:46:45 --> ErrorException: Undefined variable $list
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 65.
+ 1 APPPATH/Views/web/herbListMaster_View.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $list', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 65)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:52:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:52:30 --> ErrorException: Undefined variable $list
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 65.
+ 1 APPPATH/Views/web/herbListMaster_View.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $list', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 65)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:52:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:52:30 --> ErrorException: Undefined variable $list
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 65.
+ 1 APPPATH/Views/web/herbListMaster_View.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $list', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 65)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:54:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:54:13 --> ErrorException: Undefined variable $list
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 65.
+ 1 APPPATH/Views/web/herbListMaster_View.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $list', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 65)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:54:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:54:13 --> ErrorException: Undefined variable $list
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 65.
+ 1 APPPATH/Views/web/herbListMaster_View.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $list', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 65)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:54:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:54:22 --> ErrorException: Undefined variable $list
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 65.
+ 1 APPPATH/Views/web/herbListMaster_View.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $list', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 65)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:54:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:54:22 --> ErrorException: Undefined variable $list
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 65.
+ 1 APPPATH/Views/web/herbListMaster_View.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $list', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 65)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:54:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:54:47 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 66.
+ 1 APPPATH/Views/web/herbListMaster_View.php(66): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 66)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:54:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:54:47 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 66.
+ 1 APPPATH/Views/web/herbListMaster_View.php(66): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 66)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:56:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:56:31 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 89.
+ 1 APPPATH/Views/web/herbListMaster_View.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 89)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:56:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:56:31 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 89.
+ 1 APPPATH/Views/web/herbListMaster_View.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 89)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:57:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:57:07 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 89.
+ 1 APPPATH/Views/web/herbListMaster_View.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 89)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 07:57:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 07:57:07 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 89.
+ 1 APPPATH/Views/web/herbListMaster_View.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 89)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 08:02:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:04:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:04:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:16:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:19:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:19:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:21:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:21:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:21:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:21:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:21:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:21:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:22:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:22:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:23:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:23:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:23:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:23:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:25:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:25:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:33:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:33:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:34:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:34:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:34:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:34:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:34:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:34:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:35:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:35:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:42:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 08:42:50 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 66.
+ 1 APPPATH/Views/web/herbListMaster_View.php(66): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 66)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 08:42:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 08:42:50 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 66.
+ 1 APPPATH/Views/web/herbListMaster_View.php(66): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 66)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 08:45:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 08:45:05 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 93.
+ 1 APPPATH/Views/web/herbListMaster_View.php(93): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 93)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 08:45:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 08:45:05 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 93.
+ 1 APPPATH/Views/web/herbListMaster_View.php(93): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 93)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 08:45:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:45:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:47:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 08:47:22 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 94.
+ 1 APPPATH/Views/web/herbListMaster_View.php(94): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 94)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 08:47:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 08:47:22 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 94.
+ 1 APPPATH/Views/web/herbListMaster_View.php(94): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 94)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 08:49:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:49:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:49:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:49:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:50:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:50:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:51:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:51:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:51:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:51:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:52:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:52:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:53:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:53:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:53:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:53:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:54:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:55:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:55:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:58:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 08:58:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:00:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:00:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:03:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 09:03:27 --> ErrorException: Undefined variable $item
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 66.
+ 1 APPPATH/Views/web/herbListMaster_View.php(66): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $item', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 66)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 09:03:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 09:03:27 --> ErrorException: Undefined variable $item
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 66.
+ 1 APPPATH/Views/web/herbListMaster_View.php(66): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $item', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 66)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 09:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 09:03:57 --> ErrorException: Undefined variable $d
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 66.
+ 1 APPPATH/Views/web/herbListMaster_View.php(66): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $d', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 66)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 09:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 09:03:57 --> ErrorException: Undefined variable $d
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 66.
+ 1 APPPATH/Views/web/herbListMaster_View.php(66): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $d', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 66)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 09:04:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:04:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:04:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:04:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 09:04:47 --> ErrorException: Trying to access array offset on false
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 67.
+ 1 APPPATH/Views/web/herbListMaster_View.php(67): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on false', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 67)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 09:04:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-21 09:04:47 --> ErrorException: Trying to access array offset on false
+[Method: GET, Route: Mypage/herbList]
+in APPPATH/Views/web/herbListMaster_View.php on line 67.
+ 1 APPPATH/Views/web/herbListMaster_View.php(67): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on false', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php', 67)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/herbListMaster_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/herbListMaster_View', [], true)
+ 5 APPPATH/Controllers/HerbController.php(102): view('web/herbListMaster_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbController->herbList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-21 09:04:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:04:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:05:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:35:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:35:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:35:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:35:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:36:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:36:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:36:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:36:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:36:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:36:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:37:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-21 09:37:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

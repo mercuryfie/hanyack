@@ -1,0 +1,653 @@
+$(document).ready(function () {
+    Load_Data(1);
+
+    $('input[name="herbFilter"]').change(function (e) {
+        let value = $('input[name="herbFilter"]:checked').val();
+        Load_Product(1, value);
+    });
+
+    $('#maching1').on('click',function (e) {
+        $('#matchingpop2').css('display', 'flex');
+
+    });
+
+    $('#ptyp').on('change',function(e){
+        Load_Data(1);
+    });
+
+    $('#pharm').on('change',function(e){
+        Load_Data(1);
+    });
+
+
+    $('#XBtn').on('click',function(e){
+        INI_Matching_pop();
+        $('#matchingpop').hide();
+    });
+
+    $('#XBtn2,#btn_close').on('click',function(e){
+        INI_Matching_pop();
+        $('#matchingpop2').hide();
+    });
+
+    $('#matchingpop2').on('click', function(e){
+        if (e.target === this) {
+            INI_Matching_pop();
+            $(this).hide();
+        }
+    });
+
+    $('#selectView').on('click', function (e) {
+        $('input[name="chkproduct"]').each(function (e) {
+            if ($(this).is(':checked') == false) {
+                $(this).parent().parent().css('display', 'none');
+            }
+        });
+    });
+
+    $('#AllView').on('click', function (e) {
+        $('input[name="chkproduct"]').each(function (e) {
+            $(this).parent().parent().css('display', '');
+        });
+    });
+
+    $('#cart_reg').on('click',function(e){
+        let cnt = $('input[name="chkproduct"]:checked').length;
+        if(cnt <=0){
+            Make_Toast('주문하실 약재의 수량을 선택하셔야 합니다.');
+        }else if(window.confirm('장바구니에 담으시겠습니까?')==true){
+            let code = '';
+            let cnt = 0;
+            let gPrice = 0;
+            let str = '';
+
+            $('input[name="chkproduct"]').each(function (e) {
+                if ($(this).is(':checked') == true) {
+                    code = $(this).val();
+                    pType = $(this).data('ptype');
+                    cnt = $(this).parent().parent().find('#price_cnt').html();
+                    if (str == '') {
+                        str = '{"code":"' + code + '","cnt":"' + cnt + '","ptyp":"' + pType + '"}';
+                    } else {
+                        str += ',{"code":"' + code + '","cnt":"' + cnt + '","ptyp":"' + pType + '"}';
+                    }
+                }
+            });
+
+            if (str == '') {
+                alert('구매하실 약재를 선택하세요.');
+            } else {
+                Herb_Cart_Do(str);
+            }
+        }
+    });
+
+
+
+    $('#order_reg').on('click',function(e){
+        let price = $('#totalprice').data('tprice');
+        if(price==''){
+            alert('주문하실 약재의 수량을 선택하셔야 합니다.');
+        }else if(window.confirm("주문하시겠습니까?")==true) {
+
+            let code = '';
+            let cnt = 0;
+            let gPrice = 0;
+            let str = '';
+
+            $('input[name="chkproduct"]').each(function (e) {
+                if ($(this).is(':checked') == true) {
+                    code = $(this).val();
+                    pType = $(this).data('ptype');
+                    cnt = $(this).parent().parent().find('#price_cnt').html();
+                    if (str == '') {
+                        str = '{"code":"' + code + '","cnt":"' + cnt + '","ptyp":"' + pType + '"}';
+                    } else {
+                        str += ',{"code":"' + code + '","cnt":"' + cnt + '","ptyp":"' + pType + '"}';
+                    }
+                }
+            });
+
+            if (str == '') {
+                alert('구매하실 약재를 선택하세요.');
+            } else {
+                Insert_Order(str);
+            }
+        }
+    });
+
+    $('#btnorder').on('click',function(e){
+        let odcode = $(this).data('odcode');
+        //alert('주문번호=' + odcode);
+
+        let url = '/Mydecoc/orderList/' + odcode;
+        $(location).attr('href',url);
+    });
+
+    $('#btnclose').on('click',function(e){
+        $('#btnorder').data('odcode','');
+        $('#endOrder').css('display','none');
+    });
+
+    $('#show_checked').on('click',function(e){
+        let isChecked = document.getElementById('show_checked').checked;
+        if(isChecked==true){
+            $('input[name="chkproduct"]:not(:checked)').closest('tr').hide();
+        }else{
+            $('input[name="chkproduct"]').closest('tr').show();
+        }
+    });
+
+    $('#more, #more2').on('click',function(e){
+        let page = $('#btnmore1').data('page');
+        let nPage = page + 1;
+        Load_Data(nPage);
+    });
+});
+
+function Load_Data(page){
+    let l_typ = $('#l_typ').val();
+    let h_sKey = $('#h_sKey').val();
+    let ptyp = $('#ptyp').val();
+    let pharm = $('#pharm').val();
+    Load_Sale_List(page,l_typ,h_sKey,ptyp,pharm);
+}
+
+function show_pop(){
+    $('#bestprice').show();
+}
+function show_confirmOrder(){
+    $('#confirmOrder').show();
+}
+
+async function add_Match(data){
+    try {
+        start_spinner();
+        let dataarr = data;
+        let url = APIURL + '/Match_Proc';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            $(location).attr('href', '/Order/SmartOrder');
+        }else{
+            alert(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error.get('message') + '}');
+        stop_spinner();
+    }
+
+}
+
+async function Insert_Order(str){
+    try {
+        start_spinner();
+        let dataarr = {"str" : str};
+        let url = APIURL + '/Insert_Order';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            $('#btnorder').data('odcode',result.get('info'));
+            $('#endOrder').css('display','flex');
+        } else {
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error.get('message') + '}');
+        stop_spinner();
+    }
+}
+
+function INI_Matching_pop() {
+    $('#yaklist').empty();
+    $('#yaknation').html('');
+    $('#yakcode').html('');
+    $('#yakname').html('');
+    $('#yakcompany').val();
+    $('#yakherb').val();
+    $('#popMatch').data('hncode', '');
+    $('#popMatch').data('mm_origin', '');
+    $('#popMatch').data('mm_medicine', '');
+    $('#popMatch').data('mm_title_kor', '');
+    $('#popMatch').data('mm_origin_kor', '');
+}
+
+function INI_Load_Product(){
+    $('#selllist').empty();
+    let str_price = "총 0원";
+    $('#totalprice').html(str_price);
+    $('#totalprice').data('tprice',0);
+}
+
+function INI_Load_Product2(){
+    $('#selllist').empty();
+}
+
+async function Herb_Cart_Do(str){
+    try{
+        start_spinner();
+        let dataarr = {"str" : str};
+        let url = APIURL + '/Insert_Cart';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            $('#popcart').css('display','flex');
+        } else {
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+
+    }catch(error){
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+
+}
+
+
+
+async function Load_Sale_List(page,ltyp,h_sKey,ptyp,pharm){
+    try{
+        start_spinner();
+        if((page==1) && (ltyp==1)) {
+            INI_Load_Product2();
+        }else if((page==1) && (ltyp==2)){
+            INI_Load_Product();
+        }
+        let r_txt = '';
+        let url = APIURL + '/Load_Sale_Herb';
+        let dataarr = {"page": page,'skey' : h_sKey,'ptyp' : ptyp,'pharm' : pharm};
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if (result.get('status') == 'Empty') {
+            if(h_sKey==''){
+                r_txt = '판매되는 상품이 없습니다.'
+            }
+            $('#r_txt').html(r_txt);
+        }else{
+            let html = '';
+            let data = result.get('data');
+            let arr = (data && data.list) ? data.list : [];
+            let Cnt = arr.length;
+            let tcnt = data.tCnt;
+            if(h_sKey==''){
+                r_txt = '총 판매약재 ' + tcnt + '건';
+            }else{
+                r_txt = `"${h_sKey}"에 대한 ${tcnt}건의 검색결과`;
+            }
+            $('#r_txt').html(r_txt);
+            if (Cnt > 0) {
+                if(ltyp==1) {
+                    let t1_value_str = '';
+                    let hn_method_str = '';
+                    let hn_method_css = '';
+                    $.each(arr, function (index, el) {
+                        if (el.t1_value != '') {
+                            t1_value_str = `/${el.t1_value}`;
+                        } else {
+                            t1_value_str = '';
+                        }
+                        if (el.t2_value != '') {
+                            t2_value_str = `/${el.t2_value}`;
+                        } else {
+                            t2_value_str = '';
+                        }
+
+                        if(el.hn_method==1){
+                            hn_method_str = '일반';
+                            hn_method_css = 'buy_type1';
+                        }else{
+                            hn_method_str = '정기';
+                            hn_method_css = 'buy_type2';
+                        }
+
+                        html += `
+                            <div class="mer1-1">
+                                <div class="thumbox" type="button" onclick="go_detail('${el.hn_code}');">
+                                    <p class="buy_type ${hn_method_css}">${hn_method_str}</p>
+                                    <i class="fa-solid fa-heart heart1-2"></i>
+                                    <i class="fa-regular fa-heart heart1-1"></i>
+                                    <i class="fa-solid fa-chart-line chart1-1"></i>
+                                    <img class="mainthum" src="/assets/product/image/${el.fname}" alt="img">
+                                </div>
+                                <a href="javascript://" class="cartbtn" onclick="go_cart();" id="add_cart" name="add_cart">
+                                    <i class="fa-solid fa-cart-shopping icon2"></i>
+                                    <p>담기</p>
+                                </a>
+                                <div class="itembox" onclick="go_detail('${el.hn_code}');">
+                                    <a class="title2" href="#">[${el.mi_name}]</a> 
+                                    <a class="title" href="#" onclick="go_detail('${el.hn_code}');">
+                                        [${el.n_value}]${el.hn_name}[${el.w_name}${t1_value_str}${t2_value_str}]
+                                    </a>
+                                    <div class="child">
+                                        <a class="price" href="#" onclick="go_detail('${el.hn_code}');"> ${Number(el.hn_pPrice).toLocaleString()}원</a>
+                                        <span class="calf">(근당 ${Number(el.hn_gPrice).toLocaleString()}원)</span>
+                                    </div>
+                                </div> 
+                            </div>
+                        `;
+                    });
+                }else{
+                    let isMatch_html ='';
+                    let name_str = '';
+                    let match_html = '';
+                    let match_str = '';
+                    let Low_html = '';
+                    let Low_str = '';
+                    let price_html = '';
+                    let hn_method_info = '';
+                    console.log(arr);
+
+                    $.each(arr, function (index, el) {
+                        if (el.isMatch == 0) {
+                            isMatch_html = `disabled value="${el.hn_code}"`;
+                            name_str = el.hn_name;
+                            match_html = `onclick="reg_Match('${el.hn_code}')"`;
+                            match_str = '미매칭';
+                            price_html = '';
+                        }else{
+                            isMatch_html = `value="${el.hn_code}" onclick="chk_product(this,'${el.hn_pPrice}');" `;
+                            name_str = el.hn_name + ' / ' + el.mm_title_kor;
+                            match_html = `onclick="del_Match('${el.hn_code}')`;
+                            match_str = '매칭';
+                            price_html = `
+                                <i class="fa-regular fa-square-minus" onclick="price_minus(this,'${el.hn_pPrice}')"></i>
+                                <p id="price_cnt">0</p>
+                                <i class="fa-regular fa-square-plus" onclick="price_plus(this,'${el.hn_pPrice}')"></i></td>
+                            `;
+                        }
+
+                        if (el.LowCnt <= 0) {
+                            Low_html = '';
+                            Low_str = '최저가';
+                        }else{
+                            Low_html = `onclick="show_pop('${el.hn_code}');"`;
+                            Low_str = '추천';
+                        }
+
+                        if(el.hn_method==1){
+                            hn_method_info = '일반구매[근당가격:' + number_format(el.hn_gPrice) + '원/포장가격:' + number_format(el.hn_pPrice) + '원]';
+                        }else{
+                            hn_method_info = '정기구독[구독기간:' + el.hn_period + "개월/근당가격=" + number_format(el.hn_gPrice) + '원/포장가격=' + number_format(el.hn_pPrice) + '원]';
+                        }
+
+
+                        html += `
+                         <tr class="buyInfo">
+                            <td><input type="checkbox" class="column-1" data-ptype="${el.hn_method}" name="chkproduct" ${isMatch_html}/></td>
+                            <td class="hbname mached"><p>${el.hn_name}</p></td>
+                            <td><button class="bestpri btntype2" ${Low_html}>${Low_str}</button></td>
+                            <td>${el.mi_name}</td>
+                            <td>${el.n_value}</td>
+                            <td>${el.t1_value}</td>
+                            <td>${el.t2_value}</td>
+                            <td>${el.w_name}</td>
+                            <td>${hn_method_info}</td>
+                            <td>${el.stock}</td>
+                            <td>${el.common_stock}</td>
+                            <td>${el.month_stock}</td>
+                            <td>${el.recommand_stock}</td>
+                            <td class="countBox">
+                                ${price_html}
+                            </td>
+                        </tr>
+                    `;
+                    });
+                }
+                $('#selllist').append(html);
+                $('#btnmore1').data('page',page);
+                if(h_sKey!=''){
+                    $('#more').hide();
+                }else{
+                    $('#more').show();
+                }
+            }else{
+                if(page>1){
+                    Make_Toast('마지막입니다.');
+                }else{
+                    Make_Toast('검색된 약재가 없습니다.');
+                }
+
+            }
+        }
+        stop_spinner();
+     }catch(error){
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+
+
+async function Load_Product(page,MaxCnt) {
+    try {
+        start_spinner();
+        INI_Load_Product();
+
+        // let dataarr = {"page" : page,"skey" : skey};
+        // let url = APIURL + '/Load_herbSellList';
+        let url = APIURL + '/Load_PharmHerbList';
+        let dataarr = {"page": page,'maxcnt' : MaxCnt};
+
+
+
+        let result = await Load_API(url,dataarr);
+
+        console.log(result);
+
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            let html = '';
+            let data = result.get('data');
+            let arr = (data && data.list) ? data.list : [];
+            let Cnt = arr.length;
+            if (Cnt > 0) {
+
+                console.log(arr);
+
+                $.each(arr, function (index, el) {
+                    html += '<tr class="yak">';
+                    html += '<td>';
+                    if (el.isMatch <= 0) {
+                        html += '<input type="checkbox" class="column-1" name="chkproduct" disabled value="' + el.hn_code + '"/>';
+                    } else {
+                        html += '<input type="checkbox" class="column-1" name="chkproduct" value="' + el.hn_code + '" onclick="chk_product(this,\'' +  el.hn_pPrice + '\')" />';
+                    }
+                    html += '</td>';
+                    // html += '<td>' + el.hn_code + '</td>';
+                    // html += '<td>';
+                    // if (el.isMatch <= 0) {
+                    //     html += '<button class="colorRed machingOption btntype2" type="button" onclick="reg_Match(\'' + el.hn_code + '\')">미매칭</button>';
+                    // } else {
+                    //     html += '<button class="colorGreen machingOption btntype2" type="button" onclick="del_Match(\'' + el.hn_code + '\')">매칭</button>';
+                    // }
+                    // html += '</td>';
+
+                    html += '</td>';
+                    html += '<td class="hbname mached">';
+                    if (el.isMatch == 0) {
+                        html += '<p>' + el.hn_name + ' / 미매칭</p>';
+                    } else {
+                        html += '<p>' + el.hn_name + ' / ' + el.mm_title_kor + '</p>';
+                    }
+                    html += '<td>';
+                    if (el.LowCnt <= 0) {
+                        html += '<button class="bestpri btntype2">최저가</button>';
+                    } else {
+                        html += '<button class="bestmore btntype2" onclick="show_pop(\'' + el.hn_code + '\')">더보기</button>';
+                    }
+                    html += '<td>' + el.mi_name + '</td>';
+                    html += '</td>';
+                    html += '<td>' + el.n_value + '</td>';
+                    html += '<td>' + el.t1_value + '</td>';
+                    html += '<td>' + el.t2_value + '</td>';
+                    html += '<td>' + el.w_name + '</td>';
+                    html += '<td>일반구매</td>';
+                    html += '<td>' + number_format(el.hn_gPrice )+ '원</td>';
+                    if (el.fk_mmsn <= 0) {
+                        html += '<td></td>';
+                    } else {
+                        html += '<td class="countBox">';
+                        html += '<i class="fa-regular fa-square-minus" onclick="price_minus(this,\'' +  el.hn_pPrice + '\')"></i>';
+                        html += '<p id="price_cnt">0</p>';
+                        html += '<i class="fa-regular fa-square-plus" onclick="price_plus(this,\'' +  el.hn_pPrice + '\')"></i>';
+                        html += '</td>';
+                    }
+                    html += '<td>' + number_format(el.hn_pPrice) + '원</td>';
+
+                    html += '<td>' + el.stock + '</td>';
+                    html += '<td>' + el.common_stock + '</td>';
+                    html += '<td>' + el.month_stock + '</td>';
+                    html += '<td>' + el.recommand_stock + '</td>';
+                    html += '</tr >';
+                });
+            } else {
+                html = '<td colspan="17">사용하실 약제정보가 없습니다.</td>';
+
+            }
+            $('#selllist').append(html);
+        } else {
+            alert(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+async function reg_Match(hncode) {
+    try {
+        start_spinner();
+        INI_Matching_pop();
+
+        let dataarr = {"hncode" : hncode};
+        let url = APIURL + '/Load_Match_Data';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            $('#yakcompany').html(result.get('data').mi_name);
+            $('#yakherb').html(result.get('data').hn_name);
+            $('#popMatch').data('hncode', hncode);
+            let html = '';
+            let data = result.get('data');
+            let arr = (data && data.list) ? data.list : [];
+            let Cnt = arr.length;
+            if (Cnt > 0) {
+                $.each(arr, function (index, el) {
+                    html += '<buttion class="machingOption" onclick="setMatch(\'' + el.mmTitle + '\',\'' + el.mmMedicine + '\',\'' + el.mdMediName + '\',\'' + el.mmOrigin + '\')">[' + el.mmOrigin + '] [' + el.mmMedicine + '] ' + el.mdMediName + '</buttion>';
+                });
+            }
+            $('#yaklist').html(html);
+            $('#matchingpop').css('display', 'flex');
+        } else {
+            alert(result.msg);
+        }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+
+async function del_Match(hncode) {
+    try {
+        if (window.confirm('선택되신 약재의 매칭을 삭제하시겠습니까?') == true) {
+            start_spinner();
+            let dataarr = {"hn_code" : hncode,"typ": 1};
+            let url = APIURL + '/Match_Proc';
+            let result = await Load_API(url,dataarr);
+            if (result.get('status') == 'NoLogin') {
+                go_login();
+            }else if(result.get('status') == 'ok') {
+                $(location).attr('href', '/Order/SmartOrder');
+            }else{
+                alert(result.get('message'));
+            }
+            stop_spinner();
+        }
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+function price_minus(form,price){
+    let Cnt =  $(form).parent().find('#price_cnt').html();
+    let Chkform = $(form).parent().parent().find('input:checkbox[name="chkproduct"]');
+    Chkform.prop("checked", true)
+
+    if(Cnt >0){
+        let total = $('#totalprice').data('tprice');
+        let n_Cnt = Number(Cnt)-1;
+        let t_price =Number(total) - Number(price);
+        let str_price = "총 " + number_format(t_price) + "원";
+        $('#totalprice').html(str_price);
+        $('#totalprice').data('tprice',t_price);
+        $(form).parent().find('#price_cnt').html(n_Cnt);
+        if(n_Cnt==0) {
+            Chkform.attr("checked", false);
+        }
+    }
+}
+
+function price_plus(form,price){
+    let Cnt =  $(form).parent().find('#price_cnt').html();
+    let Chkform = $(form).parent().parent().find('input:checkbox[name="chkproduct"]');
+    Chkform.prop("checked", true)
+
+    let total = $('#totalprice').data('tprice');
+    let n_Cnt = Number(Cnt)+1;
+    let t_price =Number(total) + Number(price);
+    let str_price = "총 " + number_format(t_price) + "원";
+    $('#totalprice').html(str_price);
+    $('#totalprice').data('tprice',t_price);
+    $(form).parent().find('#price_cnt').html(n_Cnt);
+
+}
+
+
+function setMatch(val1, val2, val3, val4) {
+    $('#yakorigin').html(val4);
+    $('#yakcode').html(val2);
+    let tname = val3 + ' [' + val1 + ']';
+    $('#yakname').html(tname);
+
+    $('#popMatch').data('mm_origin', val4);
+    $('#popMatch').data('mm_medicine', val2);
+    $('#popMatch').data('mm_title_kor', val3);
+    $('#popMatch').data('mm_origin_kor', val1);
+}
+
+function chk_product(form,price){
+    let Cnt = $(form).parent().parent().find('#price_cnt').html();
+    let total = $('#totalprice').data('tprice');
+    let n_price = 0;
+    let t_price = 0;
+    let str_price = '';
+    if($(form).is(":checked")==false){
+        n_price = Number(Cnt) * Number(price);
+        t_price = Number(total) - Number(n_price);
+        str_price = "총 " + number_format(t_price) + "원";
+        $('#totalprice').html(str_price);
+        $('#totalprice').data('tprice',t_price);
+        $(form).parent().parent().find('#price_cnt').html('0');
+    }else{
+        n_price = Number(price);
+        t_price = Number(total) + Number(n_price);
+        str_price = "총 " + number_format(t_price) + "원";
+        $('#totalprice').html(str_price);
+        $('#totalprice').data('tprice',t_price);
+        $(form).parent().parent().find('#price_cnt').html('1');
+    }
+}
+

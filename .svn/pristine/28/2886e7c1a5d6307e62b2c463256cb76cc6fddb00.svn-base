@@ -1,0 +1,781 @@
+DEBUG - 2025-05-07 00:44:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:44:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:44:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:44:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:44:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:45:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:49:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:49:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:49:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:49:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 00:49:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:00:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:00:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:01:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:01:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:01:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:01:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 02:01:44 --> ErrorException: Undefined variable $result
+[Method: GET, Route: Mypharm/orderList]
+in APPPATH/Views/web/orderListPharm_View.php on line 109.
+ 1 APPPATH/Views/web/orderListPharm_View.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $result', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/orderListPharm_View.php', 109)
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/NewHanyack/app/Views/web/orderListPharm_View.php')
+ 3 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/orderListPharm_View', [], true)
+ 5 APPPATH/Controllers/HerbPharmController.php(500): view('web/orderListPharm_View', [...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbPharmController->orderList()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbPharmController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 02:03:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:03:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:03:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:03:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:03:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:04:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:04:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:04:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:04:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:04:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:04:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:07:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:07:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:07:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:11:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:11:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:14:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:14:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:16:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:16:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:16:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:17:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:18:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:18:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:20:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:21:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:21:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:21:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:22:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:23:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:24:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:24:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:25:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:26:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:34:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 02:34:46 --> ParseError: syntax error, unexpected token "endforeach", expecting end of file
+[Method: GET, Route: Mydecoc/orderList]
+in APPPATH/Views/web/orderListDec_View.php on line 215.
+ 1 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 2 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/orderListDec_View', [], true)
+ 3 APPPATH/Controllers/HerbDecocController.php(184): view('web/orderListDec_View', [...])
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbDecocController->orderList()
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbDecocController))
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 02:35:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:35:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:35:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:35:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:56:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:56:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 02:56:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 03:01:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 03:04:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 03:28:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 03:37:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 03:40:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 03:40:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 03:40:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 04:53:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 04:53:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 04:55:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 04:55:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:04:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:04:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:07:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:07:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:07:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:08:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:09:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:09:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:12:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:18:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:20:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 05:20:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 06:05:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 06:05:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 06:07:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 06:07:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 06:42:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 06:42:58 --> ErrorException: Undefined array key "fk_mdname"
+[Method: GET, Route: Api/Load_Order_Decoc]
+in APPPATH/Controllers/ApiController.php on line 134.
+ 1 APPPATH/Controllers/ApiController.php(134): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fk_mdname"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Controllers/ApiController.php', 134)
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_Order_Decoc()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 06:42:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 06:42:58 --> ErrorException: Undefined array key "fk_mdname"
+[Method: GET, Route: Api/Load_Order_Decoc]
+in APPPATH/Controllers/ApiController.php on line 134.
+ 1 APPPATH/Controllers/ApiController.php(134): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fk_mdname"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Controllers/ApiController.php', 134)
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_Order_Decoc()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 06:43:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 06:43:41 --> ErrorException: Undefined array key "fk_mdname"
+[Method: GET, Route: Api/Load_Order_Decoc]
+in APPPATH/Controllers/ApiController.php on line 134.
+ 1 APPPATH/Controllers/ApiController.php(134): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fk_mdname"', '/Users/djmedi_mac/Documents/repos/NewHanyack/app/Controllers/ApiController.php', 134)
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_Order_Decoc()
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 06:43:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 06:45:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 06:45:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:02:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:02:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:03:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:03:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:03:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:04:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:05:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:05:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:05:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:07:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:07:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:09:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:09:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:09:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:09:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:09:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:09:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:13:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:17:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:17:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:17:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:17:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:17:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:17:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 07:17:33 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "web/pop_ConfirmOrder_View.php"
+[Method: GET, Route: Mydecoc/confirmOrder]
+in VENDORPATH/codeigniter4/framework/system/Exceptions/FrameworkException.php on line 39.
+ 1 VENDORPATH/codeigniter4/framework/system/View/View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('web/pop_ConfirmOrder_View.php')
+ 2 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/pop_ConfirmOrder_View', [], true)
+ 3 APPPATH/Controllers/HerbDecocController.php(231): view('web/pop_ConfirmOrder_View', [...])
+ 4 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbDecocController->confirmOrder()
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbDecocController))
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 07:18:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:22:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:22:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:25:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:25:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:26:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:26:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:26:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:26:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:26:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:26:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:28:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:28:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:28:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:28:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:28:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:28:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:28:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:28:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:29:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:29:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:29:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:29:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:31:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:31:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:32:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:32:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:32:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:32:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:32:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:32:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:32:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:32:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:32:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:32:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:52:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:52:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 07:52:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:00:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:02:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:02:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:02:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:07:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:07:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:14:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:14:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:15:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:15:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:15:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:18:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:19:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:25:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:25:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:40:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:40:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:40:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:41:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:41:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:41:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:41:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:43:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:43:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:45:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:45:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:45:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:45:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:49:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:49:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:49:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:49:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:55:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:55:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 08:55:40 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 08:55:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:55:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 08:55:47 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 08:55:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:55:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 08:55:54 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 08:56:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:56:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 08:56:41 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 08:57:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:57:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 08:57:09 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 08:57:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:57:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 08:57:45 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 08:59:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 08:59:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 08:59:55 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:00:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:00:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:00:38 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:02:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:02:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:02:40 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:03:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:03:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:03:04 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:03:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:03:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:03:29 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:03:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:03:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:03:48 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:03:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:03:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:03:59 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:04:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:04:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:04:03 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:04:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:04:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:04:17 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:04:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:04:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:04:35 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:04:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:04:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:04:44 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:04:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:04:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:04:53 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:05:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:05:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:05:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:05:58 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:06:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:06:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:06:19 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:07:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:07:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:07:20 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbList]
+in APPPATH/Controllers/ApiController.php on line 640.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:07:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:07:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:07:35 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:08:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:08:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:08:07 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_Order_Decoc]
+in APPPATH/Controllers/ApiController.php on line 161.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_Order_Decoc()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:08:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:08:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:08:14 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:08:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:08:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:08:16 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:08:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:08:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:08:17 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:15:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:15:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:15:25 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:15:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:15:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:15:47 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_Order_Decoc]
+in APPPATH/Controllers/ApiController.php on line 161.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_Order_Decoc()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:15:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:15:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:15:50 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:15:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:15:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:15:52 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:15:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:15:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:15:52 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:16:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:16:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:16:03 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:16:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:16:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:16:04 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:16:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:16:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:16:15 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:16:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:16:17 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:16:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:16:18 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:16:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:16:19 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:16:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:16:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:16:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:16:39 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:16:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:16:40 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:17:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:17:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:17:14 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:18:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:18:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:18:56 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:23:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:23:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:23:32 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:34:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:34:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:34:41 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:34:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:34:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:34:53 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_herbSellList]
+in APPPATH/Controllers/ApiController.php on line 486.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_herbSellList()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:34:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:34:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:34:59 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_Order_Decoc]
+in APPPATH/Controllers/ApiController.php on line 161.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_Order_Decoc()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-07 09:35:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-07 09:35:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-07 09:35:05 --> Error: Call to undefined method App\Libraries\Utils::Short_Date()
+[Method: POST, Route: Api/Load_Order_Decoc]
+in APPPATH/Controllers/ApiController.php on line 161.
+ 1 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\ApiController->Load_Order_Decoc()
+ 2 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ApiController))
+ 3 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

@@ -1,0 +1,104 @@
+$(document).ready(function() {
+
+
+    Load_Herb(1, '');
+    // $(window).on('load', function (e) {
+    //     Load_Herb(1, '');
+    // });
+
+    $('.authStatus').each(function() {
+        var value = $(this).text().trim();
+        if (value === "1") {
+            $(this).text('반려').css('color', '#7c7c7c');
+        } else if (value === "0") {
+            $(this).text('미승인').css('color', 'red');
+        } else if (value === "100") {
+            $(this).text('승인').css('color', 'green');
+        }
+    });
+
+    $("#keyword").on("keypress", function (key) {
+        if (key.keyCode == 13) {
+            INI_Form();
+            let skey = $('#keyword').val();
+            Load_Herb(1,skey);
+        }
+    });
+
+    $("#searchherb").on("click", function (key) {
+        INI_Form();
+        let skey = $('#keyword').val();
+        Load_Herb(1,skey);
+    });
+
+    $("#more,#more2").on("click", function (key) {
+
+        let page = $('#more').data('page');
+        let skey = $('#keyword').val();
+        console.log('skey=' + skey);
+
+        Load_Herb(page,skey);
+    });
+});
+
+function INI_Form(){
+    $('#herbtable').empty();
+}
+
+async function Load_Herb(page, skey) {
+    try {
+        start_spinner();
+        let dataarr = {"page": page, "skey": skey};
+        let url = APIURL + '/Load_herbList';
+        //let result = await Load_HerbList(page, skey);
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if (result.get('status') == 'ok') {
+            let html = '';
+            let data = result.get('data');
+            let arr = (data && data.list) ? data.list : [];
+            let Cnt = arr.length;
+            if (Cnt > 0) {
+                $.each(arr, function (index, el) {
+                    let subHtml = '';
+                    if(el.hn_isok==1){
+                        subHtml = '<td><i class="fa-regular fa-comment-dots"></i></td>';
+                    }else{
+                        subHtml = '<td></td>';
+                    }
+
+                    html +=`
+                        <tr>
+                            <td class="authStatus">${el.hn_code}</td>
+                            <td class="authStatus">${el.hn_isok_str}</td>
+                            ${subHtml}
+                            <td>${el.hn_MakeDate}</td>
+                            <td>${el.hn_MakeDate}</td>
+                            <td>${el.hn_name}</td>
+                            <td>${el.fk_mdname}</td>
+                            <td>${el.n_value}</td>
+                            <td>${el.t1_value}</td>
+                            <td>${el.t2_value}</td>
+                            <td>${el.w_name}</td>
+                            <td>${el.hn_gPrice}</td>
+                            <td>${el.hn_pPrice}</td>
+                            <td></td>
+                            <td>일반구매</td>
+                            <td><button class="editHerb" type="button" onclick="Edit_Herb('${el.hn_code}');">수정</button></td>
+                            </tr>
+                    `;
+                });
+            }else{
+                html = '<td colspan="15">출하 약초 정보가 없습니다.</td>';
+            }
+            $('#putList').append(html);
+        }else{
+            alert(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}

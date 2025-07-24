@@ -1,0 +1,111 @@
+<?= $this->extend("/web/template/layout_mypage_dj") ?>
+<?= $this->section("content") ?>
+<!-- calendar ----------------------------  -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"> </script>
+<!-- ckeditor ----------------------------  -->
+<script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+<!-- js ----------------------------  -->
+<script src="<?=URL_MASTER_ASSETS?>/burkOrderForm_Do.js?rnd=<?= rand(); ?>"></script>
+<script>
+</script>
+<?php //print_r($body)?>
+
+    <section class="merright">
+        <div class="merright1-0">
+
+        </div>
+
+        <div class="rightBox  burkOrderForm_wrap">
+            <div class="firstBox">
+                <div class="head_title flexStart">
+                    <p class="title">대량구매 주문양식</p>
+
+                </div>
+                <div class="infobox">
+                    <div class="merinfo ">
+                        <p class="title">약재검색</p>
+                        <div class="herbbox">
+                            <input type="search" class="inputSearch"
+                                   id="txtHD" name="txtHD" placeholder="검색어 입력 후 엔터를 누르세요." onfocus="ini_Form1();">
+                            <i class="fa-solid fa-angle-down downbtn"></i>
+<!--                            <i class="fas fa-caret-down downbtn"></i>-->
+<!--                            <button class="herbtoggle" type="button"> <i class="fas fa-caret-down downbtn"></i></button>-->
+                            <!-- <i class="fa-solid fa-xmark"></i> -->
+                        </div>
+                        <div class="herbbtn1-2" id="HD_List">
+                        </div>
+                    </div>
+                    <div class="merinfo " >
+                        <p class="title">제약사</p>
+                        <p class="data"></p>
+                    </div>
+                    <div class="merinfo " >
+                        <p class="title">본초명</p>
+                        <p class="data"></p>
+                    </div>
+                    <div class="merinfo ">
+                        <p class="title">약재명</p>
+                        <p class="data"></p>
+                    </div>
+                    <div class="merinfo ">
+                        <p class="title">구분/가공방법</p>
+                        <p class="data"></p>
+                    </div>
+                    <div class="merinfo " >
+                        <p class="title">제조번호</p>
+                        <p class="data"></p>
+                    </div>
+                    <div class="merinfo " >
+                        <p class="title">제조일자</p>
+                        <p class="data"></p>
+                    </div>
+                    <div class="merinfo " >
+                        <p class="title">유통기한</p>
+                        <p class="data"></p>
+                    </div>
+                    <div class="merinfo ">
+                        <p class="title">원산지</p>
+                        <p class="data"></p>
+                    </div>
+                    <div class="merinfo ">
+                        <p class="title">탕전실</p>
+                        <select name="" id="">
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="merinfo ">
+                        <p class="title">매칭약재</p>
+                        <p class="data"></p>
+                    </div>
+                    <div class="merinfo ">
+                        <p class="title">포장단위</p>
+                        <select name="o_weight" id="o_weight" class="inputType240">
+                            <?= $body['option']; ?>
+                        </select>
+                    </div>
+                    <div class="merinfo ">
+                        <p class="title">가격</p>
+                        <input type="text" name="" id="" class="inputType240" placeholder="숫자만 입력">
+                        <p class="unit">원</p>
+                    </div>
+                    <div class="merinfo ">
+                        <p class="title">총 무게</p>
+                        <input type="text" name="" id="" class="inputType240" placeholder="ex. kg단위로 숫자만 입력">
+                        <p class="unit">kg</p>
+                    </div>
+                </div>
+            </div>
+            <div class="secondBox">
+            </div>
+            <div class="lastBox">
+                <button type="button" class="btnType3">취소</button>
+                <button type="button" id="submitBtn" name="submitBtn" class="btnType4">확인</button>
+            </div>
+    </section>
+
+<?= $this->endSection() ?>

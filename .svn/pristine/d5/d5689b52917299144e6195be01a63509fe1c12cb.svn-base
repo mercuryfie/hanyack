@@ -1,0 +1,74 @@
+$(document).ready(function () {
+    let pcode = $("#barcodeDiv").data("pcode");
+    Prn_Barcode(pcode);
+
+    $('#applyPrintBtn').on('click',function(e){
+        let ptype = $('#applyPrintBtn').data('ptype');
+        if(ptype==0){
+            if(window.confirm('해당 작업내역을 출력 하시겠습니까?')==true) {
+                let pcode = $('#applyPrintBtn').data('pcode');
+                if (pcode == '') {
+                    alert('잘못된 접근입니다.');
+                    location.reload();
+                } else {
+                    Update_deli(pcode);
+                }
+            }
+        }else {
+            if (window.confirm('해당 작업을 재출력 하시겠습니까?') == true) {
+                printWindow('org_area');
+            }
+        }
+    });
+
+});
+
+
+function Prn_Barcode(pcode) {
+    console.log("cpcode=" + pcode);
+    if (pcode == "") {
+        alert("잘못된 접근입니다.");
+        window.close();
+    } else {
+        $("#barcodeDiv").barcode(pcode, "code128", {
+            barWidth: 2,
+            barHeight: 40,
+            fontSize: 15,
+            showHRI: false,
+        });
+        $("#barcodeDiv").css("overflow", "hidden");
+        $("#barcodeDiv").css("margin", "0 auto");
+        $("#barcodeDiv").css("display", "flex");
+        $("#barcodeDiv").css("justifyContent", "center");
+        $("#barcodeDiv").css("width", "360px");
+        $("#barcodeDiv").css("height", "40px");
+
+    }
+}
+
+async function Update_deli(pcode){
+    try {
+        start_spinner();
+        let dataarr = {"pcode": pcode};
+        let url = APIURL + '/Update_Deli_Data';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            printWindow('printArea');
+        } else {
+            alert(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+function Prn_Box(hdcode){
+    let url = '/Mypharm/statementBox?key=' + hdcode;
+    let param = "status=0,title=0,height=500,width=700,scrollbars=1"
+    window.open(url,'statementBox',param);
+}
+
