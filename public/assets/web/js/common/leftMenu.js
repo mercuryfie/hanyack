@@ -29,14 +29,5 @@ document.addEventListener("DOMContentLoaded", function () {
         handleHover(".topmenu1-2", ".submenu1-2");
         handleHover(".topmenu1-4", ".submenu1-4");
 
-    // "a" 태그를 찾아서 이름 형식 적용
-    // $('.merleft1-2 .identifier').each(function() {
-    //     let $a = $(this);
-    //     let name = $a.text().trim(); // "홍길동 님"
-    //     let nameOnly = name.replace(" 님", ""); // "홍길동"만 추출
-    //     if (nameOnly.length >= 6) {
-    //         let formattedName = nameOnly.substring(0, 4) + "<br>" + nameOnly.substring(4);
-    //         $a.html(formattedName + " 님"); // 변경된 이름 다시 넣기
-    //     }
-    // });
+
 });

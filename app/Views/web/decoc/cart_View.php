@@ -1,6 +1,7 @@
 <?= $this->extend("/web/template/layout_cart") ?>
 <?= $this->section("content") ?>
 <script src="<?=URL_DECOC_ASSETS?>/cart.js"> </script>
+<script src="<?=URL_DECOC_ASSETS?>/cart_Do.js"> </script>
 <section class="cart cartbg">
     <div class="carttitle">
         <p>장바구니</p>
@@ -11,9 +12,9 @@
                 <div class="clall1-1">
                     <input type="checkbox">
                     <p>전체선택
-                        <span>1</span>
+                        <span id="s_Start">0</span>
                         <span>/</span>
-                        <span>22</span>
+                        <span id="s_End">0</span>
                     </p>
                 </div>
                 <div class="clall1-2">
@@ -21,131 +22,16 @@
                     <button>선택삭제</button>
                 </div>
             </div>
-            <div class="clbox cartleft1-1">
-                <div class="cartgds cartgoods1-1">
-                    <input type="checkbox">
-                    <p>디제이허브</p>
-                </div>
-                <div class="cartgds cartgoods1-2">
-                    <div class="goodsbox">
-                        <div class="goodsleft">
-                            <input type="checkbox">
-                            <img class="cartgoodsimg" src="/assets/web/src/sanyack.jpg" alt="img">
-                        </div>
-                        <div class="goodsright">
-                            <div class="goodsttl">
-                                <div class="goodsttl1-1">
-                                    <p>감초</p>
-                                    <span>최저가</span>
-                                    <span>더보기</span>
-                                </div>
-                                <div class="goodsttl1-2">
-                                    <i class="fa-solid fa-xmark dltbtn"></i>
-                                </div>
-                            </div>
-                            <p>국산 / 신강 1호 / 직절</p>
-                            <p>10,000원</p>
-                            <div class="cartcounter">
-                                <i class="fa-regular fa-square-minus"></i>
-                                <p>1</p>
-                                <i class="fa-regular fa-square-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cartgoods1-3">
-                    <div class="goodsbox">
-                        <div class="goodsleft">
-                            <input type="checkbox">
-                            <img class="cartgoodsimg" src="/assets/web/src/sanyack.jpg" alt="img">
-                        </div>
-                        <div class="goodsright">
-                            <div class="goodsttl">
-                                <div class="goodsttl1-1">
-                                    <p>감초</p>
-                                    <span>최저가</span>
-                                    <span>더보기</span>
-                                </div>
-                                <div class="goodsttl1-2">
-                                    <i class="fa-solid fa-xmark dltbtn"></i>
-                                </div>
-                            </div>
-                            <p>국산 / 신강 1호 / 직절</p>
-                            <p>10,000원</p>
-                            <div class="cartcounter">
-                                <i class="fa-regular fa-square-minus"></i>
-                                <p>1</p>
-                                <i class="fa-regular fa-square-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="emptyCart" name="" id="">
+                <i class="fa-solid fa-circle-info"></i>
+                <p class="msg">장바구니에 담긴 상품이 없습니다</p>
             </div>
-            <div class="clbox cartleft1-2">
-                <div class="cartgds cartgoods1-1">
-                    <input type="checkbox">
-                    <p>바른한방</p>
-                </div>
-                <div class="cartgds cartgoods1-2">
-                    <div class="goodsbox">
-                        <div class="goodsleft">
-                            <input type="checkbox">
-                            <img class="cartgoodsimg" src="/assets/web/src/sanyack.jpg" alt="img">
-                        </div>
-                        <div class="goodsright">
-                            <div class="goodsttl">
-                                <div class="goodsttl1-1">
-                                    <p>감초</p>
-                                    <span>최저가</span>
-                                    <span>더보기</span>
-                                </div>
-                                <div class="goodsttl1-2">
-                                    <i class="fa-solid fa-xmark dltbtn"></i>
-                                </div>
-                            </div>
-                            <p>국산 / 신강 1호 / 직절</p>
-                            <p>10,000원</p>
-                            <div class="cartcounter">
-                                <i class="fa-regular fa-square-minus"></i>
-                                <p>1</p>
-                                <i class="fa-regular fa-square-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cartgoods1-3">
-                    <div class="goodsbox">
-                        <div class="goodsleft">
-                            <input type="checkbox">
-                            <img class="cartgoodsimg" src="/assets/web/src/sanyack.jpg" alt="img">
-                        </div>
-                        <div class="goodsright">
-                            <div class="goodsttl">
-                                <div class="goodsttl1-1">
-                                    <p>감초</p>
-                                    <span>최저가</span>
-                                    <span>더보기</span>
-                                </div>
-                                <div class="goodsttl1-2">
-                                    <i class="fa-solid fa-xmark dltbtn"></i>
-                                </div>
-                            </div>
-                            <p>국산 / 신강 1호 / 직절</p>
-                            <p>10,000원</p>
-                            <div class="cartcounter">
-                                <i class="fa-regular fa-square-minus"></i>
-                                <p>1</p>
-                                <i class="fa-regular fa-square-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clbox cartleft1-3">
+            <div class="clbox cartleft1-3" name="" id="">
             </div>
         </div>
 
         <div class="cartright">
+
             <div class="crbox cartright1-1">
                 <div class="cartloc1-1">
                     <i class="fa-solid fa-location-dot"></i>
@@ -162,24 +48,19 @@
                 </div>
                 <div class="cartprili cartpri1-2">
                     <p>상품금액</p>
-                    <p>20,000원</p>
+                    <p>0원</p>
                 </div>
-                <div class="cartprili cartpri1-3">
-                    <p>상품할인금액</p>
-                    <p>20,000원</p>
-
-                </div>
-                <div class="cartprili cartpri1-4">
-                    <p>배송비</p>
-                    <p>3,000원</p>
-
-                </div>
+<!--                <div class="cartprili cartpri1-3">-->
+<!--                    <p>상품할인금액</p>-->
+<!--                    <p>20,000원</p>-->
+<!---->
+<!--                </div>-->
                 <div class="cartprili cartpri1-5">
                     <p>결제예정금액</p>
-                    <p>20,000원</p>
+                    <p>0원</p>
                 </div>
             </div>
-            <div class="cartright1-3">
+            <div class="cartright1-3 mb40">
                 <button class="cart_ordernow">바로 주문하기</button>
             </div>
             <div class="cart_orderpopcon">
@@ -204,9 +85,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
     </div>
 </section>
 

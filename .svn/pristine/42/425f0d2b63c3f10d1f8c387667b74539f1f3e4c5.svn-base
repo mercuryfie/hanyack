@@ -1,0 +1,198 @@
+$(document).ready(function () {
+
+    Load_Order(1,'');
+
+    $('#more, #more2').on('click',function(e){
+        let page = $('#more').data('page');
+        let skey = '';
+        Load_Order(page,skey);
+    });
+
+    $('#btn_cancle').on('click',function(e){
+        location.reload();
+    });
+
+    $('#btn_deli').on('click',function(e){
+        let o_code ='';
+        $('input:checkbox[name="chkorder"]').each(function (e) {
+
+            if ($(this).is(':checked') == true) {
+                if(o_code==''){
+                    o_code = $(this).val();
+                }else{
+                    o_code += ',' +  $(this).val();
+                }
+            }
+        });
+
+        if(o_code!=''){
+            if(window.confirm('선택하신 상품을 출하처리 하시겠습니까?')==true){
+                ship_Step(o_code);
+            }
+        }
+    });
+
+    $('#bnt_order_confirm').on('click',async function(e){
+        let arr = [];
+        $('input[name="chkorder"]:checked').each(function(){
+            let v_status = $(this).data('status');
+            let val = $(this).val();
+            arr.push({ sn: val, status: v_status });
+        });
+
+        let Cnt = arr.length;
+        if(Cnt <=0){
+            Make_Toast(ORDER_PROCESSING + ' 하실 주문을 선택하세요.');
+        }else{
+            let filtered = arr.filter(item => item.status != ORDER_UNCONFIRM_VAL);
+            let fCnt = filtered.length;
+            if(fCnt > 0){
+                Make_Toast(`선택하신 항목중에 ${ORDER_UNCONFIRM} 상태가 아닌 주문이 있습니다.` );
+            }else if(window.confirm(`선택하신 상품을 ${ORDER_PROCESSING}  처리 하시겠습니까?`)==true){
+                let retVal = await Order_Step_Do(arr,ORDER_UNCONFIRM_VAL,ORDER_PROCESSING_VAL);
+                if (retVal.get('status') == 'NoLogin') {
+                    go_login();
+                }else if(retVal.get('status') == 'ok') {
+                    let data = retVal.get('data');
+                    let arr = (data) ? data : [];
+                    let rCnt = arr.length;
+                    if (rCnt > 0) {
+                        let s_str = Return_Order_Step(ORDER_PROCESSING_VAL);
+                        $.each(arr, function (index, el) {
+                            $('#ostr_' + el).text(s_str);
+                            $('#chkorder_' + el).data('status', ORDER_PROCESSING_VAL);
+                        });
+                        $('input[name="chkorder"]').prop('checked', false);
+                        $('input[name="h_chkorder"]').prop('checked', false);
+                        Make_Toast('총 ' + rCnt + '건 ' + s_str + ' 완료 하였습니다.');
+                    }
+                }else{
+                    Make_Toast(retVal.get('message'));
+                }
+            }
+        }
+    });
+
+    $('#btn_order_deli').on('click',async function(e){
+        let arr = [];
+        $('input[name="chkorder"]:checked').each(function(){
+            let v_status = $(this).data('status');
+            let val = $(this).val();
+            arr.push({ sn: val, status: v_status });
+        });
+
+        let Cnt = arr.length;
+        if(Cnt <=0){
+            Make_Toast(ORDER_SHIPMENT + ' 하실 주문을 선택하세요.');
+        }else{
+            console.log(arr);
+            let filtered = arr.filter(item => item.status != ORDER_PROCESSING_VAL);
+            let fCnt = filtered.length;
+            if(fCnt > 0){
+                Make_Toast(`선택하신 항목중에 ${ORDER_PROCESSING} 상태가 아닌 주문이 있습니다.` );
+            }else if(window.confirm(`선택하신 상품을 ${ORDER_PROCESSING}  처리 하시겠습니까?`)==true){
+                let retVal = await Order_Step_Do(arr,ORDER_PROCESSING_VAL,ORDER_SHIPMENT_VAL);
+                if (retVal.get('status') == 'NoLogin') {
+                    go_login();
+                }else if(retVal.get('status') == 'ok') {
+                    let data = retVal.get('data');
+                    let arr = (data) ? data : [];
+                    let rCnt = arr.length;
+                    if (rCnt > 0) {
+                        let s_str = Return_Order_Step(ORDER_SHIPMENT_VAL);
+                        $.each(arr, function (index, el) {
+                            $('#otr_' + el).empty();
+                        });
+                        $('input[name="chkorder"]').prop('checked', false);
+                        $('input[name="h_chkorder"]').prop('checked', false);
+                        Make_Toast('총 ' + rCnt + '건 ' + s_str + ' 완료 하였습니다.');
+                    }
+                }else{
+                    Make_Toast(retVal.get('message'));
+                }
+            }
+        }
+    });
+});
+
+
+async function Load_Order(page, skey) {
+    try {
+        start_spinner();
+
+        let dataarr = {"page" : page,"skey" : skey,"step" : 2};
+        let url = APIURL + '/Load_Order_Pharm';
+
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            let html = '';
+            let data = result.get('data');
+            let arr = (data && data.list) ? data.list : [];
+            let Cnt = arr.length;
+            if (Cnt > 0) {
+                $.each(arr, function (index, el) {
+                    let gd_typ_str = '';
+                    let gd_ptyp_str = '';
+
+                    if (el.gd_status == 0) {
+                        gd_typ_str = ORDER_UNCONFIRM;
+                    } else if (el.gd_status == 1) {
+                        gd_typ_str = ORDER_PROCESSING;
+                    } else if (el.gd_status == 2) {
+                        gd_typ_str = ORDER_SHIPMENT;
+                    } else if (el.gd_status == 3) {
+                        gd_typ_str = ORDER_SHIP_COMPLETE;
+                    } else if (el.gd_status == 4) {
+                        gd_typ_str = ORDER_DELIVERY;
+                    } else if (el.gd_status == 5) {
+                        gd_typ_str = ORDER_DELIVERED;
+                    }
+
+                    if(el.gd_pType==1){
+                        gd_ptyp_str = ORDER_TYPE_1;
+                    }else if(el.gd_pType==2){
+                        gd_ptyp_str = ORDER_TYPE_2 +"[" + el.gd_period + "]";
+                    }else if(el.gd_pType==3){
+                        gd_ptyp_str = ORDER_TYPE_3;
+                    }
+
+                    html += `
+                        <tr id="otr_${el.sn}">
+                            <td><input type="checkbox" id="chkorder_${el.sn}" name="chkorder" value="${el.sn}" data-status="${el.gd_status}"/></td>
+                            <td id="ostr_${el.sn}">${gd_typ_str}</td>
+                            <td>${el.gd_code}</td>
+                            <td>${gd_ptyp_str}</td>
+                            <td>${el.od_wname}</td>
+                            <td>${el.hn_name}</td>
+                            <td>${el.n_value}</td>
+                            <td>${el.t1_value}</td>
+                            <td>${el.t2_value}</td>
+                            <td>${el.w_name}</td>
+                            <td>${number_format(el.gd_price)}원</td>
+                            <td>${number_format(el.gd_rPrice)}원</td>
+                        </tr >
+                    `;
+                });
+            }else{
+                html = '<td colspan="11">주문내역이 없습니다.</td>';
+            }
+            $('#more,#more2').data('page',result.get('data').page);
+            $('#orderlist').append(html);
+        }else if(result.get('status') == 'last') {
+            let tcnt = $('#orderlist tr').length;
+            if(tcnt > 0) alert('마지막 입니다.');
+            $('.moreListBox').css('display','none');
+        } else {
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+
+
