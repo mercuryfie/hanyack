@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="121d2538-a001-4905-8984-5da34d8f8081" name="Changes" comment="hanyackdo_20250801">
-      <change beforePath="$PROJECT_DIR$/app/Views/web/decoc/cart_View.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/web/decoc/cart_View.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/web/js/common/leftMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/web/js/common/leftMenu.js" afterDir="false" />
-    </list>
+    <list default="true" id="121d2538-a001-4905-8984-5da34d8f8081" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,6 +177,9 @@
       <workItem from="1754286369681" duration="4548000" />
       <workItem from="1754359033724" duration="2106000" />
       <workItem from="1754443823919" duration="2921000" />
+      <workItem from="1754874973574" duration="1922000" />
+      <workItem from="1755052674108" duration="3009000" />
+      <workItem from="1755498968091" duration="27405000" />
     </task>
     <task id="LOCAL-00001" summary="hanyackdo_20250721">
       <option name="closed" value="true" />
@@ -285,7 +285,47 @@
       <option name="project" value="LOCAL" />
       <updated>1753955617034</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="hanyackdo_20250807">
+      <option name="closed" value="true" />
+      <created>1754551168103</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1754551168104</updated>
+    </task>
+    <task id="LOCAL-00015" summary="hanyackdo_20250819">
+      <option name="closed" value="true" />
+      <created>1755569543036</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1755569543036</updated>
+    </task>
+    <task id="LOCAL-00016" summary="hanyackdo_20250819">
+      <option name="closed" value="true" />
+      <created>1755592146057</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1755592146057</updated>
+    </task>
+    <task id="LOCAL-00017" summary="hanyackdo_20250820">
+      <option name="closed" value="true" />
+      <created>1755655950050</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1755655950050</updated>
+    </task>
+    <task id="LOCAL-00018" summary="hanyackdo_20250820">
+      <option name="closed" value="true" />
+      <created>1755656565049</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1755656565049</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,7 +339,11 @@
     <MESSAGE value="hanyackdo_20250723" />
     <MESSAGE value="hanyackdo_20250729" />
     <MESSAGE value="hanyackdo_20250731" />
-    <option name="LAST_COMMIT_MESSAGE" value="hanyackdo_20250731" />
+    <MESSAGE value="hanyackdo_20250801" />
+    <MESSAGE value="hanyackdo_20250807" />
+    <MESSAGE value="hanyackdo_20250819" />
+    <MESSAGE value="hanyackdo_20250820" />
+    <option name="LAST_COMMIT_MESSAGE" value="hanyackdo_20250820" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -308,6 +352,12 @@
           <url>file://$PROJECT_DIR$/public/assets/web/js/master/herbListMaster_Do.js</url>
           <line>423</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/public/assets/web/js/decoc/orderListDecoc_Do.js</url>
+          <line>29</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

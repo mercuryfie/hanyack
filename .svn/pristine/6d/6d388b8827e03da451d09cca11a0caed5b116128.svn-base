@@ -1,0 +1,304 @@
+$(document).ready(function() {
+    Load_Data(1);
+
+    $(document).on('change', 'input[type="checkbox"].chkproduct', function(e) {
+        if ($(this).is(':checked')) {
+            let total = $('#totalprice').data('tprice');
+            let t_price = $(this).parent().parent().find('.tPrice').data('price');
+            let n_price = Number(total) + Number(t_price);
+            $('#totalprice').html('총 ' + n_price.toLocaleString() + '원');
+            $('#totalprice').data('tprice', n_price);
+        } else {
+            let total = $('#totalprice').data('tprice');
+            let t_price = $(this).parent().parent().find('.tPrice').data('price');
+            let n_price = Number(total) - Number(t_price);
+            if (n_price < 0) n_price = 0;
+            $('#totalprice').html('총 ' + n_price.toLocaleString() + '원');
+            $('#totalprice').data('tprice', n_price);
+        }
+    });
+
+    $(document).on('change', 'input[type="checkbox"].ChkMaker', function(e) {
+        let code = $(this).attr('data-code');
+        let chk_name = 'chk_' + code;
+        let isChecked = $(this).is(':checked');
+        $('input[type="checkbox"][name="' + chk_name + '"]').each(function(index, element) {
+            $(element).prop('checked', isChecked).trigger('change');
+        });
+    });
+
+    $(document).on('click','#btn_delEdit',function(e){
+        let url = '/Mydecoc/deliveryInfo';
+        $(location).attr("href", url);
+    });
+
+    $(document).on('click','#btn_cartOrder',async function(e){
+        let items = [];
+        let items1 = [];
+        $('input.chkproduct:checked').each(function () {
+            let nsn  = $(this).data('sn');
+            let code  = $(this).data('code');
+            let pType = $(this).data('ptyp');
+            let cnt   = $(this).closest('.goodsbox').find('.price_cnt').html();
+            items.push({code: code,cnt: cnt,ptyp: pType});
+            items1.push({sn:nsn});
+        });
+
+        let Cnt = items.length;
+        if(Cnt <=0){
+            Make_Toast('주문하실 약재를 선택하세요.');
+        }else if(window.confirm('주문하시겠습니까?')==true){
+            let str = JSON.stringify(items);
+            let bool = await Insert_Order(str);
+            if(bool){
+                await Promise.all(
+                    items1.map(async el => {
+                        let bool1 = await Cart_Del_Do(el.sn);
+                        if (bool1) {
+                            $(`#sub_${el.sn}`).remove();
+                        }
+                    })
+                );
+            }else{
+                Make_Toast('주문 처리에 실패 하였습니다.');
+            }
+        }
+    });
+
+    $(document).on('click','.dltbtn',function(e){
+        let sn = $(this).data('sn');
+        $('#cart_del').data('sn',sn);
+        $('#endOrderDel').show();
+    });
+
+    $(document).on('click','.close_dltmer',function(e){
+        $('#cart_del').data('sn','');
+        $('#endOrderDel').hide();
+    });
+
+    $(document).on('click','#cart_del',async function(e){
+        let sn = $(this).data('sn');
+        let bool = await Cart_Del_Do(sn);
+        if(bool){
+            $(`#sub_${sn}`).remove();
+        }
+        $('#endOrderDel').hide();
+    });
+
+
+
+});
+
+async function Insert_Order(str){
+    let bool = false;
+    try {
+        start_spinner();
+        let dataarr = {"str" : str};
+        let url = APIURL + '/Insert_Order';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+            bool = false;
+        }else if(result.get('status') == 'ok') {
+            $('#endOrder').show();
+            bool = true;
+        } else {
+            Make_Toast(result.get('message'));
+            bool = false;
+        }
+        stop_spinner();
+    } catch (error) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error.get('message') + '}');
+        stop_spinner();
+        bool = false;
+    }
+
+    return bool;
+}
+
+
+async function Cart_Del_Do(sn){
+    let bool = false;
+    try {
+        start_spinner();
+        INI_Load_Data();
+        let dataarr = {"sn": sn};
+        let url = APIURL + '/Del_Cart';
+        let result = await Load_API(url, dataarr);
+        console.log(result);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+            bool = false;
+        } else if (result.get('status') == 'ok') {
+            bool = true;
+        } else {
+            Make_Toast(result.get('message'));
+            bool = false;
+        }
+        stop_spinner();
+
+    } catch (error) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+        bool = false;
+    }
+    return bool;
+}
+
+function price_minus(form,price){
+    let Cnt =  $(form).parent().find('.price_cnt').html();
+
+    if(Cnt >0){
+        let total = $('#totalprice').data('tprice');
+        let n_Cnt = Number(Cnt)-1;
+        let now_price = Number(price) * Number(n_Cnt);
+        let str_price = number_format(now_price) + '원';
+        $(form).parent().find('.price_cnt').html(n_Cnt);
+        $(form).closest('.goodsright').find('.tPrice').html(str_price);
+        $(form).closest('.goodsright').find('.tPrice').data('price', now_price);
+
+        let bool = $(form).parent().parent().parent().find('.chkproduct').is(':checked')
+        if(bool){
+            let n_price = Number(total) - Number(price);
+            if (n_price < 0) n_price = 0;
+            $('#totalprice').html('총 ' + n_price.toLocaleString() + '원');
+            $('#totalprice').data('tprice', n_price);
+        }
+
+        if(n_Cnt<=0) {
+            console.log('11');
+            $(form).parent().parent().parent().find('.chkproduct').prop("checked", false);
+        }
+    }
+}
+
+function price_plus(form,price){
+    let Cnt =  $(form).parent().find('.price_cnt').html();
+
+    let total = $('#totalprice').data('tprice');
+    let n_Cnt = Number(Cnt)+1;
+    let now_price = Number(price) * Number(n_Cnt);
+    let str_price = number_format(now_price) + '원';
+    $(form).parent().find('.price_cnt').html(n_Cnt);
+    $(form).closest('.goodsright').find('.tPrice').html(str_price);
+    $(form).closest('.goodsright').find('.tPrice').data('price', now_price);
+
+
+    let bool = $(form).parent().parent().parent().find('.chkproduct').is(':checked')
+    if(bool){
+        let n_price = Number(total) + Number(price);
+        $('#totalprice').html('총 ' + n_price.toLocaleString() + '원');
+        $('#totalprice').data('tprice', n_price);
+    }
+}
+
+
+async function Load_Data(page) {
+    try {
+        start_spinner();
+        INI_Load_Data();
+        let dataarr = {"page" : page};
+        let url = APIURL + '/Load_Cart_Info';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            let html = '';
+            let data = result.get('data');
+            let tCnt = data.tCnt;
+            let arr = (data && data.list) ? data.list : [];
+            console.log(arr);
+            let Cnt = arr.length;
+            if (Cnt > 0) {
+                $.each(arr, function (index, el) {
+                    console.log(el.list);
+                    let subhtml = '';
+                    $.each(el.list, function (index, sub){
+                        let option_str = '';
+                        if(sub.n_value!='' &&  option_str==''){
+                            option_str += sub.n_value;
+                        } else if(sub.n_value!='' &&  option_str!=''){
+                            option_str += ' / ' + sub.n_value;
+                        }
+
+                        if(sub.t1_value!='' &&  option_str==''){
+                            option_str += sub.t1_value;
+                        } else if(sub.t1_value!='' &&  option_str!=''){
+                            option_str += ' / ' + sub.t1_value;
+                        }
+
+                        if(sub.t2_value!='' &&  option_str==''){
+                            option_str += sub.t2_value;
+                        } else if(sub.t2_value!='' &&  option_str!=''){
+                            option_str += ' / ' + sub.t2_value;
+                        }
+
+                        subhtml += `
+                            <div class="cartgds cartgoods1-2" id="sub_${sub.sn}">
+                                <div class="goodsbox">
+                                    <div class="goodsleft">
+                                        <input type="checkbox" class="chkproduct" name="chk_${sub.macode}" data-sn="${sub.sn}" data-code="${sub.hncode}" data-ptyp="${sub.ptype}">
+                                        <img class="cartgoodsimg" src="${PRODUCT_IMG_URL}/${sub.thumnail}" alt="img">
+                                    </div>
+                                    <div class="goodsright">
+                                        <div class="goodsttl">
+                                            <div class="goodsttl1-1">
+                                                <p>${sub.hnname}</p>
+                                                <span>최저가</span>
+                                                <span>더보기</span>
+                                            </div>
+                                            <div class="goodsttl1-2">
+                                                <i class="fa-solid fa-xmark dltbtn" data-sn="${sub.sn}"></i>
+                                            </div>
+                                        </div>
+                                        <p>${option_str}</p>
+                                        <p class="tPrice" data-price="${sub.t_tPrice}">${Number(sub.t_tPrice).toLocaleString()}원</p>
+                                        
+                                        <div class="cartcounter">
+                                            <i class="fa-regular fa-square-minus" onclick="price_minus(this,'${sub.t_gPrice}')"></i>
+                                            <p class="price_cnt">${sub.t_cnt}</p>
+                                            <i class="fa-regular fa-square-plus" onclick="price_plus(this,'${sub.t_gPrice}')"></i></td>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    html += `
+                    <div class="clbox cartleft1-1">
+                        <div class="cartgds cartgoods1-1">
+                            <input type="checkbox" class="ChkMaker" data-code="${el.macode}">
+                            <p>${el.maname}</p>
+                        </div>
+                        ${subhtml}
+                    </div>
+                    `;
+                });
+            } else {
+                html = `
+                    <div class="emptyCart">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <p class="msg">장바구니에 담긴 상품이 없습니다</p>
+                    </div>
+                `;
+
+            }
+            $('#s_End').text(tCnt);
+            $('#cartlist').append(html);
+        } else {
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+
+function INI_Load_Data(){
+    $('#s_Start').html('0');
+    $('#s_End').html('0');
+}
