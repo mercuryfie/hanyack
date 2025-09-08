@@ -1,0 +1,128 @@
+<?php
+
+namespace App\Controllers;
+
+
+use CodeIgniter\HTTP\IncomingRequest;
+use CodeIgniter\API\ResponseTrait;
+use App\Models;
+use App\Libraries\Utils;
+use App\Libraries\Form;
+
+
+class MainController extends BaseController
+{
+
+    use ResponseTrait;
+
+    public function Main($skey=false){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+
+        $metaarr = [
+            'h_title' => '디제이메디',
+            'h_type' => 1
+        ];
+
+        $bodydata = [];
+        $bodydata['skey'] = $skey;
+        $herb_m=model('Herb_m');
+        $Rs = $herb_m->Load_Product_All();
+        if($util->fnArrayCnt($Rs)>0){
+            $dataarr = [];
+            foreach($Rs as $d){
+                if($d['hn_isok'] == 100){
+                    $temparr = [];
+
+                    $temparr['sn'] = $d['sn'];
+                    $temparr['hn_ID'] = $d['hn_ID'];
+                    $temparr['hn_code'] = $d['hn_code'];
+                    $temparr['fk_mdcode'] = $d['fk_mdcode'];
+                    $temparr['fk_mdname'] = $d['fk_mdname'];
+                    $temparr['fk_micode'] = $d['fk_micode'];
+                    $temparr['mi_name'] = $d['mi_name'];
+                    $temparr['fk_ncode'] = $d['fk_ncode'];
+                    $temparr['n_value'] = $d['n_value'];
+
+                    $temparr['fk_t1code'] = $d['fk_t1code'];
+                    $temparr['t1_value'] = ($d['fk_t1code']=='0') ? '-' : $d['t1_value'];
+                    $temparr['fk_t2code'] = $d['fk_t2code'];
+                    $temparr['t2_value'] = $d['t2_value'];
+                    $temparr['fk_wcode'] = $d['fk_wcode'];
+                    $temparr['w_value'] = $d['w_value'];
+                    $temparr['w_name'] = $d['w_name'];
+                    $temparr['hn_name'] = $d['hn_name'];
+
+                    $temparr['hn_sale'] = $d['hn_sale'];
+                    $temparr['hn_MakeDate'] = $util->fn_Short_Date($d['hn_MakeDate']);
+                    $temparr['hn_sellSDate'] = $util->fn_Short_Date($d['hn_sellSDate']);
+                    $temparr['hn_sellEDate'] = $util->fn_Short_Date($d['hn_sellEDate']);
+                    $temparr['hn_tax'] = $d['hn_tax'];
+                    $temparr['hn_desc'] = $d['hn_desc'];
+                    $temparr['hn_isSell'] = $d['hn_isSell'];
+                    $temparr['sn'] = $d['sn'];
+                    $temparr['hn_isok'] = $d['hn_isok'];
+                    $temparr['hn_regdate'] = $d['hn_regdate'];
+                    $temparr['fname'] = $d['thumnail'];
+
+                    if (!$sessinarr['islogin']) {
+                        $temparr['hn_gPrice'] = '';
+                        $temparr['hn_pPrice'] = '';
+                        $temparr['hn_method'] = '';
+                        $temparr['login_Type'] = '';
+                        $auth = '';
+                    }else{
+                        $auth = $sessinarr['user']['mi_type'];
+                        $micode = $sessinarr['user']['mi_code'];
+                        $cfcode = $sessinarr['user']['mi_cf'];
+                        if($auth==AUTH_PHARM){
+                            $temparr['hn_gPrice'] = '';
+                            $temparr['hn_pPrice'] = '';
+                            $temparr['hn_method'] = '';
+                        }else{
+                            $pricearr = $util->fn_LoadPrice($d['hn_code']);
+                            $temparr['hn_gPrice'] = $pricearr[0]['hn_gPrice'];
+                            $temparr['hn_pPrice'] = $pricearr[0]['hn_pPrice'];
+                            $temparr['hn_method'] = $pricearr[0]['hn_method'];
+
+                            array_push($dataarr,$temparr);
+
+                            $temparr['hn_gPrice'] = $pricearr[1]['hn_gPrice'];
+                            $temparr['hn_pPrice'] = $pricearr[1]['hn_pPrice'];
+                            $temparr['hn_method'] = $pricearr[1]['hn_method'];
+
+                            array_push($dataarr,$temparr);
+
+                        }
+                    }
+                }
+            }
+
+            if((($auth==AUTH_DECOC) || ($auth==AUTH_MASTER)) && ($sessinarr['islogin']==true)){
+                $stockarr = $util->fn_Total_Stock_Quantity($this,$cfcode);
+            }else{
+                $stockarr = [];
+            }
+
+
+
+            $bodydata['list'] = $dataarr;
+            $bodydata['l_Type'] = $auth;
+            $bodydata['stock'] = $stockarr;
+        }else{
+            $bodydata['list'] = [];
+            $bodydata['l_Type'] = '';
+            $bodydata['stock'] = [];
+        }
+
+        $form = New Form;
+        $main_data = [
+            'meta' => $form->fnMake_Meta($metaarr),
+            'header' => $form->fnMake_Header($sessinarr),
+            'left_menu' => $form->fnMake_Left($sessinarr),
+            'body' => $bodydata
+        ];
+
+        return view('web/common/main_View',$main_data);
+    }
+}

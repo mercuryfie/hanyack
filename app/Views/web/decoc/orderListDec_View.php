@@ -43,13 +43,12 @@
                        name="datePicker"
                        class="inputType160 mr10" placeholder="날짜 선택" readonly>
                 <i class="fa-regular fa-calendar calicon" id="calicon1-6"></i>
+            </div>
+            <div class="orderList_boxpq8 flexType2">
+                <input type="search" name="" id="" class=""
+                        placeholder="상품명으로 검색해 보세요">
                 <button class="btnType1">조회하기</button>
             </div>
-            <!-- <div class="decorderli1-1-1-2">
-                <button>
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div> -->
         </div>
     </div>
 <!--    여기서 시작 -->

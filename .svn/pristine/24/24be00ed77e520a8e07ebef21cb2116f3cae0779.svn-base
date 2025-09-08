@@ -1,0 +1,84 @@
+$(document).ready(function () {
+
+    $('i[name="plus"]').on('click', function() {
+        let cnt = parseInt($('#price_cnt').text(), 10);
+        console.log(cnt);
+        if ( cnt < 99) {
+            cnt++;
+            $('#price_cnt').text(cnt);
+            updateTotalPrice(cnt, unitPrice);
+        }
+    });
+
+    $('i[name="minus"]').on('click', function() {
+        let cnt = parseInt($('#price_cnt').text(), 10);
+        if (cnt > 1) {
+            cnt--;
+            $('#price_cnt').text(cnt);
+            updateTotalPrice(cnt, unitPrice);
+        }
+    });
+
+
+
+
+
+    $('i[name="heart"]').on('click', function() {
+        $(this).toggleClass('fa-solid');
+        alert('added wishlist');
+    });
+});
+
+
+function updateTotalPrice(cnt, price) {
+    let total = cnt * price;
+    $('#ttl_price').text(number_format(total));
+}
+
+
+function price_minus(form,price){
+    let Cnt = $('#price_cnt').html();
+    let new_Cnt = Number(Cnt) - 1;
+    if(new_Cnt<=0) new_Cnt=0;
+    let new_tprice = Number(new_Cnt) * price;
+
+    $('#price_cnt').html(new_Cnt);
+    $('#totalprice').html(new_tprice.toLocaleString());
+}
+
+function price_plus(form,price){
+    let Cnt = $('#price_cnt').html();
+    let new_Cnt = Number(Cnt) + 1;
+    let new_tprice = Number(new_Cnt) * price;
+
+    $('#price_cnt').html(new_Cnt);
+    $('#totalprice').html(new_tprice.toLocaleString());
+}
+
+function box_minus(form,price,boxcnt){
+    let Cnt = $('#price_cnt').html();
+    let box = $('#box_cnt').html();
+    let new_Cnt = Number(Cnt) - Number(boxcnt);
+    if(new_Cnt<=0) new_Cnt = 0;
+    let new_box_Cnt = Number(box) - 1;
+    if(new_box_Cnt<=0) new_box_Cnt = 0;
+    let new_tprice = Number(new_Cnt) * price;
+
+
+    $('#price_cnt').html(new_Cnt);
+    $('#box_cnt').html(new_box_Cnt);
+    $('#totalprice').html(new_tprice.toLocaleString());
+}
+
+function box_plus(form,price,boxcnt){
+    let Cnt = $('#price_cnt').html();
+    let box = $('#box_cnt').html();
+    let new_Cnt = Number(Cnt) + Number(boxcnt);
+    let new_box_Cnt = Number(box) +1;
+    let new_tprice = Number(new_Cnt) * price;
+
+
+    $('#price_cnt').html(new_Cnt);
+    $('#box_cnt').html(new_box_Cnt);
+    $('#totalprice').html(new_tprice.toLocaleString());
+}

@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Controllers;
+
+
+use App\Libraries\Form;
+use App\Libraries\Utils;
+use CodeIgniter\API\ResponseTrait;
+
+
+class CommonController extends BaseController
+{
+    use ResponseTrait;
+
+    public function itemDetail(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+
+        $request = service('request');
+        $hncode = ($request->getGet('hd') == '') ? '' : $request->getGet('hd');
+        if($hncode==''){
+            $util->fnalert('잘못된 접근입니다.');
+        }else{
+            $metaarr = [
+                'h_title' => '디제이메디',
+                'h_type' => 1
+            ];
+
+            $herb_m = model('Herb_m');
+            $Rs = $herb_m->Load_Product_Code($hncode);
+            if($util->fnArrayCnt($Rs)<=0){
+                $util->fnalert("선택하신 상품은 판매중지되었거나,\n존재하지 않는 약재입니다.");
+            }else{
+                $info = [
+                    'thumnail' => $Rs[0]['thumnail'],
+                    'hn_code' => $Rs[0]['hn_code'],
+                    'hn_name' => $Rs[0]['hn_name'],
+                    'w_name' => $Rs[0]['w_name'],
+                    't1_value' => $Rs[0]['t1_value'],
+                    't2_value' => $Rs[0]['t2_value'],
+                    'option' => $util->fn_Product_Option_str($Rs[0]['t1_value'],$Rs[0]['t2_value']),
+                    'n_value' => $Rs[0]['n_value'],
+                    'mi_name' => $Rs[0]['mi_name'],
+                    'hn_sellSDate' => $util->fn_Short_Date($Rs[0]['hn_sellSDate']),
+                    'hn_sellEDate' => $util->fn_Short_Date($Rs[0]['hn_sellEDate']),
+                    'hn_bigsell' => $Rs[0]['hn_bigsell'],
+                    'hn_desc' => $Rs[0]['hn_desc'],
+                    'hn_boxCnt' => $Rs[0]['hn_boxCnt']
+
+                ];
+                if (!$sessinarr['islogin']) {
+                    $pricearr = [];
+                    $auth = '';
+                }else{
+                    $auth = $sessinarr['user']['mi_type'];
+                    if($auth==AUTH_PHARM){
+                        $pricearr = [];
+                    }else{
+                        $pricearr = $util->fn_LoadPrice($Rs[0]['hn_code']);
+                    }
+                }
+                $info['price'] = $pricearr;
+                $data = [
+                    'info' => $info,
+                    'auth' => $auth,
+                    'islogin' => $sessinarr['islogin']
+                ];
+
+                $form = New Form;
+                $main_data = [
+                    'meta' => $form->fnMake_Meta($metaarr),
+                    'header' => $form->fnMake_Header($sessinarr),
+                    'body' => $data
+                ];
+
+                return view('web/common/itemDetail_View',$main_data);
+
+            }
+        }
+    }
+
+
+}

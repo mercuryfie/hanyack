@@ -1,0 +1,157 @@
+<?php
+
+use CodeIgniter\Router\RouteCollection;
+
+/**
+ * @var RouteCollection $routes
+ */
+$routes->GET('/', 'MainController::Main');
+
+
+/* Login */
+$routes->GET('Member/Login','MemberController::Login');
+$routes->POST('Member/Login_Do', 'MemberController::Login_Do');
+$routes->GET('Member/Logout','MemberController::LogOut');
+
+/* Order */
+$routes->GET('Order/SmartOrder','OrderController::SmartOrder');
+$routes->GET('Order/Cart','OrderController::Cart');
+
+
+
+/* Product */
+//$routes->GET('Product/PList','UserController::PList');
+
+/* API */
+$routes->match(['GET', 'POST'], 'Api/Load_Medicine', 'ApiController::Load_Medicine');
+$routes->match(['GET', 'POST'], 'Api/Load_Medicine_Option1', 'ApiController::Load_Medicine_Option1');
+$routes->match(['GET', 'POST'], 'Api/Load_Product_Before', 'ApiController::Load_Product_Before');
+$routes->match(['GET', 'POST'], 'Api/Load_Product_Info', 'ApiController::Load_Product_Info');
+$routes->match(['GET', 'POST'], 'Api/Upload_file', 'ApiController::Upload_file');
+$routes->match(['GET', 'POST'], 'Api/Upload_file_editor', 'ApiController::Upload_file_editor');
+$routes->match(['GET', 'POST'], 'Api/Load_herbList', 'ApiController::Load_herbList');
+$routes->match(['GET', 'POST'], 'Api/Load_orderList', 'ApiController::Load_orderList');
+$routes->match(['GET', 'POST'], 'Api/Load_OrginHerb', 'ApiController::Load_OrginHerb');
+$routes->match(['GET', 'POST'], 'Api/Load_Match_Data', 'ApiController::Load_Match_Data');
+$routes->match(['GET', 'POST'], 'Api/Match_Proc', 'ApiController::Match_Proc');
+$routes->match(['GET', 'POST'], 'Api/Insert_Order', 'ApiController::Insert_Order');
+$routes->match(['GET', 'POST'], 'Api/Load_Order_Decoc', 'ApiController::Load_Order_Decoc');
+$routes->match(['GET', 'POST'], 'Api/Load_Order_Pharm', 'ApiController::Load_Order_Pharm');
+$routes->match(['GET', 'POST'], 'Api/Ship_Step', 'ApiController::Ship_Step');
+$routes->match(['GET', 'POST'], 'Api/Update_Delicode', 'ApiController::Update_Delicode');
+$routes->match(['GET', 'POST'], 'Api/Load_Package_Pharm', 'ApiController::Load_Package_Pharm');
+$routes->match(['GET', 'POST'], 'Api/Load_Package_Decoc', 'ApiController::Load_Package_Decoc');
+$routes->match(['GET', 'POST'], 'Api/Load_Package_Pharm_List', 'ApiController::Load_Package_Pharm_List');
+$routes->match(['GET', 'POST'], 'Api/Load_Package_Decoc_List', 'ApiController::Load_Package_Decoc_List');
+$routes->match(['GET', 'POST'], 'Api/Insert_Package_Deli_Data', 'ApiController::Insert_Package_Deli_Data');
+$routes->match(['GET', 'POST'], 'Api/Update_Deli_Data', 'ApiController::Update_Deli_Data');
+$routes->match(['GET', 'POST'], 'Api/Update_Product_isOk', 'ApiController::Update_Product_isOk');
+$routes->match(['GET', 'POST'], 'Api/Update_Product_Reject', 'ApiController::Update_Product_Reject');
+$routes->match(['GET', 'POST'], 'Api/Update_Product_IsOk', 'ApiController::Update_Product_IsOk');
+$routes->match(['GET', 'POST'], 'Api/Load_herb_Decoc', 'ApiController::Load_herb_Decoc');
+$routes->match(['GET', 'POST'], 'Api/Re_Approval', 'ApiController::Re_Approval');
+$routes->match(['GET', 'POST'], 'Api/Load_Decoc_Herb_List', 'ApiController::Load_Decoc_Herb_List');
+$routes->match(['GET', 'POST'], 'Api/Load_Decoc_Match_Info', 'ApiController::Load_Decoc_Match_Info');
+$routes->match(['GET', 'POST'], 'Api/Insert_Match_Data', 'ApiController::Insert_Match_Data');
+$routes->match(['GET', 'POST'], 'Api/Del_Match_Data', 'ApiController::Del_Match_Data');
+$routes->match(['GET', 'POST'], 'Api/Insert_Cart', 'ApiController::Insert_Cart');
+$routes->match(['GET', 'POST'], 'Api/Load_DelInfo', 'ApiController::Load_DelInfo');
+$routes->match(['GET', 'POST'], 'Api/Insert_DeliInfo', 'ApiController::Insert_DeliInfo');
+$routes->match(['GET', 'POST'], 'Api/Update_DeliInfo', 'ApiController::Update_DeliInfo');
+$routes->match(['GET', 'POST'], 'Api/Delete_DeliInfo', 'ApiController::Delete_DeliInfo');
+$routes->match(['GET', 'POST'], 'Api/Order_Step_Do', 'ApiController::Order_Step_Do');
+$routes->match(['GET', 'POST'], 'Api/Load_Cart_Info', 'ApiController::Load_Cart_Info');
+$routes->match(['GET', 'POST'], 'Api/Del_Cart', 'ApiController::Del_Cart');
+$routes->match(['GET', 'POST'], 'Api/Cancel_Order', 'ApiController::Cancel_Order');
+$routes->match(['GET', 'POST'], 'Api/Load_Medicine2', 'ApiController::Load_Medicine2');
+$routes->match(['GET', 'POST'], 'Api/Load_Herb_Info', 'ApiController::Load_Herb_Info');
+$routes->match(['GET', 'POST'], 'Api/Insert_BigOrder', 'ApiController::Insert_BigOrder');
+$routes->match(['GET', 'POST'], 'Api/Update_Product_isSale', 'ApiController::Update_Product_isSale');
+$routes->match(['GET', 'POST'], 'Api/Load_OrderList', 'ApiController::Load_OrderList');
+$routes->match(['GET', 'POST'], 'Api/Load_DecocTotalStock', 'ApiController::Load_DecocTotalStock');
+
+
+/* board start ------------------------ */
+$routes->match(['GET', 'POST'], 'Api/Load_Board_List', 'ApiController::Load_Board_List'); // board_notice s
+$routes->match(['GET', 'POST'], 'Api/Upload_Board_AttachedImg', 'ApiController::Upload_Board_AttachedImg'); // board_notice
+$routes->match(['GET', 'POST'], 'Api/Upload_Board_Attachment', 'ApiController::Upload_Board_Attachment'); // board_notice
+$routes->match(['GET', 'POST'], 'Api/Insert_BContent', 'ApiController::Insert_BContent');
+$routes->match(['GET', 'POST'], 'Api/Insert_RContent', 'ApiController::Insert_RContent');
+$routes->match(['GET', 'POST'], 'Api/Update_Edited_BContent', 'ApiController::Update_Edited_BContent');
+$routes->match(['GET', 'POST'], 'Api/Update_Edited_RContent', 'ApiController::Update_Edited_RContent');
+$routes->match(['GET', 'POST'], 'Api/Update_Board_Attachment', 'ApiController::Update_Board_Attachment');
+$routes->match(['GET', 'POST'], 'Api/Del_bContent_Data', 'ApiController::Del_bContent_Data');
+$routes->match(['GET', 'POST'], 'Api/del_Reply', 'ApiController::del_Reply');
+/* board end ------------------------------ */
+$routes->match(['GET', 'POST'], 'Api/Load_SmartOrderHerb', 'ApiController::Load_SmartOrderHerb');
+$routes->match(['GET', 'POST'], 'Api/Load_DecocHerbList', 'ApiController::Load_DecocHerbList'); //smart order
+$routes->match(['GET', 'POST'], 'Api/Load_PharmHerbList', 'ApiController::Load_PharmHerbList'); //smart order
+$routes->match(['GET', 'POST'], 'Api/Load_Sale_Herb', 'ApiController::Load_Sale_Herb'); //smart order
+$routes->match(['GET', 'POST'], 'Api/Insert_ProductEvent', 'ApiController::Insert_ProductEvent');
+$routes->match(['GET', 'POST'], 'Api/Load_ProductEvent', 'ApiController::Load_ProductEvent');
+
+
+
+/* CommonController */
+$routes->GET('Product/itemDetail', 'CommonController::itemDetail');
+
+
+/* Board */
+$routes->GET('Board/bList/','BoardController::bList');
+$routes->match(['GET', 'POST'], 'Board/boardForm', 'BoardController::boardForm');
+$routes->match(['GET', 'POST'], 'Board/boardForm_Do', 'BoardController::boardForm_Do');
+$routes->match(['GET', 'POST'], 'Board/editForm', 'BoardController::editForm');
+$routes->match(['GET', 'POST'], 'Board/replyForm', 'BoardController::replyForm');
+$routes->match(['GET', 'POST'], 'Board/InqForm', 'BoardController::InqForm');
+$routes->match(['GET', 'POST'], 'Board/board_InqForm', 'BoardController::board_InqForm');
+$routes->GET('Board/burkOrder','BoardController::burkOrder');
+
+/* Mypage -- 약재관리 */
+/*  약재상 : pharm   */
+$routes->GET('Mypharm/','HerbPharmController::dashBoard');
+$routes->GET('Mypharm/dashBoard','HerbPharmController::dashBoard');
+$routes->GET('Mypharm/herbList','HerbPharmController::herbList');
+$routes->GET('Mypharm/herbReg','HerbPharmController::register');
+$routes->POST('Mypharm/herbReg_Do','HerbPharmController::herbReg_Do');
+$routes->GET('Mypharm/herbRegAll','HerbPharmController::registerAll');
+$routes->GET('Mypharm/herb_Edit2','HerbPharmController::herb_Edit2');
+$routes->GET('Mypharm/herb_Edit','HerbPharmController::herb_Edit');
+$routes->POST('Mypharm/Herb_Edit_Do','HerbPharmController::Herb_Edit_Do');
+$routes->GET('Mypharm/orderList','HerbPharmController::orderList');
+$routes->GET('Mypharm/deliveryList','HerbPharmController::deliveryList');
+$routes->GET('Mypharm/shipList','HerbPharmController::shipList');
+$routes->GET('Mypharm/statement','HerbPharmController::statement');
+$routes->GET('Mypharm/statementBox','HerbPharmController::statementBox');
+$routes->GET('Mypharm/statementPallet','HerbPharmController::statementPallet');
+$routes->GET('Mypharm/burkOrder','HerbPharmController::burkOrder');
+
+/*  탕전실   */
+$routes->GET('Mydecoc/','HerbDecocController::dashBoard');
+$routes->GET('Mydecoc/dashBoard','HerbDecocController::dashBoard');
+$routes->GET('Mydecoc/herbList','HerbDecocController::herbList');
+$routes->GET('Mydecoc/orderList','HerbDecocController::orderList');
+$routes->GET('Mydecoc/orderDetail','HerbDecocController::orderDetail');
+$routes->GET('Mydecoc/orderList/(:segment)','HerbDecocController::orderList/$1');
+$routes->GET('Mydecoc/putList','HerbDecocController::putList');
+$routes->GET('Mydecoc/stockListDecoc','HerbDecocController::stockListDecoc');
+$routes->GET('Mydecoc/deliveryList','HerbDecocController::deliveryList');
+$routes->GET('Mydecoc/deliveryStatus','HerbDecocController::deliveryStatus');
+$routes->GET('Mydecoc/deliveryInfo','HerbDecocController::deliveryInfo');
+$routes->GET('Mydecoc/cancelOrder','HerbDecocController::cancelOrder');
+$routes->GET('Mydecoc/confirmOrder','HerbDecocController::confirmOrder');
+$routes->GET('Product/mainThum', 'HerbDecocController::mainThum');
+$routes->GET('Product/pList', 'HerbDecocController::pList');
+
+/*  디제이메디 master */
+$routes->GET('Mypage/','HerbController::dashBoard');
+$routes->GET('Mypage/dashBoard','HerbController::dashBoard');
+$routes->GET('Mypage/herbList/','HerbController::herbList');
+$routes->GET('Mypage/herbMatch/','HerbController::herbMatch');
+$routes->GET('Mypage/orderList','HerbController::orderList');
+$routes->GET('Mypage/deliveryList','HerbController::deliveryList');
+$routes->GET('Mypage/popReject','HerbController::popReject');
+$routes->GET('Mypage/popThum','HerbController::popThum');
+$routes->GET('Mypage/burkOrderForm','HerbController::burkOrderForm');
+
+/* pop test */
+$routes->GET('pop/popMaching','HerbDecocController::popMaching');

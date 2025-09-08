@@ -1,0 +1,969 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Libraries\Form;
+use App\Libraries\Utils;
+use App\Model;
+use CodeIgniter\API\ResponseTrait;
+
+class HerbPharmController extends BaseController
+{
+    use ResponseTrait;
+
+    public function __construct()
+    {
+        $util = New Utils;
+        $util->fn_Check_Auth(AUTH_PHARM);
+
+    }
+
+    public function statementBox(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else {
+            $request = service('request');
+            $hncode = ($request->getGet('key') == '') ? '' : $request->getGet('key');
+            $s_data = [];
+            $metaarr = [
+                'h_title' => '박스라벨출력',
+                'h_type' => 1
+            ];
+
+            $herb_m=model('Herb_m');
+            $Rs = $herb_m->Product_Match_Load($hncode);
+            if($util->fnArrayCnt($Rs)<=0){
+                $util->fnAlertClose('잘못된 접근입니다.');
+                return '';
+            }else{
+                $d_arr = [
+                    'hdcode' => $hncode,
+                    'mm_title' => $Rs[0]['md_title_kor'],
+                    'mi_name' => $Rs[0]['mi_name'],
+                    'e_date' => $util->fn_Short_Date($Rs[0]['hn_sellEDate']),
+                    'w_name' =>  $Rs[0]['w_name']
+                ];
+
+                $form = new Form;
+                $main_data = [
+                    'meta' => $form->fnMake_Meta($metaarr),
+                    'header' => $form->fnMake_Header($sessinarr),
+                    'left_menu' => $form->fnMake_Left($sessinarr),
+                    'search' => $form->fnMake_Search($s_data),
+                    'body' => $d_arr
+                ];
+
+                return view('web/pharm/statementBox_View', $main_data);
+            }
+        }
+    }
+
+
+    public function Statement(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else {
+            $request = service('request');
+            $pcode = ($request->getGet('key')=='') ? '' : $request->getGet('key');
+            $s_data = [];
+            $metaarr = [
+                'h_title' => '거래명세서',
+                'h_type' => 1
+            ];
+
+            $order_m = model('Order_m');
+            $package = $order_m->Load_Order_Package_Pcode($pcode);
+            if($util->fnArrayCnt($package)<=0){
+                $util->fnAlertClose('잘못된 접근입니다.');
+                return '';
+            }else {
+                $p_arr = [
+                    'sn' => 14,
+                    'pcode' => $package[0]['pcode'],
+                    'regdate' => $util->fn_Short_Date($package[0]['pa_regdate']),
+                    'ptype'=> $package[0]['p_type']
+                ];
+
+                $company = $order_m->Load_Company($package[0]['mi_code']);
+                $Rs = $order_m->Load_Order_Package_List($pcode);
+                if($util->fnArrayCnt($Rs)>0){
+                    $s_arr = [];
+                    $t_arr = [];
+                    $i = 1;
+                    foreach ($Rs as $d){
+                        $t_arr['num'] = $i;
+                        $t_arr['pa_code'] = $d['pa_code'];
+                        $t_arr['fk_hncode'] = $d['fk_hncode'];
+                        $t_arr['hn_name'] = $d['hn_name'];
+                        $t_arr['mm_kTitle'] = $d['mm_kTitle'];
+                        $t_arr['t_cnt'] = $d['t_cnt'];
+                        $t_arr['t_weight'] = $d['t_weight'];
+                        $t_arr['delidate'] = $d['gd_delidate'];
+
+                        $i++;
+                        array_push($s_arr,$t_arr);
+
+                    }
+                }
+
+                $body = [
+                    'info' => $p_arr,
+                    'company' => $company,
+                    'sub' => $s_arr
+                ];
+
+                $form = new Form;
+                $main_data = [
+                    'meta' => $form->fnMake_Meta($metaarr),
+                    'header' => $form->fnMake_Header($sessinarr),
+                    'left_menu' => $form->fnMake_Left($sessinarr),
+                    'search' => $form->fnMake_Search($s_data),
+                    'body' => $body
+                ];
+
+                return view('web/pharm/statement_View', $main_data);
+            }
+        }
+    }
+
+    public function statementPallet(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else {
+            $request = service('request');
+            $hdcode = ($request->getGet('key') == '') ? '' : $request->getGet('key');
+            $s_data = [];
+            $metaarr = [
+                'h_title' => '박스라벨출력',
+                'h_type' => 1
+            ];
+
+            $herb_m=model('Herb_m');
+            $Rs = $herb_m->Product_Match_Load($hdcode);
+            if($util->fnArrayCnt($Rs)<=0){
+                $util->fnAlertClose('잘못된 접근입니다.');
+                return '';
+            }else{
+                $d_arr = [
+                    'mm_title' => $Rs[0]['md_title_kor'],
+                    'mi_name' => $Rs[0]['mi_name'],
+                    'e_date' => $util->fn_Short_Date($Rs[0]['hn_sellEDate']),
+                    'w_name' =>  $Rs[0]['w_name']
+                ];
+
+                $form = new Form;
+                $main_data = [
+                    'meta' => $form->fnMake_Meta($metaarr),
+                    'header' => $form->fnMake_Header($sessinarr),
+                    'left_menu' => $form->fnMake_Left($sessinarr),
+                    'search' => $form->fnMake_Search($s_data),
+                    'body' => $d_arr
+                ];
+
+                return view('web/pharm/statementPallet_View', $main_data);
+            }
+        }
+    }
+
+    public function register(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+            $uid = $sessinarr['user']['uid'];
+            $mi_code = $sessinarr['user']['mi_code'];
+
+            $metaarr = [
+                'h_title' => '상품등록',
+                'h_type' => 1
+            ];
+
+            //t2 code
+            $herb_m = model('Herb_m');
+            $fields = ['t2_code','t2_value'];
+            $Rs = $herb_m->Load_option2($fields);
+            $option2 = '';
+            if($util->fnArrayCnt($Rs) <= 0){
+                $option2 = '<option selected value="0">옵션 없음.</option>';
+            }else{
+                $option2 = '<option selected value="0" selected>선택하세요.</option>';
+                foreach($Rs as $d){
+                    $option2 .= '<option value="' . $d['t2_code'] . '">' . $d['t2_value'] . '</option>';
+                }
+            }
+
+            // weight
+            $fields = ['w_code','w_name','w_value'];
+            $Rs = $herb_m->Load_option3($fields);
+            $option3 = '';
+            if($util->fnArrayCnt($Rs) <= 0){
+                $option3 = '<option selected value="0">옵션 없음.</option>';
+            }else{
+                $option3 = '<option selected value="0" selected>선택하세요.</option>';
+                foreach($Rs as $d){
+                    $option3 .= '<option value="' . $d['w_code'] . '" data-val="'.$d['w_value'].'">' . $d['w_name'] . '</option>';
+                }
+            }
+
+            // nation
+            $fields = ['n_code','n_key','n_value'];
+            $Rs = $herb_m->Load_option_nation($fields);
+            $nation = '';
+            if($util->fnArrayCnt($Rs) <= 0){
+                $nation = '<option selected value="0">옵션 없음.</option>';
+            }else{
+                $nation = '<option selected value="0" selected>선택하세요.</option>';
+                foreach($Rs as $d){
+                    $nation .= '<option value="' . $d['n_key'] . '">' . $d['n_value'] . '</option>';
+                }
+            }
+
+
+            $order = '<option selected value="0">등록 약재 없음</option>';
+
+            $body_data = [
+                'uid' => $uid,
+                'micode' => $mi_code,
+                'option2' => $option2,
+                'option3' => $option3,
+                'nation' => $nation
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr),
+                'body' => $body_data
+            ];
+
+            return view('web/pharm/register_View',$main_data);
+        }
+    }
+
+    public function herbReg_Do(){
+        $request = service('request');
+        foreach ($request->getPost() as $key => $value) {
+            $post[$key] = $value;
+        }
+
+
+        if(empty($post)){
+            $result = 'type101';
+            $code = '';
+            $message = '필수 입력값을 확인하여주세요.';
+        }else{
+            $util = new Utils;
+            $NewCode = $util->fn_Make_Code(1);
+
+            $data = [
+                'hn_ID' => $post['p_uid'],
+                'hn_code' => $NewCode,
+                'fk_micode' => $post['micode'],
+                'fk_mdcode' => $post['mdcode'],
+                'fk_medicode' => $post['medicode'],
+                'fk_mdname' => $post['mdname'],
+                'fk_ncode' => $post['o_nation'],
+                'fk_t1code' => $post['gubun1'],
+                'fk_t2code' => $post['o_option2'],
+                'fk_wcode' => $post['o_weight'],
+                'hn_name' => $post['o_name'],
+                'hn_number' => $post['o_number'],
+                'hn_bigsell'=> $post['hn_bigsell'],
+                'hn_DateMethod' =>  $post['method'],
+                'hn_MakeDate' => $post['makedate'],
+                'hn_sellSDate' => $post['s_date'],
+                'hn_sellEDate' => $post['e_date'],
+                'hn_desc' => $post['editor_data'],
+                'hn_boxCnt' => $post['boxCnt'],
+                'hn_isSell' => 1,
+                'hn_isok' => 100
+            ];
+
+            $herb_m = model('Herb_m');
+            $Cnt = $herb_m->Insert_Product($data);
+            if($Cnt > 0){
+                $price = [];
+                $temparr = [
+                    'fk_hncode' => $NewCode,
+                    'hn_method' => 1,
+                    'hn_gPrice' => $post['hn_gPrice_1'],
+                    'hn_pPrice' => $post['hn_pPrice_1'],
+                    'hn_stock' => $post['hn_stock_1'],
+                    'hn_period' => 0
+                ];
+                array_push($price,$temparr);
+
+                $hn_add_2 = isset($post['hn_add_2']) ? $post['hn_add_2'] : '';
+                if($hn_add_2!=''){
+                    $temparr = [
+                        'fk_hncode' => $NewCode,
+                        'hn_method' => 2,
+                        'hn_gPrice' => $post['hn_gPrice_2'],
+                        'hn_pPrice' => $post['hn_pPrice_2'],
+                        'hn_stock' => 0,
+                        'hn_period' => $post['hn_period'],
+                    ];
+                    array_push($price,$temparr);
+                }
+
+                if($util->fnArrayCnt($price) > 0) {
+                    $Cnt = $herb_m->Insert_Product_price($price);
+                }
+
+                if($post['unuse']=='on'){
+                    $Cnt = $herb_m->Update_Product_isSell($post['mdcode'],$NewCode,0);
+                }
+
+                $i_arr = [
+                    'code' => $NewCode
+                ];
+
+                $result = 'ok';
+                $code = $i_arr;
+                $message  = 'success';
+            }else{
+                $result = 'type102';
+                $code = '';
+                $message  = '';
+            }
+        }
+
+        $return = [
+            'result' => $result,
+            'info' => $code,
+            'message' => $message
+        ];
+        return $this->respond($return);
+    }
+
+
+    public function Herb_Edit_Do(){
+        $request = service('request');
+        foreach ($request->getPost() as $key => $value) {
+            $post[$key] = $value;
+        }
+
+        if(empty($post)){
+            $result = 'type101';
+            $code = '';
+            $message = '필수 입력값을 확인하여주세요.';
+        }else {
+            $util = new Utils();
+            $hncode = $post['hncode'];
+            $uid = $post['p_uid'];
+            $member_m = model('Member_m');
+            $mRs = $member_m->Load_Member_Uid($uid);
+            if ($util->fnArrayCnt($mRs) <= 0) {
+                $result = 'type111';
+                $message = '존재하지 않는 로그인 정보 입니다. ';
+            } else {
+                $fk_micode = $mRs[0]['fk_micode'];
+
+                $herb_m = model('Herb_m');
+                $info = $herb_m->Load_Product_Code($hncode);
+                if ($util->fnArrayCnt($info) <= 0) {
+                    $result = 'type102';
+                    $message = '선택하신 HB코드는 존재하지 않는 약재 입니다.';
+                } else {
+                    $mi_code = $info[0]['fk_micode'];
+                    if ($mi_code != $fk_micode) {
+                        $result = 'type103';
+                        $message = '약재 수정은 등록업체만 가능합니다.';
+                    } else {
+                        $param = [
+                            'hn_bigsell' => $post['hn_bigsell'],
+                            'hn_desc' => $post['editor_data']
+                        ];
+
+                        $herb_m = model('Herb_m');
+                        $Cnt = $herb_m->Update_Product_Info($hncode, $param);
+
+                        $param = [
+                            'hn_isDel' => 1
+                        ];
+                        $Cnt = $herb_m->Update_Product_Price_All($hncode, $param);
+
+                        $price = [];
+                        $temparr = [
+                            'fk_hncode' => $hncode,
+                            'hn_method' => 1,
+                            'hn_gPrice' => $post['hn_gPrice_1'],
+                            'hn_pPrice' => $post['hn_pPrice_1'],
+                            'hn_stock' => $post['hn_stock_1'],
+                            'hn_period' => '',
+                            'hn_sellmethod' => '',
+                            'hn_weight' => 0
+                        ];
+
+                        array_push($price, $temparr);
+
+                        $hn_add_2 = isset($post['hn_add_2']) ? $post['hn_add_2'] : '';
+                        if ($hn_add_2 != '') {
+                            $temparr = [
+                                'fk_hncode' => $hncode,
+                                'hn_method' => 2,
+                                'hn_gPrice' => $post['hn_gPrice_2'],
+                                'hn_pPrice' => $post['hn_pPrice_2'],
+                                'hn_stock' => 0,
+                                'hn_period' => $post['hn_period'],
+                                'hn_sellmethod' => '',
+                                'hn_weight' => 0
+                            ];
+                            array_push($price, $temparr);
+                        }
+
+                        if ($util->fnArrayCnt($price) > 0) {
+                            $Cnt = $herb_m->Insert_Product_price($price);
+                        }
+
+                        $i_arr = [
+                            'code' => $hncode
+                        ];
+                        $result = 'ok';
+                        $code = $i_arr;
+                        $message = '';
+                    }
+                }
+            }
+        }
+
+        $return = [
+            'result' => $result,
+            'info' => $code,
+            'message' => $message
+        ];
+        return $this->respond($return);
+    }
+
+    public function herbList(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else {
+            $request = service('request');
+            $skey = ($request->getPost('skey')=='') ? '' : $request->getPost('skey');
+            $page = ($request->getPost('page')=='') ? 1 : $request->getPost('page');
+            $limit = 50;
+
+            $s_data = [];
+
+            $metaarr = [
+                'h_title' => '상품리스트',
+                'h_type' => 1
+            ];
+
+            $body = [
+                'skey' => $skey,
+                'page' => $page,
+                'limit' => $limit
+            ];
+
+            $form = new Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr),
+                'search' => $form->fnMake_Search($s_data),
+                'body' => $body
+            ];
+
+            return view('web/pharm/herbListPharm_View', $main_data);
+        }
+    }
+
+
+    public function registerAll(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+
+            $metaarr = [
+                'h_title' => '상품등록',
+                'h_type' => 1
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr)
+            ];
+
+            return view('web/pharm/registerAll_View',$main_data);
+        }
+    }
+
+
+    public function herb_Edit(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+
+            $request = service('request');
+            $hncode = ($request->getGet('hd')=='') ? '' : $request->getGet('hd');
+
+            $herb_m = model('Herb_m');
+            $Rs = $herb_m->Load_Product_Code($hncode);
+            if($util->fnArrayCnt($Rs)<=0){
+                $util->fnAlert('존재하지 않는 약재입니다.');
+            }else {
+                $uid = $sessinarr['user']['uid'];
+                $mi_code = $sessinarr['user']['mi_code'];
+
+                $metaarr = [
+                    'h_title' => '약재수정',
+                    'h_type' => 1
+                ];
+                $n_key= $Rs[0]['n_key'];
+                $fk_wcode= $Rs[0]['fk_wcode'];
+                $fk_t2code= $Rs[0]['fk_t2code'];
+
+
+
+                //t2 code
+//                $herb_m = model('Herb_m');
+                $fields = ['t2_code','t2_value'];
+                $Rs1 = $herb_m->Load_option2($fields);
+                if($util->fnArrayCnt($Rs1) <= 0){
+                    $option2 = '<option selected value="0">옵션 없음.</option>';
+                }else{
+                    $option2 = '<option selected value="0" selected>선택하세요.</option>';
+                    foreach($Rs1 as $d){
+                        if($d['t2_code']==$fk_t2code){
+                            $option2 .= '<option value="' . $d['t2_code'] . '" selected>' . $d['t2_value'] . '</option>';
+                        }else {
+                            $option2 .= '<option value="' . $d['t2_code'] . '">' . $d['t2_value'] . '</option>';
+                        }
+                    }
+                }
+
+
+                // weight
+                $fields = ['w_code','w_name','w_value'];
+                $Rs1 = $herb_m->Load_option3($fields);
+                $option3 = '';
+                if($util->fnArrayCnt($Rs1) <= 0){
+                    $option3 = '<option selected value="0">옵션 없음.</option>';
+                }else{
+                    $option3 = '<option selected value="0" selected>선택하세요.</option>';
+                    foreach($Rs1 as $d){
+                        if($d['w_code']==$fk_wcode) {
+                            $option3 .= '<option value="' . $d['w_code'] . '" data-val="'.$d['w_value'].'" selected>' . $d['w_name'] . '</option>';
+                        }else{
+                            $option3 .= '<option value="' . $d['w_code'] . '" data-val="'.$d['w_value'].'" >' . $d['w_name'] . '</option>';
+                        }
+                    }
+                }
+
+                // nationherb_Edit
+                $fields = ['n_code','n_key','n_value'];
+                $Rs1 = $herb_m->Load_option_nation($fields);
+                $nation = '';
+                if($util->fnArrayCnt($Rs1) <= 0){
+                    $nation = '<option selected value="0">옵션 없음.</option>';
+                }else{
+                    $nation = '<option selected value="0" selected>선택하세요.</option>';
+                    foreach($Rs1 as $d){
+                        if($d['n_key']==$n_key) {
+                            $nation .= '<option value="' . $d['n_key'] . '" selected>' . $d['n_value'] . '</option>';
+                        }else{
+                            $nation .= '<option value="' . $d['n_key'] . '">' . $d['n_value'] . '</option>';
+                        }
+                    }
+                }
+
+                $fname = [
+                    'img' => '',
+                    'data' => ''
+                ];
+                $fRs = $herb_m->Load_Product_File_Code($hncode);
+                if($util->fnArrayCnt($fRs)>0){
+                    foreach ($fRs as $c){
+                        if($c['typ']==1){
+                            $fname['img'] = $c['fname'];
+                        }else if($c['typ']==2){
+                            $fname['data'] = $c['fname'];
+                        }
+                    }
+                }
+
+                $pricearr = $util->fn_LoadPrice($hncode);
+
+                $body_data = [
+                    'uid' => $uid,
+                    'mi_code' => $mi_code,
+                    'option2' => $option2,
+                    'option3' => $option3,
+                    'nation' => $nation,
+                    'data' => $Rs[0],
+                    'fname' => $fname,
+                    'price' => $pricearr
+                ];
+
+                $form = new Form;
+                $main_data = [
+                    'meta' => $form->fnMake_Meta($metaarr),
+                    'header' => $form->fnMake_Header($sessinarr),
+                    'left_menu' => $form->fnMake_Left($sessinarr),
+                    'body' => $body_data
+                ];
+
+                return view('web/pharm/herbModifier_View', $main_data);
+            }
+        }
+    }
+
+    public function herb_Edit2(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+
+            $request = service('request');
+            $hncode = ($request->getGet('hd')=='') ? '' : $request->getGet('hd');
+
+            $herb_m = model('Herb_m');
+            $Rs = $herb_m->Load_Product_Code($hncode);
+            if($util->fnArrayCnt($Rs)<=0){
+                $util->fnAlert('존재하지 않는 약재입니다.');
+            }else {
+                $uid = $sessinarr['user']['uid'];
+                $mi_code = $sessinarr['user']['mi_code'];
+
+                $metaarr = [
+                    'h_title' => '약재수정',
+                    'h_type' => 1
+                ];
+                $n_key= $Rs[0]['n_key'];
+                $fk_wcode= $Rs[0]['fk_wcode'];
+                $fk_t2code= $Rs[0]['fk_t2code'];
+
+
+
+                //t2 code
+//                $herb_m = model('Herb_m');
+                $fields = ['t2_code','t2_value'];
+                $Rs1 = $herb_m->Load_option2($fields);
+                if($util->fnArrayCnt($Rs1) <= 0){
+                    $option2 = '<option selected value="0">옵션 없음.</option>';
+                }else{
+                    $option2 = '<option selected value="0">선택하세요.</option>';
+                    foreach($Rs1 as $d){
+                        if($d['t2_code']==$fk_t2code){
+                            $option2 .= '<option value="' . $d['t2_code'] . '" selected>' . $d['t2_value'] . '</option>';
+                        }else {
+                            $option2 .= '<option value="' . $d['t2_code'] . '">' . $d['t2_value'] . '</option>';
+                        }
+                    }
+                }
+
+
+                // weight
+                $fields = ['w_code','w_name','w_value'];
+                $Rs1 = $herb_m->Load_option3($fields);
+                $option3 = '';
+                if($util->fnArrayCnt($Rs1) <= 0){
+                    $option3 = '<option selected value="0">옵션 없음.</option>';
+                }else{
+                    $option3 = '<option selected value="0">선택하세요.</option>';
+                    foreach($Rs1 as $d){
+                        if($d['w_code']==$fk_wcode) {
+                            $option3 .= '<option value="' . $d['w_code'] . '" data-val="'.$d['w_value'].'" selected>' . $d['w_name'] . '</option>';
+                        }else{
+                            $option3 .= '<option value="' . $d['w_code'] . '" data-val="'.$d['w_value'].'" >' . $d['w_name'] . '</option>';
+                        }
+                    }
+                }
+
+                // nationherb_Edit
+                $fields = ['n_code','n_key','n_value'];
+                $Rs1 = $herb_m->Load_option_nation($fields);
+                $nation = '';
+                if($util->fnArrayCnt($Rs1) <= 0){
+                    $nation = '<option selected value="0">옵션 없음.</option>';
+                }else{
+                    $nation = '<option selected value="">선택하세요.</option>';
+                    foreach($Rs1 as $d){
+                        if($d['n_key']==$n_key) {
+                            $nation .= '<option value="' . $d['n_key'] . '" selected>' . $d['n_value'] . '</option>';
+                        }else{
+                            $nation .= '<option value="' . $d['n_key'] . '">' . $d['n_value'] . '</option>';
+                        }
+                    }
+                }
+
+                $fname = [
+                    'img' => '',
+                    'data' => ''
+                ];
+                $fRs = $herb_m->Load_Product_File_Code($hncode);
+                if($util->fnArrayCnt($fRs)>0){
+                    foreach ($fRs as $c){
+                        if($c['typ']==1){
+                            $fname['img'] = $c['fname'];
+                        }else if($c['typ']==2){
+                            $fname['data'] = $c['fname'];
+                        }
+                    }
+                }
+
+                $body_data = [
+                    'uid' => $uid,
+                    'mi_code' => $mi_code,
+                    'option2' => $option2,
+                    'option3' => $option3,
+                    'nation' => $nation,
+                    'data' => $Rs[0],
+                    'fname' => $fname
+                ];
+
+                $form = new Form;
+                $main_data = [
+                    'meta' => $form->fnMake_Meta($metaarr),
+                    'header' => $form->fnMake_Header($sessinarr),
+                    'left_menu' => $form->fnMake_Left($sessinarr),
+                    'body' => $body_data
+                ];
+
+                return view('web/pharm/herbModifier_View2', $main_data);
+            }
+        }
+    }
+
+
+    public function Load_ItemDetail($hncode,$fields=['ALL']){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+
+            $request = service('request');
+            $hncode = ($request->getGet('hncode')=='') ? '' : $request->getGet('hncode');
+
+            $herb_m = model('Herb_m');
+            $Rs = $herb_m->Load_Product_Code($hncode);
+            if($util->fnArrayCnt($Rs)<=0){
+                $util->fnAlert('존재하지 않는 약재입니다.');
+            }else {
+                $uid = $sessinarr['user']['uid'];
+                $mi_code = $sessinarr['user']['mi_code'];
+                $hncode = $this->request->getPost('hncode');
+
+                $herb_m=model('Herb_m');
+                $data = $herb_m->Load_ItemDetail($hncode);
+
+                $metaarr = [
+                    'h_title' => '약재수정',
+                    'h_type' => 1
+                ];
+
+                $id = [
+                    'uid' => $uid,
+                    'mi_code' => $mi_code,
+                ];
+
+                $form = new Form;
+                $main_data = [
+                    'meta' => $form->fnMake_Meta($metaarr),
+                    'header' => $form->fnMake_Header($sessinarr),
+                    'left_menu' => $form->fnMake_Left($sessinarr),
+                    'body' => $data,
+                    'id' => $id
+                ];
+
+                return view('web/pharm/itemDetail_View', $main_data);
+            }
+        }
+    }
+
+
+
+
+    public function burkOrder(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+            $uid = $sessinarr['user']['uid'];
+            $mi_code = $sessinarr['user']['mi_code'];
+
+            $metaarr = [
+                'h_title' => '상품등록',
+                'h_type' => 1
+            ];
+
+            //t2 code
+            $herb_m = model('Herb_m');
+            $fields = ['t2_code','t2_value'];
+            $Rs = $herb_m->Load_option2($fields);
+            $option2 = '';
+            if($util->fnArrayCnt($Rs) <= 0){
+                $option2 = '<option selected value="0">옵션 없음.</option>';
+            }else{
+                $option2 = '<option selected value="">선택하세요.</option>';
+                foreach($Rs as $d){
+                    $option2 .= '<option value="' . $d['t2_code'] . '">' . $d['t2_value'] . '</option>';
+                }
+            }
+
+            // weight
+            $fields = ['w_code','w_name','w_value'];
+            $Rs = $herb_m->Load_option3($fields);
+            $option3 = '';
+            if($util->fnArrayCnt($Rs) <= 0){
+                $option3 = '<option selected value="0">옵션 없음.</option>';
+            }else{
+                $option3 = '<option selected value="">선택하세요.</option>';
+                foreach($Rs as $d){
+                    $option3 .= '<option value="' . $d['w_code'] . '">' . $d['w_name'] . '</option>';
+                }
+            }
+
+            // nation
+            $fields = ['n_code','n_key','n_value'];
+            $Rs = $herb_m->Load_option_nation($fields);
+            $nation = '';
+            if($util->fnArrayCnt($Rs) <= 0){
+                $nation = '<option selected value="0">옵션 없음.</option>';
+            }else{
+                $nation = '<option selected value="">선택하세요.</option>';
+                foreach($Rs as $d){
+                    $nation .= '<option value="' . $d['n_key'] . '">' . $d['n_value'] . '</option>';
+                }
+            }
+
+
+            $order = '<option selected value="0">등록 약재 없음</option>';
+
+            $body_data = [
+                'uid' => $uid,
+                'micode' => $mi_code,
+                'option2' => $option2,
+                'option3' => $option3,
+                'nation' => $nation
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr),
+                'body' => $body_data
+            ];
+
+            return view('web/pharm/burkOrder_View',$main_data);
+        }
+    }
+
+    public function shipList(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+
+            $metaarr = [
+                'h_title' => '배송내역',
+                'h_type' => 1
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr)
+            ];
+
+            return view('web/pharm/shipListPharm_View',$main_data);
+        }
+    }
+
+    public function orderList(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else {
+            $request = service('request');
+            $mi_code = $sessinarr['user']['mi_code'];
+            $s_data = [];
+            $metaarr = [
+                'h_title' => '주문내역',
+                'h_type' => 1
+            ];
+
+            $form = new Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr)
+            ];
+            return view('web/pharm/orderListPharm_View', $main_data);
+        }
+    }
+
+
+    public function deliveryList(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+            $mi_type = $sessinarr['user']['mi_type'];
+            $metaarr = [
+                'h_title' => '상품등록',
+                'h_type' => 1
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr)
+            ];
+
+            return view('web/pharm/deliveryListPharm_View', $main_data);
+        }
+    }
+
+
+
+    public function dashBoard(){
+        $util = New Utils;
+        $sessinarr = $util->fnGetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+            $metaarr = [
+                'h_title' => '상품등록',
+                'h_type' => 1
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr)
+            ];
+
+            return view('web/pharm/dashBoard_View', $main_data);
+        }
+    }
+
+}

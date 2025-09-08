@@ -42,7 +42,127 @@ $(document).ready(function () {
             fp.open(); // 또는 fp.toggle();
         });
     });
+
+
+    $(document).on('click', 'button[name="btn_cancle"]', async function() {
+        if(window.confirm('해당 주문을 취소하시겠습니까?')==true){
+            let sn = $(this).data('sn');
+            let bool = await Order_Del(sn);
+            if(bool ==true){
+                $('#gdr_' + sn).empty();
+                Make_Toast('선택하신 주문을 취소하였습니다.');
+            }
+        }
+    });
+
+    $(document).on('click', 'button[name="btn_cart"]', async function() {
+        let items = [];
+        let code = $(this).data('code');
+        let cnt = $(this).data('cnt');
+        let ptyp = $(this).data('ptyp');
+        items.push({code: code,cnt: cnt,ptyp: ptyp});
+
+        let str = JSON.stringify(items);
+        let bool = await Add_Cart(str);
+        if(bool ==true){
+            Make_Toast('장바구니에 담았습니다.');
+        }
+    });
+
+    $(document).on('click','button[name="btn_income"]',async function(){
+        if(window.confirm('해당 주문을 입고처리 하시겠습니까?')==true) {
+            let sn = $(this).data('sn');
+            let bool = Incoming_order(sn);
+            if (bool == true) {
+                Make_Toast('입고 완료 하였습니다.');
+            }
+        }
+    });
+
 });
+
+
+async function Incoming_order(sn){
+    let retval = false;
+    try {
+        start_spinner();
+        let dataarr = {"sn": sn};
+        let url = APIURL + '/Incoming_Do';
+        let result = await Load_API(url, dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        } else if (result.get('status') == 'ok') {
+            let busTrack = `
+                    <div class="busBox flexType2 "> 
+                        <i class="fa-regular fa-hourglass-half busColor1"></i>
+                        <i class="fa-solid fa-receipt  busColor1"></i>
+                        <i class="fa-solid fa-boxes-stacked busColor1"></i>
+                        <i class="fa-solid fa-van-shuttle busColor1"></i>
+                        <i class="fa-solid fa-circle-check busColor2"></i>
+                    </div>
+            `;
+            let status_name = Order_Step_Name(4);
+            $("#bus_" + sn).html(busTrack);
+            $("#status_" + sn).html(status_name);
+            $("#income_" + sn).remove();
+            retval = true;
+        }else{
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    }catch (e) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + e + '}');
+        stop_spinner();
+    }
+    return retval;
+}
+
+
+async function Add_Cart(str){
+    let retval = false;
+    try {
+        start_spinner();
+        let dataarr = {"str": str};
+        let url = APIURL + '/Insert_Cart';
+        let result = await Load_API(url, dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        } else if (result.get('status') == 'ok') {
+            retval = true;
+        }else{
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    }catch (e) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + e + '}');
+        stop_spinner();
+    }
+    return retval;
+}
+
+
+async function Order_Del(sn){
+    let retval = false;
+    try {
+        start_spinner();
+        let dataarr = {"sn": sn};
+        let url = APIURL + '/Cancel_Order';
+        let result = await Load_API(url, dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        } else if (result.get('status') == 'ok') {
+            let sn = result.get('data').sn;
+            retval = true;
+        }else{
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    }catch (e) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + e + '}');
+        stop_spinner();
+    }
+    return retval;
+}
 
 //Load_OrderList
 async function Load_OrderList(page) {
@@ -56,31 +176,32 @@ async function Load_OrderList(page) {
             go_login();
         } else if(result.get('status') == 'ok') {
             let html = '';
-            let busType_css = '';
             let busTrack = '';
             let data = result.get('data');
             let arr = (data && data.list) ? data.list : [];
+            console.log(arr);
             let Cnt = arr.length;
             if (Cnt > 0) {
                 $.each(arr, function(index, el) {
 
                     let html_sub = '';
                     let goods = el.goods;
-                    let cancel_str = '';
                     let cnxlBox = '';
-                    let order_str = '';
                     let goodsCount = 0;
+                    let delidate = '';
+                    let cancle = '';
+                    let ipgo = '';
 
                     goodsCount = goods.length;
                     if (goodsCount == 1) {
                         let buyType_css = '';
                         let item = goods[0];
 
-                        let inner_html1 = (item.gd_status == ORDER_UNCONFIRM) ? '<i class="fa-regular fa-hourglass-half busColor2"></i>' : '<i class="fa-regular fa-hourglass-half busColor1"></i>';
-                        let inner_html2 = (item.gd_status == ORDER_PROCESSING) ? '<i className="fa-solid fa-receipt busColor2"></i>' : '<i class="fa-solid fa-receipt busColor1"></i>';
-                        let inner_html3 = (item.gd_status == ORDER_DELIVERY_READY) ? '<i class="fa-solid fa-boxes-stacked busColor2"></i>' : '<i class="fa-solid fa-boxes-stacked busColor1"></i>';
-                        let inner_html4 = (item.gd_status == ORDER_DELIVERING) ? '<i class="fa-solid fa-van-shuttle busColor2"></i>' : '<i class="fa-solid fa-van-shuttle busColor1"></i>';
-                        let inner_html5 = (item.gd_status == ORDER_DELIVERED) ? '<i class="fa-solid fa-circle-check busColor2"></i>' : '<i class="fa-solid fa-circle-check busColor1"></i>';
+                        let inner_html1 = (item.gd_status == ORDER_UNCONFIRM) ? `<i class="fa-regular fa-hourglass-half busColor2"></i>` : `<i class="fa-regular fa-hourglass-half busColor1"></i>`;
+                        let inner_html2 = (item.gd_status == ORDER_PROCESSING) ? '<i class="fa-solid fa-receipt busColor2"></i>' : `<i class="fa-solid fa-receipt  busColor1"></i>`;
+                        let inner_html3 = (item.gd_status == ORDER_DELIVERY_READY) ? '<i class="fa-solid fa-boxes-stacked busColor2"></i>' : `<i class="fa-solid fa-boxes-stacked busColor1"></i>`;
+                        let inner_html4 = (item.gd_status == ORDER_DELIVERING) ? '<i class="fa-solid fa-van-shuttle busColor2"></i>' : `<i class="fa-solid fa-van-shuttle busColor1"></i>`;
+                        let inner_html5 = (item.gd_status == ORDER_DELIVERED) ? '<i class="fa-solid fa-circle-check busColor2"></i>' : `<i class="fa-solid fa-circle-check busColor1"></i>`;
 
                         busTrack = `
                                 <div class="busBox flexType2 "> 
@@ -99,46 +220,85 @@ async function Load_OrderList(page) {
                             </div>
                         `;
 
-                        if(item.hn_method_str==ORDER_TYPE_1){
-                            buyType_css = 'colorChip1';
-                        }else if(item.hn_method_str==ORDER_TYPE_2){
+                        if (item.hn_method_str == ORDER_TYPE_1) {
                             buyType_css = 'colorChip2';
-                        }else {
+                        } else if (item.hn_method_str == ORDER_TYPE_2) {
                             buyType_css = 'colorChip3';
+                        } else {
+                            buyType_css = 'colorChip4';
+                        };
+
+                        if(item.gd_status>=3){
+                            delidate =``;
+                        }else if(item.diff==true){
+                            delidate = '<p class=" delayed">출하지연중</p>';
+                        }else if(item.diff==false && item.gd_status==1){
+                            delidate =`<p class=" msg">${item.gd_delidate} 출하예정</p>`;
+                        }else if(item.diff==false && item.gd_status==0) {
+                            delidate =`<p class=" msg">${item.gd_delidate} 출하준비중</p>`;
+                        }else{
+                            delidate =`<p class=" msg">출하완료</p>`;
+                        }
+
+                        let delicode = item.delicode;
+                        let delitype = Make_delcode_str(item.delitype);
+
+                        console.log(delicode + '/' + delitype);
+
+                        let delistr = '';
+                        if(delicode != '' && delitype != ''){
+                            delistr = ` 
+                                            <a href="javascript://" class="delicode title ">송장번호:</a>
+                                            <a href="javascript://" class="delicode carrier mr10">${delitype}</a>
+                                            <a href="javascript://" class="delicode code mr10">${delicode}</a>                                     
+                                            <i class="fa-regular fa-copy"></i>
+                                           `;
+                        } else  {
+                            delistr = ``;
+                        }
+
+                        if(item.gd_status==0){
+                            cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType1 mr10 cnxlBtn" onclick="">주문취소</button>`;
+                        }else if(item.gd_status==1){
+                            cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType1 mr10 cnxlBtn">주문취소</button>`;
+                        } else if (item.gd_status==3) {
+                            cancle = `<button type="button" name="btn_income" id="income_${item.sn}" data-sn="${item.sn}" class="btnType1-1 mr10 cnxlBtn">입고처리</button>`;
+                        } else {
+                            cancle = ``;
                         }
 
                         let typeParts = [item.t1_value,item.t2_value,item.n_value,item.w_name];
                         typeText = Join_attr_string(typeParts,'/');
 
                         html_sub = `
-                            <div class="orderBox-aaa " name="block">  
+                            <div class="orderBox-aaa " name="block" id="gdr_${item.sn}">  
                                 <div class="buyType flexType3">
                                     <div class="left flexType2">
                                         <p class="type2 ${buyType_css}">${item.hn_method_str}</p> 
                                         <p class="pharm mr10">[${item.mi_name}]</p>
-                                        <p class="type">${item.fk_mdname}</p>
-                                        <p class="type mr10">(${item.hn_name})</p>
+                                        <p class="">${item.fk_mdname}</p>
+                                        <p class=" mr10">(${item.hn_name})</p>
                                         <p class="type fontColor1 mr10">${typeText}</p> 
                                     </div>
-                                    <div class="right">
-                                        <p class=" msg">10/1 배송예정</p>  <!-- <p class=" delayed">배송지연중</p>-->
-                                        
+                                    <div class="right flexType7 deli_boxe4z">
+                                        ${delidate} 
+                                        ${delistr}  
                                     </div>
                                 </div>
                                 <div class="priceBox flexType3">
                                     <div class="left flexType2">
-                                        <p class="status2">${Order_Step_Name(item.gd_status)}</p>  
+                                        <p class="status2" id="status_${item.sn}">${Order_Step_Name(item.gd_status)}</p>  
                                         <p class="price ">${number_format(item.gd_price)}원</p>
-                                        <p class="count">근당가격:${number_format(item.gd_rPrice)}*${item.gd_cnt}개</p>
+                                        <p class="count">포장단위가격:${number_format(item.gd_rPrice)}원*${item.gd_cnt}개</p>
                                     </div>  
                                     <div class="right flexType2">
-                                        <button type="button" class="btnType1 mr10 cnxlBtn">주문취소</button>
-                                         <button type="button" class="btnType1 fontColor1" onclick="">
+                                        ${cancle}
+                                         <button type="button" class="btnType1 fontColor1" name="btn_cart" data-code="${item.hncode}" data-cnt="1" data-ptyp="${item.gd_pType}">
                                             <i class="fa-solid fa-cart-shopping "></i>
                                         </button>   
                                     </div>
-                                  </div> 
-                                  <div class="busTrack">        
+                                  </div>   
+                                  <div class="busTrack" id="bus_${item.sn}">        
                                     ${busTrack}
                                   </div>   
                             </div>
@@ -150,11 +310,11 @@ async function Load_OrderList(page) {
 
                             let buyType_css = '';
                             if (item.hn_method_str == ORDER_TYPE_1) {
-                                buyType_css = 'colorChip1';
-                            } else if (item.hn_method_str == ORDER_TYPE_2) {
                                 buyType_css = 'colorChip2';
-                            } else {
+                            } else if (item.hn_method_str == ORDER_TYPE_2) {
                                 buyType_css = 'colorChip3';
+                            } else {
+                                buyType_css = 'colorChip4';
                             };
 
                             let inner_html1 = (item.gd_status == ORDER_UNCONFIRM) ? `<i class="fa-regular fa-hourglass-half busColor2"></i>` : `<i class="fa-regular fa-hourglass-half busColor1"></i>`;
@@ -173,39 +333,80 @@ async function Load_OrderList(page) {
                                 </div>
                             `;
 
+                            if(item.gd_status>=3){
+                                delidate =``;
+                            }else if(item.diff==true){
+                                delidate = '<p class=" delayed">출하지연중</p>';
+                            }else if(item.diff==false && item.gd_status==1){
+                                delidate =`<p class=" msg">${item.gd_delidate} 출하예정</p>`;
+                            }else if(item.diff==false && item.gd_status==0) {
+                                delidate =`<p class=" msg">${item.gd_delidate} 출하준비중</p>`;
+                            }else{
+                                delidate =`<p class=" msg">출하완료</p>`;
+                            }
+
+                            if(item.gd_status==0){
+                                cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType1 mr10 cnxlBtn">주문취소</button>`;
+                            }else if(item.gd_status==1){
+                                cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType1 mr10 cnxlBtn">주문취소</button>`;
+                            } else if (item.gd_status==3) {
+                                cancle = `<button type="button" name="btn_income" id="income_${item.sn}" data-sn="${item.sn}" class="btnType1-1 mr10 cnxlBtn">입고처리</button>`;
+                            } else {
+                                cancle = ``;
+                            }
+
+
+
+                            let delicode = item.delicode;
+                            let delitype = Make_delcode_str(item.delitype);
+
+                            let delistr = '';
+                            if(delicode != '' && delitype != ''){
+                                delistr = ` 
+                                            <a href="javascript://" class="delicode title ">송장번호:</a>
+                                            <a href="javascript://" class="delicode carrier mr10">${delitype}</a>
+                                            <a href="javascript://" class="delicode code mr10">${delicode}</a>                                     
+                                            <i class="fa-regular fa-copy"></i>
+                                           `;
+                            } else  {
+                                delistr = ``;
+                            }
+
+
                             let indexstr = (idx>0) ? 'hidden' : '';
                             let typeParts = [item.t1_value,item.t2_value,item.n_value,item.w_name];
                             typeText = Join_attr_string(typeParts,'/');
 
                             html_sub += `
-                                    <div class="orderBox-aaa ${indexstr}" name="block">  
-                                          <div class="buyType flexType3">
+                                    <div class="orderBox-aaa mt20 ${indexstr}" name="block" id="gdr_${item.sn}">   
+                                          <div class="buyType flexType3 ">
                                             <div class="left flexType2">
                                                 <p class="type2 ${buyType_css}">${item.hn_method_str}</p> 
                                                 <p class="pharm mr10">[${item.mi_name}]</p>
-                                                <p class="type">${item.fk_mdname}</p>
-                                                <p class="type mr10">(${item.hn_name})</p>
+                                                <p class="">${item.fk_mdname}</p>
+                                                <p class=" mr10">(${item.hn_name})</p>
                                                 <p class="type fontColor1 mr10">${typeText}</p> 
                                             </div>
-                                            <div class="right">
-                                                <p class=" msg">10/1 배송예정</p>  <!-- <p class=" delayed">배송지연중</p>-->
-                                                
+                                            <div class="right flexType7 deli_boxe4z">
+                                                ${delidate} 
+                                                ${delistr}  
                                             </div>
                                           </div>
                                           <div class="priceBox flexType3">
-                                            <div class="left flexType2">
-                                                <p class="status2">${Order_Step_Name(item.gd_status)}</p>  
+                                            <div class="left flexType2"> 
+                                                <p class="status2" id="status_${item.sn}">${Order_Step_Name(item.gd_status)}</p>  
                                                 <p class="price ">${number_format(item.gd_price)}원</p>
-                                                <p class="count">근당가격:${number_format(item.gd_rPrice)}*${item.gd_cnt}개</p>
+                                                <p class="count">포장단위가격:${number_format(item.gd_rPrice)}원*${item.gd_cnt}개</p>
                                             </div>  
                                             <div class="right flexType2">
-                                                <button type="button" class="btnType1 mr10 cnxlBtn">주문취소</button>
-                                                 <button type="button" class="btnType1 fontColor1" onclick="">
+                                                ${cancle}
+                                                 <button type="button" class="btnType1 fontColor1" name="btn_cart" data-code="${item.hncode}" data-cnt="1" data-ptyp="${item.gd_pType}">
                                                     <i class="fa-solid fa-cart-shopping "></i>
                                                 </button>   
                                             </div>
                                           </div> 
-                                          <div class="busTrack">        
+                                           
+                                          <div class="busTrack" id="bus_${item.sn}">        
                                             ${busTrack}
                                           </div>     
                                     </div>
@@ -228,8 +429,7 @@ async function Load_OrderList(page) {
                                         <p class="date">${el.regidate}</p>
                                         <div class="titleBox">
                                             <p class="copied title">주문번호</p>
-                                            <p class="copied orderNo">${el.od_code}</p>
-                                            <i class="fa-regular fa-copy copied copyIcon"></i>
+                                            <p class="copied orderNo">${el.od_code}</p> 
                                         </div>
                                     </div>
                                 </div>
@@ -244,10 +444,31 @@ async function Load_OrderList(page) {
             stop_spinner();
         }
     } catch (error) {
-        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
         stop_spinner();
     }
 }
+
+$(document).on('click', '.deli_boxe4z .fa-copy', function() {
+    var $box = $(this).closest('.deli_boxe4z');
+    var delicode = $box.find('.code').text().trim();
+
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(delicode);
+    } else {
+        var tempInput = $('<input>');
+        $('body').append(tempInput);
+        tempInput.val(delicode).select();
+        document.execCommand('copy');
+        tempInput.remove();
+    }
+
+    $(this)
+        .removeClass('fa-copy')
+        .removeClass('fa-regular')
+        .addClass('fa-solid')
+        .addClass('fa-check');
+});
 
 
 // 펼치기 버튼 클릭 시

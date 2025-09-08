@@ -1,0 +1,157 @@
+$(document).ready(function () {
+
+    $('i[name="plus"]').on('click', function() {
+        let cnt = parseInt($('#price_cnt').text(), 10);
+        console.log(cnt);
+        if ( cnt < 99) {
+            cnt++;
+            $('#price_cnt').text(cnt);
+            updateTotalPrice(cnt, unitPrice);
+        }
+    });
+
+    $('i[name="minus"]').on('click', function() {
+        let cnt = parseInt($('#price_cnt').text(), 10);
+        if (cnt > 1) {
+            cnt--;
+            $('#price_cnt').text(cnt);
+            updateTotalPrice(cnt, unitPrice);
+        }
+    });
+
+    $('i[name="heart"]').on('click', function() {
+        $(this).toggleClass('fa-solid');
+        alert('added wishlist');
+    });
+
+    $(document).on('click','.wishHeartBox',async function(){
+        let code = $(this).data('code');
+        let ptype = $(this).data('ptype');
+        let act = $(this).data('act');
+        if(Like_Do(code,ptype,act)){
+            if(act==1){
+                $(this).addClass('active');
+                $(this).find('.wishHeart').removeClass('fa-regular').addClass('fa-solid fa-heart wishHeart active');
+                $(this).data('act',2);
+            }else{
+                $(this).removeClass('active');
+                $(this).find('.wishHeart').removeClass('fa-solid').addClass('fa-regular fa-heart wishHeart');
+                $(this).data('act',1);
+            }
+        }
+    });
+});
+
+async function Like_Do(code,ptype,act){
+    let bool = false;
+    try {
+        start_spinner();
+        let dataarr = {"code": code,'ptype' : ptype,"act":act};
+        let url = APIURL + '/Like_Do';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            bool = true;
+        }else{
+            alert(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error.get('message') + '}');
+        stop_spinner();
+    }
+    return bool;
+}
+
+
+async function Herb_Cart_Do(str){
+    try{
+        start_spinner();
+        let dataarr = {"str" : str};
+        let url = APIURL + '/Insert_Cart';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            $('#popcart').css('display','flex');
+        } else {
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+
+    }catch(error){
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+
+}
+
+
+function updateTotalPrice(cnt, price) {
+    let total = cnt * price;
+    $('#ttl_price').text(number_format(total));
+}
+
+
+function price_minus(form,price){
+    let Cnt = $('#price_cnt').html();
+    let new_Cnt = Number(Cnt) - 1;
+    if(new_Cnt<=0) new_Cnt=0;
+    let new_tprice = Number(new_Cnt) * price;
+
+    $('#price_cnt').html(new_Cnt);
+    $('#totalprice').html(new_tprice.toLocaleString());
+}
+
+function price_plus(form,price){
+    let Cnt = $('#price_cnt').html();
+    let new_Cnt = Number(Cnt) + 1;
+    let new_tprice = Number(new_Cnt) * price;
+
+    $('#price_cnt').html(new_Cnt);
+    $('#totalprice').html(new_tprice.toLocaleString());
+}
+
+function box_minus(form,price,boxcnt){
+    let Cnt = $('#price_cnt').html();
+    let box = $('#box_cnt').html();
+    let new_Cnt = Number(Cnt) - Number(boxcnt);
+    if(new_Cnt<=0) new_Cnt = 0;
+    let new_box_Cnt = Number(box) - 1;
+    if(new_box_Cnt<=0) new_box_Cnt = 0;
+    let new_tprice = Number(new_Cnt) * price;
+
+
+    $('#price_cnt').html(new_Cnt);
+    $('#box_cnt').html(new_box_Cnt);
+    $('#totalprice').html(new_tprice.toLocaleString());
+}
+
+function box_plus(form,price,boxcnt){
+    let Cnt = $('#price_cnt').html();
+    let box = $('#box_cnt').html();
+    let new_Cnt = Number(Cnt) + Number(boxcnt);
+    let new_box_Cnt = Number(box) +1;
+    let new_tprice = Number(new_Cnt) * price;
+
+
+    $('#price_cnt').html(new_Cnt);
+    $('#box_cnt').html(new_box_Cnt);
+    $('#totalprice').html(new_tprice.toLocaleString());
+}
+
+function add_thum_cart(code,cnt,ptype){
+    console.log(code + '/' + cnt + '/' + ptype);
+
+    if((code!='') && (cnt!='') && (ptype!='')) {
+        let items = [];
+        items.push({code: code, cnt: cnt, ptyp: ptype});
+        let str = JSON.stringify(items);
+        Herb_Cart_Do(str);
+        Make_Toast('장바구니에 담았습니다.');
+    }else{
+        Make_Toast('잘못된 접근입니다..[Error101]');
+    }
+
+}

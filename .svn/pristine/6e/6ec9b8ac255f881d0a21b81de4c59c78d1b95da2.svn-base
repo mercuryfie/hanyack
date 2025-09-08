@@ -1,0 +1,177 @@
+<?= $this->extend("/web/template/layout_default") ?>
+<?= $this->section("content") ?>
+
+<script src="<?=URL_COMMON_ASSETS?>/itemDetail_Do.js?rnd=<?=rand();?>"></script>
+<section class="wrap">
+    <div class="detWrap">
+        <div class="detCon detCon1-1">
+            <div class="detBox1-1">
+                <img class="thum" src="/assets/product/image/<?=$body['info']['thumnail']?>" alt="img" onclick="">
+            </div>
+            <div class="detBox1-2">
+                <div class="detCol">
+                    <p class="hn_code"><?=$body['info']['hn_code']?></p>
+                    <p class="hn_code"><?=$body['pname']?></p>
+                    <div class="hn_nameBox">
+                        <p class="hn_name"><?=$body['info']['hn_name']?> (<?=$body['info']['w_name']?>)</p>
+<!--                        <div class="shareBox">-->
+<!--                            <i class="fa-solid fa-share-nodes"></i>-->
+<!--                        </div>-->
+                    </div>
+                    <div class="t_option_box">
+                        <p class="option" ><?=$body['info']['option']?></p>
+                    </div>
+                    <?if(($body['auth']!=AUTH_PHARM) && ($body['islogin']===true)){?>
+                        <div class="priceBox">
+                            <p class="price"><?= number_format($body['info']['price'][0]['hn_pPrice']) ?></p>
+                            <p class="won">원</p>
+                        </div>
+                    <?}?>
+                    <p class="nation">원산지: <?=$body['info']['n_value']?></p>
+                </div>
+                <div class="detInfo">
+                    <p class="title">제약사</p>
+                    <p><?=$body['info']['mi_name']?></p>
+                </div>
+                <div class="detInfo">
+                    <p class="title">소비기한/유통기한</p>
+                    <p><?= $body['info']['hn_sellEDate'] ?></p>
+                </div>
+                <?if(($body['auth']!=AUTH_PHARM ) && ($body['islogin']===true)){?>
+                    <?if($body['ptype']==1){?>
+                    <div class="detInfo">
+                        <p class="title">Box수량</p>
+                        <div class="countBox">
+                            <i class="fa-regular fa-square-minus" onclick="box_minus(this,'<?=$body['info']['price'][0]['hn_pPrice']?>','<?=$body['info']['hn_boxCnt']?>')"></i>
+                            <p id="box_cnt">0</p>
+                            <i class="fa-regular fa-square-plus" onclick="box_plus(this,'<?=$body['info']['price'][0]['hn_pPrice']?>','<?=$body['info']['hn_boxCnt']?>')"></i>
+                        </div>
+                    </div>
+                    <div class="detInfo">
+                        <p class="title">구매수량</p>
+                        <div class="countBox">
+                            <i class="fa-regular fa-square-minus" onclick="price_minus(this,'<?=$body['info']['price'][0]['hn_pPrice']?>')"></i>
+                            <p id="price_cnt">0</p>
+                            <i class="fa-regular fa-square-plus" onclick="price_plus(this,'<?=$body['info']['price'][0]['hn_pPrice']?>')"></i>
+                        </div>
+                    </div>
+                    <div class="buy_option_wrap">
+                        <label for="buyOption1" class="detLabel">
+                            <p class="buy_type">일반구매</p>
+                            <div class="buy_option_box">
+                                <div class="buy_option">
+                                    <p class="title">포장 가격</p>
+                                    <p id="hn_pPrice_1" name="hn_pPrice_1" data-val="<?=$body['info']['price'][0]['hn_pPrice']?>"><?=number_format($body['info']['price'][0]['hn_pPrice'])?>원</p>
+                                </div>
+                                <div class="buy_option">
+                                    <p class="title">근당 가격</p>
+                                    <p id="hn_gPrice_1" name="hn_gPrice_1" data-val="<?=$body['info']['price'][0]['hn_gPrice']?>"><?=number_format($body['info']['price'][0]['hn_gPrice'])?>원</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <?}else if($body['ptype']==2){?>
+                        <div class="detInfo">
+                            <p class="title">Box수량</p>
+                            <div class="countBox">
+                                <i class="fa-regular fa-square-minus" onclick="box_minus(this,'<?=$body['info']['price'][1]['hn_pPrice']?>','<?=$body['info']['hn_boxCnt']?>')"></i>
+                                <p class="box_cnt">0</p>
+                                <i class="fa-regular fa-square-plus" onclick="box_plus(this,'<?=$body['info']['price'][1]['hn_pPrice']?>','<?=$body['info']['hn_boxCnt']?>')"></i>
+                            </div>
+                        </div>
+                        <div class="detInfo">
+                            <p class="title">구매수량</p>
+                            <div class="countBox">
+                                <i class="fa-regular fa-square-minus" onclick="price_minus(this,'<?=$body['info']['price'][1]['hn_pPrice']?>')"></i>
+                                <p class="price_cnt">0</p>
+                                <i class="fa-regular fa-square-plus" onclick="price_plus(this,'<?=$body['info']['price'][1]['hn_pPrice']?>')"></i>
+                            </div>
+                        </div>
+                        <div class="buy_option_wrap">
+                            <label for="buyOption1" class="detLabel">
+                                <p class="buy_type">정기구독</p>
+                                <div class="buy_option_box">
+                                    <div class="buy_option">
+                                        <p class="title">구독 기간</p>
+                                        <p id="hn_period" name="hn_period" data-val="<?=$body['info']['price'][1]['hn_period']?>"><?=number_format($body['info']['price'][1]['hn_period'])?>개월</p>
+                                    </div>
+                                    <div class="buy_option">
+                                        <p class="title">포장 가격</p>
+                                        <p id="hn_pPrice_2" name="hn_pPrice_2" data-val="<?=$body['info']['price'][1]['hn_pPrice']?>"><?=number_format($body['info']['price'][1]['hn_pPrice'])?>원</p>
+                                    </div>
+                                    <div class="buy_option">
+                                        <p class="title">근당 가격</p>
+                                        <p id="hn_gPrice_2" name="hn_gPrice_2" data-val="<?=$body['info']['price'][1]['hn_gPrice']?>"><?=number_format($body['info']['price'][1]['hn_gPrice'])?>원</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <?}?>
+                        <?if($body['info']['hn_bigsell']==1){?>
+                            <p class="buy_type">?? 대량구매 가능</p>
+                        <?}?>
+
+
+                    <div class="detPrice" name="priceBox" id="priceBox">
+                        <p class="miniTitle">총 상품금액: </p>
+                        <div class="priceBox1">
+                            <p class="price" id="totalprice" name="totalprice" data-tprice="0">
+
+                            </p>
+                            <p class="won">원</p>
+                        </div>
+                    </div>
+                    <div class="detBuy">
+                        <?if($body['info']['hn_like']==0){?>
+                        <div class="wishHeartBox flexType1" name="btn_like" data-code="<?=$body['info']['hn_code'];?>" data-ptype="<?=$body['ptype'];?>" data-act="1">
+                            <i class="fa-regular fa-heart wishHeart" id="" ></i>
+                        </div>
+                        <?}else{?>
+                        <div class="wishHeartBox flexType1 active" name="btn_like" data-code="<?=$body['info']['hn_code'];?>" data-ptype="<?=$body['ptype'];?>" data-act="2">
+                            <i class="fa-solid fa-heart wishHeart active" ></i>
+                        </div>
+                        <?}?>
+                        <div class="heart" name="heart" id="heart">
+                            <i class="fa-regular fa-heart"></i>
+                        </div>
+                        <button type="button" class="btntype21">장바구니</button>
+                        <button type="button" class="btntype22">구매하기</button>
+                    </div>
+                <?}?>
+            </div>
+        </div>
+        <div class="detCon detCon1-2">
+            <div class="detBox2-1">
+                <a href="#" class="menutab">상품설명</a>
+                <a href="#" class="menutab">상세정보</a>
+                <a href="#" class="menutab">-</a>
+                <a href="#" class="menutab">-</a>
+            </div>
+            <div class="detBox2-2" id="desc" name="desc">
+                <?=$body['info']['hn_desc']?>
+            </div>
+            <div class="detBox2-3" id="detail" name="detail">
+                <p class="infoMsg">상품상세정보</p>
+                <table class="detInfoTable">
+                    <tr>
+                        <td class="col1">제조년월</td>
+                        <td class="col3">
+                            <?= $body['info']['hn_sellSDate'];?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col1">소비유통기한</td>
+                        <td class="col3"><?=$body['info']['hn_sellEDate'];?></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="detBox2-4" id="" name="">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<?= $this->endSection() ?>

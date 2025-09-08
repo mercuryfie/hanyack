@@ -36,6 +36,29 @@ $(document).on('click', '.copied', function (e) {
     }
 });
 
+function Make_delcode(sn){
+    let del = ['직배','퀵','경동','대신','로젠','롯데','천일','한진'];
+
+    let str = '<td><select name="delitype" id="delitype_'+ sn +'" class="selectType2">';
+    str += '<option value="0">선택</option>';
+    for(let i=0;i<=(del.length-1);i++){
+        str += '<option value="' + (i+1) + '">' + del[i] + '</option>';
+    }
+    str += '</select></td>';
+
+    return str;
+}
+
+function Make_delcode_str(sn){
+    let del = ['직배','퀵','경동','대신','로젠','롯데','천일','한진'];
+
+    str = del[(sn-1)];
+
+    return str;
+}
+
+
+
 function Search_Product(){
     let sKey = $('#h_sKey').val();
     let url = '/Product/pList?lp=2&skey=' + sKey
@@ -167,46 +190,6 @@ function Load_API_File(url,f_data){
     });
 }
 
-
-async function Order_Step_Do(o_data,ostep,nstep){
-    let retMap = new Map();
-    try {
-        start_spinner();
-        let dataarr = {"data" : o_data,"ostep" : ostep,"nstep" : nstep};
-        let url = APIURL + '/Order_Step_Do';
-        let result = await Load_API(url,dataarr);
-        if (result.get('status') == 'NoLogin') {
-            retMap.set('status','NoLogin');
-            retMap.set('data','');
-            retMap.set('message','');
-        }else if(result.get('status') == 'ok') {
-            let data = result.get('data');
-            let Cnt = (data && data.eCnt) ? data.eCnt : 0;
-            let darr = (data && data.list) ? data.list : [];
-            if(Cnt<=0){
-                retMap.set('status','NotChange');
-                retMap.set('data','');
-                retMap.set('message','수정된 주문정보가 없습니다.\n다시 확인하여 주세요.');
-            }else {
-                retMap.set('status','ok');
-                retMap.set('data',darr);
-                retMap.set('message','');
-            }
-        }else{
-            retMap.set('status','error');
-            retMap.set('data','');
-            retMap.set('message',result.get('message'));
-        }
-        stop_spinner();
-    } catch (error) {
-        retMap.set('status','error');
-        retMap.set('data','');
-        retMap.set('message','오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
-        stop_spinner();
-    }
-    return retMap;
-}
-
 function Order_Step_Name(step){
     let str = '';
     if(step==0){
@@ -273,6 +256,17 @@ function div_close(id,reload){
 
 }
 
+function go_BigOrder(){
+    let uid = $('#tUid').val();
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    } else{
+        url = "/Mypage/burkOrderForm";
+        $(location).attr("href", url);
+    }
+}
+
 
 function go_HList(){
     let url = '/Mypharm/herbList';
@@ -287,8 +281,6 @@ function go_main() {
 function go_productList(typ) {
     let url = '';
     let sKey = $('#h_sKey').val();
-
-
     if(typ=='') {
         url = "/Product/pList";
     }else{
@@ -320,13 +312,13 @@ function go_login(){
     $(location).attr("href", url);
 }
 
-function go_detail(hncode){
+function go_detail(hncode,ptype){
     let uid = $('#tUid').val();
     if(uid==''){
         url = '/Member/Login';
         $(location).attr("href", url);
     } else{
-        url = "/Product/itemDetail?hd=" + hncode;
+        url = "/Product/itemDetail?hd=" + hncode + '&pt=' + ptype;
         $(location).attr("href", url);
     }
 }
@@ -495,6 +487,39 @@ function g_SetLogin(url) {
 }
 
 
+// refund & exchange---------------
+
+function go_InqForm(hncode) {
+    let uid = $('#tUid').val();
+    //let bid = $('#title').data('bid');
+    // console.log(bid);
+    if (uid == '') {
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    } else {
+        url = "/Board/InqForm?bid=" + bid + '&bcode=' + bcode;
+        $(location).attr("href", url);
+    }
+}
+
+
+function go_refund(hncode) {
+    let mitype = $('#title').data('mitype');
+    let tUid = $('#tUid').val();
+    let p_uid = $('#p_uid').val();
+
+    if (tUid == '') {
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    } else if (mitype == 'decoc'){
+        url = "/Board/claim/refund?hncode=" + hncode +"&bcode="+bcode;
+        $(location).attr("href", url);
+        Load_BContent_Reply();
+    } else {
+        url = "/Board/bList?bid=" + bid ;
+        $(location).attr("href", url);
+    }
+}
 
 
 // mypage ---------------
@@ -691,23 +716,64 @@ function Join_attr_string(arr, sep){
 }
 
 
-
 function number_format(num){
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
 }
 
 function start_spinner() {
-    let html = '<div class="spinnerBox" id="spinner">';
-    html += '<img src="/assets/web/src/spinner.gif" alt="img" class="spinner"/>';
-    html += '</div>';
-
-    $('body').prepend(html);
+    $('#spinnerBox').addClass('active');
+    $('#spinner').addClass('active');
 
 }
 
 function stop_spinner(){
-    $('#spinner').remove();
+    $('#spinnerBox').removeClass('active');
+    $('#spinner').removeClass('active');
 }
+
+function add_wishlist(e){
+    $(e).toggleClass('active');
+
+    const iconBox = $(e).find('.wishHeartBox');
+    const icon = $(e).find('.wishHeart');
+    if(icon.hasClass('fa-regular')){
+        iconBox.addClass('.wishHeartBox');
+        iconBox.removeClass('active');
+        icon.removeClass('fa-regular')
+            .addClass('fa-solid wishHeart active');
+    } else {
+        iconBox.addClass('active');
+        icon.removeClass('fa-solid active')
+            .addClass('fa-regular wishHeart');
+    }
+    // $(e).find('.wishHeart').toggleClass('active');
+    console.log("hello1201");
+
+    // const icon = $(e).find('.wishHeart');
+    // if(icon.hasClass('fa-regular')){
+    //     icon.removeClass('fa-regular heart1-1 wishHeart')
+    //         .addClass('fa-solid heart1-2');
+    // } else {
+    //     icon.removeClass('fa-solid heart1-2')
+    //         .addClass('fa-regular fa-heart heart1-1 wishHeart');
+    // }
+
+    console.log("hello1201");
+}
+
+
+// function start_spinner() {
+//     let html = '<div class="spinnerBox" id="spinner">';
+//     html += '<img src="/assets/web/src/spinner.gif" alt="img" class="spinner"/>';
+//     html += '</div>';
+//
+//     $('body').prepend(html);
+//
+// }
+//
+// function stop_spinner(){
+//     $('#spinner').remove();
+// }
 
 function printWindow(id) {
     var init_body = document.body.innerHTML;
@@ -723,4 +789,28 @@ function printWindow(id) {
         // 인쇄 완료 후 원래 내용 복원 (print 이후에 실행되도록 변경)
         document.body.innerHTML = init_body;
     }, 500);
+}
+
+function dataCopy(text) {
+    let textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // 화면 밖으로 위치 이동시키기
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    textArea.style.top = "-9999px";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+        document.execCommand('copy');
+        Make_Toast('복사완료');
+    } catch (err) {
+        Make_Toast('복사실패');
+        console.error('Fallback: 복사 실패', err);
+    }
+
+    document.body.removeChild(textArea);
 }

@@ -1,0 +1,806 @@
+$(document).ready(function() {
+
+    $("#txtHD").on("keypress", function (key) {
+        if (key.keyCode == 13) {
+            $word = $('#txtHD').val();
+            if ($word == '') {
+                alert('검색어를 입력하세요.');
+                $('#txtHD').focus();
+            } else {
+                Search_HDMedicine(2, $word);
+            }
+        }
+    });
+
+    $("#txtHD").focusout(function () {
+        ini_Form4();
+    });
+
+    $("#txtHD").focusin(function () {
+        $('#HD_List2').empty();
+        $('#HD_List2').css('display','none');
+    });
+
+    $("#makedate").on("propertychange keyup paste input", function () {
+        Make_Period(1);
+    });
+
+    $('#attachImg').on('click', function(e) {
+        let thumbCount = $('[name="thumPreview"]').length;
+        if (thumbCount >= 1) {
+            Make_Toast('이미지는 최대 1장까지 등록 가능합니다.');
+            e.preventDefault(); // 파일 선택창 안 뜨게 막음
+            return false;
+        }
+    });
+
+    $('#attachImg').on('change', function(e) {
+        let files = e.target.files;
+        let thumbCount = $('[name="thumPreview"]').length;
+
+        if (thumbCount + files.length > 1) {
+            Make_Toast('이미지는 1장만 등록 가능합니다.');
+            $(this).val(''); // 파일 선택 취소
+            return;
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.match('image.*')) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let $thumb = $(
+
+                        '<div class="thumCon" >' +
+                        '<div class="thumBox" name="thumPreview">' +
+                        '<img src="' + e.target.result + '" alt="img" class="addedImg">' +
+                        // '<p class="file-name" >' + files[i].name + '</p>' +
+                        '<button type="button" class="delete-btn">' +
+                        '<i class="fa-solid fa-xmark"></i></button>' +
+                        '</div>' +
+                        '<p class="file-name" >' + files[i].name + '</p>' +
+                        '</div>' );
+                    $('#thumbArea').append($thumb);
+                    $thumb.find('.delete-btn').on('click', function() {
+                        $(this).closest('.thumCon').remove();
+                        $('#attachImg').val('');
+                    });
+                };
+                reader.readAsDataURL(files[i]);
+            }
+        }
+    });
+
+    $('#attachFile').on('click', function(e) {
+        let thumbCount = $('[name="thumPreview2"]').length;
+        if (thumbCount >= 1) {
+            Make_Toast('파일은 최대 1장까지 등록 가능합니다.');
+            e.preventDefault(); // 파일 선택창 안 뜨게 막음
+            return false;
+        }
+    });
+
+    $('#attachFile').on('change', function(e) {
+        let files = e.target.files;
+        let thumbCount = $('[name="thumPreview2"]').length;
+
+        if (thumbCount + files.length > 1) {
+            Make_Toast('파일은 1개만 등록 가능합니다.');
+            $(this).val(''); // 파일 선택 취소
+            return;
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type === 'application/pdf') {
+                let $thumb = $(
+                    '<div class="thumCon" name="">' +
+                    '<div class="thumBox" name="thumPreview2">' +
+                    '<img src="/assets/web/src/pdfSample.png" alt="pdf" class="addedFile">' +
+                    // '<p class="file-name">' + files[i].name + '</p>' +
+                    '<button type="button" class="delete-btn">' +
+                    '<i class="fa-solid fa-xmark"></i></button>' +
+                    '</div>' +
+                    '<p class="file-name">' + files[i].name + '</p>' +
+                    '</div>'
+                );
+                $('#thumbArea2').append($thumb);
+                $thumb.find('.delete-btn').on('click', function() {
+                    $(this).closest('.thumCon').remove();
+                    $('#attachFile').val('');
+                });
+            } else {
+                Make_Toast('PDF 파일만 등록 가능합니다.');
+                $(this).val(''); // 파일 선택 취소
+                return;
+            }
+        }
+    });
+
+    $('#deleteBtn').on('click',function () {
+        $(this).closest('.thumCon').remove();
+        $('#attachImg').val('');
+
+    });
+
+    $('#deleteBtn2').on('click',function () {
+        $(this).closest('.thumCon').remove();
+        $('#attachFile').val('');
+
+    });
+
+
+    $("#submitBtn").on('click',function(e){
+        let medicode = $('#medicode').val();
+        let o_name = $('#o_name').val();
+        let o_number = $('#o_number').val();
+        let o_weight = $("#o_weight option:selected").val();
+        let o_nation = $("#o_nation option:selected").val();
+        let makedate = $('#makedate').val();
+        let fname = $('#mainimg').val();
+        let hn_gPrice_1 = $('#hn_gPrice_1').val();
+        let hn_pPrice_1 = $('#hn_pPrice_1').val();
+        let hn_stock_1 = $('#hn_stock_1').val();
+        let hn_add2= 0;
+        if($('input[id=hn_add_2]').is(':checked')==true){
+            hn_add2= 1;
+        }
+        let hn_period = $("#hn_period option:selected").val();
+        let hn_gPrice_2 = $('#hn_gPrice_2').val();
+        let hn_pPrice_2 = $('#hn_pPrice_2').val();
+        let hn_stock_2 = $('#hn_stock_2').val();
+        let hn_boxCnt = $('#boxCnt').val();
+
+        if(medicode==''){
+            $('#txtHD').focus();
+            Make_Toast('본초를 검색하여 주세요.');
+        }else if(o_name=='') {
+            $('#o_name').focus();
+            Make_Toast('약초명을 입력하여 주세요.');
+        }else if(o_number=='') {
+            $('#o_number').focus();
+            Make_Toast('제조번호를 입력하여 주세요.');
+        }else if(o_weight==''){
+            $('#o_weight').focus();
+            Make_Toast('포장 단위를 선택하여 주세요.');
+        }else if(hn_boxCnt==''){
+            $('#boxCnt').focus();
+            Make_Toast('박스당 수량을 입력하여 주세요.');
+        }else if(o_nation=='') {
+            $('#o_nation').focus();
+            Make_Toast('원산지를 선택하여 주세요.');
+        }else if (hn_gPrice_1 == '') {
+            $('#hn_gPrice_1').focus();
+            Make_Toast('근당 가격을 입력하여 주세요.  [반드시 숫자만 입력하세요.]');
+        }else if (hn_pPrice_1 == '') {
+            $('#hn_pPrice_1').focus();
+            Make_Toast('포장 가격을 입력하여 주세요.  [반드시 숫자만 입력하세요.]');
+        }else if (hn_stock_1 == '') {
+            $('#hn_stock_1').focus();
+            Make_Toast('재고 수량을 입력하여 주세요.  [반드시 숫자만 입력하세요.]');
+        }else if ((hn_add2 == 1) && (hn_period == '')) {
+            $('#hn_period').focus();
+            Make_Toast('정기 구독 기간을 선택하여 주세요.');
+        }else if ((hn_add2 == 1) && (hn_gPrice_2 == '')) {
+            $('#hn_gPrice_2').focus();
+            Make_Toast('정기구독의 근당 가격을 입력하여 주세요.  [반드시 숫자만 입력하세요.]');
+        }else if ((hn_add2 == 1) && (hn_pPrice_2 == '')) {
+            $('#hn_pPrice_2').focus();
+            Make_Toast('정기구독의 포장 가격을 입력하여 주세요.  [반드시 숫자만 입력하세요.]');
+        }else if ((hn_add2 == 1) && (hn_stock_2 == '')) {
+            $('#hn_stock_2').focus();
+            Make_Toast('정기구독의 재고 수량을 입력하여 주세요.  [반드시 숫자만 입력하세요.]');
+        }else if (!checkValidDate(makedate)) {
+            Make_Toast('제조 일자를 확인하여 주세요.');
+        } else if (fname == '') {
+            $('#mainimg').focus();
+            Make_Toast('대표 이미지를 선택 하세요.');
+        }else if(window.confirm('등록하시겠습니까?')==true) {
+            Product_Reg();
+        }
+    });
+
+    $('#hn_gPrice_1').on('input',function(){
+        let price = $('#hn_gPrice_1').val();
+        let weight = $("#o_weight option:selected").data('val');
+        let r_price = 0;
+        if(weight==''){
+            $('#o_weight').focus();
+            Make_Toast('포장 단위를 선택하여 주세요.');
+        }else{
+            r_price = calcPricePerGeun(price,weight);
+            $('#hn_pPrice_1').val(r_price);
+        }
+    });
+
+    $('#hn_gPrice_2').on('input',function(){
+        let price = $('#hn_gPrice_2').val();
+        let weight = $("#o_weight option:selected").data('val');
+        let r_price = 0;
+        if(weight==''){
+            $('#o_weight').focus();
+            Make_Toast('포장 단위를 선택하여 주세요.');
+        }else{
+            r_price = calcPricePerGeun(price,weight);
+            $('#hn_pPrice_2').val(r_price);
+        }
+    });
+
+    $('#o_weight').on('change',function(e){
+        $('#hn_pPrice_1').val('');
+        $('#hn_pPrice_2').val('');
+        $('#hn_gPrice_1').val('');
+        $('#hn_gPrice_2').val('');
+    });
+
+    $("#o_name").on("keyup", function (e) {
+        $(this).css('outline','');
+        $(this).css('border','solid 1px #cccccc');
+    });
+
+    $("#o_weight, #o_nation", "#mainimg", "#attachimg" ).on("change", function (e) {
+        $(this).css('outline','');
+        $(this).css('border','solid 1px #cccccc');
+    });
+
+    $('#mainarea').on("drop", function (e) {
+        let extval = $(this).data('ext');
+        let files = e.originalEvent.dataTransfer.files[0];
+        let ext = extval.split(',');
+        if(!uploadFile(files,ext)){
+            e.stopPropagation();
+            e.preventDefault();
+            alert('대표이미지는 [' + extval + "] 만 가능합니다.");
+        }else{
+            $('#mainimg').files = files;
+        }
+    });
+
+    $('#attacharea').on("drop", function (e) {
+        let extval = $(this).data('ext');
+        let files = e.originalEvent.dataTransfer.files[0];
+        let ext = extval.split(',');
+        if(!uploadFile(files,ext)){
+            e.stopPropagation();
+            e.preventDefault();
+            alert('시험성적서는 [' + extval + "] 만 가능합니다.");
+        }else{
+            $('#attachimg').files = files;
+        }
+    });
+
+    $('#hn_add_2').on('click', function() {
+        if ($('#buyWrap2').is(':visible')) {
+            $('#buyWrap2').slideUp(100); // 200ms
+        } else {
+            $('#buyWrap2').slideDown(400); // 400ms
+        }
+    });
+
+    // ckeditor
+    ClassicEditor
+        .create(document.querySelector("#ckeditor"), {
+        removePlugins: ['ImageCaption'],
+        image: {
+            toolbar: [ 'imageStyle:full', 'imageStyle:side' ]
+        },
+        toolbar: {
+            // licenseKey: '<YOUR_LICENSE_KEY>',
+            label: 'Basic styles',
+            icon: 'text',
+            initialData: '<p></p>',
+            items:
+                [
+                    "selectAll",
+                    "undo",
+                    "redo",
+                    "bold",
+                    "italic",
+                    "blockQuote",
+                    "|",
+                    //"todoList",
+                    //"paragraph",
+                    //"pasteFormat",
+                    "numberedList",
+                    "bulletedList",
+                    "uploadImage",
+                    "|",
+                    "link",
+                    // "ckfinder",
+                    // "heading",
+                    "imageStyle:full",
+                    "imageStyle:side",
+                    "indent",
+                    "outdent",
+                    "mediaEmbed"
+                ]
+
+        },
+        image: {
+            upload: {
+                types: ['jpeg', 'png', 'gif']
+            }
+        },
+        ckfinder: {
+            uploadUrl: '/Api/Upload_file_editor'
+        },
+        codeBlock: {
+            languages: [
+                { language: 'javascript', label: 'JavaScript' },
+                { language: 'html', label: 'HTML' }
+            ]
+        },
+        language:'ko'
+    })
+        .then((editor) => {
+
+            //console.log('Editor initialized', editor);
+            theEditor = editor;
+
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                return new MyUploadAdapter(loader);
+            };
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+
+
+    class MyUploadAdapter {
+        constructor(loader) {
+            this.loader = loader;
+        }
+        upload() {
+            return this.loader.file
+                .then(file => new Promise((resolve, reject) => {
+                    this._initRequest();
+                    this._initListeners(resolve, reject, file);
+                    this._sendRequest(file);
+                }));
+        }
+        abort() {
+            if (this.xhr) { this.xhr.abort(); }
+        }
+        _initRequest() {
+            const xhr = this.xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Api/Upload_file_editor', true);
+            xhr.responseType = 'json';
+        }
+
+        _initListeners(resolve, reject, file) {
+            const xhr = this.xhr;
+            const loader = this.loader;
+            const genericErrorText = `Couldn't upload file: ${ file.name }.`;
+            xhr.addEventListener('error', () => reject(genericErrorText));
+            xhr.addEventListener('abort', () => reject());
+            xhr.addEventListener('load', () => {
+                const response = xhr.response;
+                if (!response || response.error) {
+                    return reject(response && response.error ? response.error.message : genericErrorText);
+                }
+                resolve({
+                    default: response.url
+                });
+            });
+            if (xhr.upload) {
+                xhr.upload.addEventListener('progress', evt => {
+                    if (evt.lengthComputable) {
+                        loader.uploadTotal = evt.total;
+                        loader.uploaded = evt.loaded;
+                    }
+                });
+            }
+        }
+        _sendRequest(file) {
+            const data = new FormData();
+            data.append('upload', file);
+            this.xhr.send(data);
+        }
+    }
+});
+/////////////////  function ////////////////////////////////////////
+
+
+async function Product_Reg() {
+    try {
+        start_spinner();
+        let result1 = await Reg_data();
+        if((result1.status=='ok') && (result1.status!='undefined')){
+            let hncode = result1.code;
+            let result2 = await Main_img(hncode);
+            if($('#attachFile').val()!=''){
+                let result3 = await Attach_file(hncode);
+                if(result3.status='ok') {
+                    Make_Toast('등록 완료 하였습니다.');
+                    let url = $('#tUrl').val();
+                    $(location).attr('href',url + '/herbList');
+                }else {
+                    Make_Toast(result3.msg);
+                }
+            }else{
+                Make_Toast('등록 완료 하였습니다.');
+                let url = $('#tUrl').val();
+                $(location).attr('href',url + '/herbList');
+            }
+            stop_spinner();
+        }else{
+            stop_spinner();
+            Make_Toast(result1.msg);
+        }
+    } catch (error) {
+        stop_spinner();
+        Make_Toast('오류가 발생했습니다: ' + error.message);
+    }
+}
+
+async function Reg_data() {
+    let retarr ={};
+    try {
+        var sHTML = theEditor.getData();
+        $('#editor_data').val(sHTML);
+        let formdata = new FormData($("#regForm")[0]);
+        let url = PHARMURL + '/herbReg_Do';
+        let result = await Load_API_Form(url, formdata);
+        if(result.get('status')=='ok'){
+            retarr.status = 'ok';
+            retarr.code = result.get('data')['code'];
+            retarr.msg = '';
+        }else{
+            retarr.status = 'error';
+            retarr.code = '';
+            retarr.msg = result.message;
+        }
+    }catch(error){
+        retarr.status = 'catch';
+        retarr.code = '';
+        retarr.msg = '오류가 발생했습니다: ' + error.message;
+    }
+    return retarr;
+}
+
+async function Main_img(hncode){
+    let retarr = {};
+    try{
+        if(hncode==''){
+            retarr['status'] = 'error';
+            retarr['msg'] = '잘못된 접근입니다.';
+        }else {
+            let formdata = new FormData();
+            formdata.append("attachImg", $("#attachImg")[0].files[0]);
+            formdata.append("key", 'attachImg');
+            formdata.append("hn_code", hncode);
+            formdata.append("allow", $('#attachImg').data('ext'));
+            formdata.append("typ", 1);
+            formdata.append("method", 'reg');
+
+            let url = APIURL + '/Upload_file';
+            let result = await Load_API_File(url, formdata);
+            if (result.get('status') == 'ok') {
+                retarr.status = 'ok';
+                retarr.msg = '';
+            } else {
+                retarr.status = 'error';
+                retarr.msg = result.message;
+            }
+        }
+    }catch(error){
+        retarr.status = 'catch';
+        retarr.msg = '오류가 발생했습니다: ' + error.message;
+    }
+    return retarr;
+}
+
+async function Attach_file(hncode){
+    let retarr = {};
+    try{
+        if(hncode==''){
+            retarr['status'] = 'error';
+            retarr['msg'] = '잘못된 접근입니다.';
+        }else {
+            let formdata = new FormData();
+            formdata.append("attachFile", $("#attachFile")[0].files[0]);
+            formdata.append("key", 'attachFile');
+            formdata.append("hn_code", hncode);
+            formdata.append("allow", $('#attachFile').data('ext'));
+            formdata.append("typ", 2);
+            formdata.append("method", 'reg');
+
+            let url = APIURL + '/Upload_file';
+            let result = await Load_API_File(url, formdata);
+            if (result.get('status') == 'ok') {
+                retarr.status = 'ok';
+                retarr.msg = '';
+            } else {
+                retarr.status = 'error';
+                retarr.msg = result.message;
+            }
+        }
+    }catch(error){
+        retarr.status = 'catch';
+        retarr.msg = '오류가 발생했습니다: ' + error.message;
+    }
+    return retarr;
+}
+
+function updateOptions(list) {
+    const gubun1 = $('#gubun1');
+    gubun1.empty();
+
+    if (list.length > 0) {
+        gubun1.append('<option value="0">선택안함</option>');
+        $.each(list, function(index, el) {
+            gubun1.append('<option value="' + el.t1_code + '">' + el.t1_value + '</option>');
+        });
+    } else {
+        gubun1.append('<button class="herboption" style="color: red;">옵션없음</button>');
+    }
+}
+
+async function Search_HDMedicine(target,val){
+    try {
+        start_spinner();
+        ini_Form1();
+        let dataarr = { "word" : val,"target" : target};
+        let url = APIURL + "/Load_Medicine";
+        let result = await Load_API(url, dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        } else if (result.get('status') == 'ok') {
+            let html = '';
+            let data = result.get('data');
+            let arr = (data && data.list) ? data.list : [];
+            let Cnt = arr.length;
+            if (Cnt > 0) {
+                $.each(arr,function (index,el){
+                    html += '<button class="herboption" type="button" onclick="Select_HD(\'' + el.mdCode + '\',\''+el.mdMediName+'\',\''+el.mdMedi+'\');">' + el.mdMediName + ' [' + el.mdCode  + '] </button>';
+                });
+                $('#HD_List').append(html);
+                $('#HD_List').css('display','flex');
+            }else{
+                Make_Toast(result.get('message'));
+            }
+        }else{
+            ini_Form1();
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+function ini_Form1(){
+    $('.HDName').html('-');
+    $('.HDName').text('검색 중...');
+    $('#mdcode').val('');
+    $('#medicode').val('');
+    $('#mdname').val('');
+    $('#HD_List').empty();
+    $('#HD_List').css('display','none');
+    $('#txtHD').val('');
+    $('#gubun1').empty();
+    $('#gubun1').append('<button value="0">옵션없음</button>');
+}
+
+function ini_Form2(){
+    $('.HDName').html('-');
+    $('#mdcode').val('');
+    $('#medicode').val('');
+    $('#mdname').val('');
+    $('#HD_List').empty();
+    $('#HD_List').css('display','none');
+}
+
+function ini_Form3(){
+    $('#HD_List').css('display','none');
+    $('#gubun1').empty();
+    $('#HD_List2').empty();
+}
+
+function ini_Form4(){
+    $('.HDName').html('-');
+    $('#txtHD').val('');
+    $('#mdcode').val('');
+    $('#medicode').val('');
+    $('#mdname').val('');
+
+}
+
+function ini_Form5(){
+    $('#hn_gPrice_2').val('');
+    $('#hn_pPrice_2').val('');
+}
+
+function ini_Form6(){
+    $('#hn_sellmethod').val('');
+    $('#hn_weight').val('');
+    $('#hn_pPrice_3').val('');
+}
+
+async function SettingData(code){
+    try {
+        start_spinner();
+        let dataarr = { "hncode" : code};
+        let url = APIURL + "/Load_Product_Info";
+        let result = await Load_API(url, dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        } else if (result.get('status') == 'ok') {
+            let info = result.get('data').info[0];
+            let price = result.get('data').price;
+
+            if(info.fk_t1code>0){
+                $('#gubun1').val(info.fk_t1code).prop('selected',true);
+            }
+            $('#o_option2').val(info.fk_t2code).prop('selected',true);
+            $('#o_weight').val(info.fk_wcode).prop('selected',true);
+            $('#o_nation').val(info.fk_ncode).prop('selected',true);
+            $('#o_gPrice').val(info.hn_gPrice);
+            $('#o_pPrice').val(info.hn_pPrice);
+            $('#boxCnt').val(info.hn_boxCnt);
+
+            for($i=1;$i<=4;$i++){
+                if(info.hn_DateMethod==$i){
+                    $('#pemethod' + $i).addClass('checkedGreen');
+                }else{
+                    $('#pemethod' + $i).removeClass('checkedGreen');
+                }
+            }
+
+            if(price[0].hn_pPrice!=''){
+                $('#hn_gPrice_1').val(price[0].hn_gPrice);
+                $('#hn_pPrice_1').val(price[0].hn_pPrice);
+                $('#hn_stock_1').val(price[0].hn_stock);
+            }
+
+            if(price[1].hn_pPrice!=''){
+                 $('#hn_add_2').prop('checked',true);
+                 $('#buyWrap2').css('display','block');
+                $('#hn_period').val(price[1].hn_period).prop('selected',true);
+                $('#hn_gPrice_2').val(price[1].hn_gPrice);
+                $('#hn_pPrice_2').val(price[1].hn_pPrice);
+            }
+            const mdate1 = moment(info.hn_MakeDate);
+            $('#makedate').val(mdate1.format('YYYY-MM-DD'));
+            const mdate2 = moment(info.hn_sellSDate);
+            $('#s_date').val(mdate2.format('YYYY-MM-DD'));
+            const mdate3 = moment(info.hn_sellEDate);
+            $('#e_date').val(mdate3.format('YYYY-MM-DD'));
+
+            theEditor.setData(info.hn_desc);
+            $('#HD_List2').css('display','none');
+        }else{
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+
+}
+
+function Select_HD(mdcode,name,medicode){
+    $('.HDName').html(name);
+    $('#mdcode').val(mdcode);
+    $('#medicode').val(medicode);
+    $('#mdname').val(name);
+    ini_Form3();
+
+    if(medicode!=''){
+        $.ajax({
+            type:"POST",
+            url:"/Api/Load_Medicine_Option1",
+            dataType:"json",
+            data : { "mdcode" : medicode},
+            success : function(data) {
+                if(data.result == 'ok'){
+                    let Cnt = data.list.info ? data.list.info.length : 0;
+                    if(Cnt>0){
+                        let arr = data.list.info;
+                        let html = '<option value="0" selected>선택하세요.</option>';
+                        $.each(arr,function (index,el){
+                            html += '<option value="' + el.t1_code + '">' + el.t1_value + '</option>';
+
+                        });
+                        $('#gubun1').append(html);
+                    }else{
+                        let html = '<option value="0" selected>옵션없음</option>';
+                        $('#gubun1').append(html);
+                    }
+                }else if(data.result == 'type101'){
+                    alert('잘못된 접근입니다.\n 다시 시도 하여주세요.(101)');
+                }else if(data.result == 'type102'){
+                    alert('통신장애로 데이터로드에 실패하였습니다. .\n 다시 시도 하여주세요.(101)');
+                }else{
+                    alert('통신에러 Error(101)');
+                }
+            },
+            error : function(xhr, status, error) {
+                alert("에러발생");
+            }
+        });
+
+        $.ajax({
+            type:"POST",
+            url:"/Api/Load_Product_Before",
+            dataType:"json",
+            data : { "mdcode" : mdcode},
+            success : function(data) {
+                if(data.result == 'ok'){
+                    let Cnt = data.list.info ? data.list.info.length : 0;
+                    if(Cnt>0){
+                        let arr = data.list.info;
+                        let html = '';
+                        $.each(arr,function (index,el){    // 약재복사 template
+                            html += `<button class="herboption" type="button" onclick="SettingData('${el.hn_code}');">${el.hn_name} [제조번호:${el.hn_number}][약재코드:${el.hn_code}]</button>`;
+                        });
+                        $('#HD_List2').append(html);
+                        $('#hdlist_cmt').html('이전 등록 약재를 선택하세요');
+                    }else{
+                        $('#hdlist_cmt').html('등록된 이전 약재 정보 없습니다.');
+                    }
+                }else if(data.result == 'type101'){
+                    alert('잘못된 접근입니다.\n 다시 시도 하여주세요.(101)');
+                }else if(data.result == 'type102'){
+                    alert('통신장애로 데이터로드에 실패하였습니다. .\n 다시 시도 하여주세요.(101)');
+                }else{
+                    alert('통신에러 Error(101)');
+                }
+            },
+            error : function(xhr, status, error) {
+                alert("에러발생");
+            }
+        });
+
+
+    }
+}
+
+function on_method(method){
+    Make_Period(method);
+}
+
+function Make_Period(method){
+    $('#method').val(method);
+    let c_date = $('#makedate').val();
+    if(c_date!='') {
+        let date = '';
+        let s_date = new Date(c_date);
+        let period = 0;
+        if (method == 1) {
+            period = 12 * 3;
+        }else if (method == 2) {
+            period = 12 * 2;
+        }else if (method == 3) {
+            period = 12 * 1;
+        } else if (method == 4) {
+            period = 6;
+        } else {
+            period = 12 * method;
+        }
+
+        date = new Date(s_date.setMonth(s_date.getMonth() + (period + 1)));
+        let e_date = date.getFullYear() + '-' + String(date.getMonth()).padStart(2, "0") + '-' + String(date.getDate()).padStart(2, "0");
+
+        $('#s_date').val(c_date);
+        $('#e_date').val(e_date);
+    }
+}
+
+
+function uploadFile(fileVal,extarr) {
+    let retval = false;
+    let filename = fileVal["name"];
+    if( filename != "" ){
+        var ext = filename.split('.').pop().toLowerCase(); //확장자분리
+        if($.inArray(ext, extarr) == -1) {
+            retval = false;
+        }else{
+            retval = true;
+        }
+    }
+    return retval;
+}
+
+function show_HDList2(){
+    $('#HD_List2').toggle();
+}

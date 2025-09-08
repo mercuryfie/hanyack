@@ -30,7 +30,6 @@ $routes->match(['GET', 'POST'], 'Api/Load_Product_Info', 'ApiController::Load_Pr
 $routes->match(['GET', 'POST'], 'Api/Upload_file', 'ApiController::Upload_file');
 $routes->match(['GET', 'POST'], 'Api/Upload_file_editor', 'ApiController::Upload_file_editor');
 $routes->match(['GET', 'POST'], 'Api/Load_herbList', 'ApiController::Load_herbList');
-$routes->match(['GET', 'POST'], 'Api/Load_thisHerb', 'ApiController::Load_thisHerb');
 $routes->match(['GET', 'POST'], 'Api/Load_orderList', 'ApiController::Load_orderList');
 $routes->match(['GET', 'POST'], 'Api/Load_OrginHerb', 'ApiController::Load_OrginHerb');
 $routes->match(['GET', 'POST'], 'Api/Load_Match_Data', 'ApiController::Load_Match_Data');
@@ -63,6 +62,16 @@ $routes->match(['GET', 'POST'], 'Api/Delete_DeliInfo', 'ApiController::Delete_De
 $routes->match(['GET', 'POST'], 'Api/Order_Step_Do', 'ApiController::Order_Step_Do');
 $routes->match(['GET', 'POST'], 'Api/Load_Cart_Info', 'ApiController::Load_Cart_Info');
 $routes->match(['GET', 'POST'], 'Api/Del_Cart', 'ApiController::Del_Cart');
+$routes->match(['GET', 'POST'], 'Api/Cancel_Order', 'ApiController::Cancel_Order');
+$routes->match(['GET', 'POST'], 'Api/Load_Medicine2', 'ApiController::Load_Medicine2');
+$routes->match(['GET', 'POST'], 'Api/Load_Herb_Info', 'ApiController::Load_Herb_Info');
+$routes->match(['GET', 'POST'], 'Api/Insert_BigOrder', 'ApiController::Insert_BigOrder');
+$routes->match(['GET', 'POST'], 'Api/Update_Product_isSale', 'ApiController::Update_Product_isSale');
+$routes->match(['GET', 'POST'], 'Api/Load_OrderList', 'ApiController::Load_OrderList');
+$routes->match(['GET', 'POST'], 'Api/Load_DecocTotalStock', 'ApiController::Load_DecocTotalStock');
+$routes->match(['GET', 'POST'], 'Api/Incoming_Do', 'ApiController::Incoming_Do');
+$routes->match(['GET', 'POST'], 'Api/Like_Do', 'ApiController::Like_Do');
+
 
 
 /* board start ------------------------ */
@@ -88,8 +97,7 @@ $routes->match(['GET', 'POST'], 'Api/Load_ProductEvent', 'ApiController::Load_Pr
 
 /* CommonController */
 $routes->GET('Product/itemDetail', 'CommonController::itemDetail');
-$routes->GET('Product/mainThum', 'CommonController::mainThum');
-$routes->GET('Product/pList', 'CommonController::pList');
+
 
 /* Board */
 $routes->GET('Board/bList/','BoardController::bList');
@@ -134,6 +142,12 @@ $routes->GET('Mydecoc/deliveryStatus','HerbDecocController::deliveryStatus');
 $routes->GET('Mydecoc/deliveryInfo','HerbDecocController::deliveryInfo');
 $routes->GET('Mydecoc/cancelOrder','HerbDecocController::cancelOrder');
 $routes->GET('Mydecoc/confirmOrder','HerbDecocController::confirmOrder');
+$routes->GET('Mydecoc/claim/','HerbDecocController::claim');
+$routes->GET('Mydecoc/claim/refund/step2','HerbDecocController::claimRefund2');
+$routes->GET('Mydecoc/claim/refund/step3','HerbDecocController::claimRefund3');
+$routes->GET('Mydecoc/claim/exchange','HerbDecocController::claimExchange');
+$routes->GET('Product/mainThum', 'HerbDecocController::mainThum');
+$routes->GET('Product/pList', 'HerbDecocController::pList');
 
 /*  디제이메디 master */
 $routes->GET('Mypage/','HerbController::dashBoard');
