@@ -3172,23 +3172,6 @@ margin: 0 auto;
     right: 40px;
 }
 
-/*.merrightlast > button {*/
-/*    border: 0.8px solid var(--bg-color4);*/
-/*    color: var(--main-color);*/
-/*    background-color: #fff;*/
-/*    margin-right: 20px;*/
-/*    border-radius: 5px;*/
-/*    width: 120px;*/
-/*    height: 32px;*/
-/*    margin-bottom: 10px;*/
-/*    font-size: 14px;*/
-/*}*/
-
-/*.merrightlast > button:last-child {*/
-/*    margin-right: 0;*/
-/*    background-color: var(--main-color);*/
-/*    color: white;*/
-/*}*/
 
 
 .submitBox {
@@ -4377,6 +4360,8 @@ margin: 0 auto;
 
 /*orderList css end hereeeeeee ---------*/
 
+
+
 /*refund css start  ---------*/
 
 .refund_boxtc6 .head_title {
@@ -4396,8 +4381,6 @@ margin: 0 auto;
 
 
 .refund_boxtc6 .area5 {
-    /*margin-top: 20px;*/
-    width: 520px;
 }
 
 .refund_boxtc6 label {
@@ -4410,6 +4393,7 @@ margin: 0 auto;
 .el_box2w9,
 .el_boxatq {
     padding-bottom: 10px;
+    text-wrap: nowrap;
 }
 
 .refund_boxtc6 .area6  {
@@ -4429,6 +4413,11 @@ margin: 0 auto;
     font-size: 14px;
     /*text-align: center;*/
     text-wrap: nowrap;
+}
+
+.el_box2w9 .colect {
+    padding-left: 4px;
+    font-size: 14px;
 }
 
 /*.el_boxatq .title {*/
@@ -4483,7 +4472,7 @@ margin: 0 auto;
     width: 420px;
     height: 140px;
     padding-left: 10px;
-    /*padding-top: 10px;*/
+    padding-top: 10px;
     resize: none;
 }
 
@@ -4553,33 +4542,99 @@ margin: 0 auto;
     color:#5c5c5c;
 }
 
-/*.refund_boxtc6 .area3 .element3 >* {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    margin-right: 14px;*/
-/*}*/
-
-
-/*.refund_boxtc6 .area3 .element3 i:last-child {*/
-/*    margin-right: 0;*/
-/*}*/
 
 .refund_boxtc6 .btnType100 {
     width: 750px;
     height: 44px;
     font-size: 18px;
     border-radius: 10px;
-    background-color: #848f9a41;
-    color:#848f9a81;
-}
-
-
-.refund_boxtc6 .btnType100.active{
     background-color: var(--second-color);
     color:#fff;
+    /*background-color: #848f9a41;*/
+    /*color:#848f9a81;*/
 }
 
+
+/*.refund_boxtc6 .btnType100.active{*/
+/*    background-color: var(--second-color);*/
+/*    color:#fff;*/
+/*}*/
+
 /*refund css end  ---------*/
+
+
+/*claimList css start  ---------*/
+
+.claimList_boxarv {
+    padding: 0px 40px;
+    width: 760px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.claimList_boxarv .upside {
+    padding-top: 20px;
+    /*border:1px solid red;*/
+    height: 80px;
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 10px;
+}
+
+.claimList_boxarv .upside .status {
+    font-weight: 500;
+    margin-bottom: 5px;
+
+}
+
+.claimList_boxarv .upside .title,
+.claimList_boxarv .upside .odcode {
+    font-size: 14px;
+    color: var(--grayColor1);
+}
+
+
+.claimList_boxarv .upside i {
+    font-size: 12px;
+    color: var(--grayColor1);
+}
+
+
+.claimList_boxarv .downside {
+    height: 80px;
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 10px;
+
+}
+
+.claimList_boxarv .downside .price{
+    font-weight: 500;
+
+}
+
+.claimList_boxarv .downside .unit{
+    font-size: 14px;
+    color: var(--grayColor1);
+
+}
+
+.claimList_boxarv .downside:last-child {
+    border-bottom: none;
+}
+
+.claimList_box2ck {
+    padding:20px 40px;
+}
+
+.claimList_tablefz7c .claimBtn{
+    /*border:1px solid var();*/
+    /*border:none;*/
+    /*background-color: #ececec;*/
+    /*color:#ccc;*/
+}
+
+
+/*claimList css end  ---------*/
+
 
 .decodrbb1-2-3 {
     width: 760px;
