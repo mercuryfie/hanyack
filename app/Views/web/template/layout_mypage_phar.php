@@ -17,6 +17,7 @@ referrerpolicy="no-referrer" />
 <!--###############-->
 <!--JS section-->
 <?= $this->include("/web/include/script_View") ?>
+<script src="<?=URL_COMMON_ASSETS?>/GaugeMeter.js"></script>
 <!--###############-->
 </head>
 <body>
