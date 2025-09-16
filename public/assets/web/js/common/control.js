@@ -61,7 +61,7 @@ function Make_delcode_str(sn){
 
 function Search_Product(){
     let sKey = $('#h_sKey').val();
-    let url = '/Product/pList?lp=2&skey=' + sKey
+    let url = '/Product/pList?lp=1&skey=' + sKey
     $(location).attr("href", url);
 }
 
@@ -190,35 +190,48 @@ function Load_API_File(url,f_data){
     });
 }
 
-function Order_Step_Name(step){
-    let str = '';
-    if(step==0){
-        str = "미확인";
-    }else if(step==1){
-        str = "제품준비중";
-    }else if(step==2){
-        str = "배송준비중";
-    }else if(step==3){
-        str = "배송중";
-    }else if(step==4){
-        str = "배송완료";
+function Return_Step_Name(step){
+    let val = parseInt(step,10);
+    switch(val){
+        case 1: return "취소완료";
+        case 2: return "반품완료";
+        case 3: return "교환완료";
+        default: return '';
     }
-    return str;
+}
+function Order_Step_Name(step){
+    let val = parseInt(step,10);
+    switch(val){
+        case 0: return "미확인";
+        case 1: return "제품준비중";
+        case 2: return "배송준비중";
+        case 3: return "배송중";
+        case 4: return "배송완료";
+        default: return '';
+    }
 }
 
-function Package_Step_name(step){
-    let str = '';
-    if(step==0){
-        str = "제품준비중";
-    }else if(step==1){
-        str = "배송준비중";
-    }else if(step==2){
-        str = "배송중";
-    }else if(step==3){
-        str = "배송완료";
+function Order_Type_Name(step) {
+    let val = parseInt(step,10);
+    switch(val){
+        case 1: return "일반";
+        case 2: return "정기";
+        case 3: return "대량";
+        default: return '';
     }
-    return str;
 }
+
+function Package_Step_Name(step) {
+    let val = parseInt(step,10);
+    switch(val){
+        case 0: return "제품준비중";
+        case 1: return "배송준비중";
+        case 2: return "배송중";
+        case 3: return "배송완료";
+        default: return '';
+    }
+}
+
 
 function Make_Toast(msg){
     const div = document.createElement('div');
@@ -331,6 +344,20 @@ function go_delInfo() {
 function go_prdBarcode() {
     var url = PHARMURL + "/settings/prdBarcode";
     $(location).attr("href", url);
+}
+
+function go_prdBarcodePreview() {
+    var url = PHARMURL + "/settings/prdBarcodePreview";
+    window.open(url, "barcodePreviewWindow", "width=1080,height=700,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes");
+}
+
+
+function exit_thisWindow() {
+    window.close();
+}
+
+function print_thisPage() {
+    window.print();
 }
 
 function pop_Maching() {

@@ -7760,6 +7760,79 @@ th, td {
 }
 
 /* prdBarcode end ------------------------------------------  */
+/* prdBarcode preview start ------------------------------------------  */
+
+
+.modal_wrapux7 {
+    width: 320px;
+    height: 480px;
+    background-color: #ececec61;
+}
+
+.print_box40c {
+    padding: 10px;
+    width: 300px;
+    height: 500px;
+}
+
+.print_boxfv6  {
+    width: 300px;
+    height: 32px;
+    /*margin: 4px 0;*/
+
+}
+
+.print_boxfv7 {
+    width: 300px;
+    height: 50px;
+
+}
+
+.print_boxfv7  img {
+    width: 220px;
+}
+
+.print_boxfv6 .category {
+    width: 80px;
+    height: 32px;
+    line-height: 32px;
+}
+
+.print_boxfv6:last-child {
+    height: 60px;
+}
+
+.print_boxfv6 .mdName {
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.print_boxd2s {
+    width: 320px;
+    height: 32px;
+    /*padding:20px 0;*/
+}
+
+@media print {
+    body * {
+        visibility: hidden; /* 전체 내용 숨김 */
+    }
+    .print_box40c, .print_box40c * {
+        visibility: visible; /* 인쇄할 영역만 보이게 */
+    }
+    .print_box40c {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 60cm;
+        height: 70cm;
+        box-sizing: border-box;
+    }
+}
+
+
+
+/* prdBarcode preview end ------------------------------------------  */
 
 /* mypage ------------------------------------------  */
 .mypage {

@@ -6,9 +6,6 @@
 <section class="merright">
 <!--    <div class="merright1-0">-->
 <!--    </div>-->
-    <!--    </div>-->
-    <!--    </div>-->
-    <!--    </div>-->
 <div class="merright1-1 dashbox">
     <p>마이페이지 > 주문관리 처리 예정</p>
     <div class="bannerbox bb1-1 flexType3">

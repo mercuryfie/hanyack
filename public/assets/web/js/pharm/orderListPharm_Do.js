@@ -162,6 +162,11 @@ async function Load_Order(page, skey) {
                             <td>${el.oddate}</td>
                             <td id="ostr2_${el.sn}">${delstr1}</td> 
                             <td id="ostr3_${el.sn}">${delstr2}</td>
+                            <td><button type="button" class="btnType1 barBtn" 
+                                onclick="go_prdBarcodePreview();">
+                                <i class="fa-solid fa-barcode"></i>
+                                </button>
+                            </td>
                         </tr >
                     `;
                 });

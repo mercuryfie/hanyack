@@ -222,7 +222,7 @@ async function Load_Herb(page, skey) {
                                 <i class="fa-solid fa-ban"></i>
                                 </button>
                             </td>
-                            <td><button type="button" class="btnType1 barBtn" >
+                            <td><button type="button" class="btnType1 barBtn" onclick="go_prdBarcodePreview();" >
                                 <i class="fa-solid fa-barcode"></i>
                                 </button>
                             </td>

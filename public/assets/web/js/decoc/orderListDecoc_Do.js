@@ -79,7 +79,40 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on('click','button[name="btn_return"]',async function(){
+        if(window.confirm('해당 주문을 반품 하시겠습니까?')==true) {
+            let sn = $(this).data('sn');
+            let bool = await Return_order(sn,RETURN_TYPE_2);
+            if (bool == true) {
+                Make_Toast('반품처리가 완료되었습니다.');
+            }
+        }
+    });
+
 });
+
+async function Return_order(sn,rtype){
+    let retval = false;
+    try {
+        start_spinner();
+        let dataarr = {"sn": sn,"rtype" : rtype};
+        let url = APIURL + '/Return_Do';
+        let result = await Load_API(url, dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        } else if (result.get('status') == 'ok') {
+            $('#gdr_' + sn).empty();
+            retval = true;
+        }else{
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    }catch (e) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + e + '}');
+        stop_spinner();
+    }
+    return retval;
+}
 
 
 async function Incoming_order(sn){
@@ -232,18 +265,16 @@ async function Load_OrderList(page) {
                             delidate =``;
                         }else if(item.diff==true){
                             delidate = '<p class=" delayed">출하지연중</p>';
-                        }else if(item.diff==false && item.gd_status==1){
-                            delidate =`<p class=" msg">${item.gd_delidate} 출하예정</p>`;
                         }else if(item.diff==false && item.gd_status==0) {
                             delidate =`<p class=" msg">${item.gd_delidate} 출하준비중</p>`;
+                        }else if(item.diff==false && item.gd_status==1){
+                            delidate =`<p class=" msg">${item.gd_delidate} 출하예정</p>`;
                         }else{
                             delidate =`<p class=" msg">출하완료</p>`;
                         }
 
                         let delicode = item.delicode;
                         let delitype = Make_delcode_str(item.delitype);
-
-                        console.log(delicode + '/' + delitype);
 
                         let delistr = '';
                         if(delicode != '' && delitype != ''){
@@ -263,6 +294,8 @@ async function Load_OrderList(page) {
                             cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType1 mr10 cnxlBtn">주문취소</button>`;
                         } else if (item.gd_status==3) {
                             cancle = `<button type="button" name="btn_income" id="income_${item.sn}" data-sn="${item.sn}" class="btnType1-1 mr10 cnxlBtn">입고처리</button>`;
+                        } else if (item.gd_status==4) {
+                            cancle = `<button type="button" name="btn_income" id="income_${item.sn}" data-sn="${item.sn}" class="btnType1-1 mr10 cnxlBtn">반품신청</button>`;
                         } else {
                             cancle = ``;
                         }
@@ -337,10 +370,10 @@ async function Load_OrderList(page) {
                                 delidate =``;
                             }else if(item.diff==true){
                                 delidate = '<p class=" delayed">출하지연중</p>';
-                            }else if(item.diff==false && item.gd_status==1){
-                                delidate =`<p class=" msg">${item.gd_delidate} 출하예정</p>`;
                             }else if(item.diff==false && item.gd_status==0) {
                                 delidate =`<p class=" msg">${item.gd_delidate} 출하준비중</p>`;
+                            }else if(item.diff==false && item.gd_status==1){
+                                delidate =`<p class=" msg">${item.gd_delidate} 출하예정</p>`;
                             }else{
                                 delidate =`<p class=" msg">출하완료</p>`;
                             }
@@ -351,6 +384,8 @@ async function Load_OrderList(page) {
                                 cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType1 mr10 cnxlBtn">주문취소</button>`;
                             } else if (item.gd_status==3) {
                                 cancle = `<button type="button" name="btn_income" id="income_${item.sn}" data-sn="${item.sn}" class="btnType1-1 mr10 cnxlBtn">입고처리</button>`;
+                            } else if (item.gd_status==4) {
+                                cancle = `<button type="button" name="btn_income" id="income_${item.sn}" data-sn="${item.sn}" class="btnType1-1 mr10 cnxlBtn">반품신청</button>`;
                             } else {
                                 cancle = ``;
                             }

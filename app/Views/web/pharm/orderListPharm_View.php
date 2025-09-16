@@ -90,6 +90,7 @@
                     <td class="merlirow">주문일자</td>
                     <td class="merlirow">출하(예정)일</td>
                     <td class="merlirow">확인</td>
+                    <td class="merlirow">출력</td>
                 </tr>
             </thead>
             <tbody id="orderlist">
