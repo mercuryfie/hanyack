@@ -290,7 +290,6 @@ async function Herb_Cart_Do(str){
 async function Load_Sale_List(page,ltyp,h_sKey,ptyp,pharm){
     try{
         start_spinner();
-        console.log("hello1100");
         if((page==1) && (ltyp==1)) {
             INI_Load_Product2();
         }else if((page==1) && (ltyp==2)){
@@ -315,7 +314,7 @@ async function Load_Sale_List(page,ltyp,h_sKey,ptyp,pharm){
             let Cnt = arr.length;
             let tcnt = data.tCnt;
             if(h_sKey==''){
-                r_txt = '총 판매약재 ' + tcnt + '건';
+                r_txt = '총 <a href="javascript:;" class="ttl_count2">' + tcnt + '</a>건';
             }else{
                 r_txt = `"${h_sKey}"에 대한 ${tcnt}건의 검색결과`;
             }
@@ -365,13 +364,10 @@ async function Load_Sale_List(page,ltyp,h_sKey,ptyp,pharm){
                             `;
                         }
 
-
                         html += `
                             <div class="mer1-1">
                                 <div class="thumbox" type="button" onclick="go_detail('${el.hn_code}','${el.hn_method}');">
-                                    <p class=" ${hn_method_css}">${hn_method_str}</p>
-<!--                                    <i class="fa-solid fa-heart heart1-2"></i>-->
-<!--                                    <i class="fa-regular fa-heart heart1-1"></i> -->
+                                    <p class=" ${hn_method_css}">${hn_method_str}</p> 
                                     <img class="mainthum" src="/assets/product/image/${el.fname}" alt="img">
                                 </div>
                                 <a href="javascript://" class="cartbtn" onclick="add_thum_cart('${el.hn_code}',1,'${el.hn_method}');" id="add_cart" name="add_cart">
@@ -379,8 +375,8 @@ async function Load_Sale_List(page,ltyp,h_sKey,ptyp,pharm){
                                     <p>담기</p>
                                 </a>
                                 <div class="itembox" >
-                                    <div class="flexType3">
-                                        <div class="flexType2">
+                                    <div class="flexType3-1">
+                                        <div class="flexType4">
                                             <a class="title2 mr10" href="#" style="">[${el.mi_name}]</a>
                                             <a class="title1" href="#" style="">${el.hn_name}</a>
                                         </div>
@@ -429,7 +425,6 @@ async function Load_Sale_List(page,ltyp,h_sKey,ptyp,pharm){
                             `;
                         }
 
-
                         if(el.LowCnt<=0){
                             Low_html = `<button type="button" class="hn_buyTypeStr3">최저가</button>`;
                         }else{
@@ -461,7 +456,7 @@ async function Load_Sale_List(page,ltyp,h_sKey,ptyp,pharm){
                         html += `
                          <tr class="buyInfo">
                             <td class=""><input type="checkbox" class="column-1" data-nPrice="0" data-ptype="${el.hn_method}" name="chkproduct" ${isMatch_html}/></td>
-                            <td class=" hbname mached"><p>${el.hn_name}</p></td>
+                            <td class=" hbname mached"><p>${el.hn_name} </p></td>
                             <td class="">${el.mi_name}</td>
                             <td class="">${el.n_value}</td>
 

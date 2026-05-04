@@ -1,0 +1,557 @@
+@media screen and (max-width: 768px) {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Noto Sans KR", sans-serif;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+
+    .main-container {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .ck-content {
+        line-height: 1.6;
+        word-break: break-word;
+    }
+
+    .editor-container_classic-editor .editor-container__editor {
+        min-width: 795px;
+        max-width: 795px;
+    }
+
+    :root {
+        --main-color: #4b6957;
+        --sub-color: #edf1ef;
+        --second-color: #5e9b76;
+        --third-color: #b0ddc2;
+        --forth-color: #8bffb9;
+        --fifth-color: #1d3627;
+        --sixth-color: #fc88ad;
+        --orange: #fb932b;
+        --eigth-color: #c975ed;
+        --ninth-color: #6eec9a;
+        --mint-color: #79f8d8;
+        --bg-color1: #f1f1f16f;
+        --bg-color2: #ececec;
+        --bg-color3: #ccc;
+        --bg-color4: #dedede;
+        --cartbg: #f2f5f8;
+        --gray-cart001: #848f9a;
+        --grayColor1: #848f9a;
+        --yellow: #f3df14;
+        --ck-z-default: 100;
+        --ck-z-panel: calc(var(--ck-z-default) + 999);
+    }
+
+    ::selection {
+        background-color: #b0ddc2; /* 드래그 배경색 */
+        color: #000; /* 드래그된 텍스트 색상 */
+    }
+
+    input[type="checkbox"] {
+        accent-color: #5e9b76; /* 체크 표시 색상 (예: 토마토색) */
+    }
+
+    input[type="search"] {
+        outline: none;
+    }
+
+    input[type="radio"] {
+        accent-color: #4b6957;
+        margin-right: 5px;
+    }
+
+    .mt20 {
+        margin-top: 20px;
+    }
+
+    .mt40 {
+        margin-top: 40px;
+    }
+
+    .pt10 {
+        padding-top: 10px;
+    }
+
+    .noto-sans-kr {
+        font-family: "Noto Sans KR", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 200;
+        font-style: normal;
+    }
+
+    /*header start */
+    .header_boxm9k {
+        background-color: var(--main-color);
+        width: 100vw;
+        height: 60px;
+        position: sticky;
+        top: 0;
+        left: 0;
+
+    }
+
+    * {
+        color: red !important;
+    }
+
+    /*header end */
+    /* spinnerBox start --------------- */
+    .spinnerBox,
+    .spinner {
+        display: none;
+    }
+
+    .spinnerBox {
+        position: fixed;
+        z-index: 30;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.05);
+
+    }
+
+    .spinner {
+        width: 24px;
+        height: 24px;
+        z-index: 32;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .spinnerBox.active, .spinner.active {
+        display: block;
+    }
+
+
+    /* spinnerBox end --------------- */
+    .btnType1 {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        border-radius: 5px;
+        width: auto;
+        height: 24px;
+        line-height: 24px;
+        padding: 0px 10px;
+        font-size: 12px;
+        text-align: center;
+
+    }
+
+    .btnType1-1 {
+
+        border: 1px solid var(--second-color);
+        color: var(--second-color);
+        background-color: transparent;
+        border-radius: 5px;
+        width: auto;
+        height: 24px;
+        line-height: 24px;
+        padding: 0px 10px;
+        font-size: 12px;
+        text-align: center;
+
+    }
+
+
+    .btnType2 {
+        border: 1px solid var(--second-color);
+        background-color: var(--second-color);
+        color: #fff;
+        border-radius: 5px;
+        width: auto;
+        height: 24px;
+        line-height: 24px;
+        padding: 0px 10px;
+        font-size: 12px;
+        text-align: center;
+
+    }
+
+    .fff {
+        background-color: #fff;
+    }
+
+
+    .btntype2 {
+        font-size: 10px;
+        width: 40px;
+        height: 20px;
+        border: none;
+        border-radius: 2px;
+    }
+
+    .btnType32 {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        border-radius: 5px;
+        width: auto;
+        height: 32px;
+        line-height: 32px;
+        padding: 0px 10px;
+        font-size: 14px;
+        text-align: center;
+        margin-left: 10px;
+        color: #2c2c2c;
+
+    }
+
+
+    .btnType3 {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        border-radius: 5px;
+        width: 120px;
+        height: 32px;
+        line-height: 32px;
+        /*padding: 0px 10px;*/
+        font-size: 14px;
+        text-align: center;
+        margin-left: 10px;
+        color: #2c2c2c;
+
+    }
+
+    .btnType4 {
+        border: 1px solid var(--main-color);
+        background-color: var(--main-color);
+        color: #fff;
+        margin-left: 10px;
+        border-radius: 5px;
+        width: 120px;
+        height: 32px;
+        line-height: 32px;
+        /*padding: 0px 10px;*/
+        font-size: 14px;
+        text-align: center;
+    }
+
+
+    .btntype5 {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        /* color:#fff; */
+        border-radius: 5px;
+        width: 220px;
+        height: 55px;
+        line-height: 55px;
+        padding: 0px 10px;
+        font-size: 22px;
+        text-align: center;
+        margin-right: 10px;
+
+    }
+
+    .btntype6 {
+        border: 1px solid #ccc;
+        background-color: var(--main-color);
+        color: #fff;
+        border-radius: 5px;
+        width: 220px;
+        height: 55px;
+        line-height: 55px;
+        padding: 0px 10px;
+        font-size: 22px;
+        text-align: center;
+        margin-right: 10px;
+
+    }
+
+
+    .btntype7 {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        /* color:#fff; */
+        border-radius: 5px;
+        width: 140px;
+        height: 38px;
+        line-height: 38px;
+        padding: 0px 10px;
+        font-size: 16px;
+        text-align: center;
+
+    }
+
+    .btntype8 {
+        border: 1px solid #ccc;
+        background-color: var(--main-color);
+        color: #fff;
+        border-radius: 5px;
+        width: 140px;
+        height: 38px;
+        line-height: 38px;
+        padding: 0px 10px;
+        font-size: 16px;
+        text-align: center;
+        margin-right: 10px;
+    }
+
+
+    .btnType9 {
+        border: 1px solid var(--second-color);
+        background-color: var(--second-color);
+        color: #fff;
+        border-radius: 5px;
+        width: 80px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0px 10px;
+        font-size: 12px;
+        text-align: center;
+
+    }
+
+    .btnType99 {
+        border: 1px solid #ececec81;
+        background-color: #ececec81;
+        color: #000;
+        border-radius: 5px;
+        width: 80px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0px 10px;
+        font-size: 12px;
+        text-align: center;
+
+    }
+
+
+    .btnType10 {
+        border: 1px solid transparent;
+        background-color: #fb932b;
+        /*background-color: red;*/
+        color: #fff;
+        border-radius: 5px;
+        width: auto;
+        height: 24px;
+        line-height: 24px;
+        padding: 0px 10px;
+        font-size: 12px;
+        text-align: center;
+
+    }
+
+
+    .btnType11 {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        width: 32px;
+        height: 32px;
+        color: #5c5c5c;
+        font-size: 12px;
+        text-align: center;
+    }
+
+
+    .btnType100 {
+        border: none;
+        background-color: var(--second-color);
+        width: 220px;
+        height: 32px;
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .fontColor1 {
+        color: #5c5c5c;
+    }
+
+    .m220 {
+        margin-left: 200px;
+
+    }
+
+    .btnTypeTItle {
+        border: none;
+        border-left: 2px solid #000;
+        /*border-radius: 5px;*/
+        width: auto;
+        height: 24px;
+        font-size: 16px;
+        /*text-decoration: underline;*/
+        font-weight: 500;
+        background-color: transparent;
+        /*color:#fff;*/
+        margin: 20px 0;
+        margin-left: 30px;
+        padding: 0 10px;
+
+    }
+
+
+    .btnTypeTItle {
+        border: none;
+        border-left: 2px solid #000;
+        width: auto;
+        height: 24px;
+        font-size: 16px;
+        font-weight: 500;
+        background-color: transparent;
+        /*color:#fff;*/
+        margin: 20px 0;
+        margin-left: 30px;
+        padding: 0 10px;
+
+    }
+
+
+    .btntype21 {
+        width: 48%;
+        border: 1px solid #ececec;
+        border-radius: 3px;
+        padding: 10px 0;
+        margin-right: 10px;
+    }
+
+    .btntype22 {
+        width: 48%;
+        border-radius: 3px;
+        border: 1px solid var(--second-color);
+        background-color: var(--second-color);
+        color: #fff;
+        padding: 10px 0;
+    }
+
+
+    .unchecked {
+        border: 1px solid #ececec;
+        background-color: #ececec;
+
+    }
+
+    .checkedGreen {
+        border: 1px solid #5E9B76;
+        background-color: #5E9B76;
+        color: #fff;
+
+    }
+
+    .aType1 {
+        /*border:none;*/
+        /*background-color:#fff;*/
+        font-size: 14px;
+        width: 40px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .inputCheck1 {
+        width: 18px;
+        height: 18px;
+
+    }
+
+    .inputType1 {
+        border: 1px solid #7c7c7c;
+    }
+
+    /*.inputType2 {*/
+    /*    width: 420px;*/
+    /*    height: 22px;*/
+    /*    border: 1px solid #ccc;*/
+    /*}*/
+    .inputType2 {
+        border: 1px solid #ccc;
+        width: 480px;
+        height: 32px;
+        font-size: 12px;
+        padding-left: 10px;
+    }
+
+    .inputType3 {
+        border: 1px solid #ccc;
+        width: 320px;
+        height: 30px;
+    }
+
+    .inputType240 {
+        border: 1px solid #ccc;
+        width: 240px;
+        height: 30px;
+    }
+
+    .inputType160 {
+        border: 1px solid #ccc;
+        width: 160px;
+        height: 30px;
+    }
+
+    .inputType140 {
+        border: 1px solid #ccc;
+        width: 140px;
+        height: 24px;
+        line-height: 24px;
+        font-size: 14px;
+    }
+
+    .periodSelected {
+        border: 1px solid var(--second-color) !important;
+        color: var(--second-color);
+    }
+
+    .lastBox {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 80px;
+        margin-bottom: 20px;
+    }
+
+    .modiLastBox {
+        margin-right: 60px;
+    }
+
+    .mb40 {
+        margin-bottom: 40px;
+    }
+
+    .mb10 {
+        margin-bottom: 10px;
+    }
+
+
+    .p40 {
+        padding: 40px 0;
+    }
+
+    .color5c {
+        color: #5c5c5c;
+    }
+
+    .mr10 {
+        margin-right: 10px;
+    }
+
+    .ml10 {
+        margin-left: 10px;
+    }
+
+    .ml20 {
+        margin-left: 20px;
+    }
+
+    .ml40 {
+        margin-left: 40px;
+    }
+
+
+}

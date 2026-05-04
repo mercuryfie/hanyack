@@ -94,7 +94,7 @@ class HerbDecocController extends BaseController
             if($l_typ==1) {
                 return view('web/decoc/mainThum_View', $main_data);
             }else{
-                return view('web/decoc/mainList_View', $main_data);
+                return view('web/decoc/mainList_Wms_View', $main_data);
             }
         }
     }

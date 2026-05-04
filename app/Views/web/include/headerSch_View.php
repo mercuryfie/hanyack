@@ -20,17 +20,6 @@
                 <button>배송지 변경</button>
             </div>
         </div>
-        <!-- <div class="schiconbox">
-        <div class="icons">
-        <i class="fa-solid fa-location-dot icon1"></i>
-        <i class="fa-solid fa-receipt icon2"></i>
-        <i class="fa-solid fa-cart-shopping icon2"></i>
-        </div>
-        <div class="locatip">
-        <p> 경기 파주시 문발로 234 (문발동, D.달관)</p>
-        <button>배송지 변경</button>
-        </div>
-        </div>  -->
 
 
     </div>
