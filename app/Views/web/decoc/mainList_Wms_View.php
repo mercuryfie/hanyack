@@ -1,8 +1,8 @@
 <?= $this->extend("/web/template/layout_default") ?>
 <?= $this->section("content") ?>
 
-<script src="<?=URL_COMMON_ASSETS?>/mainList_Do.js?rnd=<?=rand();?>"> </script>
-<input type="hidden" id="l_typ" name="l_typ" value="<?=$body['typ']?>" >
+<script src="<?= URL_COMMON_ASSETS ?>/mainList_Do.js?rnd=<?= rand(); ?>"></script>
+<input type="hidden" id="l_typ" name="l_typ" value="<?= $body['typ'] ?>">
 <section class="mainbanner ">
     <div class="mainListWrap">
 
@@ -23,7 +23,7 @@
                         <input type="checkbox" name="show_checked" id="show_checked" class="inputType1 mr10">
 
                     </label>
-                    <select  name="ptyp" id="ptyp" class="inputType120 mr10" >
+                    <select name="ptyp" id="ptyp" class="inputType120 mr10">
                         <option value="">구매방법</option>
                         <option value="100">전체</option>
                         <option value="1">일반구매</option>
@@ -31,7 +31,7 @@
                     </select>
                     <select name="pharm" id="pharm" class="inputType120 mr10">
                         <option value="">제약사</option>
-                        <?=$body['option'];?>
+                        <?= $body['option']; ?>
                     </select>
                 </div>
 
@@ -41,7 +41,7 @@
                         <i class="fa-solid fa-rotate-right"></i>
                     </button>
                     <button type="button" class="btnType3" id="cart_reg" name="cart_reg">카트 담기</button>
-                    <button type="button" class="btnType4"  id="order_reg" name="order_reg">바로 주문</button>
+                    <button type="button" class="btnType4" id="order_reg" name="order_reg">바로 주문</button>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     <thead>
                     <tr class="">
                         <td class="socol1 scidx1-1">
-                            <input type="checkbox" class="column-1" >
+                            <input type="checkbox" class="column-1">
                         </td>
                         <td class="socol1 herbName">약재명
                         </td>
@@ -92,10 +92,10 @@
         </div>
 
         <div class="more_box flexType1" type="button" name="more" id="more">
-            <button class="moreList" id="btnmore1" name="btnmore1" type="button" data-page="<?=$body['page']?>">
+            <button class="moreList" id="btnmore1" name="btnmore1" type="button" data-page="<?= $body['page'] ?>">
                 더보기
             </button>
-            <i class="fa-solid fa-angle-down" id="more2" name="btnmore2" data-page="<?=$body['page']?>"></i>
+            <i class="fa-solid fa-angle-down" id="more2" name="btnmore2" data-page="<?= $body['page'] ?>"></i>
         </div>
     </div>
 </section>

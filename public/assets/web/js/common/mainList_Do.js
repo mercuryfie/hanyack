@@ -370,13 +370,15 @@ async function Load_Sale_List(page,ltyp,h_sKey,ptyp,pharm){
                                     <p class=" ${hn_method_css}">${hn_method_str}</p> 
                                     <img class="mainthum" src="/assets/product/image/${el.fname}" alt="img">
                                 </div>
-                                <a href="javascript://" class="cartbtn" onclick="add_thum_cart('${el.hn_code}',1,'${el.hn_method}');" id="add_cart" name="add_cart">
-                                    <i class="fa-solid fa-cart-shopping icon2"></i>
-                                    <p>담기</p>
-                                </a>
+                                <div class="cart_box flexType1" onclick="">
+                                    <a href="javascript://" class="cartbtn" onclick="add_thum_cart('${el.hn_code}',1,'${el.hn_method}');" id="add_cart" name="add_cart">
+                                        <i class="fa-solid fa-cart-shopping icon2"></i>
+                                        <p>담기</p>
+                                    </a>
+                                </div> 
                                 <div class="itembox" >
                                     <div class="flexType3-1">
-                                        <div class="flexType4">
+                                        <div class="flexType2">
                                             <a class="title2 mr10" href="#" style="">[${el.mi_name}]</a>
                                             <a class="title1" href="#" style="">${el.hn_name}</a>
                                         </div>

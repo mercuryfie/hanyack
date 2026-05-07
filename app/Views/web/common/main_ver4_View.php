@@ -26,7 +26,7 @@
                 ?>
                 <? foreach (array_slice($body['hot'], 0, 4) as $d) { ?>
 
-                    <div class="mer_wrap_type4 <?= $isAuth ? 'auth-style' : 'guest-style' ?> mer_wrap_type4">
+                    <div class="mer_wrap_type4 <?= $isAuth ? 'auth-style' : 'guest-style' ?> ">
                         <!--                <div class="mer1-1">-->
                         <div class="thumbox " type="button"
                              onclick="go_detail('<?= $d['hn_code'] ?>','<?= $d['hn_method'] ?>');">
@@ -44,7 +44,7 @@
                                         data-code="<?= $d['hn_code'] ?>" data-ptype="<?= $d['hn_method']; ?>"
                                         data-cnt="1">
                                     <i class="fa-solid fa-cart-shopping icon2"></i>
-                                    <p>담기</p>
+                                    <p class="text">담기</p>
                                 </button>
                             </div>
                         <? } ?>

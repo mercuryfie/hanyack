@@ -3808,7 +3808,7 @@ margin: 0 auto;
 }
 
 
-.flexType3-1 {
+.flexType3-2 {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -6425,15 +6425,21 @@ th, td {
 }
 
 .merbox .mer1-1 {
-    width: 200px;
-    height: 380px;
-    margin-right: 10px;
+    margin-right: 12px;
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+    width: 270px;
+    height: 360px;
+    /*margin-right: 10px;*/
     display: flex;
     flex-flow: column;
     align-items: flex-start;
-    margin-bottom: 20px;
-}
 
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
 .merbox .mer1-1 .itembox {
 }
@@ -6441,7 +6447,7 @@ th, td {
 .merbox .mer1-1 .itembox .title1 {
     font-size: 16px;
     font-weight: 500;
-    min-width: 100px;
+    /*min-width: 100px;*/
     width: auto;
     margin-right: 10px;
     height: auto;
@@ -6496,15 +6502,17 @@ th, td {
     flex-wrap: wrap;
 }
 
-.thumbox {
+
+.merbox .mer1-1 .thumbox {
     /*display: none;*/
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     border: 1px solid #ccc;
     position: relative;
-    width: 200px;
+    width: 270px;
     height: 200px;
     min-width: 200px;
     min-height: 200px;
-    border-radius: 5px;
     overflow: hidden;
     margin-bottom: 10px;
     cursor: pointer;
@@ -6512,12 +6520,35 @@ th, td {
 }
 
 .thumbox .mainthum {
-    border-radius: 5px;
-    width: 200px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 270px;
     height: 200px;
     min-width: 200px;
     min-height: 200px;
     object-fit: cover;
+    cursor: pointer;
+
+}
+
+
+.merbox .mer1-1 .cart_box {
+    width: 270px;
+    margin-bottom: 10px;
+}
+
+.merbox .mer1-1 .cart_box .cartbtn {
+    border: 1px solid #ececec;
+    color: #5c5c5c;
+    border-radius: 5px;
+
+    width: 250px;
+    height: 36px;
+    line-height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    font-size: 14px;
     cursor: pointer;
 }
 
@@ -6591,11 +6622,6 @@ th, td {
 }
 
 /* main_ver2_View start -----*/
-.merbox {
-    display: flex;
-    justify-content: space-between;
-    width: 1140px;
-}
 
 .mer_wrap {
     border-radius: 10px;
@@ -6802,9 +6828,6 @@ th, td {
 /* main_ver3_View end -----*/
 /* main_ver4_View start -----*/
 
-.mer_wrap_type4 {
-    /*border:1px solid red;*/
-}
 
 .main_wrap_ver4 .dd {
     display: flex;
@@ -6816,10 +6839,12 @@ th, td {
     border: 1px solid #ececec;
     border-radius: 10px;
     width: 270px;
+    height: auto;
     overflow: hidden;
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
+    margin-right: 10px;
+    position: relative;
 
 }
 
@@ -6856,6 +6881,7 @@ th, td {
 }
 
 .mer_wrap_type4 .cartbtn_box {
+    margin: 10px 0;
 
 }
 
@@ -6864,10 +6890,18 @@ th, td {
     color: #fff;
 }
 
-.mer_wrap_type4 .cartbtn_box button {
-    width: 250px;
-    background-color: #fff;
+.mer_wrap_type4 .cartbtn_box .cartbtn {
     border: 1px solid #ececec;
+    border-radius: 5px;
+    width: 250px;
+    height: 36px;
+    background-color: #fff;
+    color: #5c5c5c;
+    text-align: center;
+}
+
+.mer_wrap_type4 .cartbtn_box .text {
+    line-height: 36px;
 }
 
 .mer_wrap_type4 .price_box .price {
@@ -6899,12 +6933,14 @@ th, td {
 }
 
 .main_wrap_ver4 .auth-style {
-    height: 380px;
+    height: 360px;
     /*border:1px solid blue;*/
 
 }
 
 .main_wrap_ver4 .guest-style {
+    /*height:auto;*/
+    /*height: 340px;*/
     /*border:1px solid greenyellow;*/
 
 }
@@ -7674,32 +7710,33 @@ th, td {
     border-radius: 5px;
 }
 
-.cartbtn {
-    border: 1px solid #ececec;
-    color: #5c5c5c;
-    border-radius: 5px;
-    width: 200px;
-    height: 36px;
-    line-height: 36px;
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    font-size: 14px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
+/*.cartbtn {*/
+/*    border: 1px solid #ececec;*/
+/*    color: #5c5c5c;*/
+/*    border-radius: 5px;*/
+/*    width: 200px;*/
+/*    height: 36px;*/
+/*    line-height: 36px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: baseline;*/
+/*    font-size: 14px;*/
+/*    cursor: pointer;*/
+/*    margin-bottom: 10px;*/
+/*}*/
 
 .cartbtn > i {
     margin-right: 10px;
 }
 
-.itembox {
-    width: 200px;
+.merbox .mer1-1 .itembox {
+    width: 270px;
     display: flex;
     flex-flow: column;
+    padding: 0 10px;
 }
 
-.itembox .title {
+.merbox .mer1-1 .itembox .title {
     height: auto;
     max-height: 40px;
     text-wrap: wrap;
@@ -7855,13 +7892,13 @@ th, td {
     border: 1px solid #ccc;
     background-color: var(--main-bg);
     /*border: 1px solid var(--fifth-color);*/
-    width: 420px;
+    width: 412px;
     height: 34px;
     /*margin-right: 80px;*/
     border-radius: 5px;
     display: flex;
     align-items: center;
-    /*position: relative;*/
+    position: relative;
 }
 
 .topbox1-2 .main_search {
@@ -7873,24 +7910,16 @@ th, td {
     font-size: 14px;
 }
 
-/*.topbox1-2 > i {*/
-/*    width: 32px;*/
-/*    height: 32px;*/
-/*    font-size: 16px;*/
-/*    color: var(--main-color);*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    transform: translateY(-50%);*/
-/*    right: 0%;*/
-/*}*/
-
 .topbox1-2 .mag_box {
     background-color: var(--main-color);
-    width: 30px;
+    width: 28px;
     height: 28px;
     border-radius: 5px;
-    margin-left: 10px;
-
+    /*margin-left: 10px;*/
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    transform: translateY(-50%);
 }
 
 .topbox1-2 .mag {

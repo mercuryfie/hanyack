@@ -29,17 +29,22 @@
                    <?}?>
                 </div>
                 <div class="topbox1-2">
-                    <input class="mainSearch" type="search" name="h_sKey" id="h_sKey" value="<?= $header["h_key"] ?>" placeholder="약재를 검색하십시오">
-                    <i class="fa-solid fa-magnifying-glass" onclick="Search_Product();"></i>
+                    <input class="main_search" type="search" name="h_sKey" id="h_sKey" value="<?= $header["h_key"] ?>"
+                           placeholder="약재를 검색하십시오">
+                    <!--                    <i class="fa-solid fa-magnifying-glass" onclick="Search_Product();"></i>-->
+
+                    <div class="mag_box flexType1">
+                        <i class="fa-solid fa-magnifying-glass mag" onclick="Search_Product();"></i>
+                    </div>
                 </div>
                 <? if (($header['mitype']==AUTH_DECOC) || ($header['mitype']==AUTH_MASTER)){?>
-                <div class="topbox1-3 ">
-                    <i class="fa-solid fa-border-all" onclick="go_productList(1);"></i>
+                    <div class="topbox1-3 ">
+                        <i class="fa-solid fa-store " onclick="go_productList(1);"></i>
                     <i class="fa-solid fa-receipt icon2" onclick="go_orderList();"></i>
                     <div class="cart_box">
                         <i class="fa-solid fa-cart-shopping " onclick="go_cart();"></i>
                         <?if($header['cartCnt']>0){?>
-                        <div class="num_box flexType1" id="cart_badge_box" style="">
+                            <div class="num_box flexType1" id="cart_badge_box" style="">
                             <p class="num" id="cart_badge"><?=$header['cartCnt'];?></p>
                         </div>
                         <?}?>
@@ -48,19 +53,20 @@
                     <? if ($header['mitype']==AUTH_MASTER){?>
                         <i class="fa-solid fa-shield" onclick="top_secret();"></i>
                     <? }?>
-                </div>
+                    </div>
                 <?}else{?>
-                <div class="topbox-1-4 flexType5">
-                    <i class="fa-regular fa-user " onclick="go_mypage();"></i>
+                    <div class="topbox1-4 flexType5">
+                        <i class="fa-regular fa-user " onclick="go_mypage();"></i>
 
-                </div>
-                <?}?>
+                    </div>
+                <? } ?>
                 <div class="topbox1-4 locatip">
                     <p> 경기 파주시 문발로 234 D.달관 디제이탕전실</p>
                     <button>배송지 변경</button>
                 </div>
             </div>
-        <?}else{?> <!-- before login -->
+        <? } else { ?> <!-- before login -->
+
             <div class="hbox1-1">
                 <div class="hbox1-1-1">
                     <p><a href="javascript:void(0);" onclick="go_login();">로그인</a></p>
