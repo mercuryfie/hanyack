@@ -1,12 +1,8 @@
 <?php
 namespace App\Libraries;
 
-use App\Libraries\Auth;
-use App\Libraries\Utils;
-
 class Form
 {
-
 
     public function fnMake_Meta($data){
         $meta = [
@@ -16,7 +12,6 @@ class Form
 
         return $meta;
     }
-
 
     public function fnMake_Header($sessionarr,$param=[]){
         $header = [];

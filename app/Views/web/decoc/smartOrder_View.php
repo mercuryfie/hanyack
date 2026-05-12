@@ -14,51 +14,58 @@ crossorigin="anonymous" referrerPolicy="no-referrer" />
 <section class="smartOrder">
       <div class="smartwrap">
         <div class="smartcon3">
-          <p class="head_title">스마트 오더 목록</p>
+            <p class="smart_head_title">스마트 오더 목록</p>
 
           <div class="scbtnbox">
-            <div class="btnon btnli1">
-                <div class="so_herb_search">
-                    <div class="searchBox">
-                        <input type="search" name="" id="ipSearch" placeholder="약재명을 검색하십시오" class="inputType2">
-                        <i class="fa-solid fa-magnifying-glass searchbtn"></i>
-
-                    </div>
-                    <label for="onSale" class="fontStyle14">
-                        <input type="radio" name="onSale" id="onSale" class="" checked>판매약재 기준
-                    </label>
-                    <label for="onStock" class="fontStyle14">
-                        <input type="radio" name="onSale" id="onStock" class="">사용약재 기준
-                    </label>
-<!--                    <button type="button" class="btnType1" onclick="" id="maching1">hello</button>-->
-<!--                    <button type="button" class="btnType1">hello</button>-->
-                </div>
+              <div class="btnon btnli1 flexType2">
+                  <!--                <div class="so_herb_search">-->
+                  <!--                    <div class="searchBox">-->
+                  <!--                        <input type="search" name="" id="ipSearch" placeholder="약재명을 검색하십시오" class="inputType2">-->
+                  <!--                        <i class="fa-solid fa-magnifying-glass searchbtn"></i>-->
+                  <!---->
+                  <!--                    </div>-->
+                  <!--                </div>-->
             </div>
-            <div class="btnli2">
-              <select name="" id="pharli">
-                <option value="">제약사</option>
-                <option value="">전체</option>
-                <option value="광명당">광명당</option>
-                <option value="대연제약">대연제약</option>
-                <option value="디제이허브">디제이허브</option>
-                <option value="바른한방">바른한방</option>
-                <option value="영천">영천</option>
-                <option value="CJ">CJ</option>
-                <option value="CK">CK</option>
-                <option value="허브팜">허브팜</option>
-              </select>
-              <select name="" id="orderli">
-                <option value="">판매량순</option>
-                <option value="저가순">저가순</option>
-                <option value="고가순">고가순</option>
-              </select>
-              <select name="" id="originli">
-                <option value="국산">국산</option>
-                <option value="수입">수입</option>
-                <option value="">전체</option>
-              </select>
-              <button type="button" id="selectView" name="selectView" class="btnType1">선택보기</button>
-              <button type="button" id="AllView" name="AllView" class="btnType1">선택해제</button>
+            <div class="btnli2 flexType3">
+
+                <!--                <select name="" id="originli" class="filter">-->
+                <!--                    <option value="">전체</option>-->
+                <!--                    <option value="국산">국산</option>-->
+                <!--                    <option value="수입">수입</option>-->
+                <!--                </select>-->
+                <!--                <select name="" id="pharli" class="filter mr10">-->
+                <!--                    <option value="">제약사</option>-->
+                <!--                    <option value="">전체</option>-->
+                <!--                    <option value="광명당">광명당</option>-->
+                <!--                    <option value="대연제약">대연제약</option>-->
+                <!--                    <option value="디제이허브">디제이허브</option>-->
+                <!--                    <option value="바른한방">바른한방</option>-->
+                <!--                    <option value="영천">영천</option>-->
+                <!--                    <option value="CJ">CJ</option>-->
+                <!--                    <option value="CK">CK</option>-->
+                <!--                    <option value="허브팜">허브팜</option>-->
+                <!--                </select>-->
+                <!--                <select name="" id="orderli" class="filter">-->
+                <!--                    <option value="">판매량순</option>-->
+                <!--                    <option value="저가순">저가순</option>-->
+                <!--                    <option value="고가순">고가순</option>-->
+                <!--                </select>-->
+                <!--                <div class="menu">-->
+                <!--                    <button>전체</button>-->
+                <!--                    <button>인기</button>-->
+                <!--                    <button>최신</button>-->
+                <!--                </div>-->
+                <div class="left">
+                    <button type="button" id="" name="" class="filterType1 active">30개</button>
+                    <button type="button" id="" name="" class="filterType1 ">50개</button>
+                    <button type="button" id="" name="" class="filterType1">100개</button>
+                </div>
+                <div class="right">
+                    <button type="button" id="" name="" class="filterType1">저가순</button>
+                    <button type="button" id="" name="" class="filterType1">고가순</button>
+                </div>
+                <!--              <button type="button" id="selectView" name="selectView" class="btnType1">선택보기</button>-->
+                <!--              <button type="button" id="AllView" name="AllView" class="btnType1">선택해제</button>-->
             </div>
           </div>
 
@@ -102,6 +109,17 @@ crossorigin="anonymous" referrerPolicy="no-referrer" />
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="page_box">
+            <button type="button">
+                <i class="fa-solid fa-angles-left"></i>
+            </button>
+            <button type="button">1</button>
+            <button type="button">1</button>
+            <button type="button">1</button>
+            <button type="button">
+                <i class="fa-solid fa-angles-right"></i>
+            </button>
         </div>
         <div class="smartcon4">
           <div class="scon4-1">

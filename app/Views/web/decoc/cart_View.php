@@ -3,9 +3,9 @@
 <script src="<?=URL_DECOC_ASSETS?>/cart.js"> </script>
 <script src="<?=URL_DECOC_ASSETS?>/cart_Do.js"> </script>
 <section class="cart cartbg">
-    <div class="carttitle">
-        <!--        <p>장바구니</p>-->
-        <a href="" onclick="Load_Cart_Count();">장바구니</a>
+    <div class="cart_view_box">
+        <p class="head_title">장바구니</p>
+        <!--        <a href="" onclick="Load_Cart_Count();">장바구니</a>-->
     </div>
     <div class="cartwrap">
         <div class="cartleft">

@@ -21,21 +21,24 @@
             <div class="hbox1-2">
                 <div class="topbox1-1">
                   <? if ($header['mitype']==AUTH_MASTER){?>
-                     <img class="logo" src="/assets/web/src/logo_master.png" alt="img" onclick="go_main();">
+                      <img class="logo loggedin_logo" src="/assets/web/src/logo_master.png" alt="img"
+                           onclick="go_main();">
                   <?}else if($header['mitype']==AUTH_DECOC){?>
-                    <img class="logo" src="/assets/web/src/logo_decoc.png" alt="img" onclick="go_main();">
+                      <img class="logo loggedin_logo" src="/assets/web/src/logo_decoc.png" alt="img"
+                           onclick="go_main();">
                   <?}else if($header['mitype']==AUTH_PHARM){?>
-                    <img class="logo" src="/assets/web/src/logo_pharm.png" alt="img" onclick="go_main();">
+                      <img class="logo loggedin_logo" src="/assets/web/src/logo_pharm.png" alt="img"
+                           onclick="go_main();">
                    <?}?>
                 </div>
                 <div class="topbox1-2">
                     <input class="main_search" type="search" name="h_sKey" id="h_sKey" value="<?= $header["h_key"] ?>"
                            placeholder="약재를 검색하십시오">
-                    <!--                    <i class="fa-solid fa-magnifying-glass" onclick="Search_Product();"></i>-->
+                    <i class="fa-solid fa-magnifying-glass mag" onclick="Search_Product();"></i>
 
-                    <div class="mag_box flexType1">
-                        <i class="fa-solid fa-magnifying-glass mag" onclick="Search_Product();"></i>
-                    </div>
+                    <!--                    <div class="mag_box flexType1">-->
+                    <!--                        <i class="fa-solid fa-magnifying-glass mag" onclick="Search_Product();"></i>-->
+                    <!--                    </div>-->
                 </div>
                 <? if (($header['mitype']==AUTH_DECOC) || ($header['mitype']==AUTH_MASTER)){?>
                     <div class="topbox1-3 ">
@@ -80,10 +83,10 @@
                     <input type="search" class="main_search" name="h_sKey" id="h_sKey" value=""
                            placeholder="약재를 검색하십시오">
 
-                    <!--                    <i class="fa-solid fa-magnifying-glass mag"></i>-->
-                    <div class="mag_box flexType1">
-                        <i class="fa-solid fa-magnifying-glass mag" onclick="Search_Product();"></i>
-                    </div>
+                    <i class="fa-solid fa-magnifying-glass mag"></i>
+                    <!--                    <div class="mag_box flexType1">-->
+                    <!--                        <i class="fa-solid fa-magnifying-glass mag" onclick="Search_Product();"></i>-->
+                    <!--                    </div>-->
                 </div>
                 <div class="topbox1-3 ">
                     <? if ($header['islogin']=='true'){?>
