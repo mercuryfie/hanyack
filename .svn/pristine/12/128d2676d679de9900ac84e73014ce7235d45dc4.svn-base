@@ -1,0 +1,773 @@
+CRITICAL - 2026-05-04 15:10:19 --> ParseError: syntax error, unexpected token ";", expecting "("
+[Method: GET, Route: /]
+in APPPATH/Views/web/include/header_View.php on line 60.
+ 1 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(475): CodeIgniter\View\View->render('/web/include/header_View', [...], true)
+ 3 APPPATH/Views/web/template/layout_default.php(23): CodeIgniter\View\View->include('/web/include/header_View', [...])
+ 4 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/hanyack2/app/Views/web/template/layout_default.php')
+ 5 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 6 VENDORPATH/codeigniter4/framework/system/View/View.php(240): CodeIgniter\View\View->render('/web/template/layout_default', [], true)
+ 7 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/common/main_ver4_View', [], true)
+ 8 APPPATH/Controllers/MainController.php(142): view('web/common/main_ver4_View', [...])
+ 9 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+10 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+11 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-05-04 15:10:21 --> ParseError: syntax error, unexpected token ";", expecting "("
+[Method: GET, Route: /]
+in APPPATH/Views/web/include/header_View.php on line 60.
+ 1 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(475): CodeIgniter\View\View->render('/web/include/header_View', [...], true)
+ 3 APPPATH/Views/web/template/layout_default.php(23): CodeIgniter\View\View->include('/web/include/header_View', [...])
+ 4 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/hanyack2/app/Views/web/template/layout_default.php')
+ 5 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 6 VENDORPATH/codeigniter4/framework/system/View/View.php(240): CodeIgniter\View\View->render('/web/template/layout_default', [], true)
+ 7 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/common/main_ver4_View', [], true)
+ 8 APPPATH/Controllers/MainController.php(142): view('web/common/main_ver4_View', [...])
+ 9 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+10 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+11 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-05-04 15:10:22 --> ParseError: syntax error, unexpected token ";", expecting "("
+[Method: GET, Route: /]
+in APPPATH/Views/web/include/header_View.php on line 60.
+ 1 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(475): CodeIgniter\View\View->render('/web/include/header_View', [...], true)
+ 3 APPPATH/Views/web/template/layout_default.php(23): CodeIgniter\View\View->include('/web/include/header_View', [...])
+ 4 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/hanyack2/app/Views/web/template/layout_default.php')
+ 5 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 6 VENDORPATH/codeigniter4/framework/system/View/View.php(240): CodeIgniter\View\View->render('/web/template/layout_default', [], true)
+ 7 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/common/main_ver4_View', [], true)
+ 8 APPPATH/Controllers/MainController.php(142): view('web/common/main_ver4_View', [...])
+ 9 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+10 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+11 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-05-04 15:10:23 --> ParseError: syntax error, unexpected token ";", expecting "("
+[Method: GET, Route: /]
+in APPPATH/Views/web/include/header_View.php on line 60.
+ 1 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 2 VENDORPATH/codeigniter4/framework/system/View/View.php(475): CodeIgniter\View\View->render('/web/include/header_View', [...], true)
+ 3 APPPATH/Views/web/template/layout_default.php(23): CodeIgniter\View\View->include('/web/include/header_View', [...])
+ 4 VENDORPATH/codeigniter4/framework/system/View/View.php(224): include('/Users/djmedi_mac/Documents/repos/hanyack2/app/Views/web/template/layout_default.php')
+ 5 VENDORPATH/codeigniter4/framework/system/View/View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 6 VENDORPATH/codeigniter4/framework/system/View/View.php(240): CodeIgniter\View\View->render('/web/template/layout_default', [], true)
+ 7 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render('web/common/main_ver4_View', [], true)
+ 8 APPPATH/Controllers/MainController.php(142): view('web/common/main_ver4_View', [...])
+ 9 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+10 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+11 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:07 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:07 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:12 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:12 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:13 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:13 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:14 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:15 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(44): CodeIgniter\Database\BaseBuilder->countAllResults()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Libraries/Form.php(35): App\Models\Herb_m->Cnt_MyCart_Item('73987727')
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/HerbPharmController.php(1011): App\Libraries\Form->fnMake_Header(Array)
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbPharmController->dashBoard()
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbPharmController))
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2026-05-04 15:27:15 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: Mypharm]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `V_CART_INFO`
+WHERE `fk_micode` = :fk_micode:
+AND `is_del` = :is_del:', [...], false)
+ 3 APPPATH/Models/Herb_m.php(44): CodeIgniter\Database\BaseBuilder->countAllResults()
+ 4 APPPATH/Libraries/Form.php(35): App\Models\Herb_m->Cnt_MyCart_Item('73987727')
+ 5 APPPATH/Controllers/HerbPharmController.php(1011): App\Libraries\Form->fnMake_Header([...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\HerbPharmController->dashBoard()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HerbPharmController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:15 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:15 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:16 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(44): CodeIgniter\Database\BaseBuilder->countAllResults()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Libraries/Form.php(35): App\Models\Herb_m->Cnt_MyCart_Item('73987727')
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MemberController.php(42): App\Libraries\Form->fnMake_Header(Array)
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MemberController->Login()
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MemberController))
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2026-05-04 15:27:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: Member/Login]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `V_CART_INFO`
+WHERE `fk_micode` = :fk_micode:
+AND `is_del` = :is_del:', [...], false)
+ 3 APPPATH/Models/Herb_m.php(44): CodeIgniter\Database\BaseBuilder->countAllResults()
+ 4 APPPATH/Libraries/Form.php(35): App\Models\Herb_m->Cnt_MyCart_Item('73987727')
+ 5 APPPATH/Controllers/MemberController.php(42): App\Libraries\Form->fnMake_Header([...])
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MemberController->Login()
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MemberController))
+ 8 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:16 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:16 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:17 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:17 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:31 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:31 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:35 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:35 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:40 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:40 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:27:46 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:27:46 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:28:02 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:28:02 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-05-04 15:28:03 --> Error connecting to the database: ErrorException: Trying to access array offset on false in /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:105
+Stack trace:
+#0 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/djmedi_m...', 105)
+#1 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/djmedi_mac/Documents/repos/hanyack2/app/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/djmedi_mac/Documents/repos/hanyack2/app/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+#6 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+#7 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+#8 /Users/djmedi_mac/Documents/repos/hanyack2/vendor/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 /Users/djmedi_mac/Documents/repos/hanyack2/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /Users/djmedi_mac/Documents/repos/hanyack2/public/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-05-04 15:28:03 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Trying to access array offset on false
+[Method: GET, Route: /]
+in VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php on line 467.
+ 1 VENDORPATH/codeigniter4/framework/system/Database/BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 VENDORPATH/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `v_product_info_all`
+ORDER BY `sn` DESC
+ LIMIT 10', [], false)
+ 3 APPPATH/Models/Herb_m.php(444): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Controllers/MainController.php(28): App\Models\Herb_m->Load_Product_limit(10)
+ 5 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(933): App\Controllers\MainController->Main()
+ 6 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MainController))
+ 7 VENDORPATH/codeigniter4/framework/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(64): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-05-04 15:31:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:31:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:31:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:31:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:32:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:32:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:32:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:33:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:34:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:34:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:34:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:41:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:41:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:41:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:41:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:41:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:41:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:41:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:42:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:42:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:44:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:44:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:44:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:44:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:44:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:44:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:45:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:47:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:47:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:47:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:48:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:48:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:49:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:50:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:50:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:50:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:50:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:51:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:51:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:51:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:56:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:56:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:57:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:57:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:57:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:57:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:57:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:58:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:58:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:58:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 15:58:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:00:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:01:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:05:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:05:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:06:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:06:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:06:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:06:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:07:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:07:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:07:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:07:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:08:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:09:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:09:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:09:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:10:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:10:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:10:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:10:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:10:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:10:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:11:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:30:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:30:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:30:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:30:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:30:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:39:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:39:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:39:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:39:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:39:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 16:39:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:08:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:09:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:09:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:16:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:16:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:16:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:16:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:16:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:16:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:16:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:16:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:16:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:17:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:17:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:17:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:17:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:17:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:17:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:17:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:17:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:17:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:18:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:18:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:20:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:20:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:20:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:20:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:38:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:38:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:38:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:38:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:38:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:38:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:38:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:52:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:52:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:52:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 17:53:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:00:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:00:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:00:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:00:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:00:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:00:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:01:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:01:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:01:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:01:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:01:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:01:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:01:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:03:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:03:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:20:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:20:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:20:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:21:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:21:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:21:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:21:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:21:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:21:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:21:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:21:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:26:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:26:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:26:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:26:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:27:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:27:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:27:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:27:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:27:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:27:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:29:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:29:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:29:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:29:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:29:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:29:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:31:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:31:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:31:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:31:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:32:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:32:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:33:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:33:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:33:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:33:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:34:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:34:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:34:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:34:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:36:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:36:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:40:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:40:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:40:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:40:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:40:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:40:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:40:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-05-04 18:40:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

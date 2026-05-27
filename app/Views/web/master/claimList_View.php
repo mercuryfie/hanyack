@@ -19,6 +19,7 @@
         <!-- <button>새 창</button> -->
         <div class="claimList_box2ck">
 
+
             <div class="periboxMaster">
                 <button class="itemFilter">오늘</button>
                 <button class="itemFilter">1주일</button>
@@ -26,7 +27,7 @@
                 <button class="itemFilter">3개월</button>
                 <button class="itemFilter">6개월</button>
             </div>
-            <div class="odrbox1-1-2">
+            <div class="odrbox1-1-2 flexType2">
                 <p class="title">날짜별</p>
                 <select name="" id="date_filter" class="selectType1">
                     <option value="결제일">결제일</option>

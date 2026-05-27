@@ -7,7 +7,7 @@
 <!--    <div class="topline" onclick="go_smart();">스마트 오더 바로가기</div>-->
     <?}?>
     <div class="headerwrap">
-        <div class="hbox">
+        <div class="hbox ">
         <? if ($header['islogin']=='true'){?>
             <div class="hbox1-1">
                 <div class="hbox1-1-1">
@@ -40,9 +40,9 @@
                     <!--                        <i class="fa-solid fa-magnifying-glass mag" onclick="Search_Product();"></i>-->
                     <!--                    </div>-->
                 </div>
-                <? if (($header['mitype']==AUTH_DECOC) || ($header['mitype']==AUTH_MASTER)){?>
+                <? if ($header['mitype']==AUTH_DECOC) {?>
                     <div class="topbox1-3 ">
-                        <i class="fa-solid fa-store " onclick="go_productList(1);"></i>
+                        <i class="fa-solid fa-store " onclick="go_productList(2);"></i>
                     <i class="fa-solid fa-receipt icon2" onclick="go_orderList();"></i>
                     <div class="cart_box">
                         <i class="fa-solid fa-cart-shopping " onclick="go_cart();"></i>
@@ -53,11 +53,17 @@
                         <?}?>
                     </div>
                     <i class="fa-regular fa-user" onclick="go_mypage();"></i>
-                    <? if ($header['mitype']==AUTH_MASTER){?>
-                        <i class="fa-solid fa-shield" onclick="top_secret();"></i>
-                    <? }?>
+<!--                    --><?// if ($header['mitype']==AUTH_MASTER){?>
+<!--                        <i class="fa-solid fa-shield" onclick="top_secret();"></i>-->
+<!--                    --><?// }?>
                     </div>
-                <?}else{?>
+                <?} else if ($header['mitype']==AUTH_MASTER){?>
+                    <div class="topbox1-3 ">
+                        <i class="fa-solid fa-store " onclick="go_productList(2);"></i>
+                        <i class="fa-solid fa-receipt icon2" onclick="go_orderList();"></i>
+                        <i class="fa-regular fa-user" onclick="go_mypage();"></i>
+                    </div>
+                <? } else { ?>
                     <div class="topbox1-4 flexType5">
                         <i class="fa-regular fa-user " onclick="go_mypage();"></i>
 

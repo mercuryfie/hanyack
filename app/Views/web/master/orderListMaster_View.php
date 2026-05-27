@@ -14,47 +14,48 @@
             <button>미매칭약재</button>
         </div>
     </div> -->
-    <div class="merlibox1-1">
-        <p>주문내역</p>
+    <div class="merlibox1-1 order_list_master_wrap">
         <!-- <button>새 창</button> -->
-        <div class="odrbox1-1 orderBoxMaster">
-            <div class="odrbox1-1-2">
-                <p class="title">날짜별</p>
-                <select name="" id="date_filter" class="selectType1">
-                    <option value="결제일">결제일</option>
-                    <option value="주문확인일">주문확인일</option>
-                    <option value="발송처리일">발송처리일</option>
-                </select>
-                <p class="title2">탕전실별</p>
-                <select name="" id="decoc_filter" class="selectType4-1">
-                    <option value="">선택하세요.</option>
-                    <?=$body['option1'];?>
-                </select>
-                <p class="title2">제약사별</p>
-                <select name="" id="pharm_filter" class="selectType4-1">
-                    <option value="">선택하세요.</option>
-                    <?=$body['option2'];?>
-                </select>
-            </div>
-            <div class="periboxMaster">
-                <button class="itemFilter">오늘</button>
-                <button class="itemFilter">1주일</button>
-                <button class="itemFilter">1개월</button>
-                <button class="itemFilter">3개월</button>
-                <button class="itemFilter">6개월</button>
-            </div>
-        </div>
-        <!--        <div class="mersearch">-->
-        <!--            <div>-->
-        <!--                <input type="text" placeholder="검색어를 입력하십시오">-->
-        <!--                <button>조회</button>-->
-        <!--            </div>-->
-        <!--            <button onclick="go_herbReg();">약재 등록</button> -->
-        <!--        </div>-->
+        <div class="ttl_box">
+            <p class="head_ttl">주문내역</p>
 
-        <div class="merrightlast">
-            <button type="button" id="btn_deli" name="btn_deli" class="btnType2" onclick="go_BigOrder();">대량주문등록</button>
         </div>
+        <div class="odrbox1-1 orderBoxMaster">
+
+            <div class=" flexType3 mb10">
+                <div class="flexType2">
+                    <div class="left period_box flexType2 mr10">
+                        <a href="javascript:;" class="period active">오늘</a>
+                        <a href="javascript:;" class="period">1주일</a>
+                        <a href="javascript:;" class="period">1개월</a>
+                        <a href="javascript:;" class="period">3개월</a>
+                    </div>
+                    <div class="filter_box flexType2">
+                        <select name="" id="date_filter" class="selectType1">
+                            <option value="결제일">날짜별</option>
+                            <option value="결제일">결제일</option>
+                            <option value="주문확인일">주문확인일</option>
+                            <option value="발송처리일">발송처리일</option>
+                        </select>
+                        <select name="" id="decoc_filter" class="selectType4-1">
+                            <option value="">탕전실별</option>
+                            <?=$body['option1'];?>
+                        </select>
+                        <select name="" id="pharm_filter" class="selectType4-1">
+                            <option value="">제약사별</option>
+                            <?=$body['option2'];?>
+                        </select>
+                    </div>
+                </div>
+                <div class="right flexType2">
+                    <button type="button" id="btn_deli" name="btn_deli" class="btnType4-1 mr10" onclick="go_RegularOrder();">정기구독 주문</button>
+                    <button type="button" id="btn_deli" name="btn_deli" class="btnType4-1" onclick="go_BigOrder();">대량 주문</button>
+
+                </div>
+            </div>
+
+        </div>
+
         <div class="order_box40c">
             <table class="merlitable">
                 <thead>

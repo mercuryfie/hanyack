@@ -253,7 +253,6 @@ class HerbController extends BaseController
         }
     }
 
-
     public function burkOrderForm()
     {
         $sessinarr = $this->GetSessionData();
@@ -300,6 +299,55 @@ class HerbController extends BaseController
             ];
 
             return view('web/master/burkOrderForm_View', $main_data);
+        }
+    }
+
+    public function regularOrder()
+    {
+        $sessinarr = $this->GetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+            $uid = $sessinarr['user']['uid'];
+            $mi_type = $sessinarr['user']['mi_type'];
+
+            $metaarr = [
+                'h_title' => '대량주문 양식',
+                'h_type' => 1
+            ];
+
+            if ($mi_type != 'master') {
+                $result = 'type101';
+                $message = '권한이외의 접근입니다.';
+            } else {
+                $herb_m = model('Herb_m');
+                $decocarr = $this->LoadDecoc('decoc');
+                $decocoption = '';
+                if(fn_ArrayCnt($decocarr)>0){
+                    $decocoption = '<option selected value="0">선택하세요.</option>';
+                    foreach ($decocarr as $c){
+                        $decocoption .= "<option value='{$c['mi_code']}'>{$c['mi_name']}</option>";
+                    }
+                }else{
+                    $decocoption = "<option value=''>옵션 없음.</option>";
+                }
+
+                $body_data = [
+                    'uid' => $uid,
+                    'd_list' => $decocoption
+                ];
+
+            }
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr),
+                'body' =>$body_data
+            ];
+
+            return view('web/master/regularOrder_View', $main_data);
         }
     }
 

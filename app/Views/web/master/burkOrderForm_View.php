@@ -17,7 +17,7 @@
         <div class="rightBox  burkOrderForm_wrap">
             <div class="firstBox">
                 <div class="head_title flexStart">
-                    <p class="title">대량구매 주문양식</p>
+                    <p class="title">대량 주문</p>
 
                 </div>
                 <div class="infobox">
@@ -90,7 +90,7 @@
                         <p class="unit">원</p>
                     </div>
                     <div class="merinfo ">
-                        <p class="title">총 박스수</p>
+                        <p class="title">총 박스 수</p>
                         <input type="number" name="txttBox" id="txttBox" class="inputType240" placeholder="숫자만 입력" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);">
                         <p class="unit">Box</p>
                     </div>

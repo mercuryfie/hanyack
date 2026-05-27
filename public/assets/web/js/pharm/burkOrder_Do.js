@@ -641,7 +641,7 @@ function Select_HD(mdcode,name,medicode){
                                 methodText = '알수없음';
                             }
                             html += '<button class="herboption" type="button" '
-                                + 'onclick="SettingData(\''+el.hn_code +'\');">'
+                                + 'onclick="SettingData('+el.hn_code +');">'
                                 + el.hn_name + ' [' + el.fk_mdname + ']'
                                 + ' [' + methodText  + '] '
                                 + ' [제조일자: ' + el.hn_sellSDate.split(' ')[0] + '] '

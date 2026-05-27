@@ -167,6 +167,7 @@ $routes->GET('Mypage/deliveryList','HerbController::deliveryList');
 $routes->GET('Mypage/popReject','HerbController::popReject');
 $routes->GET('Mypage/popThum','HerbController::popThum');
 $routes->GET('Mypage/burkOrderForm','HerbController::burkOrderForm');
+$routes->GET('Mypage/regularOrder','HerbController::regularOrder');
 $routes->GET('Mypage/claim','HerbController::claim');
 $routes->GET('Mypage/claimList','HerbController::claimList');
 $routes->GET('Mypage/reOrder','HerbController::reOrder');

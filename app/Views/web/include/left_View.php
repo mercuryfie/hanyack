@@ -9,8 +9,8 @@
     <div class="leftMenu merleft1-3">
        <div class="topmenu">
            <a href="#" class="highlight" onclick="go_mypage();">대시보드</a>
-           <a href="javascript:void(0);" class="topmenu1-2" onclick="go_herbList();">약재관리</a>
            <a href="#" class="topmenu1-1" onclick="go_orderList();">주문관리</a>
+           <a href="javascript:void(0);" class="topmenu1-2" onclick="go_herbList();">약재관리</a>
            <a href="#">정산관리</a>
            <a href="#" class="topmenu1-4">설정관리</a>
        </div>
@@ -63,8 +63,8 @@
     <div class="leftMenu merleft1-3">
         <div class="topmenu">
             <a href="#" class="highlight" onclick="go_mypage()">대시보드</a>
-            <a href="javascript:void(0);" class="topmenu1-2" onclick="go_herbList();">약재관리</a>
             <a href="#" class="topmenu1-1" onclick="go_orderList();">주문관리</a>
+            <a href="javascript:void(0);" class="topmenu1-2" onclick="go_herbList();">약재관리</a>
             <a href="#">정산관리</a>
             <a href="#">나의정보</a>
         </div>

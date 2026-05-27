@@ -251,14 +251,15 @@ function Package_Step_Name(step) {
 
 
 function Make_Toast(msg){
-    const div = document.createElement('div');
-    div.classList.add('toastBox');
-    div.innerHTML = msg.replace(/\n/g, '<br>');  // \n을 <br>로 바꿈
-    document.body.appendChild(div);
-
-    setTimeout(() => {
-        div.remove();
-    }, 1500);
+    // const div = document.createElement('div');
+    // div.classList.add('toastBox');
+    // div.innerHTML = msg.replace(/\n/g, '<br>');  // \n을 <br>로 바꿈
+    // document.body.appendChild(div);
+    //
+    // setTimeout(() => {
+    //     div.remove();
+    // }, 1500);
+    alert(msg);
 }
 
 function Make_Toast_URL(msg,URL){
@@ -304,6 +305,17 @@ function go_BigOrder(){
         $(location).attr("href", url);
     } else{
         url = "/Mypage/burkOrderForm";
+        $(location).attr("href", url);
+    }
+}
+
+function go_RegularOrder(){
+    let uid = $('#tUid').val();
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    } else{
+        url = "/Mypage/regularOrder";
         $(location).attr("href", url);
     }
 }
@@ -928,5 +940,65 @@ function dataCopy(text) {
 function concatWithDelimiter(base, val, delimiter) {
     if(val === '') return base;
     return base === '' ? val : base + delimiter + val;
+}
+
+
+function Fetch_API(endpoint, params) {
+    return new Promise((resolve, reject) => {
+        const token = $('#token').val();
+
+        if (!token) {
+            alert('보안처리에 실패 하였습니다.\n다시 시도 하여주세요.');
+            window.location.href = '/';
+            resolve({ status: 'error', data: '', message: 'No Token' });
+            return;
+        }
+
+        const isFormData = params instanceof FormData;
+        start_spinner();
+        const Murl = APIURL + endpoint;
+        console.log('call New api=' + Murl);
+        if (!isFormData) {
+            console.log(JSON.stringify(params));
+        } else {
+            console.log('Data Type: FormData');
+        }
+        $.ajax({
+            url: Murl,
+            type: 'POST',
+            dataType: "JSON",
+            data: params,
+            processData: !isFormData,
+            contentType: isFormData ? false : "application/x-www-form-urlencoded; charset=UTF-8",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            success: function (response) {
+                let rawData = response.info;
+                let processedData = Array.isArray(rawData) ? rawData : (rawData ? [rawData] : []);
+
+                const resultObj = {
+                    status: response.result,
+                    data: processedData,
+                    message: response.message
+                };
+
+                if (response.result === 'NoLogin') go_login();
+                resolve(resultObj);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+                resolve({
+                    status: 'error',
+                    data: '',
+                    message: error
+                });
+                Make_Toast("통신 오류가 발생하였습니다.\n[ERROR : " + error + "]");
+            },
+            complete: function () {
+                stop_spinner();
+            }
+        });
+    });
 }
 

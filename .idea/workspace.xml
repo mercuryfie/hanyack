@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="121d2538-a001-4905-8984-5da34d8f8081" name="Changes" comment="0512 dawn">
-      <change beforePath="$PROJECT_DIR$/app/Views/web/decoc/smartOrder_View.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/web/decoc/smartOrder_View.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Views/care" afterDir="true" />
+      <change beforePath="$PROJECT_DIR$/writable/logs/log-2026-05-12.log" beforeDir="false" afterPath="$PROJECT_DIR$/writable/logs/log-2026-05-12.log" afterDir="false" />
     </list>
-    <list id="2fca256e-69fe-469f-adcd-17e040c4af9b" name="ignore" comment="ignore" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,7 +117,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Subversion&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -219,7 +219,6 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="121d2538-a001-4905-8984-5da34d8f8081" name="Changes" comment="" />
-      <changelist id="2fca256e-69fe-469f-adcd-17e040c4af9b" name="ignore" comment="" />
       <created>1753147237960</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -288,31 +287,9 @@
       <workItem from="1774488997353" duration="22603000" />
       <workItem from="1774592785848" duration="76390000" />
       <workItem from="1775531880549" duration="145621000" />
-      <workItem from="1778489215136" duration="4517000" />
-    </task>
-    <task id="LOCAL-00030" summary="hanyackdo_20250904">
-      <option name="closed" value="true" />
-      <created>1756948125038</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1756948125038</updated>
-    </task>
-    <task id="LOCAL-00031" summary="hanyackdo_20250904">
-      <option name="closed" value="true" />
-      <created>1756958634047</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1756958634047</updated>
-    </task>
-    <task id="LOCAL-00032" summary="hanyackdo_20250904">
-      <option name="closed" value="true" />
-      <created>1756965448040</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1756965448040</updated>
+      <workItem from="1778489215136" duration="7898000" />
+      <workItem from="1778553533171" duration="2883000" />
+      <workItem from="1778557146019" duration="9402000" />
     </task>
     <task id="LOCAL-00033" summary="hanyackdo_20250904">
       <option name="closed" value="true" />
@@ -682,7 +659,31 @@
       <option name="project" value="LOCAL" />
       <updated>1778549595037</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="0512 dawn">
+      <option name="closed" value="true" />
+      <created>1778550740040</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1778550740040</updated>
+    </task>
+    <task id="LOCAL-00080" summary="0512 dawn">
+      <option name="closed" value="true" />
+      <created>1778552195048</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1778552195048</updated>
+    </task>
+    <task id="LOCAL-00081" summary="0512 dawn">
+      <option name="closed" value="true" />
+      <created>1778557176051</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1778557176051</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -691,6 +692,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
+    <confirmRemoveEmptyChangelist value="2" />
     <MESSAGE value="hanyackdo_20250819" />
     <MESSAGE value="hanyackdo_20250820" />
     <MESSAGE value="hanyackdo_20250822" />
@@ -717,6 +719,7 @@
     <MESSAGE value="0511 dawn" />
     <MESSAGE value="0512 dawn" />
     <option name="LAST_COMMIT_MESSAGE" value="0512 dawn" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -746,7 +749,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/assets/web/js/common/control.js</url>
-          <line>698</line>
+          <line>699</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -760,7 +763,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/assets/web/js/common/control.js</url>
-          <line>930</line>
+          <line>991</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -770,7 +773,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Controllers/ApiController.php</url>
-          <line>683</line>
+          <line>685</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -780,17 +783,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Controllers/ApiController.php</url>
-          <line>2110</line>
+          <line>2112</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Controllers/ApiController.php</url>
-          <line>744</line>
+          <line>746</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Views/web/common/board_Form_Notice_View.php</url>
+          <line>3</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Controllers/ApiController.php</url>
-          <line>4421</line>
+          <line>4573</line>
           <properties>
             <option name="className" value="\App\Controllers\ApiController" />
             <option name="methodName" value="Update_Product_Edited" />

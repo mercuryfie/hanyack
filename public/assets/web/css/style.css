@@ -277,9 +277,9 @@ input[type="radio"] {
 /* search header view  -------------------------------- */
 
 .headerwrap {
-
+    padding-bottom: 20px;
     width: 1140px;
-    height: 120px;
+    height: 140px;
     position: relative;
     margin: 0 auto;
     /*border:1px solid red;*/
@@ -386,7 +386,7 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-/* schbox  -------------------------------- */
+/* smartOrder_View srart  -------------------------------- */
 .smartwrap {
     width: 1440px;
     margin: 0 auto;
@@ -624,10 +624,6 @@ input[type="radio"] {
     padding: 0 20px;
 }
 
-.btnli2 .filterType1 {
-
-}
-
 
 .btnli2 .filterType1:not(:last-child)::after {
     content: "|";
@@ -643,6 +639,31 @@ input[type="radio"] {
     background: #ccc;
     margin-left: 12px;
     vertical-align: middle;
+}
+
+.smartwrap .page_box {
+    margin-top: 40px;
+    width: 1440px;
+    /*border:1px solid red;*/
+
+}
+
+.smartwrap .page_box .page {
+    /*width: auto;*/
+    border: none;
+    background-color: transparent;
+    /*border:1px solid red;*/
+    width: 32px;
+    height: 32px;
+}
+
+.smartwrap .page_box .page .page_p.active {
+    border-radius: 50%;
+    background-color: var(--main-color);
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    /*border:1px solid red;*/
 }
 
 .btnli2 > select {
@@ -3304,6 +3325,7 @@ margin: 0 auto;
 }
 
 .merrightlast {
+    border:1px solid red;
     display: flex;
     justify-content: flex-end;
     /*margin-bottom: 40px;*/
@@ -3390,16 +3412,16 @@ margin: 0 auto;
     /*margin-bottom: 10px;*/
     display: flex;
     flex-flow: column;
-    justify-content: center;
-    align-items: flex-start;
+    /*justify-content: center;*/
+    /*align-items: flex-start;*/
 }
 .odrbox1-1-1,
 .odrbox1-1-2 {
     /*height: 40px;*/
     /*line-height: 40px;*/
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    /*display: flex;*/
+    /*justify-content: flex-start;*/
+    /*align-items: center;*/
     margin-bottom: 10px;
 }
 
@@ -3824,6 +3846,7 @@ margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /*ddd*/
 }
 
 .flexType3-1 {
@@ -4568,9 +4591,18 @@ margin: 0 auto;
 
 
 /*orderList css end hereeeeeee ---------*/
+/* orderListMaster_View start ---------*/
 
+.order_list_master_wrap .ttl_box .head_ttl {
+    margin: 20px 0 20px 40px;
+}
 
+.order_list_master_wrap .filter_box select{
+    margin-right: 10px;
+    height:32px;
+}
 
+/* orderListMaster_View end ---------*/
 /*refund css start  ---------*/
 
 .refund_boxtc6 .head_title {
@@ -4997,12 +5029,12 @@ margin: 0 auto;
     height: 220px;
     display: none;
     flex-flow: column;
-    position: relative;
 
     overflow: hidden;
     overflow-y: scroll;
     scroll-behavior: auto;
-    z-index: 12;
+
+    z-index: 20;
 
 }
 
@@ -5018,7 +5050,11 @@ margin: 0 auto;
     overflow: hidden;
     overflow-y: scroll;
     scroll-behavior: auto;
-    z-index: 12;
+
+    position: absolute;
+    top:32px;
+
+    z-index: 21;
 
 }
 
@@ -5034,6 +5070,7 @@ margin: 0 auto;
     width: 556px;
     height: 30px;
     min-height: 30px;
+    z-index: 22;
 }
 
 .burkOrderForm_wrap .herboption {
@@ -5044,6 +5081,7 @@ margin: 0 auto;
     width: 336px;
     height: 30px;
     min-height: 30px;
+    z-index: 22;
 }
 
 .herbbtn1-2 > button:last-child {
@@ -5238,7 +5276,7 @@ margin: 0 auto;
 
 .burkOrderForm_wrap .head_title {
     margin-top: 0;
-    padding-top: 40px;
+    padding-top: 20px;
     margin-left: 40px;
 }
 
@@ -5477,8 +5515,8 @@ margin: 0 auto;
 
 
 .infobox {
-    margin-top: 30px;
-    margin-left: 40px;
+    padding: 20px 0 40px 40px;
+    /*margin-top: 20px;*/
     display: flex;
     flex-flow: column;
     align-items: flex-start;
@@ -6387,6 +6425,9 @@ th, td {
     z-index: 2;
 }
 
+.mainwrap > div:first-child {
+    margin-top: 0;
+}
 .mainwrap > div {
     margin-top: 20px;
     height: 520px;
@@ -6438,7 +6479,8 @@ th, td {
     margin-bottom: 60px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-between;
+    /*justify-content: flex-start;*/
     align-items: flex-start;
     /*display: grid;*/
     /*grid-template-columns: repeat(5, 1fr); !* 5등분 *!*/
@@ -7850,7 +7892,7 @@ th, td {
 
 
 .hbox1-1 {
-    margin-top: 0px;
+    margin-top: 20px;
     width: 1140px;
     height: 40px;
     display: flex;
@@ -7876,6 +7918,11 @@ th, td {
     color: #5c5c5c;
     cursor: pointer;
     font-size: 14px;
+}
+
+
+.hbox1-1-1 > p:last-child {
+    margin-right: 0;
 }
 
 .hbox1-1-1 .name{
@@ -7968,7 +8015,8 @@ th, td {
 
 .topbox1-3 {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    /*justify-content: space-between;*/
     width: 140px;
 }
 
@@ -7977,8 +8025,13 @@ th, td {
 .topbox1-4 i {
     color: var(--main-color);
     font-size: 22px;
+    margin-left: 20px;
+    /*margin-right: 20px;*/
 }
 
+.topbox1-4 i:last-child {
+    /*margin-right: 0;*/
+}
 
 .topbox1-3 .cart_box {
     position: relative;
@@ -8992,6 +9045,23 @@ button, i {
 
 }
 
+.ttl_box .head_ttl {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.period {
+    border:1px solid #ccc;
+    background-color: #fff;
+    min-width: 100px;
+    width: 100px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 14px;
+    color:#303030;
+}
+
 
 .btnType1 {
     border: 1px solid #ccc;
@@ -9021,7 +9091,6 @@ button, i {
 
 }
 
-
 .btnType2 {
     border: 1px solid var(--main-color);
     background-color: var(--main-color);
@@ -9035,6 +9104,9 @@ button, i {
     text-align: center;
 
 }
+
+
+
 .fff {
     background-color: #fff;
 }
@@ -9091,6 +9163,21 @@ button, i {
     /*padding: 0px 10px;*/
     font-size: 14px;
     text-align: center;
+}
+
+
+.btnType4-1 {
+    border: 1px solid var(--second-color);
+    background-color: #fff;
+    color:var(--second-color);
+    border-radius: 5px;
+    width: auto;
+    height: 32px;
+    line-height: 30px;
+    padding: 0px 10px;
+    font-size: 14px;
+    text-align: center;
+
 }
 
 
