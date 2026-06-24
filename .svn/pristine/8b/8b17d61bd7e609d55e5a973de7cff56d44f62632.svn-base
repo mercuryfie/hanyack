@@ -1,0 +1,36 @@
+const decoc = {
+    /*
+     Use > 탕전실 약제 전체 pageing 및 검색 가능
+     parmas > page : 현재페이지, pCnt : 한페이지출려수, sstr : 검색 약재명  
+     return > list : 데이터 , total: 데이터수 , totalRs : 데이터전체수, nPage:다음페이지 
+     */
+    async Load_Medicine_decoc(params){
+        const res = await commonRequest('/Load_Medicine_decoc',params);
+        if (!res) return { list : [],total : 0,totalRs : 0,nPage :0};
+        const [item = {}] = res.data || [];
+        return {
+            list: item.list || [],
+            total: item.tcnt || 0,
+            totalRs : item.totalRs || 0,
+            nPage : item.nPage ||0
+        };
+    },
+    /*
+     Use > 탕전실의 선택된 약재의 매칭된 정보
+     params > cfcode : 텅전실코드 , code : mm_medicine , medicode : 주성분코드
+     return > matched : 매칭된약재 , matchedCnt : 매칭된약재수, matching : 추천 매칭 가능 약재 , matchingCnt 추천된 매칭가능약재 수
+     */
+    async Load_Medicine_Decoc_Match(params){
+        const res = await commonRequest('/Load_Medicine_Decoc_Match',params);
+        if (!res) return { list: [], total: 0 };
+        const [item = {}] = res.data || [];
+        return  {
+            matched : item.matched || [],
+            matchedCnt : item.matchedCnt || 0,
+            matching : item.matching || [],
+            matchingCnt : item.matchingCnt || 0
+        };
+    }
+};
+
+window.decoc = decoc;

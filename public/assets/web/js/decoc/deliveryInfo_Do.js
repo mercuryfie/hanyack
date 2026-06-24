@@ -125,7 +125,6 @@ function Load_DelInfo() {
                 if (response.result === 'ok' && response.info.length > 0) {
                     let html = '';
                     $.each(response.info, function(index, el) {
-                        console.log(el.mi_zip);
                         let isDefault = '';
                         let isChecked = '';
                         let delAddress = '';

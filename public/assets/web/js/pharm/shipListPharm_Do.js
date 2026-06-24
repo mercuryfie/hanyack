@@ -110,7 +110,7 @@ async function Load_Data(page) {
 
 function Prn_Package(pcode){
     let url = '/Mypharm/statement?key=' + pcode;
-    let param = "status=0,title=0,height=800,width=1200,scrollbars=1"
+    let param = "status=0,title=0,height=800,width=1180,scrollbars=1"
     window.open(url,'statement',param);
 }
 

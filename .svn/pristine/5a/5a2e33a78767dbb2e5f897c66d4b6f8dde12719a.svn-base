@@ -1,0 +1,72 @@
+<div class="bestpop buy_item_wrap" id="pop_buy_item" name="pop_buy_item">
+    <div class="bestpopcon buy_item_conkol">
+
+        <div class="area area1 flexType1 " name="" id="">
+            <p class="pop_head_title " id="p_title" name="p_title">약재 구매</p>
+            <i class="fa-solid fa-xmark x_btn" id="Xbtn" name="Xbtn"></i>
+        </div>
+        <div class="area area3 ">
+            <div class="flexType2">
+                <p class="category">주간 사용량</p>
+                <p class="data" id="" name="">10,000g</p>
+            </div>
+            <div class="flexType2">
+                <p class="category">월간 사용량</p>
+                <p class="data" id="" name="">10,000g</p>
+            </div>
+            <div class="flexType2">
+                <p class="category">재고</p>
+                <p class="data" id="" name="">10,000g</p>
+            </div>
+        </div>
+        <div class="area area2">
+            <table class="buy_item_tbl flexType2-1">
+                <tr>
+                    <td>
+                        <div class="item_wrap flexType2">
+                            <div class="item_box   ">
+                                <div class="section name_box flexType2">
+                                    <p class="category mr10">이름</p>
+                                    <div class="sub_name_box flexType2">
+                                        <p class="data name mr10">감초</p>
+                                        <p class="data option">디제이메디/신강1호/직절</p>
+                                    </div>
+                                </div>
+                                <div class="section price_box flexType2">
+                                    <p class="category mr10">근당가격</p>
+                                    <p class="data ">10,000원</p>
+                                </div>
+                                <div class="section price_box flexType2 ">
+                                    <p class="category mr10">포장가격</p>
+                                    <p class="data ">10,000원</p>
+                                </div>
+                            </div>
+                            <div class="buy_box flexType2">
+                                <div class="cal_box flexType3">
+                                    <i class="fa-solid fa-minus" id="btn_minus"></i>
+                                    <p class="count" id="r_count" data-max="">1</p>
+                                    <i class="fa-solid fa-plus" id="btn_plus"></i>
+                                </div>
+                                <div class="price_box flexType3">
+                                    <p class="price">총 10,000원</p>
+                                </div>
+                                <div class="btn_box">
+                                    <button class="btnType30-1 mr10" id="">장바구니</button>
+                                    <button class="btnType30-1" id="">바로구매</button>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="area">
+
+        </div>
+        <div class="area lastArea flexType1">
+            <button class="btnType30" id="Xbtn2">닫기</button>
+        </div>
+    </div>
+</div>

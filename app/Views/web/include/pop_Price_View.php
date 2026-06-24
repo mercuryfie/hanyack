@@ -1,120 +1,60 @@
-<div class="bestpop" id="bestprice" name="bestprice">
-    <div class="bestpopcon">
-        <h2>아이템추가</h2>
-        <div class="bestcon1-1">
-            <select name="" id="popslt">
-                <option value="저가순">저가순</option>
-                <option value="고가순">고가순</option>
-                <option value="최근생산순">최근생산순</option>
-                <option value="판매량순">판매량순</option>
-                <option value="">전체</option>
-            </select>
+<div class="bestpop buy_item_wrap" id="pop_buy_item" name="pop_buy_item">
+    <div class="bestpopcon buy_item_conkol">
+
+        <div class="area area1 flexType1 " name="" id="">
+            <p class="pop_head_title " id="p_title" name="p_title">약재 구매</p>
+            <i class="fa-solid fa-xmark x_btn" id="Xbtn" name="Xbtn"></i>
         </div>
-        <div class="bestcon1-2">
-            <div class="bestops">
-                <div class="becon1-1">
-                    <input type="checkbox" />
-                    <p>감초</p>
-                    <p>디제이메디/신강1호/직절</p>
+        <div class="area area3 flexType3">
+            <div class="search_box area2 flexCol ">
+                <div class="searched_box area0 flexType2">
+                    <input type="search" class="input_type mr10" placeholder="약재검색" id="txtMatchPopSearch"
+                           name="txtMatchPopSearch">
+                    <button type="button" class="btn_primary" id="btnMatchPopSearch" name="btnMatchPopSearch">검색
+                    </button>
                 </div>
-                <div class="becon1-2">
-                    <p></p>
-                    <p>근당가격</p>
-                    <p>20,000</p>
-                    <p>원</p>
-                </div>
-                <div class="becon1-3">
-                    <p></p>
-                    <p>포장가격</p>
-                    <p>10,000</p>
-                    <p>원</p>
-                    <p>(100g 당 가격 120원)</p>
+                <div class="searched_box area1 flexCol" id="resSearch" name="resSearch">
                 </div>
             </div>
-            <div class="bestops">
-                <div class="becon1-1">
-                    <input type="checkbox" />
-                    <p>감초</p>
-                    <p>디제이메디/신강1호/직절</p>
-                </div>
-                <div class="becon1-2">
-                    <p></p>
-                    <p>근당가격</p>
-                    <p>20,000</p>
-                    <p>원</p>
-                </div>
-                <div class="becon1-3">
-                    <p></p>
-                    <p>포장가격</p>
-                    <p>30,000</p>
-                    <p>원</p>
-                    <p>(100g 당 가격 120원)</p>
+            <div class="stock_box flexType2 ml20">
+                <p class="circle color1"></p>
+                <p class="text category ">주간 사용량</p>
+                <div class="flexType2">
+                    <p class="text data" id="stock_week" name="stock_week" data-val=""></p>
+
+                    <!--                    <p class="text data" id="stock_month" name="stock_month" data-val=""></p>-->
                 </div>
             </div>
-            <div class="bestops">
-                <div class="becon1-1">
-                    <input type="checkbox" />
-                    <p>감초</p>
-                    <p>디제이메디/신강1호/직절</p>
-                </div>
-                <div class="becon1-2">
-                    <p></p>
-                    <p>근당가격</p>
-                    <p>20,000</p>
-                    <p>원</p>
-                </div>
-                <div class="becon1-3">
-                    <p></p>
-                    <p>포장가격</p>
-                    <p>30,000</p>
-                    <p>원</p>
-                    <p>(100g 당 가격 120원)</p>
-                </div>
+            <div class="stock_box flexType2 ">
+                <p class="circle color2"></p>
+                <p class="text category">월간 사용량</p>
+                <p class="text data" id="stock_month" name="stock_month" data-val=""></p>
             </div>
-            <div class="bestops">
-                <div class="becon1-1">
-                    <input type="checkbox" />
-                    <p>감초</p>
-                    <p>디제이메디/신강1호/직절</p>
-                </div>
-                <div class="becon1-2">
-                    <p></p>
-                    <p>근당가격</p>
-                    <p>20,000</p>
-                    <p>원</p>
-                </div>
-                <div class="becon1-3">
-                    <p></p>
-                    <p>포장가격</p>
-                    <p>40,000</p>
-                    <p>원</p>
-                    <p>(100g 당 가격 120원)</p>
-                </div>
+            <div class="stock_box  flexType2">
+                <p class="text circle color3"></p>
+                <p class="text category category3">재고</p>
+                <p class="text data" id="stock" name="stock" data-val=""></p>
             </div>
-            <div class="bestops">
-                <div class="becon1-1">
-                    <input type="checkbox" />
-                    <p>감초</p>
-                    <p>디제이메디/신강1호/직절</p>
-                </div>
-                <div class="becon1-2">
-                    <p></p>
-                    <p>근당가격</p>
-                    <p>20,000</p>
-                    <p>원</p>
-                </div>
-                <div class="becon1-3">
-                    <p></p>
-                    <p>포장가격</p>
-                    <p>40,000</p>
-                    <p>원</p>
-                    <p>(100g 당 가격 120원)</p>
-                </div>
+
+        </div>
+
+        <!--        <div class="area area4 maching_box flexType2-1 p10 ml20">-->
+        <!--        </div>-->
+        <div class="area area2 flexType2">
+            <div class="match_box101">
+
+            </div>
+            <div class="match_box102">
+                <table class="buy_item_tbl flexCol" id="productList" name="productList">
+                </table>
+
             </div>
         </div>
-        <div class="bestcon1-4 bestbtn">
-            <button class="closepop">닫기</button>
-            <button class="pop">추가</button>
+        <div class="area">
+
+        </div>
+        <div class="area lastArea flexType1">
+            <button class="btnType30" id="Xbtn2">닫기</button>
         </div>
     </div>
 </div>

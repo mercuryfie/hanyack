@@ -34,8 +34,9 @@ a {
     font-weight: 200;
     font-style: normal;
 }
+
 #wrap {
-    width: 1050px;
+    width: 1180px;
     height: auto;
     margin: 0 auto;
     padding: 10px 0;
@@ -58,7 +59,7 @@ header>.topline {
     z-index: 20;
 }
 .headerwrap {
-    width: 1050px;
+    width: 1180px;
     height: 240px;
     margin: 0 auto;
     float: center;
@@ -78,7 +79,7 @@ header>.topline {
 }
 .hbox1-1 {
     margin-top: 60px;
-    width: 1050px;
+    width: 1180px;
     height: 120px;
     display: flex;
     justify-content: space-between;
@@ -208,7 +209,7 @@ input[type="search"] {
     cursor: pointer;
 }
 .topmenuul {
-    width: 1050px;
+    width: 1180px;
     display: flex;
     justify-content: center;
     position: absolute;
@@ -296,7 +297,7 @@ input[type="search"] {
 .mypagewrap {
     background-color: var(--sub-color);
     margin: 0 auto;
-    width: 1050px;
+    width: 1180px;
     height: 100%;
     display: flex;
     position: relative;
@@ -588,8 +589,7 @@ footer {
 
 }
 #footerwrap {
-    /* border:1px solid var(--main-color);   */
-    width: 1050px;
+    width: 1180px;
     height: 280px;
     display: flex;
     align-items: flex-start;

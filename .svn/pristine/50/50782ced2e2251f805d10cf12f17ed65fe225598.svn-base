@@ -1,0 +1,427 @@
+$(document).ready(function(){
+    $(document).on('click','button[name="pCnt"]', function() {
+        $(this).addClass('active').siblings().removeClass('active');
+        $('#pageArea').data('page',1);
+        Make_Html(Make_Option());
+    });
+
+    $('#oby').on('click',function(){
+        const optval = $(this).data('sort');
+        const $icon = $(this).find('i');
+        if(optval==1){
+            $(this).data('sort',2);
+            $icon
+                .removeClass('fa-angle-down')
+                .addClass('fa-angle-up');
+        }else{
+            $(this).data('sort',1);
+            $icon
+                .removeClass('fa-angle-up')
+                .addClass('fa-angle-down');
+
+        }
+        $('#pageArea').data('page',1);
+        Make_Html(Make_Option());
+    });
+
+    $(document).on('click','button[name="btnLinkPaging"]',function(){
+        $('#pageArea').data('page',$(this).data('page'));
+        Make_Html(Make_Option());
+    });
+
+    $(document).on('click','button[name="popBuy"]',async function(){
+        Ini_Buy_Pop();
+
+        const cfcode = $('#cList').data('cfcode');
+        const mm_medicine = $(this).data('mmcode');
+        const stock = $(this).data('stock') || 0;
+        const stock_week = $(this).data('week') || 0;
+        const stock_month = $(this).data('month') || 0;
+        let html = '';
+        let subhtml = '';
+        const params = {cfcode:cfcode,mm_medicine:mm_medicine};
+        const response = await Model.decoc_m.Load_Decoc_Match_Produc(params);
+        console.log(response);
+        if(response.total > 0){
+            $.each(response.list, function (index, el) {
+                subhtml = (el.option_str != '') ? ('/ ' + el.option_str) : '';
+                html += `
+                    <tr>
+                        <td>
+                            <div class="item_wrap flexType2-1">
+                                <div class="item_box   ">
+                                    <div class="section name_box flexType2-1">
+                                        <p class="category mr10">이름</p>
+                                        <div class="sub_name_box flexCol">
+                                            <p class="data data1 ">[${el.n_value}] ${el.mi_name}</p>
+                                            <p class="data data2">${el.hn_name} / ${el.w_name} ${subhtml}</p> 
+                                        </div>
+                                    </div>
+                                    <div class="section price_box flexType2">
+                                        <p class="category mr10">근당가격</p>
+                                        <p class="data">${number_format((el.guenPrice || 0))}원</p>
+                                    </div>
+                                    <div class="section price_box flexType2 ">
+                                        <p class="category mr10">포장가격</p>
+                                        <p class="data ">${number_format((el.price || 0))}원</p>
+                                    </div>
+                                </div>
+                                <div class="buy_box flexType2">
+                                    <div class="cal_box flexType3">
+                                        <i class="fa-solid fa-minus" id="btn_minus"></i>
+                                        <p class="count" id="r_count" data-val="${el.need}">${el.need}</p>
+                                        <i class="fa-solid fa-plus" id="btn_plus"></i>
+                                    </div>
+                                    <div class="price_box flexType3">
+                                        <p class="price">총 ${number_format((el.needPrice || 0))}원</p>
+                                    </div>
+                                    <div class="btn_box">
+                                        <button class="btnType30-1 mr10" id="btnAddCart" name="btnAddCart" data-code="${el.hn_code}">장바구니</button>
+                                        <button class="btnType30-1" id="btnBuy" name="btnBuy" data-code="${el.hn_code}">바로구매</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        } else {
+            html += `<tr>
+                <td class="nodata p10"> 매칭 약재가 없습니다. <br> 약재 매칭 후 구매 가능합니다.
+                </td>
+            </tr>`;
+        }
+        console.log(html);
+
+        $('#productList').append(html);
+        $('#stock_week').text(number_format(stock_week)+'g');
+        $('#stock_week').data('val',stock_week);
+        $('#stock_month').text(number_format(stock_month)+'g');
+        $('#stock_month').data('val',stock_month);
+        $('#stock').text(number_format(stock)+'g');
+        $('#stock').data('val',stock);
+        $('#pop_buy_item').show();
+    });
+
+    $('#pop_buy_item #Xbtn, #pop_buy_item #Xbtn2').click(function () {
+        $('#pop_buy_item').hide();
+    });
+
+    $('#matchingpop #Xbtn, #matchingpop #Xbtn2').click(function () {
+        $('#matchingpop').hide();
+    });
+
+    $(document).on('click','button[name="mmMatch"]',function(){
+        const cfcode = $('#cList').data('cfcode');
+        const mm_medicine = $(this).data('mmcode');
+        const mm_title = $(this).data('mname');
+        const medicode = $(this).data('medicode');
+        console.log(medicode);
+        Ini_Match_Pop();
+        Open_Match_Pop(cfcode,mm_medicine,mm_title,medicode);
+
+        $('#matchingpop').show();
+    });
+
+    $('#btnHSearch').on('click',function(){
+        Search_Herb();
+    });
+
+    $('#h_sKey').on('keypress',function(e){
+        if (e.which === 13 || e.keyCode === 13) {
+            Search_Herb();
+        }
+    })
+
+    $('#txtMatchPopSearch').on('focusin',function(){
+        $('#resSearch').empty();
+        $('#resSearch').hide();
+        $('#txtMatchPopSearch').val('');
+    });
+
+    $('#txtMatchPopSearch').on('focusout',function(e){
+        if (e.relatedTarget && $(e.relatedTarget).closest('#resSearch').length > 0) {
+            return;
+        }
+        $('#resSearch').empty();
+        $('#resSearch').hide();
+
+        const skey_input = $('#txtMatchPopSearch');
+
+        skey_input.css({
+            'background-color': '#fff',
+            'border-bottom': '1px solid #ccc',
+            'border-bottom-left-radius': '5px',
+            'border-bottom-right-radius': '5px'
+        });
+        $('#txtMatchPopSearch').val('');
+    });
+
+
+    $('#btnMatchPopSearch').on('click',function(){
+        Make_Match_Search_Html();
+    });
+
+    $('#txtMatchPopSearch').on('keypress',function(e){
+        if (e.which === 13 || e.keyCode === 13) {
+            Make_Match_Search_Html();
+        }
+    });
+
+    $(document).on('click','button[name="btnMatchOff"]',async function(){
+        const typ = $(this).data('typ');
+        const cfcode = $(this).data('cfcode');
+        const sn = $(this).data('sn');
+        const mm_medicine = $('#mm_medicine').text();
+        const medicode = $('#mm_medicine').data('medicode');
+
+        if((typ=='') || (cfcode=='') || (sn=='')){
+            Make_Toast('필수 항목을 확인하세요.');
+            return;
+        }
+        if(window.confirm('해제 하시겠습니까?')!=true){
+            return;
+        }
+        let params = {typ : typ,cfcode : cfcode,sn : sn,mm_medicine:mm_medicine};
+        let res = await Model.decoc_m.Update_Medicine_Decoc_Match(params);
+        console.log(res);
+        if(res.result){
+            let eCnt = res.eCnt;
+            $('#txtMatchPopSearch').val('');
+            $('#resSearch').empty();
+            $('#resSearch').hide();
+            $('#resMatching').empty();
+            $('#resMatched').empty();
+
+            let params = {cfcode : cfcode,code:mm_medicine,medicode:medicode,mm_medicine:mm_medicine};
+            Make_Match_Html(params);
+            $('button[name="mmMatch"][data-mmcode="'+ mm_medicine +'"]').text(res.eCnt + '건');
+        }
+    });
+
+    $(document).on('click','button[name="btnMatchOn"]',async function() {
+        const typ = $(this).data('typ');
+        const cfcode = $(this).data('cfcode');
+        const hncode = $(this).data('hncode');
+        const hntitle = $(this).data('hntitle');
+        const mm_medicine = $('#mm_medicine').text();
+        const medicode = $('#mm_medicine').data('medicode');
+
+        if ((typ == '') || (cfcode == '') || (hncode == '') || (hntitle == '')) {
+            Make_Toast('필수 항목을 확인하세요.');
+            return;
+        }
+        if (window.confirm('매칭 하시겠습니까?') != true) {
+            return;
+        }
+
+        let params = {typ: typ, cfcode: cfcode, hncode: hncode, hntitle: hntitle, mm_medicine: mm_medicine};
+        let res = await Model.decoc_m.Update_Medicine_Decoc_Match(params);
+        if (res.result) {
+            $('#txtMatchPopSearch').val('');
+            $('#resSearch').empty();
+            $('#resSearch').hide();
+            $('#resMatching').empty();
+            $('#resMatched').empty();
+
+            let params = {cfcode: cfcode, code: mm_medicine, medicode: medicode};
+            Make_Match_Html(params);
+            $('button[name="mmMatch"][data-mmcode="'+ mm_medicine +'"]').text(res.eCnt + '건');
+        }
+    });
+
+
+    Make_Html(Make_Option());
+});
+
+function Search_Herb() {
+    const SearchStr = $('#h_sKey').val();
+    $('#cList').empty();
+    $('#pageArea').data('page', 1);
+    Make_Html(Make_Option());
+}
+
+
+function Make_Option(){
+    let params = {
+        cfcode : $('#cList').data('cfcode'),
+        pCnt : $('button[name="pCnt"].active').data('pval'),
+        opt : $('#oby').data('sort'),
+        page : $('#pageArea').data('page'),
+        sStr : $('#h_sKey').val()
+    };
+    return params;
+}
+
+
+async function Make_Html(params){
+    const response = await Model.decoc_m.Load_Medicine_decoc(params);
+    console.log(response);
+    let html = '';
+    let subHtml = '';
+    let stock = 0;
+    let oStock = 0;
+    let mStock = 0;
+    let rStock = 0;
+    const total = response.total;
+    const mTotal = response.totalRs;
+    const nPage= response.nPage;
+    if(total>0) {
+        $.each(response.list, function (index, el) {
+            stock = parseInt((el.stock || 0));
+            oStock = parseInt((el.optimal_stock || 0));
+            wStock = parseInt((el.stock_week || 0));
+            mStock = parseInt((el.stock_month || 0));
+            ware = parseInt((el.stock_ware || 0));
+            rStock =(stock*0.1) - el.stock_month;
+            tStock = stock + ware;
+            subHtml = (rStock<=stock) ? 'class="active"' : '';
+            html +=`
+                    <tr ${subHtml}>  
+                        <td>${el.mm_title}</td>
+                        <td>${el.mm_medicine}</td>
+                        <td>${number_format(tStock)}g</td>
+                        <td>${number_format(stock)}g</td>
+                        <td>${number_format(ware)}g</td>
+                        <td>${number_format(wStock)}g</td>
+                        <td>${number_format(mStock)}g</td>
+                        <td>${number_format(oStock)}g</td>
+                        <td><button class="colorRed machingOption btntype2" type="button" name="mmMatch" data-mname="${el.mm_title}" data-mmcode="${el.mm_medicine}" data-medicode="${el.md_Medi}">${el.matched}건</button></td>
+                        <td><button class="bestpri btntype2" type="button" name="popBuy" data-mmcode="${el.mm_medicine}" data-week="${wStock}" data-stock="${tStock}" data-month="${mStock}">구입</button></td>
+                        <td>${el.update}</td>
+                    </tr>
+            `;
+        });
+    }else{
+        html =`<tr><td colspan="11">검색된 약재정보가 없습니다.</td></tr>`;
+    }
+
+    let options = {
+        page : $('#pageArea').data('page'),
+        total : mTotal,
+        perpage : $('button[name="pCnt"].active').data('pval'),
+        bname : 'btnLinkPaging'
+    }
+    $('#pageArea').html(Make_Page_Html('simple',options));
+    $('#totalRs').text(number_format(mTotal || 0));
+    $('#cList').empty();
+    $('#cList').append(html);
+    $('#pageArea').data('page',nPage);
+}
+
+async function Open_Match_Pop(cfcode,mmcode,mmtitle,medicode){
+    $('#mm_medicine').text(mmcode);
+    $('#mm_title').text(mmtitle);
+    $('#mm_medicine').data('cfcode',cfcode);
+    $('#mm_medicine').data('medicode',medicode);
+    let params = {cfcode : cfcode,code:mmcode,medicode:medicode};
+    Make_Match_Html(params);
+}
+
+function Ini_Match_Pop() {
+    $('#mm_medicine').text('');
+    $('#mm_title').text('');
+    $('#txtMatchPopSearch').val('');
+    $('#resSearch').empty();
+    $('#resMatching').empty();
+    $('#resMatched').empty();
+}
+
+function Ini_Buy_Pop(){
+    $('#stock_week').text('');
+    $('#stock_week').data('val','');
+    $('#stock_month').text('');
+    $('#stock_month').data('val','');
+    $('#productList').empty();
+}
+
+
+async function Make_Match_Html(params){
+    let response = await Model.decoc_m.Load_Medicine_Decoc_Match(params);
+    console.log(response);
+    let matchedCnt = response.matchedCnt;
+    let matchedHtml = '';
+    if(matchedCnt>0){
+        $.each(response.matched, function (index, el) {
+            matchedHtml += `
+                <tr>
+                    <td class="flexType2"> 
+                        <div class="flexCol"> 
+                            <p class="data data1">${el.hn_origin} / ${el.hn_wname}</p>
+                            <p class="data data2">${el.hn_name} </p>
+                        </div>
+                        <button type="button" class="btn_match btn_secondary" name="btnMatchOff" data-typ="1" data-cfcode="${params['cfcode']}" data-sn="${el.matchedsn}">해제</button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        $('#resMatched').append(matchedHtml);
+    }
+    let matchingCnt =  response.matchingCnt;
+    let matchingHtml = response.matching;
+    if(matchingCnt>0){
+        $.each(response.matching, function (index, el) {
+            matchingHtml += `
+                <tr>
+                    <td class="flexType2"> 
+                        <div class="flexCol"> 
+                            <p class="data data1">${el.hn_origin} / ${el.hn_wname}</p>
+                            <p class="data data2">${el.hn_name} </p>
+                        </div> 
+                        <button type="button" class="btn_match btn_secondary" name="btnMatchOn" data-typ="2" data-cfcode="${params['cfcode']}" data-hncode="${el.hn_code}" data-hntitle="${el.hn_name}">매칭</button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        $('#resMatching').append(matchingHtml);
+    }
+}
+
+async function Make_Match_Search_Html() {
+    const s_key = $('#txtMatchPopSearch').val();
+    if (s_key == '') {
+        Make_Toast('검색할 약재명을 입력하세요.');
+        $('#txtMatchPopSearch').focus();
+        return;
+    }
+    const cfcode = $('#mm_medicine').data('cfcode');
+    let params = {skey: s_key};
+    const response = await Model.pharm_m.Search_Medicine_Pharm(params);
+    console.log(response);
+    const skey_input = $('#txtMatchPopSearch');
+    skey_input.css({
+        'background-color': '#00996510',
+        'border-bottom': 'none',
+        'border-bottom-left-radius': '0',
+        'border-bottom-right-radius': '0'
+    });
+    let html = '';
+    let total = response.total;
+    if (total > 0) {
+        $.each(response.list, function (index, el) {
+            html += `
+                    <div class="item_box flexType2"> 
+                        <div class="flexCol"> 
+                            <p class="data data1">${el.hn_origin} / ${el.hn_wname}</p>
+                            <p class="data data2">${el.hn_name} </p>
+                        </div>  
+                        <button type="button" class="btn_match btn_primary" name="btnMatchOn" data-cfcode="${cfcode}" data-typ="2" data-hncode="${el.hn_code}" data-hntitle="${el.hn_name}">매칭</button>
+                    </div>
+            `;
+        });
+    }else{
+        html += `
+                    <div class="item_box flexType2">
+                        <p class="item active mr10">검색된 약재 없습니다.</p>
+                    </div>
+       `;
+    }
+    $('#resSearch').empty();
+    $('#resSearch').append(html);
+    $('#resSearch').show();
+}
+
+
+

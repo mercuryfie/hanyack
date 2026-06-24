@@ -5,13 +5,11 @@ $(document).ready(function() {
         $('#eventPop').hide();
     });
 
-
     $('#eventPop').on('click', function(e){
         if (e.target === this) {
             $(this).hide();
         }
     });
-
 
     //popReject 시 버튼
     $('#btn_reject').on('click',function(e){
@@ -417,10 +415,7 @@ async function setEvent_Data(hncode){
             console.log(arr);
             let Cnt = arr.length;
             if(Cnt > 0){
-                $.each(arr, function(index, el) {
-                    console.log(el.sn);
-                    console.log(el.fk_hncode);
-                    console.log(el.f_type);
+                $.each(arr, function(index, el)
                     let eventTypeStr = '';
                     if (el.f_type == 1) {
                         eventTypeStr += '인기 약재';

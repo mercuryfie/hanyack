@@ -323,7 +323,6 @@ async function Load_Data(page) {
             let Cnt = arr.length;
             if (Cnt > 0) {
                 $.each(arr, function (index, el) {
-                    console.log(el.list);
                     let subhtml = '';
                     let lowhtml = '';
                     let typhtml = '';

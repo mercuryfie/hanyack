@@ -1,0 +1,27 @@
+<div class="SO_manage_wrapper common_pop_wrap" id="SO_manage_wrap" name="SO_manage_wrap">
+    <div class="SO_manage_conkol common_pop_conkol">
+        <div class="SO_manage_box100 ">
+            <div class="area area1 flexType1 " name="" id="">
+                <p class="pop_head_title " id="p_title" name="p_title">약재 관리</p>
+                <i class="fa-solid fa-xmark x_btn" id="Xbtn" name="Xbtn"></i>
+            </div>
+            <div class="area area2 flexType2">
+                <p class="category ">관리여부</p>
+                <div class="flexType2">
+                    <button class=" btn_secondary active mr10" id="">예</button>
+                    <button class=" btn_secondary " id="">아니오</button>
+
+                </div>
+            </div>
+            <div class="area area3 flexType2">
+                <p class="category ">적정재고량</p>
+                <input type="search" class="input_type mr10" placeholder="10,000">
+                <button class=" btn_primary " id="">확인</button>
+
+            </div>
+            <div class="area lastArea flexType1">
+                <button class="btn_close btnType30" id="Xbtn2">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>

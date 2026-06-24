@@ -1,0 +1,303 @@
+<div class="machingPopCon" id="matchingpop" name="matchingpop" style="">
+    <div class="machingPop">
+        <div class="machingPop1-1 mt20 ">
+            <div class="maching_box area0">
+                <h2 class="main_title" id="btn_close">약재 매칭</h2>
+                <i class="fa-solid fa-xmark" id="Xbtn"></i>
+            </div>
+            <div class="maching_box area01  flexType2 mb10">
+                <p class="category ">약재명</p>
+                <p class="data ">갈근</p>
+            </div>
+            <div class="maching_box area02 flexType2 mb10">
+                <p class="category ">약재코드12</p>
+                <p class="data ">12341234</p>
+            </div>
+            <div class="maching_box area1 flexType2-1">
+                <div class="search_box area1">
+                    <p class="category ">약재 검색</p>
+                </div>
+                <div class="search_box area2 flexCol">
+                    <div class="searched_box area0 flexType2">
+                        <input type="search" class="input_type" placeholder="약재검색">
+                        <button type="button" class="btn_primary" id="btnMatchPopSearch">검색</button>
+                    </div>
+                    <div class="searched_box area1 flexCol" id="resSearch" name="resSearch">
+                        <div class="item_box flexType2" id="">
+                            <p class="item active mr10">감초 </p>
+                            <button type="button" class="btn_match btn_primary" onclick="">매칭</button>
+                        </div>
+                        <div class="item_box flexType2 " id="">
+                            <p class="item active mr10">Lorem ipsum dolor sit amet </p>
+                            <button type="button" class="btn_match btn_primary" onclick="">매칭</button>
+                        </div>
+                        <div class="item_box flexType2 " id="">
+                            <p class="item mr10">Lorem ipsum dolor sit amet</p>
+                            <button type="button" class="btn_match btn_primary" onclick="">매칭</button>
+                        </div>
+                        <div class="item_box flexType2 " id="">
+                            <p class="item mr10">Lorem ipsum dolor sit amet</p>
+                            <button type="button" class="btn_match btn_primary" onclick="">매칭</button>
+                        </div>
+                        <div class="item_box flexType2 " id="">
+                            <p class="item mr10">Lorem ipsum dolor sit amet</p>
+                            <button type="button" class="btn_match btn_primary" onclick="">매칭</button>
+                        </div>
+                        <div class="item_box flexType2 " id="">
+                            <p class="item mr10">Lorem ipsum dolor sit amet</p>
+                            <button type="button" class="btn_match btn_primary" onclick="">매칭</button>
+                        </div>
+                        <div class="item_box flexType2 " id="">
+                            <p class="item mr10">Lorem ipsum dolor sit amet</p>
+                            <button type="button" class="btn_match btn_primary" onclick="">매칭</button>
+                        </div>
+                        <div class="item_box flexType2 " id="">
+                            <p class="item mr10">Lorem ipsum dolor sit amet</p>
+                            <button type="button" class="btn_match btn_primary" onclick="">매칭</button>
+                        </div>
+                        <div class="item_box flexType2 " id="">
+                            <p class="item mr10">Lorem ipsum dolor sit amet</p>
+                            <button type="button" class="btn_match btn_primary" onclick="">매칭</button>
+                        </div>
+                        <div class="item_box flexType2 " id="">
+                            <p class="item mr10">Lorem ipsum dolor sit amet</p>
+                            <button type="button" class="btn_match btn_primary" onclick="">매칭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="maching_box area2 flexType2-1">
+                <div class="search_box area1">
+                    <p class="category ">매칭할 약재</p>
+                </div>
+                <div class="search_box area2 ">
+                    <table class="data_tbl area2">
+                        <tr>
+                            <td class="flexType2">
+                                <p class="data">
+                                    감초
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">매칭</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">매칭</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">매칭</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">매칭</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">매칭</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">매칭</button>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!--                <div class="data_box area1" id="yaklist2" name="yaklist2"> -->
+                <!---->
+                <!--                </div>-->
+            </div>
+            <div class="maching_box area2 flexType2-1">
+                <div class="search_box area1">
+                    <p class="category ">매칭된 약재</p>
+                </div>
+                <div class="search_box area2 ">
+                    <table class="data_tbl area2">
+                        <tr>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                            <td class="flexType2">
+                                <p class="data">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci
+                                    consequatur doloremque dolorum enim, in ipsum magnam maiores maxime nobis
+                                    officiis omnis quam quo sequi sunt velit veniam veritatis! Quibusdam.
+                                </p>
+                                <button type="button" class="btn_match btn_secondary" onclick="">해제</button>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!--                <div class="data_box area1" id="yaklist2" name="yaklist2"> -->
+                <!---->
+                <!--                </div>-->
+            </div>
+            <!--            <div class="maching_box area3 flexType2-1">-->
+            <!--                <p class="category ">매칭된 약재</p>-->
+            <!--                <div class="data_box area2 " id="yaklist1" name="yaklist1">-->
+            <!--                    <table class="data_btl area2">-->
+            <!--                        <tr>-->
+            <!--                            <td class="flexType2">-->
+            <!--                                <p class="data">-->
+            <!--                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci consequatur-->
+            <!--                                    doloremque dolorum enim, in ipsum magnam maiores maxime nobis officiis omnis quam-->
+            <!--                                    quo sequi sunt velit veniam veritatis! Quibusdam.-->
+            <!--                                </p>-->
+            <!--                                <button type="button" class="btn_unmatch btn_secondary" onclick="">해제</button>-->
+            <!---->
+            <!--                            </td>-->
+            <!--                            <td class="flexType2">-->
+            <!--                                <p class="data">-->
+            <!--                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci consequatur-->
+            <!--                                    doloremque dolorum enim, in ipsum magnam maiores maxime nobis officiis omnis quam-->
+            <!--                                    quo sequi sunt velit veniam veritatis! Quibusdam.-->
+            <!--                                </p>-->
+            <!--                                <button type="button" class="btn_unmatch btn_secondary" onclick="">해제</button>-->
+            <!---->
+            <!--                            </td>-->
+            <!--                            <td class="flexType2">-->
+            <!--                                <p class="data">-->
+            <!--                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci consequatur-->
+            <!--                                    doloremque dolorum enim, in ipsum magnam maiores maxime nobis officiis omnis quam-->
+            <!--                                    quo sequi sunt velit veniam veritatis! Quibusdam.-->
+            <!--                                </p>-->
+            <!--                                <button type="button" class="btn_unmatch btn_secondary" onclick="">해제</button>-->
+            <!---->
+            <!--                            </td>-->
+            <!--                        </tr>-->
+            <!--                    </table>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--            <div class="machingPop1-4">-->
+            <!--                <button class="closeMachingPop btnType1" id="btn_match_del" name="btn_match_del" data-cfcode="" data-meMed=""  data-medicine="">매칭해제</button>-->
+            <!--            </div> -->
+            <!--            <div class="machingPop1-4">-->
+            <!--                <button class="closeMachingPop btnType1" id="btn_match" data-hncode="" data-seq="" data-cfcode="" data-meMed="" data-medicine="" data-origin="" data-title="" data-maker="" >매칭하기</button>-->
+            <!--            </div>-->
+        </div>
+    </div>
+</div>

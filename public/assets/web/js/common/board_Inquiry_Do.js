@@ -97,8 +97,6 @@ async function Load_Inquiry(bid,page) {
                     }
 
                     if (tUid == el.uid) {
-                        console.log(el.uid);
-                        // const rContent1 = reply.rContent;
                         btnBox = `
                             <div class="btnBox">
                                 <button type="button" class="btnType1 mr10 deleteBtn"  

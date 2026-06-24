@@ -1,0 +1,267 @@
+<?php
+
+namespace App\Controllers;
+
+use App\DTOs\ResultDTO;
+use App\Libraries\Utils;
+use CodeIgniter\API\ResponseTrait;
+
+class ApiDecocController extends BaseController
+{
+    use ResponseTrait;
+    public function __construct()
+    {
+        $Auth = [AUTH_MASTER, AUTH_DECOC];
+        $this->Check_Auth($Auth);
+    }
+
+    public function Load_Decoc_Match_Product()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER) && ($mi_type != AUTH_DECOC)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $cfcode = $params['cfcode'] ?? '';
+        $mm_medicine = $params['mm_medicine'] ?? '';
+        if(empty($cfcode) || (empty($mm_medicine))){
+            return $this->respond(ResultDTO::fail('Error005', [], '필수항목이 누락되었습니다.'));
+        }
+
+        $herb_m = model('Herb_m');
+        $list = [];
+        $fields = ['c.hn_code','c.hn_name','a.mm_medicine','b.stock','b.stock_ware','b.stock_week','b.stock_month','c.priceSn','c.fk_medicode','c.price','c.mi_name','c.w_name','c.w_value','c.n_value','c.t1_name','c.t2_name'];
+        $cRs = $herb_m->Load_Decoc_Match_Product($cfcode,$mm_medicine,$fields);
+        if(!empty($cRs)){
+            foreach($cRs as $d){
+                $tStock = $d['stock'] + $d['stock_ware'];
+                $stock_month = $d['stock_month'];
+                $w_value = (($d['w_value']==null) || ($d['w_value']=='')) ? '600': $d['w_value'];
+                if (($tStock * 0.1) < $stock_month) {
+                    $needWeight = $stock_month - ($tStock * 0.1);
+                    $needed_quantity = ceil($needWeight / $w_value);
+                } else {
+                    $needed_quantity = 0;
+                }
+                $t_arr = [
+                    'hn_code' => $d['hn_code'],
+                    'hn_name' => $d['hn_name'],
+                    'mm_medicine' => $d['mm_medicine'],
+                    'priceSn' => $d['priceSn'],
+                    'medicode' => $d['fk_medicode'],
+                    'price' => $d['price'],
+                    'mi_name' => $d['mi_name'],
+                    'w_name' => $d['w_name'],
+                    'w_value' => $w_value,
+                    'n_value' => $d['n_value'],
+                    't1_name' => $d['t1_name'],
+                    't2_name' => $d['t2_name'],
+                    'guenPrice' => $this->calculatePricePerGeun($d['price'],$w_value),
+                    'need' => $needed_quantity,
+                    'needPrice' => ($needed_quantity * $d['price']),
+                    'option_str' => $this->Product_Option_str($d['t1_name'],$d['t2_name'])
+                ];
+                $list[] = $t_arr;
+            }
+        }
+
+        $i_arr = ['list'=>$list,'tcnt' => count($cRs)];
+        return $this->respond(ResultDTO::success($i_arr));
+
+
+    }
+
+    public function Update_Medicine_Decoc_Match()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER) && ($mi_type != AUTH_DECOC)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $f_type = $params['typ'] ?? '';
+        if(empty($f_type)){
+            return $this->respond(ResultDTO::fail('Error004', [], '필수항목이 누락되었습니다.'));
+        }
+
+        $cfcode = $params['cfcode'] ?? '';
+        $mm_medicine = $params['mm_medicine'] ?? '';
+
+        $herb_m = model('Herb_m');
+        if($f_type==1){
+            $MatchSn = $params['sn'] ?? '';
+
+            if(empty($cfcode) || (empty($MatchSn))){
+                return $this->respond(ResultDTO::fail('Error005', [], '필수항목이 누락되었습니다.'));
+            }
+            $chceckCnt = $herb_m->Count_Medicine_Decoc_Match($cfcode,$MatchSn);
+            if($chceckCnt==0){
+                return $this->respond(ResultDTO::fail('Error006', [], '존재하지 않는 매칭 정보 입니다.'));
+            }
+            $Cnt = $herb_m->Delete_Medicine_Decoc_Match($cfcode,$MatchSn);
+            if ($Cnt === false) {
+                return $this->respond(ResultDTO::fail('Error007', [], '삭제 처리 중 오류가 발생했습니다.'));
+            }
+        }else if($f_type==2){
+            $hncode = $params['hncode'] ?? '';
+            $hntitle = $params['hntitle'] ?? '';
+
+            if(empty($cfcode) || empty($hncode)  || empty($hntitle)){
+                return $this->respond(ResultDTO::fail('Error005', [], '필수항목이 누락되었습니다.'));
+            }
+            $chceckCnt = $herb_m->Count_Medicine_Decoc_Match2($cfcode,$hncode);
+            if($chceckCnt>0){
+                return $this->respond(ResultDTO::fail('Error006', [], '선택하신 약재는 이미 다른 약재랑 매칭 되어 있습니다. \n 매칭되어 있는 약재를 삭제 하시고 다시 시도하여주세요.'));
+            }
+
+            $datas =[
+                'cfcode' => $cfcode,
+                'mm_medicine' => $mm_medicine,
+                'mm_title' => $hntitle,
+                'fk_hncode' => $hncode,
+                'is_use' => 1
+            ];
+            $Cnt = $herb_m->Insert_Medicine_Decoc_Match($datas);
+            if ($Cnt === false) {
+                return $this->respond(ResultDTO::fail('Error007', [], '매칭 처리 중 오류가 발생했습니다.'));
+            }
+
+        }
+        $tCnt = $herb_m->Count_Medicine_Decoc_Match3($cfcode,$mm_medicine);
+        $i_arr = ['result'=>'ok','pCnt' => $tCnt];
+        return $this->respond(ResultDTO::success($i_arr));
+
+    }
+
+    public function Load_Medicine_decoc(){
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER) && ($mi_type != AUTH_DECOC)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $cfcode = $params['cfcode'] ?? '';
+        if(empty($cfcode)){
+            return $this->respond(ResultDTO::fail('Error004', [], '필수항목이 누락되었습니다.'));
+        }
+        $page = $params['page'] ?? 1;
+        $searchStr = $params['sStr'] ?? '';
+        $herb_m = model('Herb_m');
+        $options = [
+            'opt' => $params['opt'] ?? 1,
+            'page' => $page,
+            'pCnt' => $params['pCnt'] ?? 30,
+            'bname' => '',
+            'sStr' => $searchStr
+        ];
+        $fields= ['a.*','IFNULL((SELECT COUNT(*) from herb_medicine_decoc_match WHERE cfcode=a.cfcode AND mm_medicine=a.mm_medicine AND is_del=0 AND is_use=1),0) AS matched'];
+        $cRs = $herb_m->Load_Medicine_Decoc_All($cfcode,$options,$fields);
+        $totalRs = $herb_m->Cnt_Medicine_Decoc_All($cfcode,$searchStr);
+
+        $i_arr = [
+            'list' => $cRs,
+            'tcnt' => count($cRs),
+            'nPage' => $page+1,
+            'totalRs' => $totalRs
+        ];
+
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+    public function Load_Medicine_Decoc_Match(){
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER) && ($mi_type != AUTH_DECOC)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $cfcode = $params['cfcode'] ?? '';
+        $mmcode = $params['code'] ?? '';
+        $medicode = $params['medicode'] ?? '';
+        Prn_Log($params);
+        if(empty($cfcode) || empty($mmcode) || empty($medicode)){
+            return $this->respond(ResultDTO::fail('Error004', [], '필수항목이 누락되었습니다.'));
+        }
+
+        $matched = [];
+        $herb_m = model('Herb_m');
+        $fields =['a.*','b.hn_name','b.n_value','b.t1_name','b.t2_name','b.mi_name'];
+        $cRs = $herb_m->Load_Medicine_Decoc_Matched($cfcode,$mmcode,$fields);
+        if(is_array($cRs) && count($cRs)>0){
+            foreach ($cRs as $d){
+                $t_arr = [
+                    'matchedsn' => $d['sn'],
+                    'hn_code' => $d['fk_hncode'],
+                    'mm_medicine' => $d['mm_medicine'],
+                    'hn_name' => $d['hn_name'],
+                    'hn_origin' => $d['n_value'],
+                    'hn_option' => $this->Product_Option_str($d['t1_name'],$d['t2_name']),
+                    'hn_wname' => $d['mi_name']
+                ];
+                $matched[] = $t_arr;
+            }
+        }
+
+        $matching = [];
+        $dRs = $herb_m->Load_Madicine_Decoc_Matching($cfcode,$medicode);
+        if(is_array($dRs) && count($dRs)>0){
+            foreach ($dRs as $d){
+                $t_arr = [
+                    'hn_code' => $d['hn_code'],
+                    'hn_name' => $d['hn_name'],
+                    'hn_origin' => $d['n_value'],
+                    'hn_option' => $this->Product_Option_str($d['t1_name'],$d['t2_name']),
+                    'hn_wname' => $d['mi_name']
+                ];
+                $matching[] = $t_arr;
+            }
+        }
+
+        $i_arr = [
+            'matched' => $matched,
+            'matchedCnt' => count($matched),
+            'matching' => $matching,
+            'matchingCnt' => count($matching),
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+
+}

@@ -1,0 +1,206 @@
+$(document).ready(function(){
+
+
+    $('#mmMatch').click(function () {
+        $('#matchingpop').css('display', 'block');
+    });
+
+    $('#matchingpop #Xbtn, #matchingpop #Xbtn2').click(function () {
+        $('#matchingpop').css('display', 'none');
+    });
+
+    $(document).on('click','button[name="pCnt"]', function() {
+        $(this).addClass('active').siblings().removeClass('active');
+        $('#pageArea').data('page',1);
+        Make_Html(Make_Option());
+    });
+
+    $('#oby').on('click',function(){
+        const optval = $(this).data('sort');
+        const $icon = $(this).find('i');
+        if(optval==1){
+            $(this).data('sort',2);
+            $icon
+                .removeClass('fa-angle-down')
+                .addClass('fa-angle-up');
+        }else{
+            $(this).data('sort',1);
+            $icon
+                .removeClass('fa-angle-up')
+                .addClass('fa-angle-down');
+
+        }
+        $('#pageArea').data('page',1);
+        Make_Html(Make_Option());
+    });
+
+    $(document).on('click','button[name="btnLinkPaging"]',function(){
+        $('#pageArea').data('page',$(this).data('page'));
+        Make_Html(Make_Option());
+    });
+
+    $(document).on('click','button[name="popBuy"]',function(){
+        const cfcode = $('#cList').data('cfcode');
+        const mm_code = $(this).data('mmcode');
+        console.log(cfcode +'/'+mm_code);
+        $('#pop_buy_item').show();
+    });
+
+    $('#pop_buy_item #Xbtn, #pop_buy_item #Xbtn2').click(function () {
+        $('#pop_buy_item').hide();
+    });
+
+    $('#matchingpop2 #Xbtn, #matchingpop2 #Xbtn2').click(function () {
+        $('#matchingpop2').hide();
+    });
+
+    $(document).on('click','button[name="mmMatch"]',function(){
+        const cfcode = $('#cList').data('cfcode');
+        const mm_code = $(this).data('mmcode');
+        console.log(cfcode +'/'+mm_code);
+        $('#matchingpop2').show();
+    });
+
+    $('#btnHSearch').on('click',function(){
+        Search_Herb();
+    });
+
+    $('#h_sKey').on('keypress',function(e){
+        if (e.which === 13 || e.keyCode === 13) {
+            Search_Herb();
+        }
+    })
+
+    Make_Html(Make_Option());
+});
+
+function Search_Herb(){
+    const SearchStr = $('#h_sKey').val();
+    $('#cList').empty();
+    $('#pageArea').data('page',1);
+    Make_Html(Make_Option());
+}
+
+
+function Make_Option(){
+    let params = {
+        cfcode : $('#cList').data('cfcode'),
+        pCnt : $('button[name="pCnt"].active').data('pval'),
+        opt : $('#oby').data('sort'),
+        page : $('#pageArea').data('page'),
+        sStr : $('#h_sKey').val()
+    };
+    return params;
+}
+
+
+async function Make_Html(params){
+    const response = await  Load_Medicine_decoc(params);
+    console.log(response);
+    let html = '';
+    let subHtml = '';
+    let stock = 0;
+    let oStock = 0;
+    let mStock = 0;
+    let rStock = 0;
+    const total = response.total;
+    const mTotal = response.totalRs;
+    const nPage= response.nPage;
+    if(total>0) {
+        $.each(response.list, function (index, el) {
+            stock = parseInt((el.stock || 0));
+            oStock = parseInt((el.optimal_stock || 0));
+            mStock = parseInt((el.stock_month || 0));
+            rStock =(stock*0.1) - el.stock_month;
+            subHtml = (rStock<=stock) ? 'class="active"' : '';
+            html +=`
+                    <tr ${subHtml}>  
+                        <td>${el.mm_title}</td>
+                        <td>${el.mm_medicine}</td>
+                        <td>${number_format(el.stock || 0)}g</td>
+                        <td>${number_format(el.stock_ware || 0)}box</td>
+                        <td>${number_format(el.stock_week || 0)}g</td>
+                        <td>${number_format(el.stock_month || 0)}g</td>
+                        <td>${number_format(el.optimal_stock || 0)}g</td>
+                        <td><button class="colorRed machingOption btntype2" type="button" name="mmMatch" data-mmcode="${el.mm_medicine}">관리</button></td>
+                        <td><button class="bestpri btntype2" type="button" name="popBuy" data-mmcode="${el.mm_medicine}">구입</button></td>
+                        <td>${el.update}</td>
+                    </tr>
+            `;
+        });
+    }else{
+        html =`<tr><td colspan="9">검색된 약재정보가 없습니다.</td></tr>`;
+    }
+
+    let options = {
+        page : $('#pageArea').data('page'),
+        total : mTotal,
+        perpage : $('button[name="pCnt"].active').data('pval'),
+        bname : 'btnLinkPaging'
+    }
+    $('#pageArea').html(Make_Page_Html('simple',options));
+    $('#totalRs').text(number_format(mTotal || 0));
+    $('#cList').empty();
+    $('#cList').append(html);
+    $('#pageArea').data('page',nPage);
+}
+
+async function Make_Match_Pop(){
+
+}
+
+
+async function reg_Match(hncode) {
+    try {
+        start_spinner();
+        INI_Matching_pop();
+
+        let dataarr = {"hncode" : hncode};
+        let url = APIURL + '/Load_Match_Data';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            let html = '';
+            let data = result.get('data');
+            let arr = (data && data.list) ? data.list : [];
+            let Cnt = arr.length;
+            if (Cnt > 0) {
+                $.each(arr, function (index, el) {
+                    html += '<buttion class="machingOption" onclick="setMatch(\'' + el.mmTitle + '\',\'' + el.mmMedicine + '\',\'' + el.mdMediName + '\',\'' + el.mmOrigin + '\')">[' + el.mmOrigin + '] [' + el.mmMedicine + '] ' + el.mdMediName + '</buttion>';
+                });
+            }
+
+            console.log(html);
+            $('#yaklist').html(html);
+            $('#matchingpop2').css('display', 'flex');
+        } else {
+            alert(result.msg);
+        }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+
+
+
+async function Load_Medicine_decoc(params){
+    let arr = { list: [], total: 0 };
+    const res = await Fetch_API('/Load_Medicine_decoc',{params:params});
+    if (res.status === 'ok') {
+        const [item = {}] = res.data;
+        arr =  {
+            list: item.list || [],
+            total: item.tcnt || 0,
+            totalRs : item.totalRs || 0,
+            nPage : item.nPage ||0
+        };
+    }else if (res.status !== 'NoLogin') {
+        Make_Toast(res.message);
+    }
+    return arr;
+}
+

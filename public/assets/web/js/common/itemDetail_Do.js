@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+
+    $('#pop_buy_item #Xbtn, #pop_buy_item #Xbtn2').click(function () {
+        $('#pop_buy_item').hide();
+    });
+
+    $('#matchingpop #Xbtn, #matchingpop #Xbtn2').click(function () {
+        $('#matchingpop').hide();
+    });
+
     $('i[name="plus"]').on('click', function() {
         let cnt = parseInt($('#price_cnt').text(), 10);
         console.log(cnt);

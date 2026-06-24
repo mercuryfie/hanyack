@@ -1,0 +1,95 @@
+<?= $this->extend("/web/template/layout_default") ?>
+<?= $this->section("content") ?>
+<script src="<?=URL_DECOC_ASSETS?>/nsmartOrder_Do.js?rnd=<?echo(rand()); ?>"> </script>
+<section class="smartOrder">
+      <div class="smartwrap">
+        <div class="smartcon3">
+            <p class="smart_head_title">스마트 오더</p>
+
+            <div class="scbtnbox flexType3">
+                <div class="right flexType2" id=" ">
+                    <p class="text mr10">총</p>
+                    <p class="text text2 mr10" id="totalRs"></p>
+                    <p class="text ">개</p>
+                </div>
+                <div class="btn_box flexType2">
+                    <button type="button" name="pCnt" data-pval="30" class="filterType1 active">30개</button>
+                    <button type="button" name="pCnt" data-pval="50" class="filterType1 ml10">50개</button>
+                    <button type="button" name="pCnt" data-pval="100" class="filterType1 ml10">100개</button>
+                </div>
+          </div>
+
+        </div>
+
+        <div class="smartcon5">
+            <div class="sotablebox">
+                <table class="sotable">
+                    <thead>
+                    <tr class="">
+                        <td class="socol1 scidx1-2">약재명</td>
+                        <td class="socol1 scidx1-2">약재코드</td>
+                        <td class="socol1 scidx1-3">총재고</td>
+                        <td class="socol1 scidx1-3">약재함재고</td>
+                        <td class="socol1 scidx1-3">창고재고</td>
+                        <td class="socol1 scidx1-4">주간사용량</td>
+                        <td class="socol1 scidx1-5">월간사용량</td>
+                        <td class="socol1 scidx1-3">적정재고</td>
+                        <td class="socol1 scidx1-5">매칭</td>
+                        <td class="socol1 scidx1-5">구매</td>
+                        <td class="socol1 scidx1-5">최종수정일</td>
+                    </tr>
+                    </thead>
+                    <tbody id="cList" name="cList" data-cfcode="<?=$body['cfcode'];?>">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+          <div class="page_box flexType1" id="pageArea" data-page="1">
+          </div>
+        <div class="smartcon4">
+            <!--          <div class="scon4-1">-->
+            <!--            <p id="totalprice" data-tprice="0">총 0원</p>-->
+            <!--          </div>-->
+            <!--          <div class="scon4-2">-->
+            <!--            <button class="addcart" type="button" onclick="go_cart();">장바구니 담기</button>-->
+            <!--            <button class="ordernow" type="button" id="order_reg" name="order_reg">바로 주문하기</button>-->
+            <!--          </div>-->
+
+          <div class="gunpop cartpopcon">
+              <div class="cartpop">
+                  <i class="fa-regular fa-circle-check"></i>
+                  <h2>담기 완료!</h2>
+                  <p>상품을 장바구니에 담았습니다</p>
+                  <div>
+                      <button class="closecart" onclick="go_smart();">닫기</button>
+                      <button class="opencart" onclick="go_cart()">장바구니 보기</button>
+                  </div>
+              </div>
+          </div>
+          <div class="gunpop orderpopcon" id="endOrder" name="endOrder">
+              <div class="orderpop">
+                  <i class="fa-regular fa-circle-check"></i>
+                  <h2>주문 완료!</h2>
+                  <p>상품이 주문되었습니다</p>
+                  <div>
+                      <button class="closegun closeorder"
+                              type="button"
+                              id="btnclose" name="btnclose" onclick="go_smart();">닫기</button>
+                      <button class="openorderli"
+                              id="btnorder" name="btnorder"
+                              type="button" data-odcode=""
+                              onclick="">주문내역 보기</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="smartcon5"></div>
+        <div class="smartcon6"></div>
+      </div>
+    </section>
+<?= $this->include("/web/include/pop_Matching_View") ?>
+<?php //= $this->include("/web/include/pop_Matching2_View") ?>
+<?= $this->include("/web/include/pop_Price_View") ?>
+<?= $this->include("/web/include/pop_ConfirmOrder_View") ?>
+
+<?= $this->endSection() ?>
