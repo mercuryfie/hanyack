@@ -537,6 +537,13 @@ input[type="radio"] {
     margin-bottom: 10px;
 }
 
+.scbtnbox .SO_filter {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 120px;
+    height: 30px;
+
+}
 .scbtnbox .text2 {
     color: var(--main-color);
     font-size: 18px;
@@ -754,7 +761,7 @@ input[type="radio"] {
 }
 
 .sotable .stock_status p.green {
-    color: green;
+    color: var(--main-color);
 }
 
 .socol1 {
@@ -1310,7 +1317,7 @@ line-height: 30px;
 .bestpopcon {
     background-color: #fff;
     border-radius: 10px;
-    width: 880px;
+    width: 980px;
     height: 520px;
     z-index: 32;
     position: fixed;
@@ -1338,20 +1345,17 @@ line-height: 30px;
 }
 
 .buy_item_conkol > .area2 {
-    /*padding: 0 20px;*/
-    /*width: 100%;*/
-    width: 840px;
-    height: 320px;
-    margin: 10px 20px 0 20px;
+    width: 930px;
+    height: 360px;
+    margin: 0 20px;
     border-radius: 5px;
-    /*border: 1px solid #ccc;*/
     overflow: hidden;
 }
 
 .buy_item_conkol > .area2 .buy_item_tbl {
     border-collapse: collapse;
     /*width: 880px;*/
-    height: 320px;
+    height: 318px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -1360,18 +1364,72 @@ line-height: 30px;
 .buy_item_conkol > .area2 .item_wrap {
     width: 100%;
     /*border:1px solid red;*/
-    padding: 10px;
+    padding: 5px 10px;
     /*border-bottom: 1px solid #ccc;*/
 }
 
-.buy_item_conkol > .area2 .buy_item_tbl td {
+
+.buy_item_conkol > .area3 .searched_box.area0 {
+    position: relative;
+}
+
+.buy_item_conkol > .area3 .searched_box.area1 {
+    display: none;
+    width: 340px;
+    height: 365px;
+    background-color: #fff;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    box-shadow: 4px 4px 8px -3px rgba(0, 0, 0, 0.25);
+    /*box-shadow: 0px 0 6px -1px rgba(0, 0, 0, 0.25);*/
+    z-index: 20;
+    border: 1px solid #ccc;
+    border-top: none;
+    position: absolute;
+    top: 90px;
+    left: 20px;
+}
+
+.buy_item_conkol > .area3 .searched_box.area1 .item_box {
+
+    height: 50px;
+    padding: 2px 5px;
+    border-bottom: 1px solid #ccc;
+
+
+}
+.buy_item_conkol > .area2 .match_box101 .buy_item_tbl td {
     border-bottom: 1px solid #ccc;
     /*width: 100%;*/
-    width: 840px;
+    width: 318px;
+    height: 50px;
+    text-wrap: nowrap;
+}
+
+.buy_item_conkol > .area2 .match_box102 .buy_item_tbl td {
+    border-bottom: 1px solid #ccc;
+    /*width: 100%;*/
+    width: 560px;
     height: 32px;
     text-wrap: nowrap;
 }
 
+.buy_item_conkol > .area2 .match_box101 .buy_item_tbl td .btn_secondary {
+    width: 40px;
+    height: 30px;
+}
+
+.buy_item_conkol > .area2 .buy_item_tbl td.match_rec_box {
+    padding: 2px 5px;
+
+}
+
+.buy_item_conkol > .area3 .item_box p.data1,
+.buy_item_conkol > .area2 .buy_item_tbl td p.data1 {
+    font-size: 14px;
+    color: #5c5c5c;
+
+}
 .buy_item_conkol .area2 .buy_item_tbl td.nodata {
     /*font-size: ;*/
     text-align: center;
@@ -1382,6 +1440,11 @@ line-height: 30px;
 
 .buy_item_conkol .area2 .item_box {
     margin-right: 10px;
+}
+
+.buy_item_conkol .area2 .item_box .buy_box .flexCol.no1 {
+
+
 }
 
 .buy_item_conkol .area2 .item_box .sub_name_box {
@@ -1438,19 +1501,19 @@ line-height: 30px;
 }
 
 
-.buy_item_conkol .area2 .btn_box .btnType30-1 {
-    /*width: 60px;*/
+.buy_item_conkol .area2 .btn_box .btnType30-1,
+.buy_item_conkol .area2 .btn_box .btn_secondary {
+    width: 70px;
     height: 30px;
 }
 
 
-.buy_item_conkol .area2 .btn_box .btnType30-1 {
-    /*height: 32px;*/
-}
-
 .buy_item_conkol .area3 {
     margin: 0 20px;
-    width: auto;
+    width: 920px;
+    padding-bottom: 10px;
+    /*margin-bottom: 10px;*/
+    border-bottom: 1px solid #ececec;
 }
 
 .buy_item_conkol .area3 .stock_box {
@@ -1486,31 +1549,70 @@ line-height: 30px;
 }
 
 
-.buy_item_conkol > .area2 > .match_box101 {
-    width: 240px;
-    height: 320px;
-    border: 1px solid #ccc;
+.buy_item_conkol > .area2 .match_box101 {
+    width: 340px;
+    height: 360px;
+    /*border: 1px solid #ccc;*/
     border-radius: 10px;
     margin-right: 10px;
 
 }
 
-.buy_item_conkol > .area2 > .match_box102 {
+.buy_item_conkol > .area2 .title {
+    padding: 5px 0;
+    height: 32px;
+
+}
+
+.buy_item_conkol > .area2 .match_box102 {
     /*width: 100%;*/
-    width: 590px;
-    height: 320px;
+    width: 580px;
+    height: 360px;
     border-radius: 10px;
+    /*border: 1px solid #ccc;*/
+
+}
+
+
+.buy_item_conkol > .area2 .match_box1011 {
     border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 338px;
+    height: 318px;
     overflow: hidden;
 
 }
 
+
+.buy_item_conkol > .area2 .match_box1021 {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 578px;
+    height: 318px;
+    overflow: hidden;
+}
+
+
 .buy_item_conkol > .area3 .search_box .input_type {
-    width: 240px;
+    width: 340px;
     height: 30px;
     text-wrap: nowrap;
 }
 
+.buy_item_conkol > .area3 .search_box .input_type.active {
+    background-color: #00996510;
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.buy_item_conkol > .area3 .search_box .input_type.active2 {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+}
 .buy_item_conkol > .area3 .search_box .btn_primary {
     height: 30px;
     text-wrap: nowrap;
@@ -1556,6 +1658,11 @@ line-height: 30px;
     color: #8e8e8e;
 }
 
+.SO_manage_conkol .area .msg {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #5c5c5c;
+}
 .SO_manage_conkol .area .input_type {
     height: 30px;
 }
@@ -10120,6 +10227,10 @@ button, i {
 .mb40 {
     margin-bottom: 40px;
 }
+
+.mb5 {
+    margin-bottom: 5px;
+}
 .mb10 {
     margin-bottom: 10px;
 }
@@ -10143,6 +10254,10 @@ button, i {
 
 .mr10 {
     margin-right: 10px;
+}
+
+.mr20 {
+    margin-right: 20px;
 }
 .ml10 {
     margin-left: 10px;
@@ -10231,7 +10346,7 @@ footer {
 }
 
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 1440px) {
     /* pop_Price_View srart  -------------------------------- */
     .buy_item_conkol > .area2 {
         width: 840px;
@@ -10263,10 +10378,11 @@ footer {
 
     .buy_item_conkol > .area2 .buy_item_tbl {
         border-collapse: collapse;
-        /*width: 880px;*/
-        height: 320px;
+        width: auto;
+        height: 318px;
         overflow-x: hidden;
         overflow-y: scroll;
+        border-radius: 10px;
     }
 
 

@@ -1,0 +1,32 @@
+<div class="SO_manage_wrapper common_pop_wrap" id="SO_manage_wrap" name="SO_manage_wrap">
+    <div class="SO_manage_conkol common_pop_conkol">
+        <input type="hidden" id="decoc_sn" name="decoc_sn" />
+        <div class="SO_manage_box100 ">
+            <div class="area area1 flexType1 " >
+                <p class="pop_head_title " id="p_title" name="p_title"></p>
+                <i class="fa-solid fa-xmark x_btn" id="Xbtn" name="Xbtn"></i>
+            </div>
+            <div class="area area2 flexType2">
+                <p class="category ">관리여부</p>
+                <div class="flexType2">
+                    <button class=" btn_secondary mr10 " id="btnIDManage1" name="btnIsManage" data-val="1" >예</button>
+                    <button class=" btn_secondary " id="btnIDManage2" name="btnIsManage" data-val="2" >아니오</button>
+
+                </div>
+            </div>
+            <div class="area area3 flexType2">
+                <p class="category ">적정재고량</p>
+                <input type="search" class="input_type mr10" placeholder="" id="opstock" name="opstock" value="">
+                <button class=" btn_primary " id="btnOpStock" name="btnOpStock">확인</button>
+
+            </div>
+            <div class="area area4 flexType2">
+                <p class="msg ">
+                <p class="dd">적정재고량이 없을 경우</p>:<br>월 사용량 기준으로 관리<br> 있을 경우: <br>적정재고량 기준으로 관리됩니다. </p>
+            </div>
+            <div class="area lastArea flexType1">
+                <button class="btn_close btnType30" id="Xbtn2">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>

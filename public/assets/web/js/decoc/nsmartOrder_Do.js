@@ -50,83 +50,106 @@ $(document).ready(function(){
 
         const cfcode = $('#cList').data('cfcode');
         const mm_medicine = $(this).data('mmcode');
+        const medicode = $(this).data('medicode');
         const stock = $(this).data('stock') || 0;
         const stock_week = $(this).data('week') || 0;
         const stock_month = $(this).data('month') || 0;
-        let html = '';
-        let subhtml = '';
-        const params = {cfcode:cfcode,mm_medicine:mm_medicine};
-        const response = await Model.decoc_m.Load_Decoc_Match_Produc(params);
-        console.log(response);
-        if(response.total > 0){
-            $.each(response.list, function (index, el) {
-                subhtml = (el.option_str != '') ? ('/ ' + el.option_str) : '';
-                html += `
-                    <tr>
-                        <td>
-                            <div class="item_wrap flexType2-1 hello?">
-                                <div class="item_box   ">
-                                    <div class="section name_box flexType2-1">
-                                        <p class="category mr10">이름</p>
-                                        <div class="sub_name_box flexCol">
-                                            <p class="data data1 ">[${el.n_value}] ${el.mi_name}</p>
-                                            <p class="data data2">${el.hn_name} / ${el.w_name} ${subhtml}</p> 
-                                        </div>
-                                    </div>
-                                    <div class="section price_box flexType2">
-                                        <p class="category mr10">근당가격</p>
-                                        <p class="data">${number_format((el.guenPrice || 0))}원</p>
-                                    </div>
-                                    <div class="section price_box flexType2 ">
-                                        <p class="category mr10">포장가격</p>
-                                        <p class="data ">${number_format((el.price || 0))}원</p>
-                                    </div>
-                                </div>
-                                <div class="buy_box flexType2">
-                                    <div class="flexCol "> 
-                                        <div class="cal_box flexType3 mb10">
-                                            <i class="fa-solid fa-minus" id="btn_minus"></i>
-                                            <p class="count" id="r_count" data-val="${el.need}" data-price="${el.price}">${el.need}</p>
-                                            <i class="fa-solid fa-plus" id="btn_plus"></i>
-                                        </div> 
-                                        <div class="price_box flexType3 ">
-                                            <p class="price" id="r_total" data-tPrice="">총 ${number_format((el.needPrice || 0))}원</p>
-                                        </div>
-                                    </div>
-                                    <div class="btn_box flexCol">
-                                        <button class=" btn_cart btnType30-1 mb10" id="btnAddCart" name="btnAddCart" data-code="${el.hn_code}">장바구니</button>
-                                        <button class="btn_buy btnType30-1" id="btnBuy" name="btnBuy" data-code="${el.hn_code}">바로구매</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            });
-        } else {
-            html += ` 
-            <tr>
-                <td class="nodata p10"> 매칭 약재가 없습니다. <br> 약재 매칭 후 구매 가능합니다.
-                </td>
-            </tr>`;
-        }
+        const title = $(this).data('title');
 
-        $('#productList').append(html);
-        $('#stock_week').text(number_format(stock_week)+'g');
-        $('#stock_week').data('val',stock_week);
-        $('#stock_month').text(' / ' + number_format(stock_month) + 'g');
-        $('#stock_month').data('val',stock_month);
-        $('#stock').text(number_format(stock)+'g');
-        $('#stock').data('val',stock);
+        $('#pbuy_title').text(title + ' 구입');
+        $('#pbuy_title').data('mmcode',mm_medicine);
+        $('#pbuy_title').data('medicode',medicode);
+        $('#pbuy_title').data('cfcode',cfcode);
+
+        $('#stock_week').text(number_format(stock_week || 0)+'g');
+        $('#stock_week').data('val',(stock_week || 0));
+        $('#stock_month').text(number_format(stock_month || 0)+'g');
+        $('#stock_month').data('val',(stock_month || 0));
+        $('#stock').text(number_format(stock || 0)+'g');
+        $('#stock').data('val',(stock || 0));
+
+        const params1 = {
+            cfcode : cfcode,
+            mm_medicine : mm_medicine
+        };
+        Make_Buy_Product(params1);
+        let params2 = {
+            cfcode : cfcode,
+            code:mm_medicine,
+            medicode:medicode,
+            mm_medicine:mm_medicine
+        };
+        Make_Match_Html(params2);
+
+
         $('#pop_buy_item').show();
     });
 
 
+    let org_manage = 1;
+    let onchangecnt = 0;
     $(document).on('click', 'i[name="pop_SO_manage"]', function () {
+        Ini_Manage_Pop();
+        const sn = $(this).data('sn');
+        const title = $(this).data('title');
+        const ismanage = $(this).data('managed');
+        const opstock = $(this).data('opstock');
+        if(ismanage==1){
+            $('#btnIDManage1').addClass('active')
+            $('#btnIDManage2').removeClass('active');
+        }else{
+            $('#btnIDManage2').addClass('active')
+            $('#btnIDManage1').removeClass('active');
+        }
+        org_manage = ismanage;
+        $('#decoc_sn').val(sn);
+        $('#pbuy_title').text(title + ' 약제관리');
+        $('#opstock').val(opstock);
         $('#SO_manage_wrap').show();
     });
 
+    $('#btnOpStock').on('click',async function(){
+        const opstock = $('#opstock').val();
+        const sn = $('#decoc_sn').val();
+        if(opstock==''){
+            Make_Toast('수정하실 적정재고량을 입력하세요.');
+            $('#opstock').focus();
+            return;
+        }
+        let params = {optimal_stock:opstock,sn:sn};
+        let response = await Model.decoc_m.Update_Decoc_Info(params);
+        if(response.effect > 0){
+            $('#op_' + sn).text((number_format(opstock) + 'g'));
+            $('#op1_' + sn).data('opstock',opstock);
+        }
+    });
+
+    $(document).on('click','button[name="btnIsManage"]',async function(){
+        const ismanage = $(this).data('val');
+        const sn = $('#decoc_sn').val();
+        if(org_manage!=ismanage){
+            let params = {is_manage:ismanage,sn:sn};
+            let response = await Model.decoc_m.Update_Decoc_Info(params);
+            if(response.effect > 0){
+                onchangecnt = response.effect;
+            }
+        }
+        if(ismanage==1){
+            $('#btnIDManage1').addClass('active')
+            $('#btnIDManage2').removeClass('active');
+        }else{
+            $('#btnIDManage2').addClass('active')
+            $('#btnIDManage1').removeClass('active');
+        }
+        org_manage = ismanage;
+    });
+
     $('#SO_manage_wrap #Xbtn, #SO_manage_wrap #Xbtn2').click(function () {
+        if(onchangecnt > 0){
+            $('#cList').empty();
+            $('#pageArea').data('page', 1);
+            Make_Html(Make_Option());
+        }
         $('#SO_manage_wrap').hide();
     });
 
@@ -175,13 +198,8 @@ $(document).ready(function(){
         $('#resSearch').hide();
 
         const skey_input = $('#txtMatchPopSearch');
-
-        skey_input.css({
-            'background-color': '#fff',
-            'border-bottom': '1px solid #ccc',
-            'border-bottom-left-radius': '5px',
-            'border-bottom-right-radius': '5px'
-        });
+        skey_input.addClass('active2')
+ 
         $('#txtMatchPopSearch').val('');
     });
 
@@ -198,11 +216,10 @@ $(document).ready(function(){
 
     $(document).on('click','button[name="btnMatchOff"]',async function(){
         const typ = $(this).data('typ');
-        const cfcode = $(this).data('cfcode');
         const sn = $(this).data('sn');
-        const mm_medicine = $('#mm_medicine').text();
-        const medicode = $('#mm_medicine').data('medicode');
-
+        const cfcode = $('#pbuy_title').data('cfcode');
+        const mm_medicine = $('#pbuy_title').data('mmcode');
+        const medicode = $('#pbuy_title').data('medicode');
         if((typ=='') || (cfcode=='') || (sn=='')){
             Make_Toast('필수 항목을 확인하세요.');
             return;
@@ -219,21 +236,22 @@ $(document).ready(function(){
             $('#resSearch').empty();
             $('#resSearch').hide();
             $('#resMatching').empty();
-            $('#resMatched').empty();
+            $('#productList').empty();
 
-            let params = {cfcode : cfcode,code:mm_medicine,medicode:medicode,mm_medicine:mm_medicine};
-            Make_Match_Html(params);
-            $('button[name="mmMatch"][data-mmcode="'+ mm_medicine +'"]').text(res.eCnt + '건');
+            const params1 = {cfcode : cfcode,mm_medicine : mm_medicine};
+            Make_Buy_Product(params1);
+            let params2 = {cfcode: cfcode, code: mm_medicine, medicode: medicode};
+            Make_Match_Html(params2);
         }
     });
 
     $(document).on('click','button[name="btnMatchOn"]',async function() {
         const typ = $(this).data('typ');
-        const cfcode = $(this).data('cfcode');
         const hncode = $(this).data('hncode');
         const hntitle = $(this).data('hntitle');
-        const mm_medicine = $('#mm_medicine').text();
-        const medicode = $('#mm_medicine').data('medicode');
+        const cfcode = $('#pbuy_title').data('cfcode');
+        const mm_medicine = $('#pbuy_title').data('mmcode');
+        const medicode = $('#pbuy_title').data('medicode');
 
         if ((typ == '') || (cfcode == '') || (hncode == '') || (hntitle == '')) {
             Make_Toast('필수 항목을 확인하세요.');
@@ -250,11 +268,20 @@ $(document).ready(function(){
             $('#resSearch').empty();
             $('#resSearch').hide();
             $('#resMatching').empty();
-            $('#resMatched').empty();
+            $('#productList').empty();
 
-            let params = {cfcode: cfcode, code: mm_medicine, medicode: medicode};
-            Make_Match_Html(params);
-            $('button[name="mmMatch"][data-mmcode="'+ mm_medicine +'"]').text(res.eCnt + '건');
+            const skey_input = $('#txtMatchPopSearch');
+            skey_input.css({
+                'background-color': '#fff',
+                'border-bottom': '1px solid #ccc',
+                'border-bottom-left-radius': '5px',
+                'border-bottom-right-radius': '5px'
+            });
+
+            const params1 = {cfcode : cfcode,mm_medicine : mm_medicine};
+            Make_Buy_Product(params1);
+            let params2 = {cfcode: cfcode, code: mm_medicine, medicode: medicode};
+            Make_Match_Html(params2);
         }
     });
 
@@ -287,38 +314,29 @@ async function Make_Html(params){
     console.log(response);
     let html = '';
     let subHtml = '';
-    let stock = 0;
-    let oStock = 0;
-    let mStock = 0;
-    let rStock = 0;
     const total = response.total;
     const mTotal = response.totalRs;
     const nPage= response.nPage;
     if(total>0) {
         $.each(response.list, function (index, el) {
-            stock = parseInt((el.stock || 0));
-            oStock = parseInt((el.optimal_stock || 0));
-            wStock = parseInt((el.stock_week || 0));
-            mStock = parseInt((el.stock_month || 0));
-            ware = parseInt((el.stock_ware || 0));
-            rStock =(stock*0.1) - el.stock_month;
-            tStock = stock + ware;
-            subHtml = (rStock<=stock) ? 'class="active"' : '';
-            subHtml2 = (rStock <= stock) ? `<p class="red">재고부족</p>` : `<p class="green">구매중</p>`;
-            subHtml3 = (rStock <= stock) ? `<<p class="green">구매중</p>` : `<p class="green">구매중</p>`;
+            if(el.is_manage==1) {
+                subHtml = (!el.stock_status) ? `<p class="red">재고부족</p>` : `<p class="green">정상</p>`;
+            }else{
+                subHtml = '미관리';
+            }
             html += `
-                    <tr class="">  
-                        <td class=""><div class="flexType1"><p class="mr10">${el.mm_title}</p><i class="fa-solid fa-pen" name="pop_SO_manage" ></i></div></td>
+                    <tr>  
+                        <td class=""><div class="flexType1"><p class="mr10">${el.mm_title}</p><i class="fa-solid fa-pen" id="op1_${el.sn}" name="pop_SO_manage" data-managed="${el.is_manage}" data-opstock="${el.optimal_stock}" data-title="${el.mm_title}" data-sn="${el.sn}"></i></div></td>
                         <td>${el.mm_medicine}</td>
-                        <td>${number_format(tStock)}g</td>
-                        <td>${number_format(stock)}g</td>
-                        <td>${number_format(ware)}g</td>
-                        <td>${number_format(wStock)}g</td>
-                        <td>${number_format(mStock)}g</td>
-                        <td>${number_format(oStock)}g</td>
-                        <td class="stock_status">${subHtml2}</td> 
-                        <td><button class="bestpri btntype2" type="button" name="popBuy" data-mmcode="${el.mm_medicine}" data-week="${wStock}" data-stock="${tStock}" data-month="${mStock}">구입</button></td>
-                   </tr>
+                        <td>${number_format(el.totalStock)}g</td>
+                        <td>${number_format(el.stock)}g</td>
+                        <td>${number_format(el.stock_ware)}g</td>
+                        <td>${number_format(el.stock_week)}g</td>
+                        <td>${number_format(el.stock_month)}g</td>
+                        <td id="op_${el.sn}">${number_format(el.optimal_stock)}g</td>
+                        <td class="stock_status">${subHtml}</td>
+                        <td><button class="bestpri btntype2" type="button" name="popBuy" data-medicode="${el.medicode}" data-mmcode="${el.mm_medicine}" data-week="${el.stock_week}" data-stock="${el.totalStock}" data-month="${el.stock_month}" data-title="${el.mm_title}">구입</button></td>
+                    </tr>
             `;
         });
     }else{
@@ -338,72 +356,76 @@ async function Make_Html(params){
     $('#pageArea').data('page',nPage);
 }
 
-async function Open_Match_Pop(cfcode,mmcode,mmtitle,medicode){
-    $('#mm_medicine').text(mmcode);
-    $('#mm_title').text(mmtitle);
-    $('#mm_medicine').data('cfcode',cfcode);
-    $('#mm_medicine').data('medicode',medicode);
-    let params = {cfcode : cfcode,code:mmcode,medicode:medicode};
-    Make_Match_Html(params);
-}
-
-function Ini_Match_Pop() {
-    $('#mm_medicine').text('');
-    $('#mm_title').text('');
-    $('#txtMatchPopSearch').val('');
-    $('#resSearch').empty();
-    $('#resMatching').empty();
-    $('#resMatched').empty();
-}
+// async function Open_Match_Pop(cfcode,mmcode,mmtitle,medicode){
+//     $('#mm_medicine').text(mmcode);
+//     $('#mm_title').text(mmtitle);
+//     $('#mm_medicine').data('cfcode',cfcode);
+//     $('#mm_medicine').data('medicode',medicode);
+//     let params = {cfcode : cfcode,code:mmcode,medicode:medicode};
+//     Make_Match_Html(params);
+// }
 
 function Ini_Buy_Pop(){
+    $('#pbuy_title').text('');
+    $('#pbuy_title').data('mmcode','');
+    $('#pbuy_title').data('medicode','');
+    $('#pbuy_title').data('cfcode','');
+    $('#txtMatchPopSearch').val('');
     $('#stock_week').text('');
     $('#stock_week').data('val','');
     $('#stock_month').text('');
     $('#stock_month').data('val','');
     $('#productList').empty();
+    $('#resMatching').empty();
+}
+
+function Ini_Manage_Pop(){
+    $('#decoc_sn').val('');
+    $('#opstock').val('');
+    org_manage = 1;
+    onchangecnt = 0;
 }
 
 
 async function Make_Match_Html(params){
     let response = await Model.decoc_m.Load_Medicine_Decoc_Match(params);
     console.log(response);
-    let matchedCnt = response.matchedCnt;
-    let matchedHtml = '';
-    if(matchedCnt>0){
-        $.each(response.matched, function (index, el) {
-            matchedHtml += `
-                <tr>
-                    <td class="flexType2"> 
-                        <div class="flexCol"> 
-                            <p class="data data1">${el.hn_origin} / ${el.hn_wname}</p>
-                            <p class="data data2">${el.hn_name} </p>
-                        </div>
-                        <button type="button" class="btn_match btn_secondary" name="btnMatchOff" data-typ="1" data-cfcode="${params['cfcode']}" data-sn="${el.matchedsn}">해제</button>
-                    </td>
-                </tr>
-            `;
-        });
-
-        $('#resMatched').append(matchedHtml);
-    }
+    // let matchedCnt = response.matchedCnt;
+    // let matchedHtml = '';
+    // if(matchedCnt>0){
+    //     $.each(response.matched, function (index, el) {
+    //         matchedHtml += `
+    //             <tr>
+    //                 <td class="flexType2">
+    //                     <div class="flexCol">
+    //                         <p class="data data1">${el.hn_origin} / ${el.hn_wname}</p>
+    //                         <p class="data data2">${el.hn_name} </p>
+    //                     </div>
+    //                     <button type="button" class="btn_match btn_secondary" name="btnMatchOff" data-typ="1" data-cfcode="${params['cfcode']}" data-sn="${el.matchedsn}">해제</button>
+    //                 </td>
+    //             </tr>
+    //         `;
+    //     });
+    //
+    //     $('#resMatched').append(matchedHtml);
+    // }
     let matchingCnt =  response.matchingCnt;
     let matchingHtml = response.matching;
     if(matchingCnt>0){
         $.each(response.matching, function (index, el) {
             matchingHtml += `
                 <tr>
-                    <td class="flexType2"> 
+                    <td class="match_rec_box flexType3"> 
                         <div class="flexCol"> 
-                            <p class="data data1">${el.hn_origin} / ${el.hn_wname}</p>
-                            <p class="data data2">${el.hn_name} </p>
+                            <p class="data data1">[${el.hn_origin}] ${el.hn_wname}</p>
+                            <p class="data data2">${el.hn_name} / ${el.w_name}</p>
                         </div> 
-                        <button type="button" class="btn_match btn_secondary" name="btnMatchOn" data-typ="2" data-cfcode="${params['cfcode']}" data-hncode="${el.hn_code}" data-hntitle="${el.hn_name}">매칭</button>
+                        <button type="button" class="btn_match btn_secondary" name="btnMatchOn" data-typ="2" data-hncode="${el.hn_code}" data-hntitle="${el.hn_name}">매칭</button>
                     </td>
                 </tr>
             `;
         });
-
+        console.log(matchingHtml);
         $('#resMatching').append(matchingHtml);
     }
 }
@@ -420,36 +442,95 @@ async function Make_Match_Search_Html() {
     const response = await Model.pharm_m.Search_Medicine_Pharm(params);
     console.log(response);
     const skey_input = $('#txtMatchPopSearch');
-    skey_input.css({
-        'background-color': '#00996510',
-        'border-bottom': 'none',
-        'border-bottom-left-radius': '0',
-        'border-bottom-right-radius': '0'
-    });
+    skey_input.addClass('active')
     let html = '';
     let total = response.total;
     if (total > 0) {
         $.each(response.list, function (index, el) {
             html += `
-                    <div class="item_box flexType2"> 
+                    <div class="item_box flexType3 "> 
                         <div class="flexCol"> 
-                            <p class="data data1">${el.hn_origin} / ${el.hn_wname}</p>
-                            <p class="data data2">${el.hn_name} </p>
+                            <p class="data data1">[${el.hn_origin}] ${el.hn_wname} </p>
+                            <p class="data data2">${el.hn_name} / ${el.w_name}</p>
                         </div>  
-                        <button type="button" class="btn_match btn_primary" name="btnMatchOn" data-cfcode="${cfcode}" data-typ="2" data-hncode="${el.hn_code}" data-hntitle="${el.hn_name}">매칭</button>
+                        <button type="button" class="btn_match btn_primary" name="btnMatchOn" data-typ="2" data-hncode="${el.hn_code}" data-hntitle="${el.hn_name}">매칭</button>
                     </div>
             `;
         });
     }else{
         html += `
                     <div class="item_box flexType2">
-                        <p class="item active mr10">검색된 약재 없습니다.</p>
+                        <p class="item active mr10">검색된 약재가 없습니다.</p>
                     </div>
        `;
     }
     $('#resSearch').empty();
     $('#resSearch').append(html);
     $('#resSearch').show();
+}
+
+async function Make_Buy_Product(params){
+    let html = '';
+    let subhtml = '';
+    const datas = {cfcode:params['cfcode'],mm_medicine:params['mm_medicine']};
+    const response = await Model.decoc_m.Load_Decoc_Match_Produc(datas);
+    console.log(response);
+    if(response.total > 0){
+        $.each(response.list, function (index, el) {
+            subhtml = (el.option_str != '') ? ('/ ' + el.option_str) : '';
+            html += `
+                    <tr>
+                        <td>
+                            <div class="item_wrap flexType2-1 hello?">
+                                <div class="item_box   ">
+                                    <div class="section name_box flexType2-1">
+                                        <p class="category mr10">이름</p>
+                                        <div class="sub_name_box flexCol">
+                                            <p class="data data1 ">[${el.n_value}] ${el.mi_name}</p>
+                                            <p class="data data2">${el.hn_name} / ${el.w_name} ${subhtml}</p> 
+                                        </div>
+                                    </div>
+                                    <div class="section price_box flexType2">
+                                        <p class="category mr10">근당가격</p>
+                                        <p class="data">${number_format((el.guenPrice || 0))}원</p>
+                                    </div>
+                                    <div class="section price_box flexType2 ">
+                                        <p class="category mr10">포장가격</p>
+                                        <p class="data ">${number_format((el.price || 0))}원</p>
+                                    </div>
+                                </div>
+                                <div class="buy_box flexType2-1">
+                                    <div class=" flexCol no1 "> 
+                                        <div class="cal_box flexType3 mb10">
+                                            <i class="fa-solid fa-minus" id="btn_minus"></i>
+                                            <p class="count" id="r_count" data-val="${el.need}" data-price="${el.price}">${el.need}</p>
+                                            <i class="fa-solid fa-plus" id="btn_plus"></i>
+                                        </div> 
+                                        <div class="price_box flexType3 ">
+                                            <p class="price" id="r_total" data-tPrice="">총 ${number_format((el.needPrice || 0))}원</p>
+                                        </div>
+                                    </div>
+                                    <div class="btn_box flexCol">
+                                        <button class=" btn_clear btnType30-1 mb5" id="" name="btnMatchOff" data-typ="1" data-sn="${el.matchedsn}">매칭해제</button>
+                                        <button class=" btn_cart btnType30-1 mb5" id="btnAddCart" name="btnAddCart" data-code="${el.hn_code}">장바구니</button>
+                                        <button class="btn_buy btnType30-1 mb10" id="btnBuy" name="btnBuy" data-code="${el.hn_code}">바로구매</button> 
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+        });
+    } else {
+        html += ` 
+            <tr>
+                <td class="nodata p10"> 매칭 약재가 없습니다. <br> 약재 매칭 후 구매 가능합니다.
+                </td>
+            </tr>`;
+    }
+
+    $('#productList').append(html);
+
 }
 
 
