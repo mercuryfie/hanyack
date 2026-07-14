@@ -1,0 +1,83 @@
+<?= $this->extend("/web/template/layout_mypage_dj") ?>
+<?= $this->section("content") ?>
+
+<script src="<?=URL_MASTER_ASSETS?>/claimList_Do.js?rnd=<?=rand();?>"></script>
+
+<section class="merright">
+    <div class="merright1-0">
+    </div>
+    <!-- <div class="merright1-1">
+        <p>필터</p>
+        <div class="merli1-1">
+            <button>전체보기</button>
+            <button>매칭약재</button>
+            <button>미매칭약재</button>
+        </div>
+    </div> -->
+    <div class="merlibox1-1">
+        <p>취소·반품·교환 리스트</p>
+        <!-- <button>새 창</button> -->
+        <div class="claimList_box2ck">
+
+
+            <div class="periboxMaster">
+                <button class="itemFilter">오늘</button>
+                <button class="itemFilter">1주일</button>
+                <button class="itemFilter">1개월</button>
+                <button class="itemFilter">3개월</button>
+                <button class="itemFilter">6개월</button>
+            </div>
+            <div class="odrbox1-1-2 flexType2">
+                <p class="title">날짜별</p>
+                <select name="" id="date_filter" class="selectType1">
+                    <option value="결제일">결제일</option>
+                    <option value="주문확인일">주문확인일</option>
+                    <option value="발송처리일">발송처리일</option>
+                </select>
+                <p class="title2">탕전실별</p>
+                <select name="" id="decoc_filter" class="selectType4-1">
+                    <option value="">선택하세요.</option>
+                </select>
+                <p class="title2">제약사별</p>
+                <select name="" id="pharm_filter" class="selectType4-1">
+                    <option value="">선택하세요.</option>
+                </select>
+            </div>
+        </div>
+        <div class="order_box40c">
+            <table class="merlitable">
+                <thead>
+                <tr>
+                    <td class="merlirow">상태</td>
+                    <td class="merlirow">주문번호</td>
+                    <td class="merlirow">주문일자</td>
+                    <td class="merlirow">재약사</td>
+                    <td class="merlirow">탕전실</td>
+                    <td class="merlirow">약재명</td>
+                    <td class="merlirow">주문방식</td>
+                    <td class="merlirow">옵션</td>
+                    <td class="merlirow">수량</td>
+                    <td class="merlirow">포장단위가격</td>
+                    <td class="merlirow">총액</td>
+
+                </tr>
+                </thead>
+                <tbody id="claimList" class="claimList_tablefz7c">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="moreListBox">
+            <button class="moreList" id="more1" name="more1" type="button" data-page="1">
+                더보기
+            </button>
+            <i class="fa-solid fa-angle-down" id="more2" name="more2"></i>
+        </div>
+
+    </div>
+
+
+
+</section>
+
+<?= $this->endSection() ?>

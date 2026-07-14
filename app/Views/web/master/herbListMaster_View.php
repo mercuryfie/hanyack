@@ -1,0 +1,131 @@
+<?= $this->extend("/web/template/layout_mypage_dj") ?>
+<?= $this->section("content") ?>
+    <script src="<?=URL_MASTER_ASSETS?>/herbListMaster_Do.js?rnd=<?= rand(); ?>"></script>
+
+    <script>
+    </script>
+<section class="merright">
+<form id="thisForm" method="post" onsubmit="return false">
+    <input type="hidden" name="" value="$hncode">
+    <div class="herb_list_master filter_box flexType6">
+        <div class="merli1-1-1">
+            <select name="" id="" class="filter filter1 mr10">
+                <option value="">상태</option>
+                <option value="">승인</option>
+                <option value="">미승인</option>
+                <option value="">반려</option>
+            </select>
+            <!--                    <button type="button" class="itemFilter" id="showAll" name="showAll">전체보기</button>-->
+            <!--                    <button type="button" class="itemFilter" id="approved" name="approved">승인</button>-->
+            <!--                    <button type="button" class="itemFilter" id="notApproved" name="notApproved">미승인</button>-->
+            <!--                    <button type="button" class="itemFilter" id="rejected" name="rejected">반려</button>-->
+            <select name="" id="pharli" class="filter filter2 mr10">
+                <option value="">제약사</option>
+                <option value="광명당">광명당</option>
+                <option value="대연제약">대연제약</option>
+                <option value="디제이허브">디제이허브</option>
+                <option value="바른한방">바른한방</option>
+                <option value="영천">영천</option>
+                <option value="CJ">CJ</option>
+                <option value="CK">CK</option>
+                <option value="허브팜">허브팜</option>
+            </select>
+            <select name="" id="" class="filter filter3">
+                <option value="">이벤트 영역</option>
+                <option value="">인기 한약재</option>
+                <option value="">추천 한약재</option>
+                <option value="">정기 구독</option>
+            </select>
+        </div>
+    </div>
+    <div class="herbList_boxli6">
+        <p class="headTitle">전체 약재 목록</p>
+        <div class="btnBox btnBox1 flexType6">
+            <div class="right">
+            </div>
+
+        </div>
+
+        <div class="btnBox btnBox2 flexType3">
+
+            <div class="left">
+                <input type="search" id="search_name" name="search_name" class="inputType240 mr10"
+                       placeholder="약재명을 검색하십시오">
+                <button type="button" class="btn_secondary" id="btnSearch" name="btnSearch" data-page="1"
+                        data-cfcode="">검색
+                </button>
+            </div>
+            <div class="right">
+                <button type="button" class="btn_primary mr10" id="yakApprove" name="yakApprove" data-hncode=""
+                        data-status="">승인
+                </button>
+                <button type="button" class="btn_secondary mr10" id="yakCancel" name="yakCancel" data-hncode=""
+                        data-status="">승인취소
+                </button>
+                <button type="button" class="btn_secondary mr10" data-hncode="hn_code" id="yakReject" name="yakReject">
+                    반려하기
+                </button>
+                <button type="button" id="btn_cancle" name="btn_cancle" class="btn_secondary">초기화</button>
+
+            </div>
+        </div>
+        <div class="herbList_box28f">
+            <table class="merlitable herblist_tableq3vv">
+                <tr>
+                    <td class="merlirow giveDataid">
+                        <input type="checkbox" data-id="" data-column="1" class="selectAll">
+                    </td>
+                    <td class="merlirow">상태</td>
+                    <td class="merlirow">생산코드</td>
+                    <td class="merlirow">제약사</td>
+                    <td class="merlirow">약재명</td>
+                    <td class="merlirow">본초명</td>
+                    <td class="merlirow">원산지</td>
+                    <td class="merlirow">구분</td>
+                    <td class="merlirow">가공방법</td>
+                    <td class="merlirow">포장단위(g)</td>
+                    <td class="merlirow herbList_boxfxp">
+                        <div class="buyingInfo ">
+                            <p class="category">일반구매</p>
+                            <div class="subCategory flexType1">
+                                <p class="buyType">근당가격</p>
+                                <p class="buyType">포장가격</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="merlirow herbList_boxfxp">
+                        <div class="buyingInfo ">
+                            <p class="category">정기구독</p>
+                            <div class="subCategory flexType1">
+                                <p class="buyType">구독기간</p>
+                                <p class="buyType">근당가격</p>
+                                <p class="buyType">포장가격</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="merlirow">노출영역</td>
+                    <td class="merlirow">판매상태</td>
+                    <td class="merlirow">더보기</td>
+
+                </tr>
+
+                <tbody id="herbList" name="herbList">
+                </tbody>
+
+
+            </table>
+        </div>
+
+        <div class="moreListBox">
+            <button class="moreList" id="more" name="more" type="button" data-page="">
+                더보기
+            </button>
+            <i class="fa-solid fa-angle-down" id="more2" name="more2"></i>
+        </div>
+    </div>
+</form>
+</section>
+<?= $this->include("/web/include/pop_Event_View") ?>
+<?= $this->include("/web/include/pop_ThumMaster_View") ?>
+<?= $this->include("/web/include/pop_RejectMaster_View") ?>
+<?= $this->endSection() ?>

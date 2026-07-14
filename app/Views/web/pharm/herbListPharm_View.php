@@ -1,0 +1,91 @@
+<?= $this->extend("/web/template/layout_mypage_phar") ?>
+<?= $this->section("content") ?>
+
+<!-- js ----------------------------  -->
+<script src="<?=URL_PHARM_ASSETS?>/herbListPharm.js?rnd=<?=rand();?>"></script>
+<script src="<?=URL_PHARM_ASSETS?>/herbListPharm_Do.js?rnd=<?=rand();?>"></script>
+<section class="merright">
+    <div class="merright1-0">
+    </div>
+    <!-- <div class="merright1-1">
+        <p>필터</p>
+        <div class="merli1-1">
+            <button>전체보기</button>
+            <button>매칭약재</button>
+            <button>미매칭약재</button>
+        </div>
+    </div> -->
+    <div class="tableRightBox merlibox1-1">
+<!--        <p>약재목록</p>-->
+        <!-- <button>새 창</button> -->
+        <div class="mersearch flexType7">
+            <input type="text" name="keyword" id="keyword" placeholder="검색어를 입력하십시오" value="<?=$body['skey'];?>" />
+            <button id="searchherb" name="searchherb" class="btn1">조회</button>
+            <button onclick="go_herbReg();" class="btn2">약재등록</button>
+<!--            <button type="button" onclick="" class="btnType32 ">판매 중지</button>-->
+
+        </div>
+        <table class="merlitable herbListPharmTable" >
+            <tr>
+<!--                <td class="merlirow "></td>-->
+<!--                <td class="merlirow ">상태</td>-->
+<!--                <td class="merlirow dueto">사유</td>-->
+                <th class="merlirow">약재코드</th>
+                <th class="merlirow">약재명</th>
+                <th class="merlirow">생산일자</th>
+
+                <th class="merlirow">제조번호</th>
+                <th class="merlirow">원산지</th>
+                <th class="merlirow">구분/가공방법</th>
+                <th class="merlirow">포장단위(g)</th>
+                <th class="merlirow herbList_boxfxp">
+                    <div class="buyingInfo ">
+                        <p class="category">일반구매</p>
+                        <div class="subCategory flexType1">
+                            <p class="buyType">근당가격</p>
+                            <p class="buyType">포장가격</p>
+                        </div>
+                    </div>
+                </th>
+                <th class="merlirow herbList_boxfxp">
+                    <div class="buyingInfo ">
+                        <p class="category">정기구독</p>
+                        <div class="subCategory flexType1">
+                            <p class="buyType">구독기간</p>
+                            <p class="buyType">근당가격</p>
+                            <p class="buyType">포장가격</p>
+                        </div>
+                    </div>
+                </th>
+                <th class="merlirow ">
+                    <div class="flexType">
+                        <p>대량구매</p>
+                    </div>
+                </th>
+                <th class="merlirow ">
+                    <div class="flexType">
+                        <p>박스당수량</p>
+                    </div>
+                </th>
+                <th class="merlirow">생산</th>
+                <th class="merlirow">수정</th>
+                <th class="merlirow">상태</th>
+                <th class="merlirow">출력</th>
+            </tr>
+            <tbody id="herbtable" name="herbtable">
+
+            </tbody>
+        </table>
+
+        <div class="moreListBox">
+            <button class="moreList" id="more" name="more" type="button" data-page="<?=$body['page']?>">
+                더보기
+            </button>
+            <i class="fa-solid fa-angle-down" id="more2" name="more2"></i>
+        </div>
+    </div>
+</section>
+
+<?= $this->include("/web/include/pop_ProduceHerbLog_View") ?>
+<?= $this->include("/web/include/pop_ProduceHerb_View") ?>
+<?= $this->endSection() ?>

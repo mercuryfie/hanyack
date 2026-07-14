@@ -1,0 +1,96 @@
+$(document).ready(function() {
+    let page = 0;
+    let search = [];
+    Load_Claim(page,search);
+
+
+    $(document).on('change','#decoc_filter,#pharm_filter',function(){
+        let decoc = $('#decoc_filter').val();
+        let pharm = $('#pharm_filter').val();
+        Form_ini();
+        Load_Order(1,decoc,pharm);
+    });
+
+    $(document).on('click','#more1,#more2',function(){
+        let decoc = $('#decoc_filter').val();
+        let pharm = $('#pharm_filter').val();
+        let page = $('#more1').data('page');
+        Load_Order(page,decoc,pharm);
+    });
+});
+
+async function  Load_Claim(page,s_arr){
+    try {
+        start_spinner();
+        let dataarr = {"page":page,"search" : s_arr};
+        let url = APIURL + '/Load_Claim_Info';
+        let result = await Load_API(url, dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        } else if (result.get('status') == 'ok') {
+            let html = '';
+            let sub_html1 = '';
+            let sub_html2 = '';
+            let data = result.get('data');
+            let arr = (data && data.list) ? data.list : [];
+            let Cnt = arr.length;
+            if (Cnt > 0) {
+                $.each(arr, function (index, el) {
+
+                    if(el.rtyp==1){
+                        sub_html1 = `<p class="tagType11">${Return_Step_Name(el.rtyp)}</p>`;
+                    }else if(el.rtyp==2){
+                        sub_html1 = `<p class="tagType13">${Return_Step_Name(el.rtyp)}</p>`;
+                    }else if(el.rtyp==3) {
+                        sub_html1 = `<p class="tagType15">${Return_Step_Name(el.rtyp)}</p>`;
+                    }
+
+                    if(el.gd_pType==1){
+                        sub_html2 = `<p class="tagType1">${Order_Type_Name(el.gd_pType)}</p>`;
+                    }else if(el.gd_pType==2){
+                        sub_html2 = `<p class="tagType2">${Order_Type_Name(el.gd_pType)}</p>`
+                    }else if(el.gd_pType==3){
+                        sub_html2 = `<p class="tagType3">${Order_Type_Name(el.gd_pType)}</p>`
+                    }
+
+                    html +=`
+                        <tr>   
+                            <td>${sub_html1}</td>
+                            <td>${el.gd_code}</td>  
+                            <td>${el.od_regdate}</td>
+                            <td>${el.mi_name}</td>
+                            <td>${el.od_wname}</td>
+                            <td>${el.hn_name}</td>
+                            <td>${sub_html2}</td>
+                            <td>${el.option_str}</td>
+                            <td>${el.gd_cnt}개</td>
+                            <td>${number_format(el.gd_rPrice)}원</td>
+                            <td>${number_format(el.gd_price)}원</td>
+                        </tr>
+                    `;
+                });
+            }else{
+                if(page==1) {
+                    html = '<tr><td colspan="11">주문정보가 없습니다.</td></tr>'
+                }else{
+                    Make_Toast('마지막입니다.');
+                }
+            }
+            $('#claimList').append(html);
+
+            $('#more1').data('page',data.page);
+        }else{
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    }catch(error){
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+function Form_ini(){
+    $('#orderlist').empty();
+    $('#more1').data('page',1);
+}
+
