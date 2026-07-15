@@ -57,10 +57,10 @@ class ApiCommonController extends BaseController
                 $temparr['hn_package_cnt'] = $d['hn_package_cnt'];
                 if($d['hn_package_type']==1){
                     $temparr['price'] = $d['price'];
-                    $temparr['unitName'] = '개';
+                    $temparr['unitName'] = '1개';
                 }else{
                     $temparr['price'] = ($d['price']* $d['hn_package_cnt']);
-                    $temparr['unitName'] = "Box({$d['hn_package_cnt']}ea)";
+                    $temparr['unitName'] = "{$d['hn_package_cnt']}개/Box";
                 }
 
                 if($sessinarr['islogin']){
@@ -88,6 +88,7 @@ class ApiCommonController extends BaseController
         $herb_m = model('Herb_m');
         $hot = [];
         $special = [];
+        $djmedi = [];
         $hRs = $herb_m->Load_Herb_MainAll();
         if (!empty($hRs)) {
             foreach ($hRs as $d) {
@@ -123,7 +124,7 @@ class ApiCommonController extends BaseController
                     $temparr['unitName'] = '1개';
                 }else{
                     $temparr['price'] = ($d['price']* $d['hn_package_cnt']);
-                    $temparr['unitName'] = "{$d['hn_package_cnt']}개/박스";
+                    $temparr['unitName'] = "{$d['hn_package_cnt']}개/Box";
                 }
 
                 if($sessinarr['islogin']){
@@ -137,14 +138,19 @@ class ApiCommonController extends BaseController
                     $hot[] = $temparr;
                 } else if ($d['f_type'] == 2) {
                     $special[] = $temparr;
+                } else if ($d['f_type'] == 3) {
+                    $djmedi[] = $temparr;
                 }
             }
 
             shuffle($hot);
             shuffle($special);
+            shuffle($djmedi);
         }
         $i_arr = [
             'isLogin' => $sessinarr['islogin'],
+            'djmedi' =>$djmedi,
+            'dcnt' => count($djmedi),
             'hot' => $hot,
             'hcnt' => count($hot),
             'special' => $special,

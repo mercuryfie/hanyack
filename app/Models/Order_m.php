@@ -16,12 +16,25 @@ class Order_m extends Model
         $this->db = Database::connect('default');
     }
 
+    public function Load_Decoc_Goods_Match($hncode,$cfcode,$fields = ['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_medicine_decoc_match');
+        $builder->select($separated_val);
+        $builder->where('cfcode', $cfcode);
+        $builder->where('fk_hncode', $hncode);
+        $builder->where('is_use', 1);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+
     public function Load_Order_Decoc_Goods($cfcode,$odcode, $fields = ['ALL']){
         $separated_val = fn_Make_Fields($fields);
         $builder = $this->db->table('V_ORDER_GOODS_INFO');
         $builder->select($separated_val);
         $builder->where('fk_odcode', $odcode);
-        $builder->where('cfcode', $cfcode);
+        $builder->where('fk_cfcode', $cfcode);
         $builder->where('gd_isdel', 0);
         $query = $builder->get();
 

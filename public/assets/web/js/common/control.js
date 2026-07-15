@@ -1,37 +1,9 @@
 $(document).ready(function () {
 
-    // sub menu show and hide
-
-    // $('.top_menu_wrap, .sub_menu_wrap').on('focusin',function(){
-    //     $('.sub_menu_wrap').addClass('active');
-    // });
-
-    // $('.top_menu_wrap, .sub_menu_wrap').on('focusout',function(){
-    //     $('.sub_menu_wrap').removeClass('active');
-    // });
-
     $(function () {
         setTopMenuHighlight();
     });
 
-    // $('.top_menu_wrap, .sub_menu_wrap').mouseenter(function () {
-    //     $('.sub_menu_wrap').addClass('active');
-    // });
-    //
-    // $('.top_menu_wrap, .sub_menu_wrap').mouseleave(function () {
-    //     $('.sub_menu_wrap').removeClass('active');
-    // });
-
-
-    // $(window).on('scroll', function () {
-    //     if ($(window).scrollTop() > 80) {
-    //         $('.gnb_area').hide();
-    //         $('.gnb_area_thin').show();
-    //     } else {
-    //         $('.gnb_area').show();
-    //         $('.gnb_area_thin').hide();
-    //     }
-    // });
 
 });
 
@@ -446,8 +418,18 @@ function go_detail(hncode,ptype){
 }
 
 function go_delInfo() {
-    var url = DECOCURL + "/deliveryInfo";
-    $(location).attr("href", url);
+    let uid = $('#tUid').val();
+    let url = '';
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    } else{
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/deliveryInfo";
+        $(location).attr("href", url);
+    }
+    // var url = DECOCURL + "/deliveryInfo";
+    // $(location).attr("href", url);
 }
 
 function go_prdBarcode() {
@@ -480,6 +462,7 @@ function top_secret() {
 
 function go_Board_Notice(){
     let uid = $('#tUid').val();
+    let url = '';
     if(uid==''){
         url = '/Member/Login';
         $(location).attr("href", url);
@@ -1014,6 +997,17 @@ function addDays(days = 0, dateStr = '') {
     var offset = date.getTimezoneOffset() * 60000;
     var result = new Date(date.getTime() - offset).toISOString().split("T")[0];
     return result;
+}
+
+
+function fnToDay(){
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    return formattedDate;
 }
 
 

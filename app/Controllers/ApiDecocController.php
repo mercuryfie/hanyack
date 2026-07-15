@@ -254,6 +254,8 @@ class ApiDecocController extends BaseController
                         $diff2 = fn_toDaysDiffUp($f['gd_delicomplete'], 7);
                     }
 
+                    $match = $order_m->Load_Decoc_Goods_Match($f['hn_code'],$cfcode);
+
                     $t_data[] = [
                         'sn' => $f['primarysn'],
                         'hncode' => $f['hn_code'],
@@ -275,7 +277,8 @@ class ApiDecocController extends BaseController
                         'fname' => $f['thumnail'],
                         'od_regdate' => $f['od_regdate'],
                         'diff' => fn_toDaysDiffUp($f['od_regdate'], 4),
-                        'diff2' => $diff2
+                        'diff2' => $diff2,
+                        'match' =>$match
                     ];
                 }
 
@@ -326,6 +329,7 @@ class ApiDecocController extends BaseController
         $herb_m = model('Herb_m');
         $hnCode = $params['code'];
         $hnCnt = $params['cnt'];
+        $hnDeliDate = $params['delidate'] ?? fn_AddDay(3, 1);
         $hInfo = $herb_m->Load_Pharm_Info($hnCode);
         if(empty($hInfo)){
             return $this->respond(ResultDTO::fail('Error004', [], '존재하지 않는 악재정보입니다.'));
@@ -350,7 +354,7 @@ class ApiDecocController extends BaseController
             'gd_price' => $totalPrice,
             'gd_cnt' => $totalCnt,
             'gd_rPrice' => $hnUnitPrice,
-            'gd_delidate' => fn_AddDay(3, 1)
+            'gd_delidate' => $hnDeliDate
         ];
         $effec_goods = $herb_m->Insert_Order_Single_Goods($goodsARr);
 

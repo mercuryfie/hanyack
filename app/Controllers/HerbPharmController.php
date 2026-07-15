@@ -17,6 +17,29 @@ class HerbPharmController extends BaseController
         $this->Check_Auth($Auth);
     }
 
+    public function deliveryInfo()
+    {
+        $sessinarr = $this->GetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else{
+            $mi_type = $sessinarr['user']['mi_type'];
+            $metaarr = [
+                'h_title' => '상품등록',
+                'h_type' => 1
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr)
+            ];
+
+            return view('web/pharm/deliInfo_View', $main_data);
+        }
+    }
+
     public function claimList()
     {
         $sessinarr = $this->GetSessionData();

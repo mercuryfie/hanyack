@@ -578,24 +578,32 @@ abstract class BaseController extends Controller
         return $str;
     }
 
-    public function getTotalPrice(int $packageType, int $packageCnt, int $buyCnt, int $price): int
+    public function getUnitInfo(int $packageType, int $packageCnt,int $unitWeight, int $buyCnt, int $unitPrice): array
     {
-        if ($buyCnt <= 0 || $price <= 0) {
-            return 0;
+        $info = [
+            'totalPrice' => 0,
+            'packageStr' => '',
+            'geunPrice' => 0,
+            'defaultCnt' => 0
+        ];
+        if ($buyCnt <= 0 || $unitPrice <= 0 || $unitWeight <= 0) {
+            return $info;
         }
-        $totalCount = ($packageType === 1) ? $buyCnt : ($packageCnt * $buyCnt);
-        return $totalCount * $price;
+        if($packageType==1){
+            $info['packageStr'] = '개';
+            $info['totalPrice'] = $buyCnt * $unitPrice;
+            $info['defaultCnt'] = $buyCnt * 1;
+        }else{
+            $info['packageStr'] = 'Box(' . $packageCnt .'개)';
+            $info['totalPrice'] = ($packageCnt * $buyCnt) * $unitPrice;
+            $info['defaultCnt'] = ($packageCnt*$buyCnt);
+        }
+        $oneGeun = 600;
+        $info['geunPrice'] =round( ($unitPrice / $unitWeight) * $oneGeun);
+        return $info;
     }
 
-    public function getPricePerGeun($unitPrice,$unitWeight): int
-    {
-        $oneGeun = 600;
-        if ($unitWeight <= 0) {
-            return 0;
-        }
-        $gPrice = ($unitPrice / $unitWeight) * $oneGeun;
-        return (int) round($gPrice);
-    }
+
 
     public function LoadPrice($hncode){
         $herb_m = model('Herb_m');

@@ -38,7 +38,7 @@
 <!--                    <p>0원</p>-->
 <!--                </div>-->
                 <div class="cartprili cartpri1-5">
-                    <p>희망 도착일</p>
+                    <p>배송 희망일</p>
                     <input type="date" class="input_date" id="p_deli_date">
                 </div>
                 <div class="cartprili cartpri1-5">

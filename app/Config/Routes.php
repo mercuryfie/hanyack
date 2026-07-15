@@ -164,6 +164,7 @@ $routes->GET('Mypharm/burkOrder','HerbPharmController::burkOrder');
 $routes->GET('Mypharm/settings/prdBarcode','HerbPharmController::prdBarcode');
 $routes->GET('Mypharm/settings/prdBarcodePreview','HerbPharmController::prdBarcodePreview');
 $routes->GET('Mypharm/claimList/','HerbPharmController::claimList');
+$routes->GET('Mypharm/deliveryInfo/','HerbPharmController::deliveryInfo');
 
 /*  탕전실   */
 $routes->GET('Mydecoc/','HerbDecocController::dashBoard');

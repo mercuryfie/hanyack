@@ -29,7 +29,9 @@ const common_m = {
             hot : item.hot,
             hotCnt : item.hcnt || 0,
             special : item.special,
-            speCnt : item.scnt || 0
+            speCnt : item.scnt || 0,
+            djmedi : item.djmedi,
+            djcnt : item.dcnt || 0,
         };
     }
 };

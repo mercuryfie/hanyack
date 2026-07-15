@@ -466,7 +466,7 @@ async function Search_HDMedicine(target,val){
 
 function ini_Form1(){
     $('.HDName').html('-');
-    $('.HDName').text('검색 중...');
+    $('.HDName').text('-');
     $('#mdcode').val('');
     $('#medicode').val('');
     $('#mdname').val('');

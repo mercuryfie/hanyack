@@ -171,7 +171,7 @@ async function Incoming_order(sn){
             go_login();
         } else if (result.get('status') == 'ok') {
             let busTrack = `
-                    <div class="busBox flexType2 "> 
+                    <div class="busBox flexType2  "> 
                         <i class="fa-regular fa-hourglass-half busColor1"></i>
                         <i class="fa-solid fa-receipt  busColor1"></i>
                         <i class="fa-solid fa-boxes-stacked busColor1"></i>
@@ -201,14 +201,19 @@ async function Incoming_order(sn){
 async function Load_OrderList(params) {
     INI_Load_Order_Decoc();
     const response = await Model.decoc_m.Load_Decoc_OrderList(params);
-    console.log(response);
+    console.log('old', response);
     let html = '';
     const total = response.total;
     const mTotal = response.totalRs;
     const nPage= response.nPage;
     if(total>0){
         let busTrack = '';
+        let match_tag = '';
+        let delidate2 = '';
+        let status_str = '';
+        let status_str_css = '';
         $.each(response.list, function(index, el) {
+            let match_tag2 = '';
             let html_sub = '';
             let goods = el.goods;
             let cnxlBox = '';
@@ -228,14 +233,36 @@ async function Load_OrderList(params) {
                 let inner_html5 = (item.gd_status >= ORDER_DELIVERED) ? '<i class="fa-solid fa-circle-check busColor2"></i>' : `<i class="fa-solid fa-circle-check busColor1"></i>`;
 
                 busTrack = `
-                        <div class="busBox flexType2 "> 
-                            ${inner_html1}
-                            ${inner_html2}
-                            ${inner_html3}
-                            ${inner_html4}
-                            ${inner_html5}
+                    <div class="busBox flexType2 "> 
+                        ${inner_html1}
+                        ${inner_html2}
+                        ${inner_html3}
+                        ${inner_html4}
+                        ${inner_html5}
+                    </div>
+                `;
+
+                const gdStatus = Number(item.gd_status);
+                const $statusStr = $(`
+                        <div class="stt_str_box flexType3">
+                            <p class="data">출하준비중</p>
+                            <p class="data">출하확인</p>
+                            <p class="data">출하완료</p>
+                            <p class="data">배송중</p>
+                            <p class="data">배송완료</p>
                         </div>
-                    `;
+                    `);
+
+                $statusStr.find('.data')
+                    .eq(gdStatus)
+                    .each(function () {
+                        $(this)
+                            .addClass('active')
+                            .siblings('.data')
+                            .removeClass('active');
+                    });
+
+                status_str = $statusStr.prop('outerHTML');
                 cnxlBox = `
                     <div class="btnBox flexType2">
                          <button type="button" class="btnType1 mr10 fontColor1" onclick="">
@@ -262,9 +289,9 @@ async function Load_OrderList(params) {
                 let delistr = '';
                 if(delicode != '' && delitype != ''){
                     delistr = ` 
-                        <a href="javascript://" class="delicode title ">송장번호:</a>
-                        <a href="javascript://" class="delicode carrier mr10">${delitype}</a>
-                        <a href="javascript://" class="delicode code mr10">${delicode}</a>                                     
+                        <a href="javascript://" class="delicode title mr5">송장번호:</a>
+                        <a href="javascript://" class="delicode carrier mr5">${delitype}</a>
+                        <a href="javascript://" class="delicode code mr5">${delicode}</a>                                     
                         <i class="fa-regular fa-copy"></i>
                        `;
                 } else  {
@@ -285,20 +312,25 @@ async function Load_OrderList(params) {
                     cancle = ``;
                 }
 
-                let typeParts = [item.t1_value,item.t2_value,item.n_value,item.w_name];
+                let typeParts = [item.t1_value, item.t2_value];
                 typeText = Join_attr_string(typeParts,'/');
+
+                if (item.match <= 0) {
+                    match_tag = `<p class="match_tag">미매칭</p>`;
+                } else {
+                    match_tag = `<p class="match_tag active">매칭</p>`;
+                }
 
                 html_sub = `
                     <div class="orderBox-aaa " name="block" id="gdr_${item.sn}">  
                         <div class="buyType flexType3">
                             <div class="left flexType2">
                                 <p class="pharm mr10">[${item.mi_name}]</p>
-                                <p class="">${item.hn_name}</p>
-                                <p class=" mr10"></p>
+                                ${match_tag}
+                                <p class="h_name mr10">[${item.n_value}] ${item.hn_name} ${item.w_name}</p> 
                                 <p class="type fontColor1 mr10">${typeText}</p> 
                             </div>
-                            <div class="right flexType7 deli_boxe4z">
-                                ${delidate} 
+                            <div class="right flexType7 deli_boxe4z"> 
                                 ${delistr}  
                             </div>
                         </div>
@@ -317,9 +349,10 @@ async function Load_OrderList(params) {
                                 </button>   
                             </div>
                           </div>   
-                          <div class="busTrack" id="bus_${item.sn}">        
+                          <div class="busTrack " id="bus_${item.sn}">        
                             ${busTrack}
                           </div>   
+                          ${status_str}
                     </div>
                    `;
             } else if (goodsCount > 1) {
@@ -343,21 +376,46 @@ async function Load_OrderList(params) {
                         </div>
                     `;
 
+                    const gdStatus = Number(item.gd_status);
+                    const $statusStr = $(`
+                        <div class="stt_str_box flexType3">
+                            <p class="data">출하준비중</p>
+                            <p class="data">출하확인</p>
+                            <p class="data">출하완료</p>
+                            <p class="data">배송중</p>
+                            <p class="data">배송완료</p>
+                        </div>
+                    `);
+
+                    $statusStr.find('.data')
+                        .eq(gdStatus)
+                        .each(function () {
+                            $(this)
+                                .addClass('active')
+                                .siblings('.data')
+                                .removeClass('active');
+                        });
+
+                    status_str = $statusStr.prop('outerHTML');
+
+
                     if(item.gd_status>=3){
                         delidate =``;
                     }else if(item.diff==true){
                         delidate = '<p class=" delayed">출하지연중</p>';
                     }else if(item.diff==false && item.gd_status==0) {
-                        delidate =`<p class=" msg">${item.gd_delidate} 출하준비중</p>`;
+                        delidate =`<p class=" msg">출하준비중</p>`;
                     }else if(item.diff==false && item.gd_status==1){
-                        delidate =`<p class=" msg">${item.gd_delidate} 출하예정</p>`;
+                        delidate =`<p class=" msg">출하예정</p>`;
                     }else{
                         delidate =`<p class=" msg">출하완료</p>`;
                     }
 
+
                     if(item.gd_status==0){
                         cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType1 mr10 cnxlBtn">주문취소</button>`;
                     }else if(item.gd_status==1){
+                        status_str =
                         cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType1 mr10 cnxlBtn">주문취소</button>`;
                     } else if (item.gd_status==3) {
                         cancle = `<button type="button" name="btn_income" id="income_${item.sn}" data-sn="${item.sn}" class="btnType1-1 mr10 cnxlBtn">입고처리</button>`;
@@ -375,33 +433,40 @@ async function Load_OrderList(params) {
                     let delistr = '';
                     if(delicode != '' && delitype != ''){
                         delistr = ` 
-                                    <a href="javascript://" class="delicode title ">송장번호:</a>
-                                    <a href="javascript://" class="delicode carrier mr10">${delitype}</a>
-                                    <a href="javascript://" class="delicode code mr10">${delicode}</a>                                     
-                                    <i class="fa-regular fa-copy"></i>
+                            <a href="javascript://" class="delicode title mr5">송장번호:</a>
+                            <a href="javascript://" class="delicode carrier mr5">${delitype}</a>
+                            <a href="javascript://" class="delicode code mr5">${delicode}</a>                                     
+                            <i class="fa-regular fa-copy"></i>
                                    `;
                     } else  {
                         delistr = ``;
                     }
-
+                    if (item.match <= 0) {
+                        match_tag = `<p class="match_tag">미매칭</p>`;
+                    } else {
+                        match_tag = `<p class="match_tag active">매칭</p>`;
+                    }
+                    if (item.gd_delidate) {
+                        delidate2 = `<p class="date e_date">(배송 희망일 : ${item.gd_delidate})`;
+                    } else {
+                        delidate2 = ``;
+                    }
 
                     let indexstr = (idx>0) ? 'hidden' : '';
-                    let typeParts = [item.t1_value,item.t2_value,item.n_value,item.w_name];
+                    let typeParts = [item.w_name, item.t1_value,item.t2_value];
                     typeText = Join_attr_string(typeParts,'/');
-
                     html_sub += `
                             <div class="orderBox-aaa mt20 ${indexstr}" name="block" id="gdr_${item.sn}">   
                                   <div class="buyType flexType3 ">
                                     <div class="left flexType2">
-                                        <p class="pharm mr10">[${item.mi_name}]</p>
-                                        <p class="">${item.hn_name}</p>
-                                        <p class=" mr10"></p>
+                                        <p class="data pharm mr10">${item.mi_name}</p> 
+                                        ${match_tag}
+                                        <p class="data h_name mr10"> [${item.n_value}] ${item.hn_name} 
+                                        </p> 
                                         <p class="type fontColor1 mr10">${typeText}</p> 
-                                    </div>
-                                    <div class="right flexType7 deli_boxe4z">
-                                        ${delidate} 
-                                        ${delistr}  
-                                    </div>
+                                    </div> 
+                                    <div>${delistr}
+                                    </div> 
                                   </div>
                                   <div class="priceBox flexType3">
                                     <div class="left flexType2"> 
@@ -422,28 +487,32 @@ async function Load_OrderList(params) {
                                   <div class="busTrack" id="bus_${item.sn}">        
                                     ${busTrack}
                                   </div>     
+                                  ${status_str} 
                             </div>
                         `;
 
                 });
                 html_sub += `
-                            <div type="button" class="decodrbb1-2-3" data-odcode="${el.od_code}">
-                                <p class="odrtext">총${goodsCount}건 주문 펼쳐보기</p>
-                                <i class="fa-solid fa-angle-down odrmore"></i>
-                            </div>
-                            `;
+                        <div type="button" class="decodrbb1-2-3" data-odcode="${el.od_code}">
+                            <p class="odrtext">총${goodsCount}건 주문 펼쳐보기</p>
+                            <i class="fa-solid fa-angle-down odrmore"></i>
+                        </div>
+                        `;
             } else {
                 html_sub += '<p>상품이 없습니다.</p>';
             }
 
-            html += `<div class="dec_orderli">
+            html += `<div class="dec_orderli ">
                         <div class="dec_orderli1-1">
                             <div class="dec_orderli_ttl">
-                                <p class="date">${el.regidate}</p>
-                                <div class="titleBox">
-                                    <p class="copied title">주문번호</p>
-                                    <p class="copied orderNo">${el.od_code}</p> 
+                                <div class="flexType2">
+                                    <p class="date mr10">${el.regidate}</p>
+                                    <p class="date e_date">${delidate2}</p>
                                 </div>
+                                    <div class="titleBox">
+                                        <p class="copied title">주문번호</p>
+                                        <p class="copied orderNo">${el.od_code}</p> 
+                                    </div>
                             </div>
                         </div>
                         <div class="dec_orderli1-2">${html_sub}</div>

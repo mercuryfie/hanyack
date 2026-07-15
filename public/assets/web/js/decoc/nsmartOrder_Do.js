@@ -466,7 +466,7 @@ async function Make_Buy_Product(params){
     if(response.total > 0){
         $.each(response.list, function (index, el) {
             subhtml = (el.option_str != '') ? (el.option_str) : '';
-            p_type = (el.hn_package_type==1) ?'개' : `박스[${el.hn_package_cnt}ea]`;
+            p_type = (el.hn_package_type==1) ?'1개' : `${el.hn_package_cnt}/Box`;
             html += `
                     <tr>
                         <td>
@@ -475,7 +475,7 @@ async function Make_Buy_Product(params){
                                     <div class="section name_box flexType2-1">
                                         <p class="category mr10">이름</p>
                                         <div class="sub_name_box flexCol">
-                                            <p class="data data1 ">[${el.n_value}] ${el.mi_name}</p>
+                                            <p class="data data1 ">[${el.n_value}] ${el.mi_name} </p>
                                             <p class="data data2">${el.hn_name} ${el.w_name} ${subhtml}</p> 
                                         </div>
                                     </div>

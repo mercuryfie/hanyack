@@ -42,8 +42,8 @@
                     </div>
                     <? if ($header['mitype'] == AUTH_DECOC) { ?>
                         <div class="topbox1-3 flexType3">
-                            <i class="fa-solid fa-store " onclick="go_smart();"></i>
-                            <i class="fa-solid fa-receipt icon2" onclick="go_orderList();"></i>
+                            <i class="fa-solid fa-store " onclick="Search_Product('');"></i>
+                            <a href="javascript:;" class="icon_goSmart flexType1" onclick="go_smart();"><i class="fa-solid fa-s" onclick=""></i></a>
                             <div class="cart_box">
                                 <i class="fa-solid fa-cart-shopping " onclick="go_cart();"></i>
                                 <? if ($header['cartCnt'] > 0) { ?>
@@ -52,15 +52,15 @@
                                     </div>
                                 <? } ?>
                             </div>
-                            <i class="fa-regular fa-user" onclick="go_mypage();"></i>
+                            <i class="fa-regular fa-user" onclick="go_orderList();"></i>
                             <!--                    --><? // if ($header['mitype']==AUTH_MASTER){?>
                             <!--                        <i class="fa-solid fa-shield" onclick="top_secret();"></i>-->
                             <!--                    --><? // }?>
                         </div>
                     <? } else if ($header['mitype'] == AUTH_MASTER) { ?>
-                        <div class="topbox1-3 flexType3">
+                        <div class="topbox1-3 hTyp1 flexType3">
                             <i class="fa-solid fa-store " onclick="go_smart();"></i>
-                            <i class="fa-solid fa-receipt icon2" onclick="go_orderList();"></i>
+                            <a href="javascript:;" class="icon_goSmart flexType1" onclick="go_smart();"><i class="fa-solid fa-s" onclick=""></i></a>
                             <i class="fa-regular fa-user" onclick="go_mypage();"></i>
                         </div>
                     <? } else { ?>

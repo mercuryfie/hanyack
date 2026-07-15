@@ -104,9 +104,7 @@ class CommonController extends BaseController
             $info['hn_matched'] = 0;
             $auth = '';
             $match = [];
-            $info['totalPrice'] = '';
-            $info['geunPrice'] = '';
-            $info['unitPackageStr'] ='';
+            $info['unitInfo'] = '';
         }else{
             $auth = $sessinarr['user']['mi_type'];
             $mi_cfcode = $sessinarr['user']['mi_cf'];
@@ -114,17 +112,13 @@ class CommonController extends BaseController
                 $info['hn_like'] = 0;
                 $info['hn_matched'] = 0;
                 $match = [];
-                $info['totalPrice'] = '';
-                $info['geunPrice'] = '';
-                $info['unitPackageStr'] ='';
+                $info['unitInfo'] = '';
             }else{
                 $mi_code = $sessinarr['user']['mi_code'];
                 $info['hn_like'] = $herb_m->Cnt_Product_Like($hncode,$mi_code,$ptype);
                 $match = $herb_m->Load_Product_Match_info2($mi_cfcode,$hncode);
                 $info['hn_matched'] = fn_ArrayCnt($match);
-                $info['totalPrice'] = $this->getTotalPrice($hn_package_type,$hn_package_cnt,1,$hn_price);
-                $info['geunPrice'] = $this->getPricePerGeun($hn_price,$hn_weight);
-                $info['unitPackageStr'] = $this->getUnitString($hn_package_type,$hn_package_cnt);
+                $info['unitInfo'] = $this->getUnitInfo($hn_package_type,$hn_package_cnt,$hn_weight,1,$hn_price);
             }
         }
         $data = [

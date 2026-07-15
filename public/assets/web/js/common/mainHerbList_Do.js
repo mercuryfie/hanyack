@@ -91,6 +91,7 @@ async function Make_Html(params){
             let Auth = ((el.Auth == AUTH_DECOC) || (el.Auth == AUTH_MASTER)) ? 'agree' : 'disagree';
             let subhtml1 = '';
             let subhtml2 = '';
+            let subhtml3 = '';
             let like = '';
             let like1 = '';
             let likeDo = 1;
@@ -119,13 +120,17 @@ async function Make_Html(params){
                         </div>
                     `;
                 subhtml2=`
-                            <div class="wishHeartBox flexType1 ${like}" name="btnLike" data-code="${el.hncode}" data-act="${likeDo}">
-                                <i class="${like1}" id=""></i>
+                        <div class="wishHeartBox flexType1 ${like}" name="btnLike" data-code="${el.hncode}" data-act="${likeDo}">
+                            <i class="${like1}" id=""></i>
+                        </div>
+                    `;
+                subhtml3=`
+                            <div class="price_box flexType2">
+                                <p class="price mr10">${number_format(el.price || 0)}원</p>
+                                <span class="calc">근당 ${number_format(el.gunPrice || 0)}원</span>
                             </div>
                     `;
             }
-
-
             html +=`
                     <div class="mer_wrap_type4 ${AuthCss}">
                             <div class="thumbox " type="button" name="btnPDetail" data-hncode="${el.hncode}">
@@ -137,14 +142,14 @@ async function Make_Html(params){
                                     <p class="title" >[${el.n_value}] ${el.hn_name} ${el.w_name}</p>
                                     ${subhtml2} 
                                 </div>
-                                <div class="price_box flexType2">
-                                    <p class="price mr10">${number_format(el.price || 0)}원</p>
-                                    <span class="calc">(근당 ${number_format(el.gunPrice || 0)}원) / (기본단위: ${el.unitName})</span>
-                                </div>
+                                ${subhtml3}
                             </div>
                             <div class="tagbox flexType2 ${el.flexType}">
                                 <p style="" class="type t1_type">
                                     ${el.mi_name}
+                                </p>
+                                <p style="" class="type ">
+                                    ${el.unitName} 
                                 </p>
                                 <p style="${t1_str}" class="type ">
                                     ${el.t1_value}
@@ -156,6 +161,8 @@ async function Make_Html(params){
                         </div>
                 `;
         });
+
+        $('#herblist').removeClass('typ_none');
         $('#herblist').append(html);
         $('#totalRs').text(mTotal);
         let options = {
@@ -166,7 +173,8 @@ async function Make_Html(params){
         }
         $('#pageArea').html(Make_Page_Html('simple',options));
     }else{
-        html = `검색된 약재가 없습니다. `;
+        html = `<p class="msg">검색된 약재가 없습니다.</p>`;
+        $('#herblist').addClass('typ_none');
         $('#r_txt').text('');
         $('#totalRs').text('0');
         $('#herblist').append(html);

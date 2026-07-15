@@ -61,6 +61,7 @@ body.body-no-scroll {
 :root {
     --main-color: #009965;
     --main-color20: #00996510;
+    --main-color40: #00996540;
     --main-bg: #F9FAFB;
     --sub-color: #edf1ef;
     --second-color: #5e9b76;
@@ -505,7 +506,6 @@ input[type="radio"] {
 .common_page_box {
     margin-top: 20px;
     width: 1180px;
-
 }
 
 /*order list decoc type page box ---*/
@@ -1136,13 +1136,14 @@ line-height: 30px;
     align-items: center;
 }
 
-.countBox > p {
+.countBox p.count {
+    font-size: 16px;
     padding: 0 10px;
     margin-bottom: 2px;
 }
 
 .countBox > i {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 /*.sotable td button {*/
@@ -1610,6 +1611,8 @@ line-height: 30px;
 }
 
 .buy_item_conkol .area2 .item_box .sub_name_box .data1 {
+    width: 160px;
+    overflow: hidden;
     font-size: 14px;
     color: #8e8e8e;
 
@@ -3160,6 +3163,7 @@ line-height: 30px;
     margin: 0 auto;
 }
 
+/* mainThum_View start -------------------------------- */
 .mainListWrap .viewBox,
 .mainThumWrap .viewBox {
     /*margin-bottom: 20px;*/
@@ -3172,7 +3176,7 @@ line-height: 30px;
 }
 
 
-.viewBox .ttl_count2 {
+.viewBox .right .text2 {
     color: var(--main-color);
     font-weight: 600;
     margin: 0 10px;
@@ -3180,21 +3184,10 @@ line-height: 30px;
 
 }
 
-.mainListWrap .viewFilter,
-.mainThumWrap .viewFilter {
-    font-size: 18px;
-
-}
-.mainListWrap .viewFilter .fa-list,
-.mainThumWrap .viewFilter .fa-list {
-    margin-left: 10px;
-    padding-left: 10px;
-    width: 40px;
-    border-left: 1px solid #ccc;
-    /*margin-right: 10px;*/
-}
 
 
+
+/* mainThum_View end  -------------------------------- */
 /* orderBoxMaster  -------------------------------- */
 
 .order_box40c .test {
@@ -5115,6 +5108,13 @@ main,
     font-size: 18px;
 }
 
+.dec_orderli_ttl .date.e_date {
+    margin-left: 0px;
+    font-weight: normal;
+    font-size: 14px;
+    color: #5c5c5c;
+
+}
 .dec_orderli_ttl .titleBox {
     margin-left: 20px;
 
@@ -5127,6 +5127,10 @@ main,
     color: var(--gray-cart001);
 }
 
+.dec_orderli_ttl .titleBox .title {
+    width: 60px;
+    margin-right: 10px;
+}
 .dec_orderli_ttl .titleBox .orderNo {
     margin-left: 10px;
 }
@@ -5203,14 +5207,41 @@ main,
     min-width: 80px;
 }
 
+.orderBox-aaa .pharm {
+    min-width: 60px;
+    width: auto;
+    padding: 2px 5px;
+    background-color: var(--main-color40);
+    font-size: 14px;
+    text-align: center;
+}
+
+.orderBox-aaa .match_tag {
+    border-radius: 5px;
+    border:1px solid #ccc;
+    min-width: 40px;
+    width: auto;
+    /*height: 20px;*/
+    padding: 0 5px;
+    color: #5c5c5c;
+    margin-right: 10px;
+    text-align: center;
+
+}
+.orderBox-aaa .match_tag.active {
+    border:1px solid var(--main-color);
+    color: var(--main-color);
+
+}
+
 .orderBox-aaa .busTrack {
     /*padding-left: 20px;*/
     border-bottom: 1px solid #ccc;
     width: 550px;
-    height: 18px;
+    height: 20px;
     position: relative;
     z-index: 10;
-    margin-left: 20px;
+    margin-left: 40px;
 
 }
 
@@ -5238,10 +5269,28 @@ main,
     width:auto;
 }
 
+.orderBox-aaa .stt_str_box {
+    margin-top: 10px;
+    width: 600px;
+    margin-left: 20px;
+
+}
+
+.orderBox-aaa .stt_str_box .data {
+    min-width: 80px;
+    font-size: 14px;
+    color: #9d9d9d;
+    text-align: center;
+    text-wrap: nowrap;
+}
+.orderBox-aaa .stt_str_box .data.active {
+    color: var(--main-color);
+
+}
+
 
 .deli_boxe4z .title {
     width:60px;
-    margin-right: 10px;
 }
 
 .deli_boxe4z .title,
@@ -5306,7 +5355,7 @@ main,
 }
 
 .orderBox-aaa {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 
@@ -5758,7 +5807,7 @@ main,
 
 
 .decodrbb1-2-3 {
-    width: 760px;
+    width: 840px;
     color: #5c5c5c;
     cursor: pointer;
     margin-top: 20px;
@@ -6762,17 +6811,6 @@ main,
 }
 
 
-/*.ck-image__caption {*/
-/*    display: none !important;*/
-/*}*/
-
-/*.ck-editor__top {*/
-/*    position: sticky;*/
-/*    top: 0;*/
-/*    background: white;*/
-/*    z-index: 2;*/
-/*}*/
-
 
 
 /********************************************************************************************************************************************************
@@ -7222,7 +7260,7 @@ th, td {
     background-color: #a86f5f;
 }
 
-/* slickprev  -------------------------------- */
+/* slickprev start -------------------------------- */
 .slickprev,
 .slicknext {
     border: none;
@@ -7256,7 +7294,7 @@ th, td {
     -moz-osx-font-smoothing: grayscale;
 }
 
-
+/* slickprev end -------------------------------- */
 .mainwrap {
     margin: 0 auto;
     width: 1180px;
@@ -7267,9 +7305,16 @@ th, td {
 .mainwrap > div:first-child {
     margin-top: 0;
 }
-.mainwrap > div {
+
+.mainwrap .main1-1,
+.mainwrap .main1-2 {
     margin-top: 20px;
     height: 440px;
+}
+
+.mainwrap .main1-1.guest-style,
+.mainwrap .main1-2.guest-style {
+    height: 360px;
 }
 
 .maintitle {
@@ -7305,7 +7350,7 @@ th, td {
 }
 
 .merbox {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -7314,6 +7359,15 @@ th, td {
     /*display: grid;*/
     /*grid-template-columns: repeat(5, 1fr); !* 5등분 *!*/
     /*gap: 10px; !* 필요시 간격 *!*/
+}
+
+.merbox.typ_none {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:1180px;
+    min-height: 480px;
+    height: auto;
 }
 
 .merlast {
@@ -7418,7 +7472,7 @@ th, td {
 .thumbox .mainthum {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    width: 270px;
+    width: 220px;
     height: 200px;
     min-width: 200px;
     min-height: 200px;
@@ -7740,10 +7794,23 @@ th, td {
     overflow: hidden;
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-right: 10px;
     position: relative;
+    margin-right: 10px;
+    margin-bottom: 40px;
 
 }
+
+.main_wrap_ver4 .mer_wrap_type4.auth-style {
+    min-height: 360px;
+    height: 360px
+
+}
+
+.main_wrap_ver4 .mer_wrap_type4.guest-style {
+    min-height: 280px;
+    height: auto;
+}
+
 
 .main_wrap_ver4 .mer_wrap_type4 .thumbox {
     width: 268px;
@@ -7822,31 +7889,6 @@ th, td {
 }
 
 /* main_ver5_View end -----*/
-/* main_View  -> common start -----*/
-
-.auth-style {
-    width: 220px;
-    min-height: 350px;
-
-}
-
-.guest-style {
-    width: 220px;
-    height: 300px;
-}
-
-.main_wrap_ver4 .auth-style {
-    height: auto;
-    /*border:1px solid blue;*/
-
-}
-
-.main_wrap_ver4 .guest-style {
-    /*min-height: 320px;*/
-    /*height: 320;*/
-}
-
-/* main_View  -> common end -----*/
 /*board style start -----*/
 
 .boardWrap {
@@ -8756,6 +8798,7 @@ th, td {
     align-items: center;
     /*text-align: right;*/
     /*text-align: right;*/
+    margin-top: 20px;
     width: 1180px;
     height: 30px;
     line-height: 30px;
@@ -8799,6 +8842,7 @@ th, td {
 
 .hbox1-2 {
     margin: 0 auto;
+    margin-top: 10px;
     width: 1180px;
     height: 50px;
     display: flex;
@@ -8955,8 +8999,8 @@ th, td {
 
 .hbox1-3 .top_gnb_ul > li {
     width: 140px;
-    height: 50px;
-    padding: 5px 10px;
+    height: 40px;
+    /*padding: 5px 10px;*/
     line-height: 40px;
     /*padding: 0 10px;*/
     text-align: center;
@@ -9171,9 +9215,6 @@ th, td {
 .buy_option_wrap {
 }
 
-.buy_option_wrap .buy_type {
-    font-size: 14px;
-}
 
 .detLabel input[type="radio"] {
     /*font-size: 14px;*/
@@ -9194,37 +9235,31 @@ th, td {
     /*gap: 4px;*/
 }
 
-.detLabel .buy_type {
-    /*color:red;*/
-    font-size: 14px;
-}
 
 .buy_option_wrap .buy_type,
 .buy_option_wrap .buy_option_box {
 }
 
-.buy_option_wrap .buy_option_box {
-    font-size: 14px;
-}
-
 .detInfo {
-    font-size: 14px;
     color:#5c5c5c;
     width: 420px;
-    height: 40px;
+    height: 30px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 10px;
 }
 
+.detInfo .input_date {
+    border-radius: 5px;
+    border:1px solid #ccc;
+    width: 160px;
+    height: 32px;
+}
 .buy_option:first-child {
     padding-top: 10px;
 }
 
-.buy_option {
-    font-size: 14px;
-    padding-bottom: 20px;
-}
 
 .buy_option .title,
 .detInfo .title {
@@ -9310,9 +9345,7 @@ th, td {
 
 .detBox1-2 .detCol  {
     width: 420px;
-    padding: 20px 0;
     height: auto;
-    font-size: 12px;
     color:#7c7c7c;
 }
 .detBox1-2 .detCol .hn_name{
@@ -9368,8 +9401,8 @@ th, td {
 .hn_nameBox .shareBox{
     border:1px solid #ececec;
     border-radius: 50%;
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9381,16 +9414,11 @@ th, td {
 
 
 .detCon .detPrice {
-    margin-top: 20px;
-    height: 60px;
+    margin-bottom: 10px;
+    height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.detCon .detPrice .miniTitle {
-    font-size: 14px;
-    margin-right: 20px;
-    color:#5c5c5c;
 }
 .detCon .detPrice .price {
     font-size: 22px;
@@ -9399,12 +9427,15 @@ th, td {
 
 .detBuy {
     width: 420px;
+    gap:10px;
 }
 
-.detBuy .btnType1 {
-    height: 32px;
+.detBuy .btnType32,
+.detBuy .btnType4 {
+    width: 50%;
+    height: 40px;
+    font-size: 16px;
 }
-
 
 .detBox2-1 {
     margin:40px 0;
@@ -10209,10 +10240,8 @@ button, i {
     width: 120px;
     height: 32px;
     line-height: 32px;
-    /*padding: 0px 10px;*/
     font-size: 14px;
     text-align: center;
-    margin-left: 10px;
     color: #2c2c2c;
     text-wrap: nowrap;
 

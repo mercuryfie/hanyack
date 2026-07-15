@@ -6,7 +6,7 @@
 <header>
     <?= $this->include('/web/include/pop_Account_View'); ?>
     <? if ($header['mitype'] == AUTH_DECOC) { ?>
-        <!--    <div class="topline" onclick="go_smart();">스마트 오더 바로가기</div>-->
+            <div class="topline" onclick="go_smart();">스마트 오더 바로가기</div>
     <? } ?>
     <div class="headerwrap2 main_header">
         <div class="hbox2 gnb_area">
@@ -39,14 +39,13 @@
                                placeholder="약재를 검색하십시오">
                         <i class="fa-solid fa-magnifying-glass mag" id="btnHSearch" name="btnHSearch"></i>
 
-
                         <!--                    <div class="mag_box flexType1">-->
                         <!--                        <i class="fa-solid fa-magnifying-glass mag" onclick="Search_Product();"></i>-->
                         <!--                    </div>-->
                     </div>
                     <? if ($header['mitype'] == AUTH_DECOC) { ?>
                         <div class="topbox1-3 flexType3 ">
-                            <i class="fa-solid fa-store " onclick="go_smart();"></i>
+                            <i class="fa-solid fa-store " onclick="Search_Product('');"></i>
                             <a href="javascript:;" class="icon_goSmart flexType1" onclick="go_smart();"><i class="fa-solid fa-s" onclick=""></i></a>
                             <div class="cart_box">
                                 <i class="fa-solid fa-cart-shopping " onclick="go_cart();"></i>
@@ -62,9 +61,9 @@
                             <!--                    --><? // }?>
                         </div>
                     <? } else if ($header['mitype'] == AUTH_MASTER) { ?>
-                        <div class="topbox1-3 ">
+                        <div class="topbox1-3 flexType3 hTyp1">
                             <i class="fa-solid fa-store " onclick="go_productList(2);"></i>
-                            <i class="fa-solid fa-receipt icon2" onclick="go_orderList();"></i>
+                            <a href="javascript:;" class="icon_goSmart flexType1" onclick="go_smart();"><i class="fa-solid fa-s" onclick=""></i></a>
                             <i class="fa-regular fa-user" onclick="go_orderList();"></i>
                         </div>
                     <? } else { ?>
@@ -117,10 +116,10 @@
                 <div class="top_menu_wrap">
                     <ul class="top_gnb_ul flexType1">
                         <? if ($header['mitype'] == AUTH_DECOC) { ?>
-<!--                            <li>-->
-<!--                                <a href="javascript:;" class=" top_menu down_1" onclick="go_dashBoard();"-->
-<!--                                   data-menu="dashboard">대시보드</a>-->
-<!--                            </li>-->
+                            <li>
+                                <a href="javascript:;" class=" top_menu down_1" onclick="go_dashBoard();"
+                                   data-menu="dashboard">창고관리</a>
+                            </li>
                             <li>
                                 <a href="javascript:;" class="top_menu down_2 highlight" onclick="go_smart();"
                                    data-menu="smartorder">스마트오더</a>
@@ -145,9 +144,11 @@
 <!--                        <li>-->
 <!--                            <a href="javascript:;" class="top_menu down_5" data-menu="smartorder">정산관리</a>-->
 <!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a href="javascript:;" class="top_menu down_6" data-menu="smartorder">배송지관리</a>-->
-<!--                        </li>-->
+                        <? if ($header['mitype'] == AUTH_DECOC) { ?>
+                        <li>
+                            <a href="javascript:;" class="top_menu down_6" data-menu="smartorder" onclick="go_delInfo();">배송지관리</a>
+                        </li>
+                        <? } ?>
                     </ul>
                 </div>
 
@@ -253,7 +254,7 @@
                             <!--                    --><? // }?>
                         </div>
                     <? } else if ($header['mitype'] == AUTH_MASTER) { ?>
-                        <div class="topbox1-3 ">
+                        <div class="topbox1-3 hTyp1 flexType3">
                             <i class="fa-solid fa-store " onclick="go_productList(2);"></i>
                             <i class="fa-solid fa-receipt icon2" onclick="go_orderList();"></i>
                             <i class="fa-regular fa-user" onclick="go_orderList();"></i>

@@ -98,11 +98,11 @@
                         <p>약재명</p>
                         <input type="search" id="o_name" name="o_name" placeholder="ex. 감초" class="inputType240">
                     </div>
-                    <div class="merinfo infotype1">
-                        <p class="must"></p>
-                        <p>제조번호</p>
-                        <input type="search" id="o_number" name="o_number" placeholder="" class="inputType240">
-                    </div>
+<!--                    <div class="merinfo infotype1">-->
+<!--                        <p class="must"></p>-->
+<!--                        <p>제조번호</p>-->
+<!--                        <input type="search" id="o_number" name="o_number" placeholder="" class="inputType240">-->
+<!--                    </div>-->
                     <div class="merinfo infotype2">
                         <p class="must notmust"></p>
                         <p>구분</p>
@@ -138,44 +138,44 @@
                     </div>
                 </div>
 
-                <div class="date_wrap">
-                    <div class="option_type">
-                        <p class="must"></p>
-                        <p class="title">제조일자</p>
-                        <input type="text" id="makedate" name="makedate" class="datepicker datepicker1-1 d_start inputType160" placeholder="날짜 선택" readonly>
-                        <i class="fa-regular fa-calendar calicon" id="calicon1-4" name=""></i>
-                    </div>
-                    <div class="option_type">
-                        <p class="must"></p>
-                        <p class="title">유통기한</p>
-                        <div class="option_date pribox1-3 btnon" name="pe_boxx7z"> <!-- 3,2,1년 -->
-                            <button onclick="on_method('1');" id="pemethod1" name="pemethod" type="button"
-                                    class="btnType1 ">3년
-                            </button>
-                            <button onclick="on_method('2');" id="pemethod2" name="pemethod" type="button"
-                                    class="btnType1 ">2년
-                            </button>
-                            <button onclick="on_method('3');" id="pemethod3" name="pemethod" type="button"
-                                    class="btnType1 ">1년
-                            </button>
-                            <button onclick="on_method('4');" id="pemethod4" name="pemethod" type="button"
-                                    class="btnType1 ">6개월
-                            </button>
-                        </div>
-                    </div>
-                    <div class="option_type  ">
-                        <p class="notmust"></p>
-                        <p class="title"></p>
-                        <div class="option_date pribox1-4 mb40"> <!-- 소비기한 -->
-                            <input type="text" id="s_date" name="s_date" class="inputType160 datepickers datepicker1-2 d_start" placeholder="날짜 선택" readonly>
-                            <i class="fa-regular fa-calendar calicon" id="calicon1-1"></i>
-                            <p class="wave">~</p>
-                            <input type="text" id="e_date" name="e_date" class="inputType160 datepickers datepicker1-3" placeholder="날짜 선택" readonly>
-                            <i class="fa-regular fa-calendar calicon" id="calicon1-2"></i>
-                        </div>
-                    </div>
-
-                </div>
+<!--                <div class="date_wrap">-->
+<!--                    <div class="option_type">-->
+<!--                        <p class="must"></p>-->
+<!--                        <p class="title">제조일자</p>-->
+<!--                        <input type="text" id="makedate" name="makedate" class="datepicker datepicker1-1 d_start inputType160" placeholder="날짜 선택" readonly>-->
+<!--                        <i class="fa-regular fa-calendar calicon" id="calicon1-4" name=""></i>-->
+<!--                    </div>-->
+<!--                    <div class="option_type">-->
+<!--                        <p class="must"></p>-->
+<!--                        <p class="title">유통기한</p>-->
+<!--                        <div class="option_date pribox1-3 btnon" name="pe_boxx7z">  -->
+<!--                            <button onclick="on_method('1');" id="pemethod1" name="pemethod" type="button"-->
+<!--                                    class="btnType1 ">3년-->
+<!--                            </button>-->
+<!--                            <button onclick="on_method('2');" id="pemethod2" name="pemethod" type="button"-->
+<!--                                    class="btnType1 ">2년-->
+<!--                            </button>-->
+<!--                            <button onclick="on_method('3');" id="pemethod3" name="pemethod" type="button"-->
+<!--                                    class="btnType1 ">1년-->
+<!--                            </button>-->
+<!--                            <button onclick="on_method('4');" id="pemethod4" name="pemethod" type="button"-->
+<!--                                    class="btnType1 ">6개월-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="option_type  ">-->
+<!--                        <p class="notmust"></p>-->
+<!--                        <p class="title"></p>-->
+<!--                        <div class="option_date pribox1-4 mb40">  -->
+<!--                            <input type="text" id="s_date" name="s_date" class="inputType160 datepickers datepicker1-2 d_start" placeholder="날짜 선택" readonly>-->
+<!--                            <i class="fa-regular fa-calendar calicon" id="calicon1-1"></i>-->
+<!--                            <p class="wave">~</p>-->
+<!--                            <input type="text" id="e_date" name="e_date" class="inputType160 datepickers datepicker1-3" placeholder="날짜 선택" readonly>-->
+<!--                            <i class="fa-regular fa-calendar calicon" id="calicon1-2"></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!--                </div>-->
             </div>
             <div class="rightBox merright1-4 priceInfoBox">
                 <p class="headtitle">판매 정보</p>
