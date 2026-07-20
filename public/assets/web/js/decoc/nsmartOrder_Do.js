@@ -1,6 +1,5 @@
 $(document).ready(function(){
-    $(document).on('click','button[name="pCnt"]', function() {
-        $(this).addClass('active').siblings().removeClass('active');
+    $('#pCnt').on('change', function() {
         $('#pageArea').data('page',1);
         Make_Html(Make_Option());
     });
@@ -8,6 +7,18 @@ $(document).ready(function(){
     $('#oby').on('change',function(){
         $('#pageArea').data('page',1);
         Make_Html(Make_Option());
+    });
+    
+    $('#btnSmartSearch').on('click',function(){
+        $('#pageArea').data('page',1);
+        Make_Html(Make_Option());
+    });
+
+    $('#txtSmart').on('keypress',function(e){
+        if (e.which === 13 || e.keyCode === 13) {
+            $('#pageArea').data('page',1);
+            Make_Html(Make_Option());
+        }
     });
 
     $(document).on('click','button[name="btnLinkPaging"]',function(){
@@ -150,23 +161,6 @@ $(document).ready(function(){
     $('#matchingpop #Xbtn, #matchingpop #Xbtn2').click(function () {
         $('#matchingpop').hide();
     });
-
-    $('#btnHSearch, #btnHSSearch').on('click',function(){
-        let SearchStr = '';
-        if($(this).attr('id')=='btnHSearch'){
-            SearchStr = $('#h_sKey').val();
-        }else{
-            SearchStr = $('#h_sSKey').val();
-        }
-        Search_Herb(SearchStr);
-    });
-
-    $('#h_sKey,#h_sSKey').on('keypress',function(e){
-        if (e.which === 13 || e.keyCode === 13) {
-            const SearchStr = $(this).val();
-            Search_Herb(SearchStr);
-        }
-    })
 
     $('#txtMatchPopSearch').on('focusin',function(){
         $('#resSearch').empty();
@@ -311,15 +305,14 @@ function Search_Herb(SearchStr) {
 }
 
 
-function Make_Option(SearchStr){
-    let params = {
+function Make_Option(){
+    return{
         cfcode : $('#cList').data('cfcode'),
-        pCnt : $('button[name="pCnt"].active').data('pval'),
+        pCnt : $('#pCnt').val(),
         opt : $('#oby').val(),
         page : $('#pageArea').data('page'),
-        sStr : SearchStr
+        sStr : $('#txtSmart').val()
     };
-    return params;
 }
 
 
@@ -334,9 +327,9 @@ async function Make_Html(params){
     if(total>0) {
         $.each(response.list, function (index, el) {
             if(el.is_manage==1) {
-                subHtml = (!el.stock_status) ? `<div class="flexType1"><p class="red">재고부족</p><i class="fa-solid fa-pen" id="op1_${el.sn}" name="pop_SO_manage" data-managed="${el.is_manage}" data-opstock="${el.optimal_stock}" data-title="${el.mm_title}" data-sn="${el.sn}"></i></div>` : `<div class="flexType1"><p class="green">정상</p><i class="fa-solid fa-pen" id="op1_${el.sn}" name="pop_SO_manage" data-managed="${el.is_manage}" data-opstock="${el.optimal_stock}" data-title="${el.mm_title}" data-sn="${el.sn}"></i></div>`;
+                subHtml = (!el.stock_status) ? `<div class="flexType1"><p class="status red">재고부족</p><i class="fa-solid fa-pen" id="op1_${el.sn}" name="pop_SO_manage" data-managed="${el.is_manage}" data-opstock="${el.optimal_stock}" data-title="${el.mm_title}" data-sn="${el.sn}"></i></div>` : `<div class="flexType1"><p class="status green">정상</p><i class="fa-solid fa-pen" id="op1_${el.sn}" name="pop_SO_manage" data-managed="${el.is_manage}" data-opstock="${el.optimal_stock}" data-title="${el.mm_title}" data-sn="${el.sn}"></i></div>`;
             }else{
-                subHtml = '미관리';
+                subHtml = '<div class="flexType1"><p class="status">미관리</p><i class="fa-solid fa-pen" id="op1_${el.sn}" name="pop_SO_manage" data-managed="${el.is_manage}" data-opstock="${el.optimal_stock}" data-title="${el.mm_title}" data-sn="${el.sn}"></i></div>';
             }
             html += `
                     <tr>  
@@ -348,7 +341,7 @@ async function Make_Html(params){
                         <td>${number_format(el.stock_week)}g</td>
                         <td>${number_format(el.stock_month)}g</td>
                         <td id="op_${el.sn}">${number_format(el.optimal_stock)}g</td>
-                        <td class="stock_status">${subHtml}</td>
+                        <td class="stock_status scidx1-9">${subHtml}</td>
                         <td><button class="bestpri btntype2" type="button" name="popBuy" data-medicode="${el.medicode}" data-mmcode="${el.mm_medicine}" data-week="${el.stock_week}" data-stock="${el.totalStock}" data-month="${el.stock_month}" data-title="${el.mm_title}">구입</button></td>
                     </tr>
             `;
@@ -360,7 +353,7 @@ async function Make_Html(params){
     let options = {
         page : $('#pageArea').data('page'),
         total : mTotal,
-        perpage : $('button[name="pCnt"].active').data('pval'),
+        perpage : $('#pCnt').val(),
         bname : 'btnLinkPaging'
     }
     $('#pageArea').html(Make_Page_Html('simple',options));
@@ -435,8 +428,8 @@ async function Make_Match_Search_Html() {
             html += `
                     <div class="item_box flexType3 "> 
                         <div class="flexCol"> 
-                            <p class="data data1">[${el.hn_origin}] ${el.hn_wname} </p>
-                            <p class="data data2">${el.hn_name} / ${el.w_name}</p>
+                            <p class="data data1 fontStyle5c14">[${el.hn_origin}] ${el.hn_wname} </p>
+                            <p class="data data2 fw_600">${el.hn_name} ${el.w_name}</p>
                         </div>  
                         <button type="button" class="btn_match btn_primary" name="btnMatchOn" data-typ="2" data-hncode="${el.hn_code}" data-hntitle="${el.hn_name}">매칭</button>
                     </div>
@@ -500,7 +493,6 @@ async function Make_Buy_Product(params){
                                             <i class="fa-solid fa-plus" name="btn_plus"></i>
                                         </div> 
                                         <div class="price_box flexType2 ">
-                                            <a href="javascript:;" class="icon_cart mr10 flexType1 "><i class="fa-solid fa-cart-shopping "></i></a>
                                             <p class="price " name="r_total" data-tprice="">총 ${number_format((el.needPrice || 0))}원</p> 
                                         </div>
                                     </div>

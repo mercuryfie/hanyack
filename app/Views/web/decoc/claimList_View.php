@@ -16,7 +16,7 @@
             <div class="flexType3">
                 <div class="orderList_boxpq8 flexType2">
                     <input type="search" name="" id="" class=""
-                           placeholder="상품명으로 검색해 보세요">
+                           placeholder="약재명을 검색하십시오.">
                     <button class="btn_secondary">조회하기</button>
                 </div>
                 <div class="decorderli1-1-1-1">

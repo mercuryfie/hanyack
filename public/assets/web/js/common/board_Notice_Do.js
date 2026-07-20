@@ -131,18 +131,15 @@ async function Del_bContent(uid,bid,bcode) {
             if(result.status == 'ok') {
                 window.location.href = BOARDURL + '/bList?bid=' + bid;
                 Make_Toast('삭제 완료하였습니다.');
-                console.log('bello1');
 
             } else {
-                Make_Toast('2삭제 완료하였습니다.');
-                console.log('bello2');
+                Make_Toast('삭제 완료하였습니다.');
 
             }
         }
 
     } catch (error) {
-        Make_Toast('bello.');
-        console.log('bello333333');
+        Make_Toast('에러가 발생하였습니다.'+error);
         console.log( error );
     }
 }
@@ -158,7 +155,6 @@ function Del_bContent_Data(uid, bcode){
 
         let retarr = new Array();
         for (let pair of formdata.entries()) {
-            console.log('bello 15',pair[0]+ ': ' + pair[1]);
         }
 
         $.ajax({
@@ -234,7 +230,6 @@ async function del_Content(bid,bcode) {
                 go_login();
             }else if(result.get('status') == 'ok') {
                 window.location.href = BOARDURL + '/bList?bid=' + bid;
-                console.log('bello 1604');
             }else{
                 alert(result.get('message'));
             }

@@ -195,7 +195,6 @@ async function Load_Inquiry(bid,page) {
                 console.log('there is no post');
             }
             $('#inquiryList').append(html);
-            console.log('bello');
         } else {
             alert(result.get('message'));
         }
@@ -222,7 +221,6 @@ async function Del_bContent(bid,bcode) {
 
 
     } catch (error) {
-        Make_Toast('bello.');
         console.log( error );
     }
 }

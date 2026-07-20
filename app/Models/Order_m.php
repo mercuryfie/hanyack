@@ -16,6 +16,72 @@ class Order_m extends Model
         $this->db = Database::connect('default');
     }
 
+
+    public function Update_Order_Step($sn,$step) {
+        $this->db->transStart();
+        $builder = $this->db->table('herb_order_goods');
+        $builder->set('gd_status', $step);
+        $builder->where('sn', $sn);
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Cnt_Order_Step_Check($sn, $step, $fk_micode) {
+        $builder=$this->db->table('v_order_goods_info');
+        $builder->where('primarysn', $sn);
+        $builder->where('gd_status !=', $step);
+        $builder->where('fk_micode', $fk_micode);
+        return $builder->countAllResults();
+    }
+
+
+    public function Load_Order_Pharm_All($params,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_order_goods_info');
+        $builder->select($separated_val);
+        $builder->where('fk_micode',$params['micode']);
+        if(!empty($params['cfcode'])){
+            $builder->where('fk_cfcode',$params['cfcode']);
+        }
+        if(!empty($params['sdate']) && !empty($params['edate'])) {
+            $builder->where('od_regdate >=', $params['sdate'].' 00:00:00');
+            $builder->where('od_regdate <=', $params['edate'].' 23:59:59');
+        }else{
+            $builder->where('delicode','');
+        }
+        if(!empty($params['delistatus'])){
+            $builder->where('gd_status',$params['delistatus']);
+        }
+
+        $builder->orderBy('primarysn','DESC');
+        $offset = ($params['page'] - 1) * $params['pcnt'];
+        $builder->limit($params['pcnt'], $offset);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Cnt_Order_Pharm_All($params){
+        $builder = $this->db->table('v_order_goods_info');
+        $builder->where('fk_micode',$params['micode']);
+        if(!empty($params['cfcode'])){
+            $builder->where('fk_cfcode',$params['cfcode']);
+        }
+        if(!empty($params['sdate']) && !empty($params['edate'])) {
+            $builder->where('od_regdate >=', $params['sdate'].' 00:00:00');
+            $builder->where('od_regdate <=', $params['edate'].' 23:59:59');
+        }else{
+            $builder->where('delicode','');
+        }
+        if(!empty($params['delistatus'])){
+            $builder->where('gd_status',$params['delistatus']);
+        }
+        return $builder->countAllResults();
+    }
+
+
     public function Load_Decoc_Goods_Match($hncode,$cfcode,$fields = ['ALL']){
         $separated_val = fn_Make_Fields($fields);
         $builder = $this->db->table('herb_medicine_decoc_match');
@@ -46,7 +112,7 @@ class Order_m extends Model
         $builder->select('fk_odcode');
         $builder->distinct();
         $builder->like('hn_name', $params['name'], 'both');
-        $builder->where('cfcode', $params['cfcode']);
+        $builder->where('fk_cfcode', $params['cfcode']);
         if(!empty($params['sdate']) && !empty($params['edate'])) {
             $builder->where('od_regdate >=', $params['sdate'].' 00:00:00');
             $builder->where('od_regdate <=', $params['edate'].' 23:59:59');
@@ -96,9 +162,6 @@ class Order_m extends Model
         if (!empty($distinct)) {
             $builder->whereIn('od_code', $distinct);
         }
-        $builder->orderBy('sn','DESC');
-        $offset = ($params['page'] - 1) * $params['pcnt'];
-        $builder->limit($params['pcnt'], $offset);
         return $builder->countAllResults();
     }
 
@@ -256,8 +319,7 @@ class Order_m extends Model
         $builder = $this->db->table('herb_order_Package');
         $builder->select($separated_val);
         $builder->where('mi_code', $param['mi_code']);
-        $builder->where('w_code', $param['w_code']);
-        $builder->where('p_type', 0);
+        $builder->where('cfcode', $param['cfcode']);
         $query = $builder->get();
 
         return $query->getResultArray();

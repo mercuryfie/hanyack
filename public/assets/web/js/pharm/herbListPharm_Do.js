@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    Load_Herb(1, '');
+
 
     $('#pop_producelog_herb #Xbtn, #pop_producelog_herb #Xbtn2').click(function () {
         $('#pop_producelog_herb').hide();
@@ -9,7 +9,7 @@ $(document).ready(function() {
         $('#pop_produce_herb').hide();
     });
 
-    $('#totalprice').html('총 ' + n_price.toLocaleString() + '원');
+    //$('#totalprice').html('총 ' + n_price.toLocaleString() + '원');
 
     $('.authStatus').each(function() {
         var value = $(this).text().trim();
@@ -63,6 +63,12 @@ $(document).ready(function() {
         e.stopPropagation();
     });
 
+    $(document).on('click','button[name="btnLinkPaging"]',function(){
+        $('#pageArea').data('page',$(this).data('page'));
+        INI_Form();
+        Make_Html(Make_Option());
+    });
+
     $(document).on('click','button[name="btn_isok"]',function(){
         let sn = $(this).data('sn');
         let isok = $(this).data('isok');
@@ -71,7 +77,22 @@ $(document).ready(function() {
         Change_Sell(sn,isok);
     });
 
+    Make_Html(Make_Option());
+    //Load_Herb(1, '');
+
 });
+
+function INI_Form(){
+    $('#herbList').empty();
+}
+
+function Make_Option(){
+    return {
+        'page' : $('#pageArea').data('page'),
+        'skey' : $('#keyword').val()
+    };
+}
+
 
 
 async function Change_Sell(sn,isok){
@@ -102,9 +123,7 @@ async function Change_Sell(sn,isok){
 }
 
 
-function INI_Form(){
-    $('#herbtable').empty();
-}
+
 
 function Re_approval(hncode,sn){
     if(window.confirm('재승인 요청하시겠습니까?')==true) {
@@ -133,6 +152,55 @@ async function Re_APP(hncode,sn){
         alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
         stop_spinner();
     }
+}
+
+async function Make_Html(params){
+    const response = await Model.pharm_m.Load_Pharm_Medicine_All(params);
+    console.log(response);
+    let list = response.list;
+    let tcnt = response.total;
+    let mTotal = response.totalRs;
+    let nPage = response.nPage;
+    let html = '';
+    if(tcnt > 0) {
+        $.each(list, function (index, el) {
+            html += ` 
+                      <tr id="line_${el.sn}"> 
+                        <td class="firstCol">${el.hn_code}</td>
+                        <td>${el.hn_name}</td>
+                        <td>${el.hn_batch_no}</td>
+                        <td>${el.hn_product_date}</td>
+                        <td>${el.hn_expired_date}</td>
+                        <td>${el.n_value}</td>
+                        <td>${el.option_str}</td>
+                        <td>${el.defaultCnt}(${el.packageStr})</td>
+                        <td>${el.w_name}</td>
+                        <td>${number_format(el.geunPrice || 0)}원</td>
+                        <td>${number_format(el.totalPrice || 0)}원</td>
+                        <td><button class="btnType1 " type="button" onclick="Produce_Herb('${el.hn_code}');"><i class="fa-solid fa-plus"></i></button></td>
+                        <td><button class="btnType1 " type="button" onclick="go_prodList('${el.hn_code}');">재고</button></td>
+                        <td><button class="btnType1 editHerb" type="button" onclick="Edit_Herb('${el.hn_code}');">수정</button></td> 
+                        <td><button type="button" class="btnType1 barBtn" onclick="barcodePreview('${el.hn_code}');" >
+                            <i class="fa-solid fa-barcode"></i>
+                            </button>
+                        </td>
+                            
+                    </tr>
+               `;
+        });
+    }else{
+        html = `<tr><td colspan="15">*검색된 정보가 없습니다.</td></tr>`;
+    }
+    $('#herbList').append(html);
+    let options = {
+        page : $('#pageArea').data('page'),
+        total : mTotal,
+        perpage : $('#pageArea').data('pcnt'),
+        bname : 'btnLinkPaging'
+    }
+    $('#pageArea').html(Make_Page_Html('simple',options));
+    $('#pageArea').data('page',nPage);
+
 }
 
 

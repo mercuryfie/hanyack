@@ -556,125 +556,7 @@ class ApiController extends BaseController
 
 
 
-    public function Order_Step_Do(){
-        $o_data = (fn_IsEmpty($this->request->getPost('data'))) ? [] : $this->request->getPost('data');
-        $o_step = ($this->request->getPost('ostep') == '') ? '' : $this->request->getPost('ostep');
-        $n_step = ($this->request->getPost('nstep') == '') ? '' : $this->request->getPost('nstep');
 
-        if(($o_data=='') || ($o_step=='')|| ($n_step=='')){
-            $result = 'type101';
-            $info = '';
-            $message = '선택하신 약재 정보를 확인하여주세요.';
-        }else {
-            $sessinarr = $this->GetSessionData();
-            if (!$sessinarr['islogin']) {
-                $result = 'NoLogin';
-                $info = '';
-                $message = '로그인을 하셔야 합니다.';
-            } else {
-                $mi_code = $sessinarr['user']['mi_code'];
-                $mi_type = $sessinarr['user']['mi_type'];
-                if($mi_type==AUTH_DECOC) {
-                    $result = 'AUTH_FAIL';
-                    $info = '';
-                    $message = '접근 권한이 없습니다.';
-                }else {
-
-                    $data = json_decode($o_data, true);
-                    $sn = $data[0]['sn'];
-                    $status = $data[0]['status'];
-                    $delidate = $data[0]['delidate'];
-
-                    $herb_m = model('Herb_m');
-                    $Cnt = $herb_m->Cnt_Order_Step_Check($sn, $o_step, $mi_code);
-                    if ($Cnt > 0) {
-                        $result = 'type103';
-                        $info = '';
-                        $message = "주문상태가 잘못되었습니다.\n 입력하신 주문 확인하여주세요.";
-                    } else {
-                        $order_m = model('Order_m');
-                        if ($n_step == ORDER_PROCESSING) {
-                            $Rs = $order_m->Load_Order_Goods($sn);
-                            if (fn_ArrayCnt($Rs) <= 0) {
-                                $result = 'type113';
-                                $message = '배송 항목 정보 확인에 실패하였습니다.';
-                            } else {
-                                $u_Cnt = 0;
-                                $u_weight = 0;
-
-                                $t_cnt = $Rs[0]['gd_cnt'];
-                                $weight = $Rs[0]['w_value'];
-                                $od_code = $Rs[0]['fk_odcode'];
-                                $gd_code = $Rs[0]['gd_code'];
-                                $od_wcode = $Rs[0]['od_wcode'];
-                                $od_wname = $Rs[0]['od_wname'];
-
-                                $tarr = [
-                                    'mi_code' => $mi_code,
-                                    'w_code' => $od_wcode,
-                                    'p_type' => 0
-                                ];
-
-                                $Rs2 = $order_m->Load_Package_Goods_Active($tarr);
-                                if (fn_ArrayCnt($Rs2) <= 0) {
-                                    $fk_pcode = $this->Make_Code(6);
-                                    $marr = [
-                                        'pcode' => $fk_pcode,
-                                        'mi_code' => $mi_code,
-                                        'w_code' => $od_wcode,
-                                        'w_name' => $od_wname
-                                    ];
-                                    $Cnt = $order_m->Insert_Package($marr);
-                                } else {
-                                    $fk_pcode = $Rs2[0]['pcode'];
-                                }
-
-                                $sarr = [
-                                    'pa_code' => $this->Make_Code(5),
-                                    'fk_pcode' => $fk_pcode,
-                                    'fk_odcode' => $od_code,
-                                    'fk_gdcode' => $gd_code,
-                                    't_cnt' => $t_cnt,
-                                    't_weight' => ($t_cnt * $weight)
-                                ];
-                                $Cnt = $order_m->Insert_Package_Goods($sarr);
-
-                                $p_arr = [
-                                    'pcode' => $fk_pcode,
-                                    'cnt' => $t_cnt,
-                                    'weight' => ($t_cnt * $weight)
-                                ];
-                                $eCnt = $order_m->Update_Package_Info($fk_pcode, $p_arr);
-
-                            }
-                        }
-
-                        $rCnt = $herb_m->Update_Order_Step($sn, $delidate, $n_step);
-                        $i_arr = [
-                            'eCnt' => $rCnt,
-                            'sn' => $sn,
-                            'n_step' => $n_step
-                        ];
-
-                        $typ = 'Order_Step';
-                        $Log = 'Order_Step:' . $this->OrderStepName($n_step) . '|ostep:' . $o_step . '|nstep:' . $n_step . '|data:' . $sn;
-                        $this->Log_Reg($mi_code, $typ, $Log);
-
-                        $result = 'ok';
-                        $info = $i_arr;
-                        $message = '';
-                    }
-                }
-            }
-        }
-
-        $return = [
-            'result' => $result,
-            'info' => $info,
-            'message' => $message
-        ];
-        return $this->respond($return);
-    }
 
 
     public function Order_Step_Do2(){
@@ -2204,7 +2086,7 @@ class ApiController extends BaseController
                             if ($isDefault == 1) {
                                 $isZero = 0;
 
-                                $Cnt = $herb_m->Update_DelInfo_SetAllAsZero($mi_code,$isZero);
+                                $Cnt = $herb_m->Update_DeliInfo_SetAllAsZero($mi_code,$isZero);
                                 if ($Cnt <= 0) {
                                     $result = 'type103';
                                     $message = '기본 배송지 저장에 실패 하였습니다.';
@@ -2269,6 +2151,8 @@ class ApiController extends BaseController
     public function Update_DeliInfo()
     {
         $sessinarr = $this->GetSessionData();
+        $post = $this->request->getPost();
+        $param = [];
 
         // 1. 로그인 체크
         if (!$sessinarr['islogin']) {
@@ -2281,6 +2165,7 @@ class ApiController extends BaseController
             if ($mi_type != AUTH_DECOC) {
                 $result = 'type101';
                 $message = '권한이외의 접근입니다.';
+                $param = '';
             } else {
                 foreach ($this->request->getPost() as $key => $value) {
                     $post[$key] = $value;
@@ -2288,6 +2173,7 @@ class ApiController extends BaseController
                 if (empty($post)) {
                     $result = 'type102';
                     $message = '잘못된 접근입니다.';
+                    $param = '';
                 } else {
                     $sn = $post['sn'];
                     $pcode = $post['zonecode'];
@@ -2298,20 +2184,18 @@ class ApiController extends BaseController
                     $isDefault = $post['isDefault'];
 
                     $herb_m = model('Herb_m');
-                    $param = [];
                     $Rs = $herb_m->Load_DelInfo_Sn(['sn' => $sn]);
                     $Cnt = fn_ArrayCnt($Rs);
                     if (fn_ArrayCnt($Rs) <= 0) {
                         $result = 'type102';
                         $message = '해당 주소 정보가 존재하지 않습니다.';
+                        $param = '';
                     } else {
                         $dbSn = '';
                         $db_micode = '';
                         if (!empty($Rs)) {
                             $dbSn = $Rs[0]['sn'];
                             $db_micode = $Rs[0]['fk_micode'];
-                            $echo = $sn;
-                            $echo2 = $dbSn;
                         }
                         if ($db_micode != $mi_code) {
                             $result = 'type108';
@@ -2320,15 +2204,16 @@ class ApiController extends BaseController
                             if ($dbSn != $sn) {
                                 $result = 'type109';
                                 $message = '해당 주소가 없습니다.';
+                                $param = '';
                             } else {
                                 if ($isDefault == 1) {
                                     $isZero = 0;
 
-                                    $Cnt = $herb_m->Update_DelInfo_SetAllAsZero($mi_code,$isZero);
+                                    $Cnt = $herb_m->Update_DeliInfo_SetAllAsZero($mi_code,$isZero);
                                     if ($Cnt <= 0) {
                                         $result = 'type103';
                                         $message = '기본 배송지 저장에 실패 하였습니다.';
-                                        echo ($mi_code);
+                                        $param = '';
                                     } else {
                                         $param2 = [
                                             'sn' => $sn,
@@ -2341,17 +2226,13 @@ class ApiController extends BaseController
                                             'isDefault' => 1
                                         ];
                                         $Cnt2 = $herb_m->Update_DelInfo($param2);
-                                        if ($Cnt2 <= 0) {
-                                            $result = 'type104';
-                                            $message = '새로운 주소 등록 실패';
-                                        } else {
-                                            $result = 'ok';
-                                            $message = 'success';
-
-                                        }
+                                        $result = 'ok';
+                                        $message = 'success';
+                                        $param = $param2;
                                     }
                                 } else if ($isDefault == 0){
                                     $param3 = [
+                                        'sn' => $sn,
                                         'fk_micode' => $mi_code,
                                         'mi_zip' => $pcode,
                                         'mi_Address1' => $Add1,
@@ -2362,16 +2243,15 @@ class ApiController extends BaseController
                                     ];
 
                                     $Cnt3 = $herb_m->Update_DelInfo($param3);
-                                    if ($Cnt3 <= 0) {
-                                        $result = 'type105';
-                                        $message = '새로운 주소 등록 실패2';
-                                    } else {
-                                        $result = 'ok';
-                                        $message = 'success';
-                                    }
+
+                                    $result = 'ok';
+                                    $message = 'success';
+                                    $param = $param3;
+
                                 } else {
                                     $result = 'type106';
                                     $message = '새로운 주소 등록 실패3';
+                                    $param = '';
 
                                 }
                             }
@@ -3582,141 +3462,7 @@ class ApiController extends BaseController
     }
 
 
-    public function Load_herbList()
-    {
-        $sessinarr = $this->GetSessionData();
-        if (!$sessinarr['islogin']) {
-            $result = 'NoLogin';
-            $data = '';
-            $message = 'NOT LOGIN';
-        } else {
-            $skey = ($this->request->getPost('skey') == '') ? '' : $this->request->getPost('skey');
-            $page = ($this->request->getPost('page') == '') ? 1 : ($this->request->getPost('page'));
-            //$type = ($request->getPost('typ') == '') ? '1' : ($request->getPost('typ'));
-            $limit = 100;
 
-            $mi_code = $sessinarr['user']['mi_code'];
-            $mi_type = $sessinarr['user']['mi_type'];
-            $offset = $limit * ($page - 1);
-            $param = [
-                'micode' => $mi_code,
-                'offset' => $offset,
-                'limit' => $limit,
-                'skey' => $skey
-            ];
-
-            $herb_m = model('Herb_m');
-            if ($mi_type == AUTH_MASTER){
-                if ($skey == '') {
-                    $Rs = $herb_m->Load_Product_Page_All($param);
-                } else {
-                    $Rs = $herb_m->Load_Product_SearchPage($param);
-                }
-            }else{
-                if ($skey == '') {
-                    $Rs = $herb_m->Load_Product_Page_All2($param);
-                } else {
-                    $Rs = $herb_m->Load_Product_SearchPage2($param);
-                }
-            }
-            $dataarr = [];
-            if (fn_ArrayCnt($Rs) > 0) {
-                foreach ($Rs as $d) {
-                    $temparr = [];
-
-                    $temparr['sn'] = $d['sn'];
-                    $temparr['hn_ID'] = $d['hn_ID'];
-                    $temparr['hn_code'] = $d['hn_code'];
-                    $temparr['fk_mdcode'] = $d['fk_mdcode'];
-                    $temparr['fk_mdname'] = $d['fk_mdname'];
-                    $temparr['fk_micode'] = $d['fk_micode'];
-                    $temparr['mi_name'] = $d['mi_name'];
-                    $temparr['fk_ncode'] = $d['fk_ncode'];
-                    $temparr['n_value'] = $d['n_value'];
-
-                    $temparr['fk_t1code'] = $d['fk_t1code'];
-                    $temparr['t1_value'] = $d['t1_value'];
-                    $temparr['fk_t2code'] = $d['fk_t2code'];
-                    $temparr['t2_value'] = $d['t2_value'];
-                    $temparr['hn_optstr'] = $this->Product_Option_str($d['t1_value'], $d['t2_value']);
-                    $temparr['fk_wcode'] = $d['fk_wcode'];
-                    $temparr['w_value'] = $d['w_value'];
-                    $temparr['w_name'] = $d['w_name'];
-                    $temparr['hn_name'] = $d['hn_name'];
-                    $temparr['hn_number'] = $d['hn_number'];
-                    $temparr['hn_bigsell'] = $d['hn_bigsell'];
-                    $temparr['hn_sale'] = $d['hn_sale'];
-                    $temparr['hn_MakeDate'] = fn_Short_Date($d['hn_MakeDate']);
-                    $temparr['hn_sellSDate'] = fn_Short_Date($d['hn_sellSDate']);
-                    $temparr['hn_sellEDate'] = fn_Short_Date($d['hn_sellEDate']);
-                    $temparr['hn_tax'] = $d['hn_tax'];
-                    $temparr['hn_desc'] = $d['hn_desc'];
-                    $temparr['hn_isSell'] = $d['hn_isSell'];
-                    $temparr['hn_boxCnt'] = $d['hn_boxCnt'];
-
-
-                    $fname = [
-                        'img' => '',
-                        'data' => ''
-                    ];
-                    $fRs = $herb_m->Load_Product_File_Code($d['hn_code']);
-                    if(fn_ArrayCnt($fRs)>0){
-                        foreach ($fRs as $c){
-                            if($c['typ']==1){
-                                $fname['img'] = $c['fname'];
-                            }else if($c['typ']==2){
-                                $fname['data'] = $c['fname'];
-                            }
-                        }
-                    }
-
-                    $temparr['fname'] = $fname;
-                    $temparr['price'] = $this->LoadPrice($d['hn_code']);
-
-                    if ($d['hn_isok'] == 100) {
-                        $hn_isok_str = '승인';
-                    } else if ($d['hn_isok'] == 1) {
-                        $hn_isok_str = '반려';
-                    } else if ($d['hn_isok'] == 0) {
-                        $hn_isok_str = '미승인';
-                    }
-
-                    $temparr['hn_isok_str'] = $hn_isok_str;
-                    $temparr['hn_isok'] = $d['hn_isok'];
-                    $temparr['hn_regdate'] = $d['hn_regdate'];
-
-                    $reject = $herb_m->Load_Product_isOk($d['hn_code']);
-                    if(fn_ArrayCnt($reject)>0){
-                        $temparr['hn_memo'] = $reject[0]['hn_memo'];
-                        $temparr['hn_type'] = $reject[0]['hn_type'];
-                    }else{
-                        $temparr['hn_memo'] = '';
-                        $temparr['hn_type'] = '';
-                    }
-                    array_push($dataarr, $temparr);
-                }
-                $new_page = $page + 1;
-            } else {
-                $new_page = $page;
-            }
-
-            $info = [
-                'page' => $new_page,
-                'list' => $dataarr
-            ];
-
-            $result = 'ok';
-            $data = $info;
-            $message = 'success';
-        }
-
-        $return = [
-            'result' => $result,
-            'info' => $data,
-            'message' => $message
-        ];
-        return $this->respond($return);
-    }
 
     public function Load_Herb_Info(){
         $hncode = ($this->request->getPost('hncode') == '') ? '' : ($this->request->getPost('hncode'));

@@ -5,8 +5,52 @@ $(document).ready(function () {
     });
 
 
-});
+    $('#btnHSearch').on('click',function(){
+        const skey = $('#h_sKey').val();
+        if(skey==''){
+            Make_Toast('검색어를 입력하세요.');
+            $('#h_sKey').focus();
+            return;
+        }
+        Search_Product(skey);
+    });
 
+    $("#h_sKey").on("keypress", function (key) {
+        if (key.keyCode == 13) {
+            const skey = $('#h_sKey').val();
+            if(skey==''){
+                Make_Toast('검색어를 입력하세요.');
+                $('#h_sKey').focus();
+                return;
+            }
+            Search_Product(skey);
+        }
+    });
+
+    // $(function () {
+    //     $('.gnb_area').on('mouseenter', '.top_gnb_ul > li', function () {
+    //         $('.sub_menu_wrap')
+    //             .stop(true, true)
+    //             .slideDown(200);
+    //     });
+    //
+    //     $('.gnb_area').on('mouseleave', function () {
+    //         $('.sub_menu_wrap')
+    //             .stop(true, true)
+    //             .slideUp(200);
+    //     });
+    // });
+    $(function () {
+        $('.hbox1-3 .top_gnb_ul > li').on('mouseenter', function () {
+            $('.hbox1-3 .sub_menu_wrap').addClass('active');
+        });
+
+        $('.hbox1-3').on('mouseleave', function () {
+            $('.hbox1-3 .sub_menu_wrap').removeClass('active');
+        });
+    });
+
+});
 
 function setTopMenuHighlight() {
     var path = (window.location.pathname + window.location.search).toLowerCase();
@@ -24,6 +68,11 @@ function setTopMenuHighlight() {
         $('.top_gnb_ul .top_menu.down_2').addClass('highlight');
 
     } else if (
+        path.indexOf('mainherblist') > -1
+    ) {
+        $('.top_gnb_ul .top_menu.down_3').addClass('highlight');
+
+    } else if (
         path.indexOf('orderlist') > -1 ||
         path.indexOf('orderdetail') > -1 ||
         path.indexOf('regularorder') > -1 ||
@@ -31,14 +80,20 @@ function setTopMenuHighlight() {
         path.indexOf('shiplist') > -1 ||
         path.indexOf('claimlist') > -1
     ) {
-        $('.top_gnb_ul .top_menu.down_3').addClass('highlight');
+        $('.top_gnb_ul .top_menu.down_6').addClass('highlight');
 
     } else if (
         path.indexOf('stock') > -1 ||
         path.indexOf('herblist') > -1 ||
         path.indexOf('herbreg') > -1 ||
         path.indexOf('herbregall') > -1 ||
-        path.indexOf('herbmatch') > -1
+        path.indexOf('herbmatch') > -1 ||
+        path.indexOf('prodlist') > -1
+    ) {
+        $('.top_gnb_ul .top_menu.down_5').addClass('highlight');
+
+    } else if (
+        path.indexOf('materiallist') > -1
     ) {
         $('.top_gnb_ul .top_menu.down_4').addClass('highlight');
 
@@ -91,9 +146,9 @@ function Make_delcode_str(sn){
 function Search_Product(skey){
     let url ='';
     if(skey==''){
-        url = '/Product/herbList';
+        url = '/Product/mainHerbList';
     }else{
-        url = '/Product/herbList?hd=' + skey
+        url = '/Product/mainHerbList?hd=' + skey
     }
 
     $(location).attr("href", url);
@@ -668,6 +723,30 @@ function go_mypage(){
     }
 }
 
+function go_materialList(){
+    let uid = $('#tUid').val();
+    let url = '';
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    }else{
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/materialList";
+        $(location).attr("href", url);
+    }
+}
+function go_prodList(){
+    let uid = $('#tUid').val();
+    let url = '';
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    }else{
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/prodList";
+        $(location).attr("href", url);
+    }
+}
 function go_herbList(){
     let uid = $('#tUid').val();
     let url = '';
@@ -917,12 +996,11 @@ function add_wishlist(e){
 
 function printWindow(id) {
     var printContent = document.getElementById(id).innerHTML;
-    var printWindow = window.open('', '', 'width=800,height=600');
+    var printWindow = window.open('', '', 'width=800,height=600,padding=10');
     printWindow.document.write('<html><head><title>Print</title>');
     var rnd = Math.floor(Math.random() * 10000);
     var cssstr = "<link rel='stylesheet' href='/assets/web/css/style.css?rnd=" + rnd + "' />";
     printWindow.document.write(cssstr);
-    console.log(cssstr, 'dawn1659');
     printWindow.document.write('</head><body>');
     printWindow.document.write(printContent);
     printWindow.document.write('</body></html>');
@@ -944,7 +1022,7 @@ function barcodePreview(code) {
     } else {
         let tUrl = $('#tUrl').val();
         url = tUrl + "/settings/prdBarcodePreview?hn=" + code;
-        window.open(url, 'barcodePopup', 'width=300,height=400,resizable=yes,scrollbars=yes');
+        window.open(url, 'barcodePopup', 'width=360,height=560,resizable=yes,scrollbars=yes');
     }
 }
 

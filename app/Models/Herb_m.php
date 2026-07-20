@@ -15,6 +15,58 @@ class Herb_m extends Model
         $this->db = Database::connect('default');
     }
 
+    public function Load_Product_info($hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->select($separated_val);
+        $builder->where('hn_code', $hncode);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+
+    public function Load_Pharm_Medicine_All($params,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->select($separated_val);
+        $builder->where('fk_micode',$params['micode']);
+        if(!empty($param['skey'])){
+            $builder->groupStart()
+                ->like('hn_code', $param['skey'])
+                ->orLike('hn_name', $param['skey'])
+                ->groupEnd();
+        }
+        $builder->orderBy('sn','DESC');
+        $offset = ($params['page'] - 1) * $params['pcnt'];
+        $builder->limit($params['pcnt'], $offset);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Cnt_Pharm_Medicine_All($params){
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->where('fk_micode',$params['micode']);
+        if(!empty($param['skey'])){
+            $builder->groupStart()
+                ->like('hn_code', $param['skey'])
+                ->orLike('hn_name', $param['skey'])
+                ->groupEnd();
+        }
+        return $builder->countAllResults();
+    }
+
+    public function Load_Product_PrdInfo($hncode,$hpcode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine a');
+        $builder->join('herb_company b', 'a.fk_micode = b.mi_code', 'inner');
+        $builder->select($separated_val);
+        $builder->where('hn_code', $hncode);
+        $builder->where('hp_code', $hpcode);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
     public function Insert_Product_Like($param){
         $this->db->transStart();
         $builder = $this->db->table('herb_medicine_like');
@@ -737,7 +789,7 @@ class Herb_m extends Model
         return $Query->getResultArray();
     }
 
-    public function Update_DelInfo_SetAllAsZero($mi_code,$isZero){
+    public function Update_DeliInfo_SetAllAsZero($mi_code,$isZero){
         $this->db->transStart();
         $builder = $this->db->table('herb_company_address');
         $builder->set('isDefault',$isZero);
@@ -836,15 +888,7 @@ class Herb_m extends Model
         return $query->getResultArray();
     }
 
-    public function Load_Product_info($hncode,$fields=['ALL']){
-        $separated_val = fn_Make_Fields($fields);
-        $builder = $this->db->table('v_product_info_all');
-        $builder->select($separated_val);
-        $builder->where('hn_code', $hncode);
-        $query = $builder->get();
 
-        return $query->getResultArray();
-    }
 
     public function Load_Product_info2($mdcode,$fields=['ALL']){
         $separated_val = fn_Make_Fields($fields);
@@ -900,18 +944,6 @@ class Herb_m extends Model
         return $Cnt;
     }
 
-    public function Cnt_Order_Step_Check($sn,$step,$fk_micode,$fields=['ALL']){
-        $sql = "SELECT COUNT(*) AS Cnt from v_order_goods_info WHERE sn = :SN: AND gd_status<>:STATUS: AND fk_micode = :MICODE:; ";
-        $bindparam = [
-            'SN' => $sn,
-            'STATUS' => $step,
-            'MICODE' => $fk_micode
-        ];
-        $Query = $this->db->query($sql, $bindparam);
-        $row = $Query->getRow();
-        $Cnt = ($row) ? $row->Cnt : 0;
-        return $Cnt;
-    }
 
     public function Cnt_Order_Step_Check2($in_sql,$step,$fk_micode,$fields=['ALL']){
         $sql = "SELECT COUNT(*) AS Cnt from v_order_goods_info WHERE sn IN(:INSQL:) AND gd_status<>:STATUS: AND fk_micode = :MICODE:; ";
@@ -1243,19 +1275,6 @@ class Herb_m extends Model
         $builder->update();
     }
 
-    public function Update_Order_Step($sn,$delidate,$step) {
-
-        $this->db->transStart();
-        $builder = $this->db->table('v_order_goods_info');
-        $builder->set('gd_status', $step);
-        $builder->set('gd_delidate', $delidate);
-        $builder->where('sn', $sn);
-        $builder->update();
-        $affected_rows = $this->db->affectedRows();
-        $this->db->transComplete();
-
-        return $affected_rows;
-    }
 
     public function Update_Order_Step3($sn,$step) {
         $this->db->transStart();

@@ -132,15 +132,8 @@ async function del_Reply(bid,bcode) {
 async function Update_rContent(bid,bcode) {
     try {
         let result1 = await Reply_Data(bid,bcode);
-        // console.log(result1);
-        console.log('bello1',bid);
         if(result1.result = 'ok'){
             let bcode = result1.code;
-            console.log('bello2',bcode);
-
-            // if($('#attachImg').val()!='') {
-            //     let result2 = await Attached_Img(bcode);
-            // }
 
             Make_Toast('답변을 등록하였습니다.');
 
@@ -150,8 +143,6 @@ async function Update_rContent(bid,bcode) {
         }
 
     } catch (error) {
-        Make_Toast('bello.');
-        console.log('bello3');
         console.log( error );
     }
 }
@@ -168,7 +159,6 @@ function Reply_Data(bid,bcode){
 
         let retarr = new Array();
         for (let pair of formdata.entries()) {
-            console.log('bello 777',pair[0]+ ': ' + pair[1]);
         }
 
         // console.log(formdata);
@@ -214,7 +204,6 @@ function Attached_Img(bcode){
         let formdata = new FormData();
 
         let files = $("#attachedImg")[0].files[0];
-        console.log('bello',formdata);
 
         formdata.append( "bcode", bcode);
         formdata.append("attachedImg",files);

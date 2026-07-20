@@ -25,13 +25,8 @@ function Prn_Barcode(pcode) {
             fontSize: 12
         });
         $("#barcodeDiv").css("overflow", "hidden");
-        //$("#barcodeDiv").css("display", "flex");
-        //$("#barcodeDiv").css("flexFlow", "column");
-        //$("#barcodeDiv").css("justifyContent", "center");
-        // $("#barcodeDiv").css("alignItens", "center");
-
-        $("#barcodeDiv").css("width", "100%");
-        $("#barcodeDiv").css("height", "46px");
+        // $("#barcodeDiv").css("width", "auto");
+        $("#barcodeDiv").css("height", "52px");
 
     }
 }

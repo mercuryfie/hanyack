@@ -55,7 +55,7 @@
                                     </div>
                                 <? } ?>
                             </div>
-                            <i class="fa-regular fa-user" onclick="go_orderList();"></i>
+                            <i class="fa-regular fa-user" onclick="go_orderList('');"></i>
                             <!--                    --><? // if ($header['mitype']==AUTH_MASTER){?>
                             <!--                        <i class="fa-solid fa-shield" onclick="top_secret();"></i>-->
                             <!--                    --><? // }?>
@@ -111,74 +111,90 @@
                 </div>
             <? } ?>
 
-
             <div class="hbox1-3 gnb_area">
                 <div class="top_menu_wrap">
                     <ul class="top_gnb_ul flexType1">
                         <? if ($header['mitype'] == AUTH_DECOC) { ?>
+<!--                            <li>-->
+<!--                                <a href="javascript:;" class=" top_menu down_1" onclick="go_dashBoard();"-->
+<!--                                   data-menu="dashboard">dashboard</a>-->
+<!--                            </li>-->
                             <li>
-                                <a href="javascript:;" class=" top_menu down_1" onclick="go_dashBoard();"
-                                   data-menu="dashboard">창고관리</a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" class="top_menu down_2 highlight" onclick="go_smart();"
+                                <a href="javascript:;" class="top_menu down_2 highlight" onclick="go_smart('');"
                                    data-menu="smartorder">스마트오더</a>
                             </li>
-                        <? } ?>
-                        <? if ($header['mitype'] == AUTH_DECOC) { ?>
                             <li>
-                                <a href="javascript:;" class="top_menu down_4" onclick="Search_Product('');"
+                                <a href="javascript:;" class="top_menu down_3" onclick="Search_Product('');"
                                    data-menu="stocklist">약재 둘러보기</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="top_menu down_6" onclick="go_orderList('');"
+                                   data-menu="orderlist">주문관리</a>
+                            </li>
+                        <? } else if ($header['mitype'] == AUTH_PHARM) { ?>
+                            <li>
+                                <a href="javascript:;" class="top_menu down_4" onclick="go_materialList('');"
+                                   data-menu="stocklist">입출고관리</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="top_menu down_5" onclick="go_herbList('');"
+                                   data-menu="herblist">약재관리</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="top_menu down_6" onclick="go_orderList('');"
+                                   data-menu="orderlist">주문관리</a>
                             </li>
                         <? } else { ?>
                             <li>
                                 <a href="javascript:;" class="top_menu down_4" onclick="go_herbList();"
                                    data-menu="herblist">약재관리</a>
                             </li>
-                        <? } ?>
-                        <li>
-                            <a href="javascript:;" class="top_menu down_3" onclick="go_orderList();"
-                               data-menu="orderlist">주문내역</a>
-                        </li>
+                        <? }  ?>
+<!--                        --><?//  if  ($header['mitype'] == AUTH_PHARM){ ?>
+<!--                            <li>-->
+<!--                                <a href="javascript:;" class="top_menu down_5" onclick="go_shipList();"-->
+<!--                                   data-menu="herblist">배송내역</a>-->
+<!--                            </li>-->
+<!--                        --><?// } ?>
 
 <!--                        <li>-->
 <!--                            <a href="javascript:;" class="top_menu down_5" data-menu="smartorder">정산관리</a>-->
 <!--                        </li>-->
-                        <? if ($header['mitype'] == AUTH_DECOC) { ?>
-                        <li>
-                            <a href="javascript:;" class="top_menu down_6" data-menu="smartorder" onclick="go_delInfo();">배송지관리</a>
-                        </li>
-                        <? } ?>
                     </ul>
                 </div>
 
                 <!--    top menu area end-->
                 <!--    sub_menu_box start-->
-                <div class="sub_menu_wrap flexType1">
+                <div class="sub_menu_wrap flexType1-1">
                     <? if ($header['mitype'] == AUTH_DECOC) { ?>
                         <div class="sub_menu_box">
                         </div>
                         <div class="sub_menu_box ">
                         </div>
                         <div class="sub_menu_box flexCol2-1">
+                            <a href="javascript:;" onclick="go_orderList();" class="sub_menu">주문내역</a>
                             <a href="javascript:;" onclick="go_claimList();" class="sub_menu">취소·반품내역</a>
+                            <a href="javascript:;" onclick="go_delInfo();" class="sub_menu">배송지 관리</a>
                             <!--                            <a href="javascript:;" onclick="go_BigOrder();" class="sub_menu">정기구독</a>-->
                             <!--                            <a href="javascript:;" onclick="go_BigOrder();" class="sub_menu">대량주문</a>-->
                         </div>
-                        <div class="sub_menu_box ">
-                        </div>
                     <? } else if ($header['mitype'] == AUTH_PHARM) { ?>
                         <div class="sub_menu_box ">
-                            <a href="javascript:void(0);" onclick="go_orderList();" class="sub_menu">주문내역</a>
-                            <a href="javascript:void(0);" onclick="go_shipList();" class="sub_menu">배송내역</a>
-                            <a href="javascript:void(0);" onclick="go_claimList();" class="sub_menu">취소·반품내역</a>
+                            <a href="javascript:void(0);" onclick="go_materialList();" class="sub_menu">원재료관리</a>
+<!--                            <a href="javascript:void(0);" onclick="go_prodList();" class="sub_menu">생산관리</a>-->
                         </div>
                         <div class="sub_menu_box ">
                             <a href="javascript:void(0);" onclick="go_herbList();" class="sub_menu">전체약재</a>
                             <a href="javascript:void(0);" onclick="go_herbReg();" class="sub_menu">약재등록</a>
                             <a href="javascript:void(0);" onclick="go_herbRegAll();" class="sub_menu">약재등록(일괄)</a>
                         </div>
-
+                        <div class="sub_menu_box ">
+                            <a href="javascript:void(0);" onclick="go_orderList();" class="sub_menu">주문내역</a>
+                            <a href="javascript:void(0);" onclick="go_shipList();" class="sub_menu">배송내역</a>
+                            <a href="javascript:void(0);" onclick="go_claimList();" class="sub_menu">취소·반품내역</a>
+                        </div>
+<!--                        <div class="sub_menu_box ">-->
+<!--                        </div>-->
                     <? } else { ?>
                         <div class="sub_menu_box ">
                             <a href="javascript:;" onclick="go_orderList();" class="sub_menu">주문내역</a>
@@ -192,15 +208,8 @@
                         </div>
 
                     <? } ?>
-                    <div class="sub_menu_box ">
-                        <!--                        <a href="javascript:;" onclick="go_delInfo();" class="sub_menu">hello?</a>-->
-                    </div>
-                    <div class="sub_menu_box flexCol2-1">
-                        <a href="javascript:;" onclick="go_delInfo();" class="sub_menu">배송지 관리</a>
-                        <a href="javascript:;" onclick="" class="sub_menu"></a>
-                    </div>
                 </div>
-        </div>
+            </div>
 
         </div>
         <div class="gnb_area_thin flexType1">

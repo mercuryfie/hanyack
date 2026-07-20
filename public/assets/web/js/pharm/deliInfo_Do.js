@@ -242,13 +242,11 @@ async function add_NewAddress(mizip,add1) {
             if(result.status == 'ok') {
                 Make_Toast('저장하였습니다.');
                 do_refresh();
-                console.log('bello1');
             }
         }
 
     } catch (error) {
-        Make_Toast('bello.');
-        console.log('bello333333');
+        Make_Toast('에러가 발생하였습니다.'+error);
         console.log( error );
     }
 }
@@ -274,7 +272,6 @@ function add_NewAddress_Data(mizip,add1){
 
         let retarr = new Array();
         for (let pair of formdata.entries()) {
-            console.log('bello 13',pair[0]+ ': ' + pair[1]);
         }
 
         $.ajax({
@@ -319,13 +316,11 @@ async function edit_Address(sn) {
             if(result.status == 'ok') {
                 Make_Toast('저장하였습니다.');
                 do_refresh();
-                console.log('bello1');
             }
         }
 
     } catch (error) {
-        Make_Toast('bello.');
-        console.log('bello333333');
+        Make_Toast('에러가 발생하였습니다.'+error);
         console.log( error );
     }
 }
@@ -369,7 +364,6 @@ function edit_Address_Data(sn){
 
         let retarr = new Array();
         for (let pair of formdata.entries()) {
-            console.log('bello 14',pair[0]+ ': ' + pair[1]);
         }
 
         $.ajax({
@@ -414,13 +408,11 @@ async function do_DelAddress(sn) {
             if(result.status == 'ok') {
                 Make_Toast('삭제하였습니다.');
                 do_refresh();
-                console.log('bello1');
             }
         }
 
     } catch (error) {
-        Make_Toast('bello.');
-        console.log('bello333333');
+        Make_Toast('에러가 발생하였습니다.'+error);
         console.log( error );
     }
 }
@@ -435,7 +427,6 @@ function Del_Address_Data(sn){
 
         let retarr = new Array();
         for (let pair of formdata.entries()) {
-            console.log('bello 14',pair[0]+ ': ' + pair[1]);
         }
 
         $.ajax({

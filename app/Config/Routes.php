@@ -42,6 +42,12 @@ $routes->match(['GET', 'POST'], 'Api/Load_Herb_ListByMain', 'ApiCommonController
 
 /* API  - pharm*/
 $routes->match(['GET', 'POST'], 'Api/Search_Medicine_Pharm', 'ApiPharmController::Search_Medicine_Pharm');
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_Order', 'ApiPharmController::Load_Pharm_Order');
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_Medicine_All', 'ApiPharmController::Load_Pharm_Medicine_All');
+$routes->match(['GET', 'POST'], 'Api/Update_Pharm_OrderByStep', 'ApiPharmController::Update_Pharm_OrderByStep');
+
+
+
 
 $routes->match(['GET', 'POST'], 'Api/Load_Medicine', 'ApiController::Load_Medicine');
 $routes->match(['GET', 'POST'], 'Api/Load_Medicine_Option1', 'ApiController::Load_Medicine_Option1');
@@ -125,14 +131,6 @@ $routes->match(['GET', 'POST'], 'Api/Insert_Product_Event', 'ApiController::Inse
 $routes->match(['GET', 'POST'], 'Api/Load_ProductEvent', 'ApiController::Load_ProductEvent');
 
 
-/* CommonController */
-$routes->GET('Product/itemDetail', 'CommonController::itemDetail');
-$routes->GET('Product/itemDetail_m', 'CommonController::itemDetail_m');
-$routes->GET('Product/herbList', 'CommonController::herbList');
-//$routes->get('mobile/(:any)', 'MobileController::index');
-
-
-
 /* Board */
 $routes->GET('Board/bList/','BoardController::bList');
 $routes->match(['GET', 'POST'], 'Board/boardForm', 'BoardController::boardForm');
@@ -145,8 +143,10 @@ $routes->GET('Board/burkOrder','BoardController::burkOrder');
 
 /* Mypage -- 약재관리 */
 /*  약재상 : pharm   */
-$routes->GET('Mypharm/','HerbPharmController::dashBoard');
+$routes->GET('Mypharm/','HerbPharmController::herbList');
 $routes->GET('Mypharm/dashBoard','HerbPharmController::dashBoard');
+$routes->GET('Mypharm/materialList','HerbPharmController::materialList');
+$routes->GET('Mypharm/prodList','HerbPharmController::prodList');
 $routes->GET('Mypharm/herbList','HerbPharmController::herbList');
 $routes->GET('Mypharm/herbReg','HerbPharmController::register');
 $routes->POST('Mypharm/herbReg_Do','HerbPharmController::herbReg_Do');
@@ -163,8 +163,9 @@ $routes->GET('Mypharm/statementPallet','HerbPharmController::statementPallet');
 $routes->GET('Mypharm/burkOrder','HerbPharmController::burkOrder');
 $routes->GET('Mypharm/settings/prdBarcode','HerbPharmController::prdBarcode');
 $routes->GET('Mypharm/settings/prdBarcodePreview','HerbPharmController::prdBarcodePreview');
-$routes->GET('Mypharm/claimList/','HerbPharmController::claimList');
-$routes->GET('Mypharm/deliveryInfo/','HerbPharmController::deliveryInfo');
+$routes->GET('Mypharm/claimList','HerbPharmController::claimList');
+$routes->GET('Mypharm/deliveryInfo','HerbPharmController::deliveryInfo');
+$routes->GET('Mypharm/PrnInfo','HerbPharmController::PrnInfo');
 
 /*  탕전실   */
 $routes->GET('Mydecoc/','HerbDecocController::dashBoard');
@@ -172,7 +173,6 @@ $routes->GET('Mydecoc/dashBoard','HerbDecocController::dashBoard');
 $routes->GET('Mydecoc/herbList','HerbDecocController::herbList');
 $routes->GET('Mydecoc/orderList','HerbDecocController::orderList');
 $routes->GET('Mydecoc/orderDetail','HerbDecocController::orderDetail');
-$routes->GET('Mydecoc/orderList/(:segment)','HerbDecocController::orderList/$1');
 $routes->GET('Mydecoc/putList','HerbDecocController::putList');
 $routes->GET('Mydecoc/stockListDecoc','HerbDecocController::stockListDecoc');
 $routes->GET('Mydecoc/deliveryList','HerbDecocController::deliveryList');
@@ -185,6 +185,11 @@ $routes->GET('Mydecoc/return/','HerbDecocController::claim');
 $routes->GET('Mydecoc/claim/exchange','HerbDecocController::claimExchange');
 //$routes->GET('Product/mainThum', 'HerbDecocController::mainThum');
 $routes->GET('Mydecoc/SmartOrder','OrderController::NewSmartOrder');
+
+/* CommonController */
+$routes->GET('Product/itemDetail', 'CommonController::itemDetail');
+$routes->GET('Product/itemDetail_m', 'CommonController::itemDetail_m');
+$routes->GET('Product/mainHerbList', 'CommonController::mainHerbList');
 
 /*  디제이메디 master */
 $routes->GET('Mypage/','HerbController::dashBoard');

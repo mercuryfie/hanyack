@@ -32,6 +32,13 @@
                 <p class="cat">시험성적서</p>
                 <input type="file" class="input_file">
             </div>
+            <div class="row flexType2">
+                <p class="cat">생산량</p>
+                <div class="unit_box flexType2">
+                    <input type="search" class="input_type mr10" placeholder="숫자만">
+                    <p class="unit">g</p>
+                </div>
+            </div>
         </div>
         <div class="area lastArea">
             <button class="btnType32 mr10" id="Xbtn2">닫기</button>

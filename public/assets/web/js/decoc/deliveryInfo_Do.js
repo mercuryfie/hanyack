@@ -42,9 +42,9 @@ $(document).ready(function () {
                             </label>
                         </div> 
                         <div class="btnBox flexType6 mr10 ">
-                        <button type="button" class="btnType1 mr10" 
+                        <button type="button" class="btnType32 mr10" 
                                 name="" onclick="do_refresh();">취소</button>
-                        <button type="button" class="btnType2" 
+                        <button type="button" class="btnType32-1" 
                                 name="" onclick="add_NewAddress('${data.zonecode}','${data.roadAddress}');">저장</button>
                          </div>
                          
@@ -139,7 +139,7 @@ function Load_DelInfo() {
                         } else {
                             isDefault += ``;
                             isChecked += ``;
-                            delAddress += `<button type="button" class="btnType1 "  
+                            delAddress += `<button type="button" class="btnType32 "  
                                             onclick="do_DelAddress(${el.sn});">삭제</button>`;
                             setDefault += `
                                          <div class="type flexType2">
@@ -170,7 +170,7 @@ function Load_DelInfo() {
                                 </div>
                                 <div class="btnBox"> 
                                     ${delAddress}
-                                    <button type="button" class="btnType1 mr10"  
+                                    <button type="button" class="btnType32 mr10"  
                                             onclick="do_EditAddress(${el.sn});">수정</button>
                                 </div>
                             </div>
@@ -211,9 +211,9 @@ function Load_DelInfo() {
                                 ${setDefault}
                                  
                                 <div class="btnBox flexType5 mr10 mt20">
-                                    <button type="button" class="btnType1 mr10" 
+                                    <button type="button" class="btnType32 mr10" 
                                             name="" onclick="do_refresh();">취소</button>
-                                    <button type="button" class="btnType2" 
+                                    <button type="button" class="btnType32-1" 
                                             name="submitNewAddress" 
                                             onclick="edit_Address(${el.sn});">저장</button>
                                 </div>
@@ -242,13 +242,11 @@ async function add_NewAddress(mizip,add1) {
             if(result.status == 'ok') {
                 Make_Toast('저장하였습니다.');
                 do_refresh();
-                console.log('bello1');
             }
         }
 
     } catch (error) {
-        Make_Toast('bello.');
-        console.log('bello333333');
+        Make_Toast('에러가 발생하였습니다.'+error);
         console.log( error );
     }
 }
@@ -274,7 +272,6 @@ function add_NewAddress_Data(mizip,add1){
 
         let retarr = new Array();
         for (let pair of formdata.entries()) {
-            console.log('bello 13',pair[0]+ ': ' + pair[1]);
         }
 
         $.ajax({
@@ -319,20 +316,17 @@ async function edit_Address(sn) {
             if(result.status == 'ok') {
                 Make_Toast('저장하였습니다.');
                 do_refresh();
-                console.log('bello1');
             }
         }
 
     } catch (error) {
-        Make_Toast('bello.');
-        console.log('bello333333');
+        Make_Toast('에러가 발생하였습니다.'+error);
         console.log( error );
     }
 }
 
 function edit_Address_Data(sn){
     return new Promise(function(resolve, reject) {
-
 
         let $editRoot = $(`[name="edit_address"][data-sn="${sn}"]`);
         let zonecode = $editRoot.find('[name="zonecode"]').val();
@@ -356,6 +350,7 @@ function edit_Address_Data(sn){
 
         // 값 직접 뽑아오고 append
         formdata.append("sn", sn);
+        console.log("sn=", sn);
         formdata.append("zonecode", zonecode ?? '');
         formdata.append("Add1", add1 ?? '');
         formdata.append("Add2", add2 ?? '');
@@ -369,7 +364,6 @@ function edit_Address_Data(sn){
 
         let retarr = new Array();
         for (let pair of formdata.entries()) {
-            console.log('bello 14',pair[0]+ ': ' + pair[1]);
         }
 
         $.ajax({
@@ -414,13 +408,11 @@ async function do_DelAddress(sn) {
             if(result.status == 'ok') {
                 Make_Toast('삭제하였습니다.');
                 do_refresh();
-                console.log('bello1');
             }
         }
 
     } catch (error) {
-        Make_Toast('bello.');
-        console.log('bello333333');
+        Make_Toast('에러가 발생하였습니다.'+error);
         console.log( error );
     }
 }
@@ -435,7 +427,6 @@ function Del_Address_Data(sn){
 
         let retarr = new Array();
         for (let pair of formdata.entries()) {
-            console.log('bello 14',pair[0]+ ': ' + pair[1]);
         }
 
         $.ajax({

@@ -28,8 +28,8 @@
                     <input type="date" class="input_date" id="e_date">
                 </div>
                 <div class="orderList_boxpq8 flexType2">
-                    <input type="search" name="hnName" id="hnName" class="" placeholder="상품명으로 검색해 보세요">
-                    <button class="btnType32" id="btnOrderSearch" type="button">조회하기</button>
+                    <input type="search" name="hnName" id="hnName" class="" placeholder="약재명을 검색하십시오.">
+                    <button class="btnType32-1" id="btnOrderSearch" type="button">검색</button>
                 </div>
             </div>
             <div class="right blank">

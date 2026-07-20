@@ -1,7 +1,7 @@
 
           <div class="gunpop cartpopcon" id="popcart" name="popcart">
               <div class="cartpop">
-                  <i class="fa-regular fa-circle-check"></i>
+                  <p class="circle"><i class="fa-solid fa-check"></i> </p>
                   <h2>담기 완료!</h2>
                   <p>상품을 장바구니에 담았습니다</p>
                   <div>

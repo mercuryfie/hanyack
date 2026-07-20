@@ -337,6 +337,7 @@ class ApiDecocController extends BaseController
         $hnPackageType = $hInfo[0]['hn_package_type'];
         $hnPackageCnt = $hInfo[0]['hn_package_cnt'];
         $hnUnitPrice = $hInfo[0]['price'];
+        $hpcode = $hInfo[0]['hp_code'];
 
         if($hnPackageType==1){
             $totalCnt = $hnCnt;
@@ -351,6 +352,7 @@ class ApiDecocController extends BaseController
             'fk_odcode' => $od_code,
             'fk_cfcode' => $cfcode,
             'fk_hncode' => $hnCode,
+            'fk_hpcode' =>$hpcode,
             'gd_price' => $totalPrice,
             'gd_cnt' => $totalCnt,
             'gd_rPrice' => $hnUnitPrice,
@@ -404,6 +406,7 @@ class ApiDecocController extends BaseController
             $hnPackageType = $hInfo[0]['hn_package_type'];
             $hnPackageCnt = $hInfo[0]['hn_package_cnt'];
             $hnUnitPrice = $hInfo[0]['price'];
+            $hpcode = $hInfo[0]['hp_code'];
 
             if($hnPackageType==1){
                 $totalCnt = $hnCnt;
@@ -420,6 +423,7 @@ class ApiDecocController extends BaseController
                 'fk_odcode' => $od_code,
                 'fk_cfcode' => $cfcode,
                 'fk_hncode' => $hnCode,
+                'fk_hpcode' =>$hpcode,
                 'gd_price' => $totalPrice,
                 'gd_cnt' => $totalCnt,
                 'gd_rPrice' => $hnUnitPrice,

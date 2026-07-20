@@ -40,6 +40,12 @@ body.body-no-scroll {
         color: #000 !important;
         text-decoration: none !important;
     }
+
+    .pop_prn_barcode_con {
+        margin: 2mm;
+    }
+
+
 }
 
 .main-container {
@@ -505,7 +511,7 @@ input[type="radio"] {
 
 .common_page_box {
     margin-top: 20px;
-    width: 1180px;
+    width: 1140px;
 }
 
 /*order list decoc type page box ---*/
@@ -556,15 +562,31 @@ input[type="radio"] {
 
 }
 
+.common_list_wrap .common_table th {
+    font-weight: normal;
+    height: 32px;
+    text-align: center;
+    background-color: #ececec60;
+
+}
 .common_list_wrap .common_table td {
     border-bottom: 1px solid #ccc;
-    height: 30px;
+    height: 32px;
+    text-align: center;
 
 }
 
 .common_list_wrap .common_table .select_type {
     width: 120px;
     height: 32px;
+
+}
+
+.common_list_wrap.so_wrap .common_table td:first-child {
+    width: 220px;
+}
+.common_list_wrap.so_wrap .common_table td:nth-child(2) {
+    width: 180px;
 
 }
 
@@ -656,13 +678,6 @@ input[type="radio"] {
     margin-right: 20px;
 }
 
-/*.col1 {*/
-/*    width: 25%;*/
-/*    background-color: var(--bg-color1);*/
-/*    text-align: center;*/
-/*    font-weight: 500;*/
-/*}*/
-
 .col2 {
     align-items: center;
 }
@@ -685,48 +700,6 @@ input[type="radio"] {
     transform: translateY(-50%);
     right: 10px;
     color: var(--bg-color3);
-}
-
-.smartcon3 {
-    /*width: 1180px;*/
-    /*margin: 0 auto;*/
-}
-
-.smartcon3 .smart_head_title {
-    margin: 0 auto;
-    font-size: 22px;
-    font-weight: bold;
-    padding: 20px 0;
-    text-align: center;
-}
-
-.scbtnbox {
-    margin: 0 auto;
-    width: 1180px;
-    margin-bottom: 10px;
-}
-
-.scbtnbox .SO_filter {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 160px;
-    height: 30px;
-
-}
-.scbtnbox .text2 {
-    color: var(--main-color);
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.scbtnbox .btn_box button + button::before {
-    content: "|";
-    margin-right: 10px;
-    color: #ccc;
-}
-
-.scbtnbox .btn_box button {
-    position: relative;
 }
 
 /* herbMatch> herbSearch cdd start */
@@ -868,82 +841,106 @@ input[type="radio"] {
 
 }
 
+/*newsmartOrder_View start ----------------*/
 
-/* .btnli2>button:nth-child(1),
-.btnli2>button:nth-child(2) {
-    border:none;
-    background-color: transparent;
-    color:#5c5c5c;
-    font-size: 12px;
-    width: 60px;
-    height: 24px;
+.smartcon3 {
+    /*width: 1180px;*/
+    /*margin: 0 auto;*/
+}
 
-} */
-.sotablebox {
-    width: 1180px;
+.smartcon3 .smart_head_title {
     margin: 0 auto;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 20px 0;
+    text-align: center;
 }
 
-.sotable {
-    width: 1180px;
-    border-collapse: collapse;
-    font-size: 14px;
-    background-color: #fff;
-    text-wrap: nowrap;
+.scbtnbox {
+    /*margin: 0 auto;*/
+    width: 1140px;
+    /*padding: 0 20px;*/
+    margin-bottom: 20px;
 }
+
+.scbtnbox .sch_box .input_search {
+    /*border: 1px solid #ccc;*/
+    border-radius: 5px;
+    width: 220px;
+    height: 32px;
+    border: none;
+    background-color: #ececec80;
+    padding-left: 10px;
+
+}
+.scbtnbox .select_type.typ2 {
+    /*border: 1px solid #ccc;*/
+    /*border-radius: 5px;*/
+    width: auto;
+    height: 32px;
+    padding: 0 5px;
+    border: none;
+    background-color: #ececec80;
+
+}
+.scbtnbox .text2 {
+    color: var(--main-color);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.scbtnbox .btn_box button + button::before {
+    content: "|";
+    margin-right: 10px;
+    color: #ccc;
+}
+
+.scbtnbox .btn_box button {
+    position: relative;
+    color:#9d9d9d;
+    font-size:14px;
+}
+
+
+.scbtnbox .btn_box button.active {
+    color: var(--main-color);
+}
+
 
 .sotable .stock_status {
     width: 40px;
 }
 
 .sotable .stock_status i {
-    /*font-size: 16px;*/
     color: #5c5c5c;
     margin-left: 10px;
-    /*font-weight: 600;*/
 }
 
-.sotable .stock_status p.red {
+.sotable .stock_status .status {
+    text-wrap: nowrap;
+    font-size: 14px;
+    color: #5c5c5c;
+}
+.sotable .stock_status .status.red {
     color: red;
     /*text-wrap: nowrap;*/
 }
 
-.sotable .stock_status p.green {
+.sotable .stock_status .status.green {
     color: var(--main-color);
     /*text-wrap: nowrap;*/
 }
 
 .socol1 {
-    min-height: 32px;
-    height: 32px;
-    line-height: 32px;
-    border-bottom: 1px solid var(--bg-color3);
-    font-weight: 500;
-    text-align: center;
     background-color: var(--bg-color1);
-}
-
-.sotable td.scidx1-1 {
-    width: 220px;
-}
-
-.sotable td.scidx1-2 {
-    width: 120px;
-
-}
-.sotable td {
-    min-width: 60px;
-    width: auto;
-    min-height: 32px;
-    height: 32px;
-    line-height: 32px;
-    border-bottom: 1px solid var(--bg-color3);
-    text-align: center;
-
 }
 
 .sotable tr.active {
     background-color: #f5e5fc;
+}
+
+.common_list_wrap .common_table.sotable td.scidx1-9 {
+    width: 100px;
 }
 
 .sotable .hn_buyTypeStr1 {
@@ -1055,9 +1052,6 @@ input[type="radio"] {
     display: inline-block;
 }
 
-/* .sotable td:nth-child(3)>p:nth-child(1) {
-line-height: 30px;
-} */
 .hbname > p:nth-child(1) {
     margin-right: 2px;
 }
@@ -1145,14 +1139,6 @@ line-height: 30px;
 .countBox > i {
     font-size: 18px;
 }
-
-/*.sotable td button {*/
-/*    font-size: 10px;*/
-/*    width: 40px;*/
-/*    height: 20px;*/
-/*    border: none;*/
-/*    border-radius: 2px; */
-/*}*/
 
 .bestpri {
     background-color: var(--mint-color);
@@ -1247,6 +1233,7 @@ line-height: 30px;
     /*color:#fff;*/
 }
 
+/* newsmartOrder_View end --------------- */
 /* itemRejectpopcon --------------- */
 
 .accPopCon,
@@ -1281,9 +1268,7 @@ line-height: 30px;
     transform: translate(-50%, -50%);
     display: flex;
     flex-flow: column;
-    /*justify-content: center;*/
     align-items: center;
-
 }
 
 .thumpop  i{
@@ -1454,6 +1439,73 @@ line-height: 30px;
 }
 
 
+
+/* pop_AddMaterial_View start  -------------------------------- */
+
+.common_pop_wrap.add_material_wrap {
+    display: block;
+}
+
+.common_pop_conkol.add_material_con {
+    /*display: block;*/
+    border:1px solid red;
+    width:480px;
+    height:480px;
+    padding: 10px;
+}
+
+.add_material_con .cat {
+    color: #8c8c8c;
+    width: 100px;
+    margin-right: 20px;
+}
+
+.add_material_con .input_type {
+    border:1px solid #ccc;
+    border-radius: 5px;
+    width: 240px;
+    height:32px;
+}
+
+.add_material_con textarea {
+    border:1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    resize: none;
+    width: 240px;
+
+}
+
+/* pop_AddMaterial_View end  -------------------------------- */
+/* pop_Order_Del_View start --------------- */
+
+
+.common_pop_conkol.del_order {
+    width: 320px;
+    height: 220px;
+}
+
+
+.common_pop_conkol.del_order .area2 {
+}
+
+.common_pop_conkol.del_order .circle {
+    border:1px solid var(--main-color);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+}
+
+.common_pop_conkol.del_order .circle i {
+    color: var(--main-color);
+}
+
+.common_pop_conkol.del_order .btnType32,
+.common_pop_conkol.del_order .btnType32-1 {
+    width: 80px;
+}
+
+/* pop_Order_Del_View end --------------- */
 /* pop_Price_View start --------------- */
 .bestpop {
     display: none;
@@ -1617,6 +1669,7 @@ line-height: 30px;
     color: #8e8e8e;
 
 }
+
 .buy_item_conkol .area2 .item_box .sub_name_box .data2 {
     font-weight: 600;
     /*font-size: 14px;*/
@@ -1841,7 +1894,6 @@ line-height: 30px;
 
 .pop_produceherb_con .area.area2 .left,
 .pop_produceherb_con .area.area2 .right{
-    border:1px solid red;
     width: 100%;
     height: 100%;
 
@@ -1863,14 +1915,15 @@ line-height: 30px;
     margin-right: 10px;
 }
 
-.pop_produceherb_con .area .row .input_file {
-
-}
-
 
 .pop_produceherb_con .btnType32.date {
     width: 160px;
 }
+
+.pop_produceherb_con .input_type {
+    height:32px;
+}
+
 .pop_produceherblog_con .btnType32,
 .pop_produceherblog_con .btnType32-1,
 .pop_produceherb_con .btnType32,
@@ -2879,7 +2932,6 @@ line-height: 30px;
 }
 
 .cartpop,
-.orderpop,
 .cart_orderpop,
 .cart_dltmer,
 .authpop
@@ -2899,11 +2951,11 @@ line-height: 30px;
     align-items: center;
 }
 
-.cartpop > i,
-.orderpop > i,
-.cart_orderpop > i {
-    font-size: 48px;
 
+.cartpop i,
+.cart_orderpop i {
+    font-size: 18px;
+    color: var(--main-color);
 }
 
 .cart_dltmer > i,
@@ -2913,7 +2965,6 @@ line-height: 30px;
 }
 
 .cartpop > h2,
-.orderpop > h2,
 .cart_orderpop > h2,
 .cart_dltmer > h2,
 .authpop > h2 {
@@ -2930,7 +2981,6 @@ line-height: 30px;
 }
 
 .cartpop button,
-.orderpop button,
 .cart_orderpop button,
 .cart_dltmer button,
 .authpop button {
@@ -3116,7 +3166,7 @@ line-height: 30px;
 
 
 .wishHeartBox  {
-    border:1px solid #ececec;
+    border:1px solid #ccc;
     border-radius: 50%;
     width: 32px;
     height: 32px;
@@ -4243,16 +4293,26 @@ main,
 
 /* orderListPharm_View start --------- */
 
+.olp_conkol .input_period_box .dash {
+    padding: 0 10px;
+}
 .olp_conkol .input_date {
     border-radius: 5px;
-    border:1px solid #ccc;
-    width: 160px;
+    border:none;
+    /*border:1px solid #ccc;*/
+    width: 120px;
     height: 32px;
+    padding: 0 5px;
 }
 
 .olp_conkol .select_type {
     height: 32px;
 
+}
+
+.olp_conkol .select_type.typ2 {
+    border:none;
+    background-color: #ececec80;
 }
 
 .olp_conkol .input_search {
@@ -4267,13 +4327,6 @@ main,
 }
 
 /* orderListPharm_View end --------- */
-/*.shipListPharm {*/
-/*    height: 40px;*/
-
-/*}*/
-/*.shipListPharm .odrbox1-1-1 {*/
-/*    height: 40px;*/
-/*}*/
 
 .periboxMaster {
     width: 1180px;
@@ -4524,6 +4577,7 @@ main,
     margin-left: -1px;
 }
 
+/*herbListPharm_View start -----*/
 .herbListPharmTable .editHerb,
 .herbListPharmTable .hideBtn,
 .herbListPharmTable .barBtn {
@@ -4546,80 +4600,60 @@ main,
     color:red;
 }
 
-
-.mersearch {
-    margin-left: 20px;
-    width: 1140px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-
-.mersearch input {
+.hlp_wrap .sch_box .input_search {
     border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 340px;
-    height: 30px;
-    margin-right: 10px;
+    width: 220px;
+    height: 32px;
+    border: none;
+    background-color: #ececec80;
     padding-left: 10px;
-}
 
-.mersearch .btn1 {
-    border: none;
-    border-radius: 5px;
-    background-color: #ececec;
-    width: 40px;
-    height: 30px;
-    margin-right: 10px;
 }
-
-.mersearch .btn2 {
-    border: none;
-    border-radius: 5px;
-    background-color: var(--main-color);
-    color: #fff;
-    width: 80px;
-    height: 30px;
-    font-size: 14px;
-}
-
-.merlitable {
-    /* border:1px solid #ccc; */
-    margin: 10px 20px auto;
-    width: 1140px;
-    height: auto;
-    font-size: 12px;
-    border-collapse: collapse;
-    text-align: center;
+.common_table.hlp_table {
 
 }
 
-.merlitable th {
-    font-weight: normal;
-    text-wrap: nowrap;
-}
-.herbListDecTable {
-    margin-top: 20px;
-    width: 1140px;
-}
-
-.herbListPharmTable {
-    /*margin-top: 20px;*/
-}
-
-.herbListPharmTable .merlirow:first-child {
-    width: 40px;
-}
+/*.mersearch {*/
+/*    margin-left: 20px;*/
+/*    width: 1140px;*/
+/*    height: 40px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: space-between;*/
+/*    margin-top: 10px;*/
+/*}*/
 
 
-.herbListPharmTable .dueto {
-    width: 40px;
+/*.mersearch input {*/
+/*    border-radius: 5px;*/
+/*    border: 1px solid #ccc;*/
+/*    width: 340px;*/
+/*    height: 32px;*/
+/*    margin-right: 10px;*/
+/*    padding-left: 10px;*/
+/*}*/
 
-}
+/*.mersearch .btn1 {*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    background-color: #ececec;*/
+/*    width: 40px;*/
+/*    height: 32px;*/
+/*    margin-right: 10px;*/
+/*}*/
 
+/*.mersearch .btn2 {*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    background-color: var(--main-color);*/
+/*    color: #fff;*/
+/*    width: 80px;*/
+/*    height: 32px;*/
+/*    font-size: 14px;*/
+/*}*/
+
+
+/*herbListPharm_View end  -----*/
 .flexType1 {
     display: flex;
     justify-content: center;
@@ -4951,7 +4985,7 @@ main,
     /*border:1px solid red;*/
     /*border-radius: 10px;*/
     width: 840px;
-    min-height:480px;
+    min-height:580px;
     height:auto;
     padding-bottom: 40px;
     /*background-color: #fff;*/
@@ -5004,14 +5038,22 @@ main,
 
 
 /* claimList_View start  --------- */
-.claim_list_wrap {
-    /*width:1180px;*/
-    /*border:1px solid red;*/
-    /*background-color: #fff;*/
-    /*border-radius: 10px;*/
-    /*padding: 0 10px;*/
+
+.common_list_wrap.clp_wrap .area2 {
+    padding:10px 0;
+}
+.common_list_wrap.clp_wrap .area2 .input_type {
+    background-color: #ececec20;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 220px;
+    height: 32px;
 }
 
+.common_list_wrap.clp_wrap .area2 .select_type {
+    height: 32px;
+
+}
 /* claimList_View end  --------- */
 .copied {
     cursor: pointer;
@@ -5028,7 +5070,7 @@ main,
     border:1px solid transparent;
     border-radius: 10px;
     background-color: #ececec41;
-    width: 200px;
+    width: 220px;
     height: 32px;
 }
 
@@ -7036,65 +7078,75 @@ th, td {
 
 
 
-/*shipBox1-1 ---------------------*/
-.ipgoTitle {
-    width: 1180px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-}
+/*shipListPharm_View start ---------------------*/
 
-.ipgoFilter {
-    margin-top: 20px;
+.common_list_wrap.slp_wrap .area2 .input_date{
+    border:none;
+
 }
-.shipBox1-1 {
-    border: 1px solid #ececec;
-    margin-left: 20px;
-    width: 1140px;
-    height: 340px;
-    overflow: hidden;
-    overflow-y: scroll;
-    scroll-behavior: auto;
+.common_list_wrap.slp_wrap .area2 .input_period_box,
+.common_list_wrap.slp_wrap .area2 .select_type{
+    height: 32px;
 
 }
 
-.shipBox1-2 {
-    border: 1px solid #ececec;
-    margin-left: 20px;
-    width: 1180px;
-    height: 340px;
-    overflow: hidden;
-    overflow-y: scroll;
-    scroll-behavior: auto;
+.common_list_wrap.slp_wrap .area2 .input_search{
+    background-color: #ececec60;
+    border-radius: 5px;
+    border:none;
+    width: 220px;
+    height: 32px;
+    padding-left: 10px;
+
 }
-.shipBox1-3 {
-    width: 1180px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/*shipListPharm_View end ---------------------*/
+/*materialList_View start ---------------------*/
+
+.common_list_wrap.mlp_wrap {
+    margin-top: 0;
 }
 
+.common_list_wrap.mlp_wrap .common_table th{
+    background-color: #ececec60;
 
-.shipBox .btnType1,
-.ipgoTitle .btntype3{
-    margin-left: 10px;
 }
 
-.stockTable1-1,
-.stockTable1-2,
-.shipTable1-1 {
-    margin-top: 0px;
-    margin-left: 0px;
-    width: 1140px;
-    /*border:1px solid #ececec;*/
+.common_list_wrap.mlp_wrap .common_table th.h_name {
+    width: 220px;
 }
-.shipTable1-1 td ~ .hoverGreen:hover {
-    color:var(--second-color);
-    text-decoration: underline;
-    cursor: pointer;
+/*materialList_View end ---------------------*/
+/*ProdList_View start ---------------------*/
+
+.common_list_wrap.plp_wrap {
+    margin-top: 0;
 }
 
+.common_list_wrap.plp_wrap .common_table th{
+    background-color: #ececec;
+
+}
+
+.common_list_wrap.plp_wrap .common_table th.h_name {
+    width: 220px;
+}
+
+.common_list_wrap.plp_wrap .area1 .data_box .cat{
+    width: 100px;
+    margin-right: 10px;
+    color: #8c8c8c;
+
+}
+
+.common_list_wrap.plp_wrap .common_table tr.status.deactivation {
+    background-color: #ececec60;
+    color: #5c5c5c;
+
+}
+
+.common_list_wrap.plp_wrap .common_table i {
+    color: #5c5c5c;
+}
+/*ProdList_View end ---------------------*/
 /* statement-con --------------------------- */
 .statement-con {
     margin: 0 auto;
@@ -7353,8 +7405,8 @@ th, td {
     margin-bottom: 40px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    /*justify-content: flex-start;*/
+    justify-content: flex-start;
+    gap: 20px;
     align-items: flex-start;
     /*display: grid;*/
     /*grid-template-columns: repeat(5, 1fr); !* 5등분 *!*/
@@ -9012,29 +9064,85 @@ th, td {
     font-weight: 600;
 }
 
+.hbox1-3 .sub_menu_wrap {
+    display: flex;
+
+    width: 100vw;
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -10px);
+
+    transition:
+            max-height 0.3s ease,
+            opacity 0.2s ease,
+            transform 0.3s ease,
+            visibility 0s linear 0.3s;
+
+    z-index: 20;
+    padding: 0 10px;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+
+    background-color: #ececec61;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/*.hbox1-3 .sub_menu_wrap.active {*/
+/*    max-height: 300px; !* 실제 서브메뉴보다 넉넉하게 *!*/
+/*    opacity: 1;*/
+/*    visibility: visible;*/
+/*    transform: translate(-50%, 0);*/
+
+/*    transition:*/
+/*            max-height 0.3s ease,*/
+/*            opacity 0.2s ease,*/
+/*            transform 0.3s ease,*/
+/*            visibility 0s;*/
+/*}*/
+
 .hbox1-3 .sub_menu_wrap.active {
+    max-height: 300px; /* 실제 서브메뉴보다 넉넉하게 */
     opacity: 1;
     visibility: visible;
+    transform: translate(-50%, 0);
+
+    transition:
+            max-height 0.3s ease,
+            opacity 0.2s ease,
+            transform 0.3s ease,
+            visibility 0s;
     /*display: flex;*/
 }
 
 .hbox1-3 .sub_menu_wrap {
 
     display: flex;
+    width: 100vw;
+    overflow: hidden;
+
     opacity: 0;
     visibility: hidden;
-    height: auto;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
+    transform: translate(-50%, 0px);
 
-    width: 100vw;
+    transition:
+            max-height 0.3s ease,
+            opacity 0.2s ease,
+            transform 0.3s ease,
+            visibility 0s linear 0.3s;
+
     /*height: 160px;*/
     /*padding-bottm: 20px;*/
     z-index: 20;
-    padding: 0 10px;
+    padding: 5px 10px;
     position: absolute;
-    top: 50px;
+    top: 40px;
     left: 50%;
-    transform: translateX(-50%);
+
     background-color: #ececec61;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -9255,7 +9363,9 @@ th, td {
     border:1px solid #ccc;
     width: 160px;
     height: 32px;
+    padding-left: 10px;
 }
+
 .buy_option:first-child {
     padding-top: 10px;
 }
@@ -9399,7 +9509,7 @@ th, td {
 
 }
 .hn_nameBox .shareBox{
-    border:1px solid #ececec;
+    border:1px solid #ccc;
     border-radius: 50%;
     width: 32px;
     height: 32px;
@@ -9532,53 +9642,40 @@ th, td {
 /* prdBarcode preview start ------------------------------------------  */
 
 
-.modal_wrapux7 {
-    width: 100vw;
-    height: auto;
-    /*overflow: hidden;*/
+
+/*.modal_wrapux7 {*/
+/*    width: 100vw;*/
+/*    height: auto;*/
+/*    !*overflow: hidden;*!*/
+/*}*/
+
+/*.print_box40c {*/
+/*    width: 100vw;*/
+/*}*/
+
+.pop_prn_wrap {
+    padding: 20px;
+    width: 320px;
+    height:auto;
 }
 
-.print_box40c {
-    width: 100vw;
+.pop_prn_barcode_con {
+    padding: 10px;
 }
 
 .print_boxfv8 {
-    margin-top: 10px;
-    margin-bottom: 5px;
-    margin-left: 4vw;
-    width: 80vw;
-    height: 46px;
 
 }
 
 .print_boxfv6 {
-    margin-left: 8px;
-    width: 100vw;
     height: 20px;
 
 }
 
-
-.print_boxfv9 {
-    margin-left: 5vw;
-    width: 80vw;
-    margin-bottom: 4px;
-    height: 20px;
-
-}
-
-.print_boxfv7 {
-    margin-bottom: 0px;
-    margin-left: 5vw;
-    width: 80vw;
-    height: 32px;
-    overflow: hidden;
-
-}
-
-
-.print_boxfv7 img {
-    width: 120px;
+.print_boxfv9 .mdName {
+    font-weight: bold;
+    font-size: 20px;
+    text-wrap: wrap;
 }
 
 .print_boxfv6 .category {
@@ -9588,32 +9685,22 @@ th, td {
 }
 
 .print_boxfv6 .colon {
-    width: 46vw;
+    min-width: 160px;
+    width: auto;
     font-size: 14px;
     text-wrap: nowrap;
     overflow: hidden;
+    font-weight: 400;
 }
 
-.print_boxfv6:last-child {
-    /*height: 60px;*/
+.print_boxfv6 .colon.fs12{
+    font-size: 12px;
+    font-weight: normal;
 }
 
-.print_boxfv9 .mdName {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.print_boxfv10 {
-   border: 1px solid red;
-    margin-left: 4vw;
-    width: 80vw;
-    height: 22px;
-
-}
 
 .print_boxd2s {
-    margin: 0 auto;
-    width: 300px;
+    width: 320px;
     height: 32px;
     /*padding:20px 0;*/
 }
@@ -9987,6 +10074,20 @@ button, i {
 }
 
 
+.mr20 {
+    margin-right: 20px;
+}
+.ml10 {
+    margin-left: 10px;
+}
+
+.ml20 {
+    margin-left: 20px;
+}
+.ml40 {
+    margin-left: 40px;
+}
+
 .headTitle1 {
     font-size: 18px;
     font-weight: 500;
@@ -10111,17 +10212,20 @@ button, i {
     font-size: 18px;
 }
 
-.period:nth-child(1),
-.period:nth-child(2),
-.period:nth-child(3) {
-    border-right: none;
+.period_box {
+    display: flex;
+    gap: 0;
+    overflow: hidden;
+    border:none;
 }
 
-.period {
+
+.period_box .period {
+    text-decoration: none;
     border: 1px solid #ccc;
     background-color: #fff;
-    min-width: 100px;
-    width: 100px;
+    min-width: 60px;
+    width: 60px;
     height: 32px;
     line-height: 32px;
     text-align: center;
@@ -10129,12 +10233,27 @@ button, i {
     color: #303030;
 }
 
+.period.active {
+    z-index: 2;
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+
+}
+
+.period_box .period + .period {
+    margin-left: -1px;
+}
+
+.period_box .period:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.period_box .period:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
 .calicon {
-    /*width: 32px;*/
-    /*height: 32px;*/
-    /*line-height: 32px;*/
     text-align: center;
-    /*vertical-align: center;*/
     color: #5c5c5c;
 
 }
@@ -10649,6 +10768,7 @@ button, i {
     border: 1px solid #ccc;
     width: 160px;
     height: 30px;
+    padding-left: 10px;
 }
 
 .inputType140 {
@@ -10710,23 +10830,6 @@ button, i {
     color:#5c5c5c;
 }
 
-.mr10 {
-    margin-right: 10px;
-}
-
-.mr20 {
-    margin-right: 20px;
-}
-.ml10 {
-    margin-left: 10px;
-}
-
-.ml20 {
-    margin-left: 20px;
-}
-.ml40 {
-    margin-left: 40px;
-}
 
 /* footer ------------------------------------------  */
 
@@ -10832,10 +10935,10 @@ footer {
 
     }
 
-    /* login_View end  -------------------------------- */
-    /* orderListMaster_View start  -------------------------------- */
-    /* orderListMaster_View end  -------------------------------- */
-    /* pop_Price_View srart  -------------------------------- */
+/* login_View end  -------------------------------- */
+/* orderListMaster_View start  -------------------------------- */
+/* orderListMaster_View end  -------------------------------- */
+/* pop_Price_View srart  -------------------------------- */
     .buy_item_conkol > .area2 {
         width: 920px;
         height: 320px;

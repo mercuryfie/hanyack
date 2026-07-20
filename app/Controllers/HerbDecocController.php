@@ -330,7 +330,7 @@ class HerbDecocController extends BaseController
             ];
 
             $body_arr = [
-                'stock' => $this->Total_Stock_Quantity($this,$mi_cf)
+
             ];
 
             $form = New Form;

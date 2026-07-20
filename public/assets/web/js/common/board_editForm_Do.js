@@ -166,27 +166,14 @@ async function del_Reply(bid,bcode) {
 async function Update_Content(tUid,bid,bcode) {
     try {
         let result1 = await Board_data(tUid,bid,bcode);
-        // console.log(result1);
-        console.log('bello1111111',bid);
         if(result1.result == 'ok'){
-            // let bcode = result1.code;
-            console.log('bello222222',bcode);
-
-            // if($('#attachImg').val()!='') {
-            //     let result2 = await Attached_Img(bcode);
-            // }
-
             Make_Toast('게시글 수정 완료하였습니다.');
-            // window.location.href = BOARDURL + '/bList?bid=' + bid;
-
         } else{
             Make_Toast('2게시글 수정 완료하였습니다.');
-            // window.location.href = BOARDURL + '/bList?bid=' + bid;
         }
 
     } catch (error) {
-        Make_Toast('bello.');
-        console.log('bello333333');
+        Make_Toast('에러가 발생하였습니다.'+error);
         console.log( error );
     }
 }
@@ -208,10 +195,7 @@ function Board_data(tUid,bid,bcode){
 
         let retarr = new Array();
         for (let pair of formdata.entries()) {
-            console.log('bello 15',pair[0]+ ': ' + pair[1]);
         }
-        // console.log(formdata);
-        // console.log('b1514',Array.from(formdata.entries()));
 
         $.ajax({
             // url: BOARDURL + '/boardForm_Do',
@@ -251,25 +235,14 @@ async function Del_bContent(bid,bcode) {
     try {
         let result1 = await Del_bContent_Data(bcode);
         if(result1.result == 'ok'){
-            // let bcode = result1.code;
-            console.log('bello222222',bcode);
-
-            // if($('#attachImg').val()!='') {
-            //     let result2 = await Attached_Img(bcode);
-            // }
-
             Make_Toast('삭제 완료하였습니다.');
-            // window.location.href = BOARDURL + '/bList?bid=' + bid;
-
         } else{
-            Make_Toast('2삭제 완료하였습니다.');
-            console.log('bello33',bcode);
+            Make_Toast('삭제 완료하였습니다.');
             window.location.href = BOARDURL + '/bList?bid=' + bid;
         }
 
     } catch (error) {
-        Make_Toast('bello.');
-        console.log('bello333333');
+        Make_Toast('에러가 발생하였습니다.'+error);
         console.log( error );
     }
 }
@@ -285,10 +258,7 @@ function Del_bContent_Data(bcode){
 
         let retarr = new Array();
         for (let pair of formdata.entries()) {
-            console.log('bello 15',pair[0]+ ': ' + pair[1]);
         }
-        // console.log(formdata);
-        // console.log('b1514',Array.from(formdata.entries()));
 
         $.ajax({
             // url: BOARDURL + '/boardForm_Do',
@@ -332,7 +302,6 @@ function Attached_Img(bcode){
         let formdata = new FormData();
 
         let files = $("#attachedImg")[0].files[0];
-        console.log('bello',formdata);
 
         formdata.append( "bcode", bcode);
         formdata.append("attachedImg",files);

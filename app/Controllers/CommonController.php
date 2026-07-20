@@ -13,7 +13,7 @@ class CommonController extends BaseController
     use ResponseTrait;
 
 
-    public function herbList()
+    public function mainHerbList()
     {
         $sessinarr = $this->GetSessionData();
 
@@ -52,7 +52,7 @@ class CommonController extends BaseController
                 'body' => $bodydata
             ];
 
-            return view('web/common/mainThum_View', $main_data);
+            return view('web/common/mainHerbList_View', $main_data);
         }
     }
 

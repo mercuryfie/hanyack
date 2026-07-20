@@ -9,6 +9,10 @@ $(document).ready(function() {
         }
     });
 
+    $('#Xbtn,#Xbtn2').on('click',function(e){
+        $('#pop_del_order').hide();
+    });
+
     $(document).on('change', 'input[type="checkbox"].chkproduct', function(e) {
         let tpriceclass = $(this).closest('.cartgds').find('.tPrice');
 
@@ -69,13 +73,13 @@ $(document).ready(function() {
     $(document).on('click','.dltbtn',function(e){
         let sn = $(this).data('sn');
         $('#cart_del').data('sn',sn);
-        $('#endOrderDel').show();
+        $('#pop_del_order').show();
 
     });
 
     $(document).on('click','.close_dltmer',function(e){
         $('#cart_del').data('sn','');
-        $('#endOrderDel').hide();
+        $('#pop_del_order').hide();
     });
 
     $(document).on('click','#cart_del',async function(e){
@@ -83,7 +87,7 @@ $(document).ready(function() {
         const params = {sn: sn};
         let response = await Model.decoc_m.Del_Decoc_Cart(params);
         if(response.effect > 0){
-            $('#endOrderDel').hide();
+            $('#pop_del_order').hide();
             Ini_Form();
             Load_Data(Make_Option());
             Make_Toast('삭제 완료 하였습니다.');
@@ -229,7 +233,6 @@ async function Load_Data(params) {
             let priceUnit = 0;
             let strUnitPrice = 0;
             $.each(el.list, function (index, sub){
-
                 if(sub.LowCnt<=0) {
                     lowhtml = `<span class="lowest">최저가</span>`;
                 }
@@ -286,24 +289,21 @@ async function Load_Data(params) {
                         </div>
                     </div>
                 `;
-
-
-                html += `
-                <div class="clbox cartleft1-1">
-                    <div class="cartgds cartgoods1-1 flexType3"> 
-                        <div class="area flexType2">
-                            <input type="checkbox" class="ChkMaker" data-code="${el.macode}">
-                            <p class="h_name">${el.maname}</p> 
-                        </div>  
-                        
-                        <div class="goodsttl1-2">
-                            <i class="fa-solid fa-xmark dltbtn" data-sn="${sub.sn}"></i>
-                        </div>
-                    </div>
-                    ${subhtml}
-                </div>
-                `;
             });
+
+            html += `
+            <div class="clbox cartleft1-1">
+                <div class="cartgds cartgoods1-1 flexType3"> 
+                    <div class="area flexType2">
+                        <input type="checkbox" class="ChkMaker" data-code="${el.macode}">
+                        <p class="h_name">${el.maname}</p> 
+                    </div>  
+                    
+                </div>
+                ${subhtml}
+            </div>
+            `;
+
 
         });
     } else {

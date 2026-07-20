@@ -1,6 +1,6 @@
 <div class="gunpop orderpopcon" id="endOrder" name="endOrder">
     <div class="orderpop">
-        <i class="fa-regular fa-circle-check"></i>
+        <p class="circle flexType1"><i class="fa-solid fa-check"></i> </p>
         <h2>주문 완료!</h2>
         <p>상품이 주문되었습니다</p>
         <div>
