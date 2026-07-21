@@ -203,68 +203,49 @@ async function Incoming_order(sn){
 async function Load_OrderList(params) {
     INI_Load_Order_Decoc();
     const response = await Model.decoc_m.Load_Decoc_OrderList(params);
-    console.log('old', response);
+    console.log(response);
     let html = '';
     const total = response.total;
     const mTotal = response.totalRs;
     const nPage= response.nPage;
     if(total>0){
         let busTrack = '';
+        let strTrack = '';
         let match_tag = '';
         let delidate2 = '';
         let status_str = '';
-        let status_str_css = '';
+
         $.each(response.list, function(index, el) {
-            let match_tag2 = '';
             let html_sub = '';
             let goods = el.goods;
             let cnxlBox = '';
             let goodsCount = 0;
             let delidate = '';
             let cancle = '';
+            let busarr = [];
+            let strarr = [];
 
             goodsCount = goods.length;
             if (goodsCount == 1) {
-                let buyType_css = '';
                 let item = goods[0];
+                let status = Number(item.gd_status);
+                busarr = [
+                    (status == ORDER_UNCONFIRM) ? `<i class="fa-regular fa-hourglass-half busColor2"></i>` : `<i class="fa-regular fa-hourglass-half busColor1"></i>`,
+                    (status == ORDER_PROCESSING) ? `<i class="fa-solid fa-receipt busColor2"></i>` : `<i class="fa-solid fa-receipt busColor1"></i>`,
+                    (status == ORDER_DELIVERY_READY) ? `<i class="fa-solid fa-boxes-stacked busColor2"></i>` : `<i class="fa-solid fa-boxes-stacked busColor1"></i>`,
+                    (status == ORDER_DELIVERING) ? `<i class="fa-solid fa-van-shuttle busColor2"></i>` : `<i class="fa-solid fa-van-shuttle busColor1"></i>`,
+                    (status >= ORDER_DELIVERED) ? `<i class="fa-solid fa-circle-check busColor2"></i>` : `<i class="fa-solid fa-circle-check busColor1"></i>`
+                ];
+                strarr = [
+                    `<p class="data ${(status == ORDER_UNCONFIRM) ? 'active' : ''}">${Order_Step_Name(1)}</p>`,
+                    `<p class="data ${(status == ORDER_PROCESSING) ? 'active' : ''}">${Order_Step_Name(2)}</p>`,
+                    `<p class="data ${(status == ORDER_DELIVERY_READY) ? 'active' : ''}">${Order_Step_Name(3)}</p>`,
+                    `<p class="data ${(status == ORDER_DELIVERING) ? 'active' : ''}">${Order_Step_Name(4)}</p>`,
+                    `<p class="data ${(status >= ORDER_DELIVERED) ? 'active' : ''}">${Order_Step_Name(5)}</p>`
+                ];
+                busTrack = `<div class="busBox flexType2">${busarr.join('')}</div>`;
+                strTrack = `<div class="stt_str_box flexType3">${strarr.join('')}</div>`;
 
-                let inner_html1 = (item.gd_status == ORDER_UNCONFIRM) ? `<i class="fa-regular fa-hourglass-half busColor2"></i>` : `<i class="fa-regular fa-hourglass-half busColor1"></i>`;
-                let inner_html2 = (item.gd_status == ORDER_PROCESSING) ? '<i class="fa-solid fa-receipt busColor2"></i>' : `<i class="fa-solid fa-receipt  busColor1"></i>`;
-                let inner_html3 = (item.gd_status == ORDER_DELIVERY_READY) ? '<i class="fa-solid fa-boxes-stacked busColor2"></i>' : `<i class="fa-solid fa-boxes-stacked busColor1"></i>`;
-                let inner_html4 = (item.gd_status == ORDER_DELIVERING) ? '<i class="fa-solid fa-van-shuttle busColor2"></i>' : `<i class="fa-solid fa-van-shuttle busColor1"></i>`;
-                let inner_html5 = (item.gd_status >= ORDER_DELIVERED) ? '<i class="fa-solid fa-circle-check busColor2"></i>' : `<i class="fa-solid fa-circle-check busColor1"></i>`;
-
-                busTrack = `
-                    <div class="busBox flexType2 "> 
-                        ${inner_html1}
-                        ${inner_html2}
-                        ${inner_html3}
-                        ${inner_html4}
-                        ${inner_html5}
-                    </div>
-                `;
-
-                const gdStatus = Number(item.gd_status);
-                const $statusStr = $(`
-                        <div class="stt_str_box flexType3">
-                            <p class="data">출하준비중</p>
-                            <p class="data">출하확인</p>
-                            <p class="data">출하완료</p>
-                            <p class="data">배송중</p>
-                            <p class="data">배송완료</p>
-                        </div>
-                    `);
-
-                $statusStr.find('.data')
-                    .eq(gdStatus)
-                    .each(function () {
-                        $(this)
-                            .addClass('active')
-                            .siblings('.data')
-                            .removeClass('active');
-                    });
-
-                status_str = $statusStr.prop('outerHTML');
                 cnxlBox = `
                     <div class="btnBox flexType2">
                          <button type="button" class="btnType1 mr10 fontColor1" onclick="">
@@ -300,13 +281,13 @@ async function Load_OrderList(params) {
                     delistr = ``;
                 }
 
-                if(item.gd_status==0){
+                if(item.gd_status==1){
                     cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType32 mr10 cnxlBtn" onclick="">주문취소</button>`;
-                }else if(item.gd_status==1){
+                }else if(item.gd_status==2){
                     cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType32 mr10 cnxlBtn">주문취소</button>`;
-                } else if (item.gd_status==3) {
+                } else if (item.gd_status==4) {
                     cancle = `<button type="button" name="btn_income" id="income_${item.sn}" data-sn="${item.sn}" class="btnType32 mr10 cnxlBtn">입고처리</button>`;
-                } else if (item.gd_status >= 4) {
+                } else if (item.gd_status >= 5) {
                     if(item.diff2==0) {
                         cancle = `<button type="button" name="btn_return" id="return_${item.sn}" data-sn="${item.sn}" class="btnType32 mr10 cnxlBtn">반품/교환신청</button>`;
                     }
@@ -314,8 +295,6 @@ async function Load_OrderList(params) {
                     cancle = ``;
                 }
 
-                let typeParts = [item.t1_value, item.t2_value];
-                typeText = Join_attr_string(typeParts,'/');
 
                 if (item.match <= 0) {
                     match_tag = `<p class="match_tag">미매칭</p>`;
@@ -330,7 +309,7 @@ async function Load_OrderList(params) {
                                 <p class="pharm mr10">[${item.mi_name}]</p>
                                 ${match_tag}
                                 <p class="h_name mr10">[${item.n_value}] ${item.hn_name} ${item.w_name}</p> 
-                                <p class="type fontColor1 mr10">${typeText}</p> 
+                                <p class="type fontColor1 mr10">${item.option_str}</p> 
                             </div>
                             <div class="right flexType7 deli_boxe4z"> 
                                 ${delistr}  
@@ -354,52 +333,31 @@ async function Load_OrderList(params) {
                           <div class="busTrack " id="bus_${item.sn}">        
                             ${busTrack}
                           </div>   
-                          ${status_str}
+                          ${strTrack}
                     </div>
                    `;
+
+                console.log(html_sub);
+
             } else if (goodsCount > 1) {
                 $.each(goods, function(idx, item) {
-                    const randomClass = generateRandomClassName();
-                    $('#example').addClass(randomClass);
-
-                    let inner_html1 = (item.gd_status == ORDER_UNCONFIRM) ? `<i class="fa-regular fa-hourglass-half busColor2"></i>` : `<i class="fa-regular fa-hourglass-half busColor1"></i>`;
-                    let inner_html2 = (item.gd_status == ORDER_PROCESSING) ? '<i class="fa-solid fa-receipt busColor2"></i>' : `<i class="fa-solid fa-receipt  busColor1"></i>`;
-                    let inner_html3 = (item.gd_status == ORDER_DELIVERY_READY) ? '<i class="fa-solid fa-boxes-stacked busColor2"></i>' : `<i class="fa-solid fa-boxes-stacked busColor1"></i>`;
-                    let inner_html4 = (item.gd_status == ORDER_DELIVERING) ? '<i class="fa-solid fa-van-shuttle busColor2"></i>' : `<i class="fa-solid fa-van-shuttle busColor1"></i>`;
-                    let inner_html5 = (item.gd_status >= ORDER_DELIVERED) ? '<i class="fa-solid fa-circle-check busColor2"></i>' : `<i class="fa-solid fa-circle-check busColor1"></i>`;
-
-                    busTrack = `
-                        <div class="busBox flexType2 "> 
-                            ${inner_html1}
-                            ${inner_html2}
-                            ${inner_html3}
-                            ${inner_html4}
-                            ${inner_html5}
-                        </div>
-                    `;
-
-                    const gdStatus = Number(item.gd_status);
-                    const $statusStr = $(`
-                        <div class="stt_str_box flexType3">
-                            <p class="data">출하준비중</p>
-                            <p class="data">출하확인</p>
-                            <p class="data">출하완료</p>
-                            <p class="data">배송중</p>
-                            <p class="data">배송완료</p>
-                        </div>
-                    `);
-
-                    $statusStr.find('.data')
-                        .eq(gdStatus)
-                        .each(function () {
-                            $(this)
-                                .addClass('active')
-                                .siblings('.data')
-                                .removeClass('active');
-                        });
-
-                    status_str = $statusStr.prop('outerHTML');
-
+                    let status = Number(item.gd_status);
+                    busarr = [
+                        (status == ORDER_UNCONFIRM) ? `<i class="fa-regular fa-hourglass-half busColor2"></i>` : `<i class="fa-regular fa-hourglass-half busColor1"></i>`,
+                        (status == ORDER_PROCESSING) ? `<i class="fa-solid fa-receipt busColor2"></i>` : `<i class="fa-solid fa-receipt busColor1"></i>`,
+                        (status == ORDER_DELIVERY_READY) ? `<i class="fa-solid fa-boxes-stacked busColor2"></i>` : `<i class="fa-solid fa-boxes-stacked busColor1"></i>`,
+                        (status == ORDER_DELIVERING) ? `<i class="fa-solid fa-van-shuttle busColor2"></i>` : `<i class="fa-solid fa-van-shuttle busColor1"></i>`,
+                        (status >= ORDER_DELIVERED) ? `<i class="fa-solid fa-circle-check busColor2"></i>` : `<i class="fa-solid fa-circle-check busColor1"></i>`
+                    ];
+                    strarr = [
+                        `<p class="data ${(status == ORDER_UNCONFIRM) ? 'active' : ''}">${Order_Step_Name(1)}</p>`,
+                        `<p class="data ${(status == ORDER_PROCESSING) ? 'active' : ''}">${Order_Step_Name(2)}</p>`,
+                        `<p class="data ${(status == ORDER_DELIVERY_READY) ? 'active' : ''}">${Order_Step_Name(3)}</p>`,
+                        `<p class="data ${(status == ORDER_DELIVERING) ? 'active' : ''}">${Order_Step_Name(4)}</p>`,
+                        `<p class="data ${(status >= ORDER_DELIVERED) ? 'active' : ''}">${Order_Step_Name(5)}</p>`
+                    ];
+                    busTrack = `<div class="busBox flexType2">${busarr.join('')}</div>`;
+                    strTrack = `<div class="stt_str_box flexType3">${strarr.join('')}</div>`;
 
                     if(item.gd_status>=3){
                         delidate =``;
@@ -414,16 +372,15 @@ async function Load_OrderList(params) {
                     }
 
 
-                    if(item.gd_status==0){
-                        cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType1 mr10 cnxlBtn">주문취소</button>`;
-                    }else if(item.gd_status==1){
-                        status_str =
-                        cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType1 mr10 cnxlBtn">주문취소</button>`;
-                    } else if (item.gd_status==3) {
-                        cancle = `<button type="button" name="btn_income" id="income_${item.sn}" data-sn="${item.sn}" class="btnType1-1 mr10 cnxlBtn">입고처리</button>`;
-                    } else if (item.gd_status == 4) {
+                    if(item.gd_status==1){
+                        cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType32 mr10 cnxlBtn">주문취소</button>`;
+                    }else if(item.gd_status==2){
+                        cancle = `<button type="button" name="btn_cancle" data-sn="${item.sn}" class="btnType32 mr10 cnxlBtn">주문취소</button>`;
+                    } else if (item.gd_status==4) {
+                        cancle = `<button type="button" name="btn_income" id="income_${item.sn}" data-sn="${item.sn}" class="btnType32 mr10 cnxlBtn">입고처리</button>`;
+                    } else if (item.gd_status == 5) {
                         if(item.diff2==0) {
-                            cancle = `<button type="button" name="btn_return" id="return_${item.sn}" data-sn="${item.sn}" class="btnType1-1 mr10 cnxlBtn">반품/교환신청</button>`;
+                            cancle = `<button type="button" name="btn_return" id="return_${item.sn}" data-sn="${item.sn}" class="btnType32 mr10 cnxlBtn">반품/교환신청</button>`;
                         }
                     } else {
                         cancle = ``;
@@ -458,40 +415,35 @@ async function Load_OrderList(params) {
                     let typeParts = [item.w_name, item.t1_value,item.t2_value];
                     typeText = Join_attr_string(typeParts,'/');
                     html_sub += `
-                            <div class="orderBox-aaa mt20 ${indexstr}" name="block" id="gdr_${item.sn}">   
-                                  <div class="buyType flexType3 ">
-                                    <div class="left flexType2">
-                                        <p class="data pharm mr10">${item.mi_name}</p> 
-                                        ${match_tag}
-                                        <p class="data h_name mr10"> [${item.n_value}] ${item.hn_name} 
-                                        </p> 
-                                        <p class="type fontColor1 mr10">${typeText}</p> 
-                                    </div> 
-                                    <div>${delistr}
-                                    </div> 
-                                  </div>
-                                  <div class="priceBox flexType3">
-                                    <div class="left flexType2"> 
-                                        <p class="status2" id="status_${item.sn}">${Order_Step_Name(item.gd_status)}</p>  
-                                        <p class="price ">${number_format(item.gd_price||0)}원</p>
-                                        <p class="count">포장단위가격:${number_format(item.gd_rPrice)}원*${item.gd_cnt}개</p>
-                                    </div>  
-                                    <div class="right flexType2">
-                                        <div id="cancel_${item.sn}">
-                                        ${cancle}
-                                        </div>
-                                         <button type="button" class="btnType1 fontColor1" name="btn_cart" data-code="${item.hncode}" data-cnt="1" data-ptyp="${item.gd_pType}">
-                                            <i class="fa-solid fa-cart-shopping "></i>
-                                        </button>   
-                                    </div>
-                                  </div> 
-                                   
-                                  <div class="busTrack" id="bus_${item.sn}">        
-                                    ${busTrack}
-                                  </div>     
-                                  ${status_str} 
+                        <div class="orderBox-aaa mt20 ${indexstr}" name="block" id="gdr_${item.sn}">   
+                            <div class="buyType flexType3 ">
+                                <div class="left flexType2">
+                                    <p class="data pharm mr10">${item.mi_name}</p> 
+                                    ${match_tag}
+                                    <p class="data h_name mr10"> [${item.n_value}] ${item.hn_name}</p> 
+                                    <p class="type fontColor1 mr10">${typeText}</p> 
+                                </div> 
+                            <div>${delistr}</div> 
+                        </div>
+                        <div class="priceBox flexType3">
+                            <div class="left flexType2"> 
+                                <p class="status2" id="status_${item.sn}">${Order_Step_Name(item.gd_status)}</p>  
+                                <p class="price ">${number_format(item.gd_price||0)}원</p>
+                                <p class="count">포장단위가격:${number_format(item.gd_rPrice)}원*${item.gd_cnt}개</p>
+                            </div>  
+                            <div class="right flexType2">
+                                <div id="cancel_${item.sn}">${cancle}</div>
+                                <button type="button" class="btnType32 fontColor1" name="btn_cart" data-code="${item.hncode}" data-cnt="1" data-ptyp="${item.gd_pType}">
+                                    <i class="fa-solid fa-cart-shopping "></i>
+                                </button>   
                             </div>
-                        `;
+                        </div> 
+                        <div class="busTrack" id="bus_${item.sn}">        
+                        ${busTrack}
+                        </div>     
+                        ${strTrack} 
+                        </div>
+                    `;
 
                 });
                 html_sub += `

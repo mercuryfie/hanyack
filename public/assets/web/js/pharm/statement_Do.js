@@ -1,17 +1,20 @@
 $(document).ready(function () {
-    let pcode = $("#barcodeDiv").data("pcode");
-    Prn_Barcode(pcode);
+    Prn_Barcode();
 
-    $(document).on('click','#applyPrintBtn',function(e){
+    $(document).on('click','#applyPrintBtn',async function(e){
         let ptype = $('#applyPrintBtn').data('ptype');
-        if(ptype==0){
+        if(ptype==1){
             if(window.confirm('해당 작업내역을 출력 하시겠습니까?')==true) {
                 let pcode = $('#applyPrintBtn').data('pcode');
                 if (pcode == '') {
-                    alert('잘못된 접근입니다.');
-                    location.reload();
+                    Make_Toast('잘못된 접근입니다.');
                 } else {
-                    Update_deli(pcode);
+                    let params = {pcode:pcode};
+                    const response = await Model.pharm_m.Update_Pharm_Delivery_Info(params);
+                    if(response.effect > 0){
+                        opener.location.reload();
+                        printWindow('org_area');
+                    }
                 }
             }
         }else {
@@ -21,53 +24,21 @@ $(document).ready(function () {
         }
     });
 
+    $('.prnBox').on('click',function(){
+        const code=$(this).data('code');
+        let url = '/Mypharm/statementBox?cd=' + code;
+        openPopup(url,700,500,'sboxprn');
+    });
+
 });
 
 
-function Prn_Barcode(pcode) {
-    console.log("cpcode=" + pcode);
-    if (pcode == "") {
-        alert("잘못된 접근입니다.");
-        window.close();
-    } else {
-        $("#barcodeDiv").barcode(pcode, "code128", {
-            barWidth: 2,
-            barHeight: 40,
-            fontSize: 15,
-            showHRI: false,
-        });
-        $("#barcodeDiv").css("overflow", "hidden");
-        $("#barcodeDiv").css("margin", "0 auto");
-        $("#barcodeDiv").css("display", "flex");
-        $("#barcodeDiv").css("justifyContent", "center");
-        $("#barcodeDiv").css("width", "360px");
-        $("#barcodeDiv").css("height", "40px");
-
-    }
+function Prn_Barcode() {
+    let pcode = $("#barcodeDiv").data("pcode");
+    JsBarcode("#barcodeDiv", pcode, {format: "CODE39",width: 1.8,height:60, displayValue: false});
+    $("#barcodeDiv").css("overflow", "hidden");
+    $("#barcodeDiv").css("margin", "0 auto");
+    $("#barcodeDiv").css("display", "flex");
+    $("#barcodeDiv").css("justifyContent", "center");
+    $("#barcodeDiv").css("width", "320px");
 }
-
-async function Update_deli(pcode){
-    try {
-        let dataarr = {"pcode": pcode};
-        let url = APIURL + '/Update_Deli_Data';
-        let result = await Load_API(url,dataarr);
-        if (result.get('status') == 'NoLogin') {
-            go_login();
-        }else if(result.get('status') == 'ok') {
-            window.opener.location.reload();
-            printWindow('org_area');
-        } else {
-            Make_Toast(result.get('message'));
-        }
-        console.log('end');
-    } catch (error) {
-        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
-    }
-}
-
-function Prn_Box(hdcode){
-    let url = '/Mypharm/statementBox?key=' + hdcode;
-    let param = "status=0,title=0,height=500,width=700,scrollbars=1"
-    window.open(url,'statementBox',param);
-}
-

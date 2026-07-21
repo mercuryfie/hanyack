@@ -121,7 +121,7 @@ $(document).ready(function () {
 
     $('#btnclose').on('click',function(e){
         $('#btnorder').data('odcode','');
-        $('#endOrder').css('display','none');
+        $('#pop_confirm_odr').css('display','none');
     });
 
     $('#show_checked').on('click',function(e){
@@ -229,7 +229,7 @@ async function Insert_Order(str){
             go_login();
         }else if(result.get('status') == 'ok') {
             $('#btnorder').data('odcode',result.get('info'));
-            $('#endOrder').css('display','flex');
+            $('#pop_confirm_odr').css('display','block');
         } else {
             Make_Toast(result.get('message'));
         }

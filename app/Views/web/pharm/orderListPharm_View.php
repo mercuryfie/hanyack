@@ -8,10 +8,10 @@
         <div class="  flexType3 mb10">
             <div class="left flexType2">
                 <div class="left period_box flexType2 mr10">
-                    <a href="#" role="button"  class="period active" onclick="set_Period('');">오늘</a>
-                    <a href="#" role="button" class="period" onclick="set_Period('');">1주일</a>
-                    <a href="#" role="button" class="period" onclick="set_Period('');">1개월</a>
-                    <a href="#" role="button" class="period" onclick="set_Period('');">3개월</a>
+                    <a href="#" role="button"  class="period active">전체</a>
+                    <a href="#" role="button"  class="period">오늘</a>
+                    <a href="#" role="button" class="period">3개월</a>
+                    <a href="#" role="button" class="period">6개월</a>
                 </div>
 
                 <div class="input_period_box flexType3 mr10">
@@ -19,7 +19,7 @@
                     <p class="dash">-</p>
                     <input type="date" class="input_date" ame="edate" id="edate">
                 </div>
-                <select name="sort2" id="sort2" class="select_type mr10">
+                <select name="cfcode" id="cfcode" class="select_type mr10">
                     <option value="">전체탕전실</option>
                     <?=$body['decoc'];?>
                 </select>
@@ -30,6 +30,7 @@
                     <option value="3">발송처리</option>
                     <option value="4">발송완료</option>
                 </select>
+                <input type="search" id="skey" name="skey" placeholder="주문번호 또는 약재명 입력하세요" class="input_search mr10">
                 <button class="btnType32-1 active" name="btnOSearch" id="btnOSearch">조회</button>
             </div>
             <div class="right flexType2 ">

@@ -4,14 +4,14 @@
             <p class="pop_head_title">입고하기</p>
             <i class="fa-solid fa-xmark " id="Xbtn"></i>
         </div>
-<!--        <div class="area  flexType2 mb10">-->
-<!--            <p class="cat">사유</p>-->
-<!--            <select name="" id="">-->
-<!--                <option value="">항</option>-->
-<!--                <option value=""></option>-->
-<!--                <option value=""></option>-->
-<!--            </select> -->
-<!--        </div>-->
+        <div class="area  flexType2 mb10">
+            <p class="cat">사유</p>
+            <select name="" id="" class="select_type">
+                <option value="">반품</option>
+                <option value="">11</option>
+                <option value="">22</option>
+            </select>
+        </div>
         <div class="area  flexType2 mb10">
             <p class="cat">이름</p>
             <input type="search" class="input_type">

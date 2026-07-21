@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     $('#btnclose').on('click',function(e){
         $('#btnorder').data('odcode','');
-        $('#endOrder').css('display','none');
+        $('#pop_confirm_odr').css('display','none');
     });
 
     $("#more,#more2").on("click", function (key) {

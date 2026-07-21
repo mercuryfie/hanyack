@@ -58,6 +58,49 @@ const pharm_m = {
             effect : item.ecnt || 0
         };
     },
+    /*
+         Use > 약재상 배송내역리스트
+         params > pcnt : 페이지당갯수, page :
+         return > list : 데이터 , total:갯수, totalRs :전체갯수,nPage:다음페이지
+         */
+    async Load_Pharm_Package(params) {
+        const res = await commonRequest('/Load_Pharm_Package', params);
+        if (!res) return { list : [],total : 0,totalRs : 0,nPage :0};
+        const [item = {}] = res.data || [];
+        return {
+            list: item.list || [],
+            total: item.tcnt || 0,
+            totalRs : item.totalRs || 0,
+            nPage : item.nPage ||0
+        };
+    },
+    /*
+         Use > 약재상 배송 상세내역
+         params > pcnt : 페이지당갯수, page :
+         return > list : 데이터 , total:갯수, totalRs :전체갯수,nPage:다음페이지
+         */
+    async Load_Pharm_PackageDetail(params) {
+        const res = await commonRequest('/Load_Pharm_PackageDetail', params);
+        if (!res) return { list : [],total : 0};
+        const [item = {}] = res?.data || [];
+        return {
+            list: item.list || [],
+            total: item.tcnt || 0
+        };
+    },
+    /*
+         Use > 약재상 출고처리
+         params > pcode : 배송코드
+         return > ecnt : 적용유무
+         */
+    async Update_Pharm_Delivery_Info(params) {
+        const res = await commonRequest('/Update_Pharm_Delivery_Info', params);
+        if (!res) return { ecnt: 0 };
+        const [item = {}] = res.data || [];
+        return  {
+            effect : item.ecnt || 0
+        };
+    }
 
 
 

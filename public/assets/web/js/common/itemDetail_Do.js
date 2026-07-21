@@ -95,7 +95,7 @@ $(document).ready(function () {
             let response = await Model.decoc_m.Add_Decoc_OrderByList(params);
             if (response.effect > 0) {
                 if(window.confirm("완료 하였습니다.\n주문내역으로 이동하시겠습니까?")==true){
-                    //go_orderList();
+                    go_orderList();
                 }
             }
         }

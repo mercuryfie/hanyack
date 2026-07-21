@@ -1,4 +1,29 @@
 $(document).ready(function() {
+
+    $(document).on('change', '#check_all', function () {
+        $('.chkproduct, .chkmaker').prop('checked', $(this).prop('checked'));
+    });
+
+    $(document).on('change', '.chkproduct', function () {
+        const $box = $(this).closest('.clbox');
+
+        const totalCount = $box.find('.chkproduct').length;
+        const checkedCount = $box.find('.chkproduct:checked').length;
+        const isBoxAllChecked =
+            totalCount > 0 && totalCount === checkedCount;
+
+        $box.find('.chkmaker').prop('checked', isBoxAllChecked);
+
+        const allProductCount = $('.chkproduct').length;
+        const allCheckedCount = $('.chkproduct:checked').length;
+
+        $('#check_all').prop(
+            'checked',
+            allProductCount > 0 &&
+            allProductCount === allCheckedCount
+        );
+    });
+
     let today = addDays(3)
     $("#p_deli_date").val(today).attr("min", today);
 
@@ -11,6 +36,7 @@ $(document).ready(function() {
 
     $('#Xbtn,#Xbtn2').on('click',function(e){
         $('#pop_del_order').hide();
+        $('#pop_confirm_odr').hide();
     });
 
     $(document).on('change', 'input[type="checkbox"].chkproduct', function(e) {
@@ -32,7 +58,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('change', 'input[type="checkbox"].ChkMaker', function(e) {
+    $(document).on('change', 'input[type="checkbox"].chkmaker', function(e) {
         let code = $(this).attr('data-code');
         let chk_name = 'chk_' + code;
         let isChecked = $(this).is(':checked');
@@ -65,7 +91,7 @@ $(document).ready(function() {
             if(response.total > 0){
                 Ini_Form();
                 Load_Data(Make_Option());
-                $('#endOrder').show();
+                $('#pop_confirm_odr').show();
             }
         }
     });
@@ -218,12 +244,23 @@ function Ini_Form(){
     $('#totalprice').text('총 0원').data('tprice',0);
 }
 
-
 async function Load_Data(params) {
     let response = await Model.decoc_m.Load_Decoc_Cart(params);
     console.log(response);
     let html = '';
     if( response.total > 0){
+        $('#cartlist').prepend(`
+            <div class="area1 flexType2">
+                <input
+                    type="checkbox"
+                    name="check_all"
+                    id="check_all"
+                    class="mr10"
+                    checked
+                >
+                <p class="text">전체</p>
+            </div>
+        `);
         $.each(response.list, function (index, el) {
             let subhtml = '';
             let lowhtml = '';
@@ -253,7 +290,7 @@ async function Load_Data(params) {
                     <div class="cartgds cartgoods1-2" id="sub_${sub.sn}">
                         <div class="goodsbox flexType4">
                             <div class="goodsleft flexType4">
-                                <input type="checkbox" class="chkproduct" name="chk_${sub.macode}" data-sn="${sub.sn}" data-code="${sub.hncode}" data-ptyp="${sub.ptype}">
+                                <input type="checkbox" class="chkproduct" name="chk_${sub.macode}" data-sn="${sub.sn}" data-code="${sub.hncode}" data-ptyp="${sub.ptype}" checked>
                                 <div class="imgBox">
                                     <img class="cartgoodsimg" src="${PRODUCT_IMG_URL}/${sub.thumnail}" alt="img">
                                 </div> 
@@ -291,12 +328,15 @@ async function Load_Data(params) {
                 `;
             });
 
-            html += `
+            html += ` 
             <div class="clbox cartleft1-1">
-                <div class="cartgds cartgoods1-1 flexType3"> 
-                    <div class="area flexType2">
-                        <input type="checkbox" class="ChkMaker" data-code="${el.macode}">
-                        <p class="h_name">${el.maname}</p> 
+                <div class="cartgds cartgoods1-1 flexType3">  
+                    <div class="area2 flexType3"> 
+                        <div class="flexType2"> 
+                            <input type="checkbox" class="chkmaker " data-code="${el.macode}" checked >
+                            <p class="h_name">${el.maname}</p>  
+                        </div>
+                        <i class="fa-solid fa-xmark" id="Xbtn"></i>
                     </div>  
                     
                 </div>
@@ -316,6 +356,7 @@ async function Load_Data(params) {
 
     }
     $('#cartlist').append(html);
+    $('#check_all, .chkproduct, .chkmaker').prop('checked', true);
 }
 
 

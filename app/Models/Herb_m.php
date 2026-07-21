@@ -15,7 +15,10 @@ class Herb_m extends Model
         $this->db = Database::connect('default');
     }
 
-    public function Load_Product_info($hncode,$fields=['ALL']){
+
+
+
+    public function Load_Medicine_info($hncode,$fields=['ALL']){
         $separated_val = fn_Make_Fields($fields);
         $builder = $this->db->table('v_pharm_medicine');
         $builder->select($separated_val);
@@ -24,7 +27,6 @@ class Herb_m extends Model
 
         return $query->getResultArray();
     }
-
 
     public function Load_Pharm_Medicine_All($params,$fields=['ALL']){
         $separated_val = fn_Make_Fields($fields);
@@ -1293,7 +1295,7 @@ class Herb_m extends Model
 
         $this->db->transStart();
         $builder = $this->db->table('v_order_goods_info');
-        $builder->set('gd_status', $step);  // 삭제 처리
+        $builder->set('gd_status', $step);
         $builder->whereIn('sn', $in_sql);
         $builder->update();
         $affected_rows = $this->db->affectedRows();

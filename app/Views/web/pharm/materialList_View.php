@@ -8,7 +8,7 @@
 
 <section class="merright">
     <div class="common_list_wrap mlp_wrap">
-        <p class="main_title mb20">원재료 목록11</p>
+        <p class="main_title mb20">원재료 목록</p>
 
         <div class="area area2">
             <table class="common_table">
@@ -38,7 +38,7 @@
                     </tr>
                     <tr>
                         <td>12341234</td>
-                        <td>감초</td>
+                        <td>복령</td>
                         <td>10,000g</td>
                         <td>
                             <button type="button" class="btnType1" name="btn_log" data-code="" >
@@ -52,7 +52,7 @@
                     </tr>
                     <tr>
                         <td>12341234</td>
-                        <td>감초</td>
+                        <td>대추</td>
                         <td>10,000g</td>
                         <td>
                             <button type="button" class="btnType1" name="btn_log" data-code="" >
@@ -75,6 +75,6 @@
     </div>
 
 </section>
-
+<?= $this->include("/web/include/pop_outMaterial_View") ?>
 <?= $this->include("/web/include/pop_addMaterial_View") ?>
 <?= $this->endSection() ?>

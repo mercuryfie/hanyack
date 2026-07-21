@@ -5,6 +5,23 @@ use CodeIgniter\I18n\Time;
 use Config\Services;
 use App\Libraries\Auth;
 
+function fnFormatWeight(float $grams, int $precision = 2): string
+{
+    if ($grams >= 1000000) {
+        $value = $grams / 1000000;
+        $unit = 't';
+    } elseif ($grams >= 1000) {
+        $value = $grams / 1000;
+        $unit = 'kg';
+    } else {
+        $value = $grams;
+        $unit = 'g';
+    }
+
+    return round($value, $precision) . $unit;
+}
+
+
 function Prn_Log($data){
     $logData = print_r($data, true);
     log_message('info', $logData);

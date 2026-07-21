@@ -3,17 +3,8 @@
 
 <script src="<?=URL_DECOC_ASSETS?>/orderListDecoc_Do.js?rnd=<?=rand();?>"></script>
 
-<!-- calendar ----------------------------  -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"> </script>
-<script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
-
 <section class="orderlist_dec">
     <div class="decorderli1-1  ">
-<!--        <div class="area area1 flexType5 mt10 mb10">-->
-<!---->
-<!--            <button class="btnType32" name="" type="button" onclick="go_claimList()">취소·반품 내역</button>-->
-<!--        </div>-->
         <div class="area area2 flexType1-1 mt20">
             <div class="decorderli1-1-1 left  ">
                 <div class="decorderli1-1-1-1 ">

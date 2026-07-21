@@ -7,9 +7,8 @@
         <thead>
         <tr>
             <th>약재명</th>
-            <td class="title"><?=$body['mm_title']?></td>
+            <td class="title"><?=$body['hn_name']?></td>
         </tr>
-
         </thead>
         <tbody>
         <tr>
@@ -22,7 +21,7 @@
         </tr>
         <tr>
             <th>포장단위</th>
-            <td><?=$body['w_name']?></td>
+            <td><?=$body['unitWeight']?></td>
         </tr>
         <tr>
             <th>수량</th>
@@ -34,7 +33,7 @@
 
 <div class="printBox btn-wrap">
     <button type="button" class="btntype7" onclick="g_close();">닫기</button>
-    <button type="button" class="btntype7" onclick="prn_Pallet('<?=$body['hdcode']?>');">파레트 출력</button>
+    <button type="button" class="btntype7" id="btnPrnPallet" data-code="<?=$body['pacode']?>">파레트 출력</button>
     <button type="button" class="btntype8" id="prn_Box">출력</button>
 </div>
 

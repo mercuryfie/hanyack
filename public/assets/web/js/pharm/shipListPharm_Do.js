@@ -1,31 +1,103 @@
 $(document).ready(function () {
-    Load_Data(1);
 
-    $(document).on('click', 'a[name="delicodeA"]', function (e) {
-        e.preventDefault(); // a태그의 기본 동작(링크 이동) 방지
 
-        // console.log($(this));
-        let aTag = $(this);
-        let text = aTag.text();
+    $('#btnOSearch').on('click',function() {
+        $('#pageArea').data('page', 1);
+        Ini_Form();
+        Make_Html(Make_Option());
+    });
 
-        if (aTag.find('input').length > 0) return;
+    $('#skey').on('keypress',function(e){
+        if (e.which === 13 || e.keyCode === 13) {
+            Ini_Form();
+            $('#pageArea').data('page',1);
+            Make_Html(Make_Option());
+        }
+    });
 
-        let input = $('<input type="text" class="newdelicode">').val(text);
+    $('.period').on('click',function(e){
+        e.preventDefault();
+        $('.period').removeClass('active');
+        $(this).addClass('active');
+
+        const today = new Date();
+        let startDate = new Date();
+        let endDate = new Date();
+
+        const periodText = $(this).text();
+
+        switch (periodText) {
+            case '오늘':
+                startDate = today;
+                endDate = today;
+                break;
+            case '1주일':
+                startDate = new Date(today);
+                startDate.setDate(today.getDate() - 6);
+                endDate = today;
+                break;
+            case '1개월':
+                startDate = new Date(today);
+                startDate.setMonth(today.getMonth() - 1);
+                startDate.setDate(startDate.getDate() + 1);
+                endDate = today;
+                break;
+            case '3개월':
+                startDate = new Date(today);
+                startDate.setMonth(today.getMonth() - 3);
+                startDate.setDate(startDate.getDate() + 1);
+                endDate = today;
+                break;
+            case '6개월':
+                startDate = new Date(today);
+                startDate.setMonth(today.getMonth() - 6);
+                startDate.setDate(startDate.getDate() + 1);
+                endDate = today;
+                break;
+            case '전체':
+                startDate = '';
+                endDate = '';
+                break;
+            default:
+                startDate = today;
+                endDate = today;
+        }
+
+        $('#sdate').val(startDate ? formatDate(startDate) : '');
+        $('#edate').val(endDate ? formatDate(endDate) : '');
+    });
+
+
+    $(document).on('click','button[name="btnLinkPaging"]',function(){
+        $('#pageArea').data('page',$(this).data('page'));
+        Ini_Form();
+        Make_Html(Make_Option());
+    });
+
+
+    $("#sdate , #edate").on("click", function () {
+        if (this.showPicker) {
+            this.blur();
+            this.showPicker();
+        }
+    });
+
+    $(document).on('click', '.delicodeA', function (e) {
+        e.preventDefault();
+        let text = $(this).text();
+        if ($(this).find('input').length > 0) return;
+        let input = $('<input type="search" class="newdelicode">').val(text);
         let btn = $('button[name="btn_deli"]');
-
-        aTag.empty().append(input);
-
-        // blur 시 처리 (입력값이 없을 때는 확인 버튼이 보이므로 blur 저장은 하지 않음)
+        $(this).empty().append(input);
         input.on('blur', function() {
             if (input.val().trim() === '') {
                 btn.show();
             } else {
                 let newtext = input.val();
-                aTag.text(newtext);
+                $(this).text(newtext);
                 console.log('새로 입력된 text:', newtext);
             }
         });
-
         input.on('keydown', function(e) {
             if (e.key === 'Enter') {
                 $(this).blur();
@@ -33,138 +105,134 @@ $(document).ready(function () {
         });
         New_Delicode.call(this, e);
     });
-});
 
-async function Load_Data(page) {
-    try {
-        start_spinner();
-        INI_Load_Data();
-        let dataarr = {"page" : page};
-        let url = APIURL + '/Load_Package_Pharm';
-        let result = await Load_API(url,dataarr);
-        if (result.get('status') == 'NoLogin') {
-            go_login();
-        }else if(result.get('status') == 'ok') {
-            let html = '';
-            let data = result.get('data');
-            let arr = (data && data.list) ? data.list : [];
-            let Cnt = arr.length;
-            if (Cnt > 0) {
-                $.each(arr, function (index, el) {
-                    let subHhtml = '';
-                    let delcode_html = '';
-                    let prn_html = '';
-
-                    if (el.p_type == PACKAGE_READY) {
-                        prn_html = `<button class="btnType9" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">출력하기</button>`;
-                        subHhtml = `
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            `;
-                    }else if (el.p_type == PACKAGE_SHIP_READY) {
-                        delcode_html = Make_delcode(el.sn,1);
-                        subHhtml = `
-                            ${delcode_html}
-                            <td><input type="text" name="delicode" id="delicode_${el.sn}" placeholder="송장번호 입력" class=""></td>
-                            <td><button class="btnType1" type="button" name="btn_deli" id="btn_deli_${el.sn}" onclick="Insert_Package('${el.sn}','${el.pcode}')">송장입력</button></td>
-                        `;
-                        prn_html = `<button class="btnType10" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">재출력하기</button>`;
-                    }else if (el.p_type == PACKAGE_SHIP_START) {
-                        subHhtml = `
-                            <td>${Make_delcode_str(el.delitype)}</td>
-                            <td><a href="#" name="delicodeA">${el.delicode}</a></td>
-                            <td></td>
-                        `;
-                        prn_html = `<button class="btnType10" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">재출력하기</button>`;
-                    }
-
-                    html += `
+    $(document).on('click','.btnPackageDetail',async function(){
+        const params = {'pcode' :  $(this).data('pcode')};
+        const response = await Model.pharm_m.Load_Pharm_PackageDetail(params);
+        console.log(response);
+        const tcnt = response.total;
+        const list = response.list;
+        let html = '';
+        if(tcnt > 0){
+            $.each(list, function (index, el) {
+                let gdstatus = '';
+                let status = el.gd_status;
+                if(status >= 3){
+                    gdstatus = 'disabled';
+                }
+                html += `
                         <tr>
-                            <td class="">${Package_Step_Name(el.p_type)}</td>
-                            <td class="hoverGreen"><a href="javascript://" onclick="Load_Package('${el.pcode}')">${el.pcode}</a></td>
-                            <td>${el.w_name}</td>
-                            <td>${el.t_cnt}개</td>
-                            <td>${number_format(el.t_weight)}(g)</td>
-                            ${subHhtml}
-                            <td>${prn_html}</td>
-                            <td>${el.pa_regdate}</td>
-                        </tr>    
-                    `;
-                });
-            } else {
-                html = '<td colspan="10">출하 정보가 없습니다.</td>';
-
-            }
-            $('#packagelist').append(html);
-        } else {
-            Make_Toast(result.get('message'));
-        }
-        stop_spinner();
-    } catch (error) {
-        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
-        stop_spinner();
-    }
-}
-
-
-function Prn_Package(pcode){
-    let url = '/Mypharm/statement?key=' + pcode;
-    let param = "status=0,title=0,height=800,width=1200,scrollbars=1"
-    window.open(url,'statement',param);
-}
-
-
-
-async function Load_Package(pcode){
-    try {
-        start_spinner();
-        INI_Load_Data2();
-        let dataarr = {"pcode" : pcode};
-        let url = APIURL + '/Load_Package_Pharm_List';
-        let result = await Load_API(url,dataarr);
-        if (result.get('status') == 'NoLogin') {
-            go_login();
-        }else if(result.get('status') == 'ok') {
-            let html = '';
-            let data = result.get('data');
-            let arr = (data && data.list) ? data.list : [];
-            let Cnt = arr.length;
-            if (Cnt > 0) {
-                $.each(arr, function (index, el) {
-                    let gdstatus = '';
-                    let status = el.gd_status;
-                    if(status >= 3){
-                        gdstatus = 'disabled';
-                    }
-                    html += `
-                        <tr>
-                            <td><input type="checkbox" name="chkorder" value="${el.sn}" ${gdstatus}/></td>
-                            <td>${el.pa_code}</td>
-                            <td>${el.fk_pcode}</td>
-                            <td>${el.fk_hncode}</td>
+                            <td class="row row1">${el.pa_code}</td>
+                            <td class="row row2">${el.fk_pcode}</td>
+                            <td class="row row3">${el.fk_hncode}</td>
                             <td>${el.hn_name}</td>
                             <td>${el.t1_value}</td>
                             <td>${el.t2_value}</td>
                             <td>${el.t_cnt}개</td>
-                            <td>${number_format(el.t_weight)}(g)</td>
+                            <td>${formatWeight(el.t_weight)}</td>
                             <td>${el.delidate}</td>
                         </tr>
                     `;
-                });
-            } else {
-                html = '<td colspan="10">출하 상품 정보가 없습니다.</td>';
-            }
-            $('#packagelistinfo').append(html);
+            });
         } else {
-            alert(result.get('message'));
+            html = '<td colspan="10">출하 상품 정보가 없습니다.</td>';
         }
-        stop_spinner();
-    } catch (error) {
-        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
-        stop_spinner();
+        $('#packagelistinfo').empty();
+        $('#packagelistinfo').append(html);
+    });
+
+    $(document).on('click','button[name="btnPrnDelivery"]',function(){
+        const pcode = $(this).data('pcode');
+        let url = '/Mypharm/statement?cd=' + pcode;
+        openPopup(url,1200,800,'prnPackage');
+    });
+
+    Make_Html(Make_Option());
+});
+
+async function Make_Html(params){
+    const response = await Model.pharm_m.Load_Pharm_Package(params);
+    let list = response.list;
+    let tcnt = response.total;
+    let mTotal = response.totalRs;
+    let nPage = response.nPage;
+    let html = '';
+    if(tcnt > 0) {
+        $.each(list, function (index, el) {
+            let subHhtml = '';
+            let delcode_html = '';
+            let prn_html = '';
+
+            if (el.p_type == PACKAGE_READY) {
+                prn_html = `<button class="btnType1-2" type="button" name="btnPrnDelivery" data-pcode="${el.pcode}" >출력하기</button>`;
+                subHhtml = `
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            `;
+            }else if (el.p_type == PACKAGE_SHIP_READY) {
+                delcode_html = Make_delcode(el.sn,1);
+                subHhtml = `
+                            ${delcode_html}
+                            <td><input type="text" name="delicode"  placeholder="송장번호 입력" class=""></td>
+                            <td><button class="btnType1" type="button" name="btnDeliveryInput"  data-pcode="${el.pcode}" onclick="Insert_Package('${el.sn}','${el.pcode}')">송장입력</button></td>
+                        `;
+                prn_html = `<button class="btnType10" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">재출력하기</button>`;
+            }else if (el.p_type == PACKAGE_SHIP_START) {
+                subHhtml = `
+                            <td>${Make_delcode_str(el.delitype)}</td>
+                            <td><a href="#" role="button" class="delicodeA">${el.delicode}</a></td>
+                            <td></td>
+                        `;
+                prn_html = `<button class="btnType10" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">재출력하기</button>`;
+            }
+
+            html += `
+                <tr>
+                    <td class="">${Package_Step_Name(el.p_type)}</td>
+                    <td class="row row2"><a href="javascript:void(0);" class="btnPackageDetail" data-pcode="${el.pcode}">${el.pcode}</a></td>
+                    <td>${el.cfname}</td>
+                    <td>${el.t_cnt}개</td>
+                    <td>${formatWeight(el.t_weight)}</td>
+                    ${subHhtml}
+                    <td>${prn_html}</td>
+                    <td>${el.pa_regdate}</td>
+                </tr>    
+            `;
+        });
+    }else{
+        html = '<td colspan="10">검색된 정보가 없습니다.</td>';
     }
 
+    $('#packagelist').append(html);
+    let options = {
+        page : $('#pageArea').data('page'),
+        total : mTotal,
+        perpage : $('#pageArea').data('pcnt'),
+        bname : 'btnLinkPaging'
+    }
+    $('#pageArea').html(Make_Page_Html('simple',options));
+    $('#pageArea').data('page',nPage);
+
+}
+
+
+function Ini_Form(){
+    $('#packagelist').empty();
+    $('#packagelistinfo').empty();
+}
+
+function Make_Option(){
+    return {
+        'cfcode' : $('#cfcode').val(),
+        'deliStatus' : $('#deliStatus').val(),
+        'page' : $('#pageArea').data('page'),
+        'sdate' : $('#sdate').val(),
+        'edate' : $('#edate').val(),
+        'sort' : $('#sort').val(),
+        'pCnt' : $('#pCnt').val(),
+        'skey' : $('#skey').val()
+    }
 }
 
 async function Insert_delicode(deltype,delcode,pcode){
@@ -227,11 +295,3 @@ function Insert_Package(sn,pcode){
 
 }
 
-function INI_Load_Data(){
-    $('#packagelist').empty();
-    $('#packagelistinfo').empty();
-}
-
-function INI_Load_Data2(){
-    $('#packagelistinfo').empty();
-}

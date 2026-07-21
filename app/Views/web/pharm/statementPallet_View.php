@@ -8,7 +8,7 @@
         <thead>
         <tr>
             <th>약재명</th>
-            <td class="title"><?=$body['mm_title']?></td>
+            <td class="title"><?=$body['hn_name']?></td>
         </tr>
 
         </thead>
@@ -23,19 +23,34 @@
         </tr>
         <tr>
             <th>포장단위</th>
-            <td><?=$body['w_name']?></td>
+            <td><?=$body['unitWeight']?></td>
         </tr>
         <tr>
-            <th>박스수량</th>
-            <td>Box</td>
+            <th class="">박스수량</th>
+            <td class="">
+                <div class="flexType3-2">
+                    <p class="write_area mr20"></p>
+                    <p class="unit">Box</p>
+                </div>
+            </td>
         </tr>
         <tr>
             <th>포장수량</th>
-            <td>개</td>
+            <td>
+                <div class="flexType3-2">
+                    <p class="write_area mr20"></p>
+                    <p class="unit">개</p>
+                </div>
+            </td>
         </tr>
         <tr>
             <th>전체무게</th>
-            <td>kg</td>
+            <td>
+                <div class="flexType3-2">
+                    <p class="write_area mr20"></p>
+                    <p class="unit">kg</p>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

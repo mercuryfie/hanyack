@@ -2,13 +2,17 @@
 <?= $this->section("content") ?>
 <script src="<?=URL_DECOC_ASSETS?>/cart.js"> </script>
 <script src="<?=URL_DECOC_ASSETS?>/cart_Do.js"> </script>
-<section class="cart  ">
+<section class="">
     <div class="cart_view_box">
         <p class="head_title">장바구니</p>
         <!--        <a href="" onclick="Load_Cart_Count();">장바구니</a>-->
     </div>
     <div class="cartwrap">
         <div class="cartleft">
+<!--            <div class="area1 flexType2 "> -->
+<!--                <input type="checkbox" name="check_all" id="check_all" class="mr10" checked>-->
+<!--                <p class="text">전체</p>-->
+<!--            </div>-->
             <div id="cartlist">
             </div>
             <div class="clbox cartleft1-3">

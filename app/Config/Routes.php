@@ -45,8 +45,9 @@ $routes->match(['GET', 'POST'], 'Api/Search_Medicine_Pharm', 'ApiPharmController
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Order', 'ApiPharmController::Load_Pharm_Order');
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Medicine_All', 'ApiPharmController::Load_Pharm_Medicine_All');
 $routes->match(['GET', 'POST'], 'Api/Update_Pharm_OrderByStep', 'ApiPharmController::Update_Pharm_OrderByStep');
-
-
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_Package', 'ApiPharmController::Load_Pharm_Package');
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_PackageDetail', 'ApiPharmController::Load_Pharm_PackageDetail');
+$routes->match(['GET', 'POST'], 'Api/Update_Pharm_Delivery_Info', 'ApiPharmController::Update_Pharm_Delivery_Info');
 
 
 $routes->match(['GET', 'POST'], 'Api/Load_Medicine', 'ApiController::Load_Medicine');
@@ -65,12 +66,12 @@ $routes->match(['GET', 'POST'], 'Api/Match_Proc', 'ApiController::Match_Proc');
 $routes->match(['GET', 'POST'], 'Api/Load_Order_Pharm', 'ApiController::Load_Order_Pharm');
 $routes->match(['GET', 'POST'], 'Api/Ship_Step', 'ApiController::Ship_Step');
 $routes->match(['GET', 'POST'], 'Api/Update_Delicode', 'ApiController::Update_Delicode');
-$routes->match(['GET', 'POST'], 'Api/Load_Package_Pharm', 'ApiController::Load_Package_Pharm');
+
 $routes->match(['GET', 'POST'], 'Api/Load_Package_Decoc', 'ApiController::Load_Package_Decoc');
-$routes->match(['GET', 'POST'], 'Api/Load_Package_Pharm_List', 'ApiController::Load_Package_Pharm_List');
+
 $routes->match(['GET', 'POST'], 'Api/Load_Package_Decoc_List', 'ApiController::Load_Package_Decoc_List');
 $routes->match(['GET', 'POST'], 'Api/Insert_Package_Deli_Data', 'ApiController::Insert_Package_Deli_Data');
-$routes->match(['GET', 'POST'], 'Api/Update_Deli_Data', 'ApiController::Update_Deli_Data');
+
 $routes->match(['GET', 'POST'], 'Api/Update_Product_isOk', 'ApiController::Update_Product_isOk');
 $routes->match(['GET', 'POST'], 'Api/Update_Product_Reject', 'ApiController::Update_Product_Reject');
 $routes->match(['GET', 'POST'], 'Api/Update_Product_IsOk', 'ApiController::Update_Product_IsOk');
@@ -183,7 +184,6 @@ $routes->GET('Mydecoc/confirmOrder','HerbDecocController::confirmOrder');
 $routes->GET('Mydecoc/claimList/','HerbDecocController::claimList');
 $routes->GET('Mydecoc/return/','HerbDecocController::claim');
 $routes->GET('Mydecoc/claim/exchange','HerbDecocController::claimExchange');
-//$routes->GET('Product/mainThum', 'HerbDecocController::mainThum');
 $routes->GET('Mydecoc/SmartOrder','OrderController::NewSmartOrder');
 
 /* CommonController */

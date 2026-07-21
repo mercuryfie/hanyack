@@ -8,7 +8,7 @@
 
               <div class="scbtnbox flexType3  ">
                 <div class="sch_box flexType2">
-                    <input type="search" class="input_search mr10" id="txtSmart" name="txtSmart" placeholder="약재명또는코드를 검색하십시오.">
+                    <input type="search" class="input_search mr10" id="txtSmart" name="txtSmart" placeholder="약재명 또는 코드를 검색하십시오.">
                     <button type="button" id="btnSmartSearch" name="btnSmartSearch" class="btnType32-1 ">검색</button>
                 </div>
                 <div class="flexType2">
@@ -69,5 +69,4 @@
 <?= $this->include("/web/include/pop_SO_Manage_View") ?>
 <?= $this->include("/web/include/pop_Price_View") ?>
 <?= $this->include("/web/include/pop_ConfirmOrder_View") ?>
-<?= $this->include("/web/include/pop_PayResult_View") ?>
 <?= $this->endSection() ?>

@@ -119,23 +119,23 @@ if (! empty($_SERVER['HTTP_HOST'])) {
 $BASEURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://') . $HTTPHOST;
 defined('BASE_URL') || define('BASE_URL', $BASEURL);
 
-define("ORDER_UNCONFIRM","0");
-define("ORDER_PROCESSING","1");
-define("ORDER_DELIVERY_READY","2");
-define("ORDER_DELIVERING","3");
-define("ORDER_DELIVERED","4");
-define("ORDER_CANCEL","5");
-define("ORDER_RETURNING","6");
-define("ORDER_RETURNED","7");
-define("ORDER_EXCHANGING","8");
-define("ORDER_EXCHANGED","9");
+define("ORDER_UNCONFIRM","1");
+define("ORDER_PROCESSING","2");
+define("ORDER_DELIVERY_READY","3");
+define("ORDER_DELIVERING","4");
+define("ORDER_DELIVERED","5");
+define("ORDER_CANCEL","6");
+define("ORDER_RETURNING","7");
+define("ORDER_RETURNED","8");
+define("ORDER_EXCHANGING","9");
+define("ORDER_EXCHANGED","10");
 
 define("STOCK_LEVEL","0.3");
 
-define("PACKAGE_READY","0");
-define("PACKAGE_SHIP_READY","1");
-define("PACKAGE_SHIP_START","2");
-define("PACKAGE_SHIP_END","3");
+define("PACKAGE_READY","1");
+define("PACKAGE_SHIP_READY","2");
+define("PACKAGE_SHIP_START","3");
+define("PACKAGE_SHIP_END","4");
 
 
 define("ORDER_TYPE_1","일반구매");

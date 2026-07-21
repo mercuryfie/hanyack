@@ -1285,53 +1285,7 @@ class ApiController extends BaseController
 
 
 
-    public function Update_Deli_Data(){
-        $sessinarr = $this->GetSessionData();
-        if (!$sessinarr['islogin']) {
-            $result = 'NoLogin';
-            $message = '로그인을 하셔야 합니다.';
-        } else {
-            $mi_type = $sessinarr['user']['mi_type'];
-            $mi_code = $sessinarr['user']['mi_code'];
-            if ($mi_type != 'pharm') {
-                $result = 'type111';
-                $message = '권한이외의 접근입니다.';
-            } else {
-                $pcode = ($this->request->getPost('pcode') == '') ? '' : $this->request->getPost('pcode');
-                if ($pcode == '') {
-                    $result = 'type112';
-                    $message = '출하 정보를 확인하세요.';
-                } else {
-                    $order_m = model('Order_m');
-                    $Rs = $order_m->Load_Order_Package_List($pcode);
-                    if (fn_ArrayCnt($Rs) <= 0) {
-                        $result = 'type113';
-                        $message = '해당 출고코드에 등록되어 있는 약재가 없습니다.';
-                    } else {
-                        $t_arr = [];
-                        foreach ($Rs as $d) {
-                            $t_arr[] = $d['oSN'];
-                        }
-                        $herb_m = model('Herb_m');
-                        $rCnt = $herb_m->Update_Order_Step2($t_arr, ORDER_DELIVERY_READY);
 
-                        $param = [
-                            'p_type' => PACKAGE_SHIP_READY
-                        ];
-                        $Cnt = $order_m->Update_Deli_info($pcode, $param);
-
-                        $result = 'ok';
-                        $message = '';
-                    }
-                }
-            }
-        }
-        $return = [
-            'result' => $result,
-            'message' => $message
-        ];
-        return $this->respond($return);
-    }
 
     public function Load_Board_List(){
         $sessinarr = $this->GetSessionData();
@@ -1598,139 +1552,8 @@ class ApiController extends BaseController
     }
 
 
-    public function Load_Package_Pharm(){
-        $sessinarr = $this->GetSessionData();
-        if (!$sessinarr['islogin']) {
-            $result = 'NoLogin';
-            $info = '';
-            $message = '로그인을 하셔야 합니다.';
-        } else {
-            $mi_type = $sessinarr['user']['mi_type'];
-            $mi_code = $sessinarr['user']['mi_code'];
-            if ($mi_type != 'pharm') {
-                $result = 'type111';
-                $info = '';
-                $message = '권한이외의 접근입니다.';
-            } else {
-                $page = ($this->request->getPost('page') == '') ? '1' : $this->request->getPost('page');
 
-                $order_m = model('Order_m');
-                $Rs = $order_m->Load_Order_Package_Pharm($mi_code);
-                if (fn_ArrayCnt($Rs) <= 0) {
-                    $i_arr = [
-                        'page' => ($page + 1),
-                        'list' => ''
-                    ];
 
-                    $result = 'ok';
-                    $info = $i_arr;
-                    $message = '';
-                } else {
-                    $t_arr = [];
-                    $m_arr = [];
-                    foreach ($Rs as $d) {
-                        $t_arr['sn'] = $d['sn'];
-                        $t_arr['pcode'] = $d['pcode'];
-                        $t_arr['w_code'] = $d['w_code'];
-                        $t_arr['w_name'] = $d['w_name'];
-                        $t_arr['t_cnt'] = $d['t_cnt'];
-                        $t_arr['t_weight'] = $d['t_weight'];
-                        $t_arr['delitype'] = $d['delitype'];
-                        $t_arr['delicode'] = $d['delicode'];
-                        $t_arr['delidate'] = $d['delidate'];
-                        $t_arr['p_type'] = $d['p_type'];
-                        $t_arr['pa_regdate'] = fn_Short_Date($d['pa_regdate']);
-
-                        array_push($m_arr, $t_arr);
-                    }
-
-                    $i_arr = [
-                        'page' => ($page + 1),
-                        'list' => $m_arr
-                    ];
-
-                    $result = 'ok';
-                    $info = $i_arr;
-                    $message = '';
-                }
-            }
-        }
-        $return = [
-            'result' => $result,
-            'info' => $info,
-            'message' => $message
-        ];
-        return $this->respond($return);
-
-    }
-
-    public function Load_Package_Pharm_List(){
-        $sessinarr = $this->GetSessionData();
-        if (!$sessinarr['islogin']) {
-            $result = 'NoLogin';
-            $info = '';
-            $message = '로그인을 하셔야 합니다.';
-        } else {
-            $mi_type = $sessinarr['user']['mi_type'];
-            $mi_code = $sessinarr['user']['mi_code'];
-            if ($mi_type != AUTH_PHARM) {
-                $result = 'type111';
-                $info = '';
-                $message = '권한이외의 접근입니다.';
-            } else {
-                $page = ($this->request->getPost('page') == '') ? '1' : $this->request->getPost('page');
-                $pcode = ($this->request->getPost('pcode') == '') ? '1' : $this->request->getPost('pcode');
-                if ($pcode == '') {
-                    $result = 'type112';
-                    $info = '';
-                    $message = '잘못된 접근입니다.';
-                } else {
-                    $order_m = model('Order_m');
-                    $Rs = $order_m->Load_Order_Package_List($pcode);
-                    if (fn_ArrayCnt($Rs) <= 0) {
-                        $result = 'ok';
-                        $info = '';
-                        $page = '';
-                        $message = '';
-                    } else {
-                        $t_arr = [];
-                        $m_arr = [];
-                        foreach ($Rs as $d) {
-                            $t_arr['sn'] = $d['sn'];
-                            $t_arr['pa_code'] = $d['pa_code'];
-                            $t_arr['gd_status'] = $d['gd_status'];
-                            $t_arr['fk_pcode'] = $d['fk_pcode'];
-                            $t_arr['fk_hncode'] = $d['fk_hncode'];
-                            $t_arr['hn_name'] = $d['hn_name'];
-                            $t_arr['t1_value'] = $d['t1_value'];
-                            $t_arr['t2_value'] = $d['t2_value'];
-                            $t_arr['t_cnt'] = $d['t_cnt'];
-                            $t_arr['t_weight'] = $d['t_weight'];
-                            $t_arr['delidate'] = $d['gd_delidate'];
-
-                            array_push($m_arr, $t_arr);
-                        }
-
-                        $i_arr = [
-                            'page' => ($page + 1),
-                            'list' => $m_arr
-                        ];
-
-                        $result = 'ok';
-                        $info = $i_arr;
-                        $message = '';
-                    }
-                }
-            }
-        }
-        $return = [
-            'result' => $result,
-            'info' => $info,
-            'message' => $message
-        ];
-        return $this->respond($return);
-
-    }
 
     public function Load_Package_Decoc_List()
     {
@@ -2684,7 +2507,7 @@ class ApiController extends BaseController
                             }
                         }
                     } else {
-                        $Rs = $herb_m->Load_Product_info($hn_code);
+                        $Rs = $herb_m->Load_Medicine_info($hn_code);
                         if (fn_ArrayCnt($Rs) <= 0) {
                             $result = 'type105';
                             $message = '매칭 약재 정보 로드에 실패 하였습니다.';
@@ -2814,7 +2637,7 @@ class ApiController extends BaseController
 
             $dataarr = [];
             $herb_m = model('Herb_m');
-            $Rs = $herb_m->Load_Product_info($hncode);
+            $Rs = $herb_m->Load_Medicine_info($hncode);
             if (fn_ArrayCnt($Rs) > 0) {
                 $dataarr['mi_name'] = $Rs[0]['mi_name'];
                 $dataarr['hn_name'] = $Rs[0]['hn_name'];

@@ -1,7 +1,7 @@
 <?= $this->extend("/web/template/layout_pop") ?>
 <?= $this->section("content") ?>
-<script src="<?=URL_COMMON_ASSETS?>/jquery-barcode.js"></script>
-<script src="<?=URL_PHARM_ASSETS?>/statement_Do.js"></script>
+<script src="<?=URL_COMMON_ASSETS?>/JsBarcode.all.min.js"></script>
+<script src="<?=URL_PHARM_ASSETS?>/statement_Do.js?rnd=<?=rand();?>"></script>
 
 <div class="modal-con" id="org_area">
     <!-- <h3>작업서 및 바코드출력</h3> -->
@@ -16,7 +16,7 @@
                         </p>
                     </th>
                     <td colspan="4" rowspan="2" style="margin: 0 auto;">
-                        <div id="barcodeDiv" data-pcode="<?=$body['info']['pcode']?>" style=""></div>
+                        <svg id="barcodeDiv" data-pcode="<?=$body['info']['pcode']?>" style=""></svg>
                     </td>
                     <th colspan="2">대표</th>
                     <th colspan="" >부사장</th>
@@ -33,9 +33,9 @@
                     <th colspan="1">작업번호</th>
                     <td colspan="4" rowspan="" ><?=$body['info']['pcode']?></td>
                     <th colspan="2">발행일</th>
-                    <td colspan="2" class="printDate"><?=$body['info']['regdate']?></td>
-                    <th>부서</th>
-                    <td style="width:100px;"></td>
+                    <td colspan="4" class="printDate"><?=$body['info']['regdate']?></td>
+<!--                    <th>부서</th>-->
+<!--                    <td style="width:100px;"></td>-->
                 </tr>
                 <!-- row start -->
                 <tr>
@@ -55,7 +55,7 @@
             </tbody>
         </table>
         <div class="list-area bottom-table-area" style="min-height: 345px;">
-            <table id="tableMediapplydesc">
+            <table id="tableMediapplydesc" class="tbl_statement">
                 <colgroup class="col12">
                     <col class="wid3"><col class="wid4"><col  class="wid4"><col class="wid12"><col class="wid12">
                     <col  class="wid4"><col  class="wid4"><col class="wid4"><col ><col  class="wid5">
@@ -72,7 +72,7 @@
                     <th>무게</th>
                     <th>수량</th>
                     <th>배송희망일</th>
-                    <th>비고</th>
+<!--                    <th>비고</th>-->
                 </tr>
                 </thead>
 
@@ -82,9 +82,9 @@
                         <tr>
                             <td><?=$d['num']?></td>
                             <td><?=$d['pa_code']?></td>
-                            <td><?=$d['fk_hncode']?></td>
+                            <td><?=$d['hn_code']?></td>
                             <td><?=$d['hn_name']?></td>
-                            <td class="herbName"><a href="javascript://" onclick="Prn_Box('<?=$d['fk_hncode']?>');"><?=$d['mm_kTitle']?></a></td>
+                            <td class="herbName"><a href="javascript:void(0);"  role="button" class="prnBox" data-code="<?=$d['pa_code']?>"><?=$d['hn_name']?></a></td>
                             <td><?=$d['t_weight']?>g</td>
                             <td><?=$d['t_cnt']?>개</td>
                             <td><?=$d['delidate']?></td>

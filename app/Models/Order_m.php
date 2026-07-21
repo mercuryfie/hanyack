@@ -16,6 +16,115 @@ class Order_m extends Model
         $this->db = Database::connect('default');
     }
 
+    public function Update_Package_StepInfo($pcode,$param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_order_Package');
+        $builder->where('pcode',$pcode);
+        $builder->update($param);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Process_Order_StepInfo($in_sql,$step) {
+        $this->db->transStart();
+        $builder = $this->db->table('v_order_goods_info');
+        $builder->set('gd_status', $step);
+        $builder->whereIn('gd_code', $in_sql);
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Load_Order_Package_ListByPacode($pacode, $fields = ['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('V_ORDER_PACKAGE_LIST');
+        $builder->select($separated_val);
+        $builder->where('pa_code', $pacode);
+        $builder->where('p_isDel', 0);
+        $builder->orderBy('sn', 'DESC');
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+
+    public function Load_Order_Package_List($pcode, $fields = ['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('V_ORDER_PACKAGE_LIST');
+        $builder->select($separated_val);
+        $builder->where('fk_pcode', $pcode);
+        $builder->where('p_isDel', 0);
+        $builder->orderBy('sn', 'DESC');
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Cnt_Order_Package_Pharm($params){
+        $builder = $this->db->table('V_ORDER_PACKAGE');
+        $builder->where('mi_code', $params['micode']);
+        if(!empty($params['cfcode'])){
+            $builder->where('cfcode',$params['cfcode']);
+        }
+        if(!empty($params['sdate']) && !empty($params['edate'])) {
+            $builder->where('pa_regdate >=', $params['sdate'].' 00:00:00');
+            $builder->where('pa_regdate <=', $params['edate'].' 23:59:59');
+        }else{
+            $builder->where('delicode','');
+        }
+        if(!empty($params['delistatus'])){
+            $builder->where('p_type',$params['delistatus']);
+        }
+        if(!empty($params['skey'])) {
+            $builder->like('pcode', $params['skey']);
+        }
+
+        return $builder->countAllResults();
+    }
+
+    public function Load_Order_Package_Pharm($params, $fields = ['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('V_ORDER_PACKAGE');
+        $builder->select($separated_val);
+        $builder->where('mi_code', $params['micode']);
+        if(!empty($params['cfcode'])){
+            $builder->where('cfcode',$params['cfcode']);
+        }
+        if(!empty($params['sdate']) && !empty($params['edate'])) {
+            $builder->where('pa_regdate >=', $params['sdate'].' 00:00:00');
+            $builder->where('pa_regdate <=', $params['edate'].' 23:59:59');
+        }else{
+            $builder->where('delicode','');
+        }
+        if(!empty($params['delistatus'])){
+            $builder->where('p_type',$params['delistatus']);
+        }
+        if(!empty($params['skey'])) {
+            $builder->like('pcode', $params['skey']);
+        }
+        $builder->orderBy('sn','DESC');
+        $offset = ($params['page'] - 1) * $params['pcnt'];
+        $builder->limit($params['pcnt'], $offset);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Load_Order_PackageByPcode($pcode, $fields = ['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('V_ORDER_PACKAGE');
+        $builder->select($separated_val);
+        $builder->where('pcode', $pcode);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+
+
+
 
     public function Update_Order_Step($sn,$step) {
         $this->db->transStart();
@@ -55,6 +164,13 @@ class Order_m extends Model
         if(!empty($params['delistatus'])){
             $builder->where('gd_status',$params['delistatus']);
         }
+        if(!empty($params['skey'])){
+            $builder->groupStart()
+                ->like('gd_code', $params['skey'])
+                ->orLike('hn_name', $params['skey'])
+                ->groupEnd();
+
+        }
 
         $builder->orderBy('primarysn','DESC');
         $offset = ($params['page'] - 1) * $params['pcnt'];
@@ -77,6 +193,12 @@ class Order_m extends Model
         }
         if(!empty($params['delistatus'])){
             $builder->where('gd_status',$params['delistatus']);
+        }
+        if(!empty($params['skey'])){
+            $builder->groupStart()
+                ->like('gd_code', $params['skey'])
+                ->orLike('hn_name', $params['skey'])
+                ->groupEnd();
         }
         return $builder->countAllResults();
     }
@@ -320,6 +442,7 @@ class Order_m extends Model
         $builder->select($separated_val);
         $builder->where('mi_code', $param['mi_code']);
         $builder->where('cfcode', $param['cfcode']);
+        $builder->where('p_type',1);
         $query = $builder->get();
 
         return $query->getResultArray();
@@ -419,16 +542,7 @@ class Order_m extends Model
         return $query->getResultArray();
     }
 
-    public function Load_Order_Package_Pharm($micode, $fields = ['ALL']){
-        $separated_val = fn_Make_Fields($fields);
-        $builder = $this->db->table('V_ORDER_PACKAGE');
-        $builder->select($separated_val);
-        $builder->where('mi_code', $micode);
-        $builder->orderBy('sn', 'DESC');
-        $query = $builder->get();
 
-        return $query->getResultArray();
-    }
 
     public function Load_Order_Package_Decoc($wcode, $fields = ['ALL']){
         $separated_val = fn_Make_Fields($fields);
@@ -442,26 +556,7 @@ class Order_m extends Model
         return $query->getResultArray();
     }
 
-    public function Load_Order_Package_List($pcode, $fields = ['ALL']){
-        $separated_val = fn_Make_Fields($fields);
-        $builder = $this->db->table('V_ORDER_PACKAGE_LIST');
-        $builder->select($separated_val);
-        $builder->where('fk_pcode', $pcode);
-        $builder->where('p_isDel', 0);
-        $builder->orderBy('sn', 'DESC');
-        $query = $builder->get();
 
-        return $query->getResultArray();
-    }
 
-    public function Update_Deli_info($pcode,$param){
-        $this->db->transStart();
-        $builder = $this->db->table('herb_order_Package');
-        $builder->where('pcode',$pcode);
-        $builder->update($param);
-        $affected_rows = $this->db->affectedRows();
-        $this->db->transComplete();
 
-        return $affected_rows;
-    }
 }

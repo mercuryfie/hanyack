@@ -293,16 +293,16 @@ function Return_Step_Name(step){
 function Order_Step_Name(step){
     let val = parseInt(step,10);
     switch(val){
-        case 0: return "미확인";
-        case 1: return "제품준비중";
-        case 2: return "배송준비중";
-        case 3: return "배송중";
-        case 4: return "배송완료";
-        case 5: return "주문취소";
-        case 6: return "반품진행중";
-        case 7: return "반품완료";
-        case 8: return "교환진행중";
-        case 9: return "교환완료";
+        case 1: return "미확인";
+        case 2: return "제품준비중";
+        case 3: return "배송준비중";
+        case 4: return "배송중";
+        case 5: return "배송완료";
+        case 6: return "주문취소";
+        case 7: return "반품진행중";
+        case 8: return "반품완료";
+        case 9: return "교환진행중";
+        case 10: return "교환완료";
         default: return '';
     }
 }
@@ -320,10 +320,10 @@ function Order_Type_Name(step) {
 function Package_Step_Name(step) {
     let val = parseInt(step,10);
     switch(val){
-        case 0: return "제품준비중";
-        case 1: return "배송준비중";
-        case 2: return "배송중";
-        case 3: return "배송완료";
+        case 1: return "미확인";
+        case 2: return "출고준비";
+        case 3: return "출고시작";
+        case 4: return "출고시작";
         default: return '';
     }
 }
@@ -1131,4 +1131,32 @@ function Make_Page_Html(theme, params) {
 
     return html;
 }
-
+/**
+ * 팝업창
+ * @param {string} url - 이동할 페이지 URL
+ * @param {number|string} [width=1200] - 팝업창 너비 (기본값: 1200)
+ * @param {number|string} [height=800] - 팝업창 높이 (기본값: 800)
+ * @param {string} [name='popupWindow'] - 팝업창 이름/타겟 (기본값: 'popupWindow')
+ */
+function openPopup(url, width = 1200, height = 800, name = 'popupWindow') {
+    const features = `width=${width},height=${height},status=0,titlebar=0,scrollbars=1,resizable=1`;
+    return window.open(url, name, features);
+}
+/**
+ * 무게단위포함 리턴
+ * @param {number} grams - 무게
+ * @param {number|string} [precision] - 소숫점 갯수
+ */
+function formatWeight(grams, precision = 2) {
+    let value = parseFloat(grams);
+    if (isNaN(value)) return '0g';
+    let unit = 'g';
+    if (value >= 1000000) {
+        value = value / 1000000;
+        unit = 't';
+    } else if (value >= 1000) {
+        value = value / 1000;
+        unit = 'kg';
+    }
+    return Number(value.toFixed(precision)) + unit;
+}

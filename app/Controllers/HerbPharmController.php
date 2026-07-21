@@ -13,23 +13,23 @@ class HerbPharmController extends BaseController
 
     public function __construct()
     {
-        $Auth = [AUTH_MASTER,AUTH_PHARM];
+        $Auth = [AUTH_MASTER, AUTH_PHARM];
         $this->Check_Auth($Auth);
     }
 
     public function deliveryInfo()
     {
         $sessinarr = $this->GetSessionData();
-        if(!$sessinarr['islogin']){
-            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
-        }else{
+        if (!$sessinarr['islogin']) {
+            return redirect()->to('/Member/Login')->with('msg', '로그인이 필요합니다.');
+        } else {
             $mi_type = $sessinarr['user']['mi_type'];
             $metaarr = [
                 'h_title' => '상품등록',
                 'h_type' => 1
             ];
 
-            $form = New Form;
+            $form = new Form;
             $main_data = [
                 'meta' => $form->fnMake_Meta($metaarr),
                 'header' => $form->fnMake_Header($sessinarr),
@@ -43,11 +43,11 @@ class HerbPharmController extends BaseController
     public function claimList()
     {
         $sessinarr = $this->GetSessionData();
-        if(!$sessinarr['islogin']){
-            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
-        }else {
-            $skey = ($this->request->getPost('skey')=='') ? '' : $this->request->getPost('skey');
-            $page = ($this->request->getPost('page')=='') ? 1 : $this->request->getPost('page');
+        if (!$sessinarr['islogin']) {
+            return redirect()->to('/Member/Login')->with('msg', '로그인이 필요합니다.');
+        } else {
+            $skey = ($this->request->getPost('skey') == '') ? '' : $this->request->getPost('skey');
+            $page = ($this->request->getPost('page') == '') ? 1 : $this->request->getPost('page');
             $limit = 50;
 
             $s_data = [];
@@ -80,152 +80,163 @@ class HerbPharmController extends BaseController
     public function statementBox()
     {
         $sessinarr = $this->GetSessionData();
-        if(!$sessinarr['islogin']){
-            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
-        }else {
-            $hncode = ($this->request->getGet('key') == '') ? '' : $this->request->getGet('key');
-            $s_data = [];
-            $metaarr = [
-                'h_title' => '박스라벨출력',
-                'h_type' => 1
-            ];
-
-            $herb_m=model('Herb_m');
-            $Rs = $herb_m->Product_Match_Load($hncode);
-            if(fn_ArrayCnt($Rs)<=0){
-                fn_AlertClose('잘못된 접근입니다.');
-                return '';
-            }else{
-                $d_arr = [
-                    'hdcode' => $hncode,
-                    'mm_title' => $Rs[0]['md_title_kor'],
-                    'mi_name' => $Rs[0]['mi_name'],
-                    'e_date' => fn_Short_Date($Rs[0]['hn_sellEDate']),
-                    'w_name' =>  $Rs[0]['w_name']
-                ];
-
-                $form = new Form;
-                $main_data = [
-                    'meta' => $form->fnMake_Meta($metaarr),
-                    'header' => $form->fnMake_Header($sessinarr),
-                    'left_menu' => $form->fnMake_Left($sessinarr),
-                    'search' => $form->fnMake_Search($s_data),
-                    'body' => $d_arr
-                ];
-
-                return view('web/pharm/statementBox_View', $main_data);
-            }
+        if (!$sessinarr['islogin']) {
+            fn_AlertClose('로그인이 필요합니다.');
+            return '';
         }
+        $hncode = $this->request->getGet('cd') ?? '';
+        if(empty($hncode)) {
+            fn_AlertClose('잘못된 접근입니다.');
+            return '';
+        }
+        $order_m = model('Order_m');
+        $Rs = $order_m->Load_Order_Package_ListByPacode($hncode);
+        if(empty($Rs)) {
+            fn_AlertClose('존재하지 않는 포장정보 입니다.');
+            return '';
+        }
+        $s_data = [];
+        $metaarr = [
+            'h_title' => '박스라벨출력',
+            'h_type' => 1
+        ];
+        $d_arr = [
+            'pacode' => $Rs[0]['pa_code'],
+            'hncode' => $Rs[0]['hn_code'],
+            'hpcode' => $Rs[0]['hp_code'],
+            'hn_name' => $Rs[0]['hn_name'],
+            'mi_name' => $Rs[0]['mi_name'],
+            'e_date' => fn_Short_Date($Rs[0]['hn_expired_date']),
+            'de_name' => $Rs[0]['decoc_name'],
+            'unitWeight' => $Rs[0]['w_name'],
+        ];
+        $form = new Form;
+        $main_data = [
+            'meta' => $form->fnMake_Meta($metaarr),
+            'header' => $form->fnMake_Header($sessinarr),
+            'left_menu' => $form->fnMake_Left($sessinarr),
+            'search' => $form->fnMake_Search($s_data),
+            'body' => $d_arr
+        ];
+        return view('web/pharm/statementBox_View', $main_data);
     }
-
 
     public function Statement()
     {
         $sessinarr = $this->GetSessionData();
-        if(!$sessinarr['islogin']){
-            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
-        }else {
-            $pcode = ($this->request->getGet('key')=='') ? '' : $this->request->getGet('key');
-            $s_data = [];
-            $metaarr = [
-                'h_title' => '거래명세서',
-                'h_type' => 1
-            ];
-
-            $order_m = model('Order_m');
-            $package = $order_m->Load_Order_Package_Pcode($pcode);
-            if(fn_ArrayCnt($package)<=0){
-                fn_AlertClose('잘못된 접근입니다.');
-                return '';
-            }else {
-                $p_arr = [
-                    'sn' => 14,
-                    'pcode' => $package[0]['pcode'],
-                    'regdate' => fn_Short_Date($package[0]['pa_regdate']),
-                    'ptype'=> $package[0]['p_type']
-                ];
-
-                $company = $order_m->Load_Company($package[0]['mi_code']);
-                $Rs = $order_m->Load_Order_Package_List($pcode);
-                if(fn_ArrayCnt($Rs)>0){
-                    $s_arr = [];
-                    $t_arr = [];
-                    $i = 1;
-                    foreach ($Rs as $d){
-                        $t_arr['num'] = $i;
-                        $t_arr['pa_code'] = $d['pa_code'];
-                        $t_arr['fk_hncode'] = $d['fk_hncode'];
-                        $t_arr['hn_name'] = $d['hn_name'];
-                        $t_arr['mm_kTitle'] = $d['mm_kTitle'];
-                        $t_arr['t_cnt'] = $d['t_cnt'];
-                        $t_arr['t_weight'] = $d['t_weight'];
-                        $t_arr['delidate'] = $d['gd_delidate'];
-
-                        $i++;
-                        array_push($s_arr,$t_arr);
-
-                    }
-                }
-
-                $body = [
-                    'info' => $p_arr,
-                    'company' => $company,
-                    'sub' => $s_arr
-                ];
-
-                $form = new Form;
-                $main_data = [
-                    'meta' => $form->fnMake_Meta($metaarr),
-                    'header' => $form->fnMake_Header($sessinarr),
-                    'left_menu' => $form->fnMake_Left($sessinarr),
-                    'search' => $form->fnMake_Search($s_data),
-                    'body' => $body
-                ];
-
-                return view('web/pharm/statement_View', $main_data);
-            }
+        if (!$sessinarr['islogin']) {
+            fn_AlertClose('로그인이 필요합니다.');
+            return '';
         }
+        $pcode = $this->request->getGet('cd') ?? '';
+        if (empty($pcode)) {
+            fn_AlertClose('잘못된 접근입니다.');
+            return '';
+        }
+        $order_m = model('Order_m');
+        $package = $order_m->Load_Order_PackageByPcode($pcode);
+        if (empty($package)) {
+            fn_AlertClose('존재하지 않는 발송건입니다.');
+            return '';
+        }
+        $company = $order_m->Load_Company($package[0]['mi_code']);
+        $pList = $order_m->Load_Order_Package_List($pcode);
+        if (empty($pList)) {
+            fn_AlertClose('존재하지 않는 발송건입니다.');
+            return '';
+        }
+
+
+        $s_data = [];
+        $metaarr = [
+            'h_title' => '거래명세서',
+            'h_type' => 1
+        ];
+        $p_arr = [
+            'sn' => $package[0]['sn'],
+            'pcode' => $package[0]['pcode'],
+            'regdate' => fn_Short_Date($package[0]['pa_regdate']),
+            'ptype' => $package[0]['p_type']
+        ];
+
+        $list = [];
+        $i = 1;
+        foreach ($pList as $d) {
+            $t_arr = [
+                'num' => $i,
+                'pa_code' => $d['pa_code'],
+                'hn_code' => $d['hn_code'],
+                'hn_name' => $d['hn_name'],
+                't_cnt' => $d['t_cnt'],
+                't_weight' => $d['t_weight'],
+                'delidate' => $d['gd_delidate']
+            ];
+            $list[] = $t_arr;
+            $i++;
+        }
+        $body = [
+            'info' => $p_arr,
+            'company' => $company,
+            'sub' => $list
+        ];
+
+        $form = new Form;
+        $main_data = [
+            'meta' => $form->fnMake_Meta($metaarr),
+            'header' => $form->fnMake_Header($sessinarr),
+            'left_menu' => $form->fnMake_Left($sessinarr),
+            'search' => $form->fnMake_Search($s_data),
+            'body' => $body
+        ];
+
+        return view('web/pharm/statement_View', $main_data);
     }
+
 
     public function statementPallet()
     {
         $sessinarr = $this->GetSessionData();
-        if(!$sessinarr['islogin']){
-            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
-        }else {
-            $hdcode = ($this->request->getGet('key') == '') ? '' : $this->request->getGet('key');
-            $s_data = [];
-            $metaarr = [
-                'h_title' => '박스라벨출력',
-                'h_type' => 1
-            ];
-
-            $herb_m=model('Herb_m');
-            $Rs = $herb_m->Product_Match_Load($hdcode);
-            if(fn_ArrayCnt($Rs)<=0){
-                fn_AlertClose('잘못된 접근입니다.');
-                return '';
-            }else{
-                $d_arr = [
-                    'mm_title' => $Rs[0]['md_title_kor'],
-                    'mi_name' => $Rs[0]['mi_name'],
-                    'e_date' => fn_Short_Date($Rs[0]['hn_sellEDate']),
-                    'w_name' =>  $Rs[0]['w_name']
-                ];
-
-                $form = new Form;
-                $main_data = [
-                    'meta' => $form->fnMake_Meta($metaarr),
-                    'header' => $form->fnMake_Header($sessinarr),
-                    'left_menu' => $form->fnMake_Left($sessinarr),
-                    'search' => $form->fnMake_Search($s_data),
-                    'body' => $d_arr
-                ];
-
-                return view('web/pharm/statementPallet_View', $main_data);
-            }
+        if (!$sessinarr['islogin']) {
+            fn_AlertClose('로그인이 필요합니다.');
+            return '';
         }
+        $hncode = $this->request->getGet('cd') ?? '';
+        if(empty($hncode)) {
+            fn_AlertClose('잘못된 접근입니다.');
+            return '';
+        }
+        $order_m = model('Order_m');
+        $Rs = $order_m->Load_Order_Package_ListByPacode($hncode);
+        if(empty($Rs)) {
+            fn_AlertClose('존재하지 않는 포장정보 입니다.');
+            return '';
+        }
+        $s_data = [];
+        $metaarr = [
+            'h_title' => '박스라벨출력',
+            'h_type' => 1
+        ];
+        $d_arr = [
+            'pacode' => $Rs[0]['pa_code'],
+            'hncode' => $Rs[0]['hn_code'],
+            'hpcode' => $Rs[0]['hp_code'],
+            'hn_name' => $Rs[0]['hn_name'],
+            'mi_name' => $Rs[0]['mi_name'],
+            'e_date' => fn_Short_Date($Rs[0]['hn_expired_date']),
+            'de_name' => $Rs[0]['decoc_name'],
+            'unitWeight' => $Rs[0]['w_name'],
+        ];
+        $form = new Form;
+        $main_data = [
+            'meta' => $form->fnMake_Meta($metaarr),
+            'header' => $form->fnMake_Header($sessinarr),
+            'left_menu' => $form->fnMake_Left($sessinarr),
+            'search' => $form->fnMake_Search($s_data),
+            'body' => $d_arr
+        ];
+        return view('web/pharm/statementPallet_View', $main_data);
     }
+
 
     public function register()
     {
@@ -1041,11 +1052,25 @@ class HerbPharmController extends BaseController
                 'h_type' => 1
             ];
 
+            $miHtml = '';
+            $member_m = model('Member_m');
+            $mRs = $member_m->Load_Company_miType('decoc');
+            if(!empty($mRs)){
+                foreach($mRs as $d){
+                    $miHtml .= '<option value="' . $d['mi_cfcode'] . '">' . $d['mi_name'] . '</option>';
+                }
+            }
+
+            $body_data = [
+                'decoc' => $miHtml
+            ];
+
             $form = New Form;
             $main_data = [
                 'meta' => $form->fnMake_Meta($metaarr),
                 'header' => $form->fnMake_Header($sessinarr),
-                'left_menu' => $form->fnMake_Left($sessinarr)
+                'left_menu' => $form->fnMake_Left($sessinarr),
+                'body' =>$body_data
             ];
 
             return view('web/pharm/shipListPharm_View',$main_data);
@@ -1220,7 +1245,7 @@ class HerbPharmController extends BaseController
             return '';
         }
         $herb_m = model('Herb_m');
-        $Rs = $herb_m->Load_Product_info($hncode);
+        $Rs = $herb_m->Load_Medicine_info($hncode);
         if(empty($Rs)){
             fn_AlertClose('존재하지 않는 약재 입니다.');
             return '';

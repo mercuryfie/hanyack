@@ -98,7 +98,7 @@ crossorigin="anonymous" referrerPolicy="no-referrer" />
                   </div>
               </div>
           </div>
-          <div class="gunpop orderpopcon" id="endOrder" name="endOrder">
+          <div class="gunpop orderpopcon" id="pop_confirm_odr" name="pop_confirm_odr">
               <div class="orderpop">
                   <i class="fa-regular fa-circle-check"></i>
                   <h2>주문 완료!</h2>

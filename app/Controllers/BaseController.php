@@ -317,7 +317,7 @@ abstract class BaseController extends Controller
     public function Product_Option_str($t1value,$t2value){
         $str = '';
         if(($t1value=='') && ($t2value=='')){
-            $str = '-';
+            $str = '';
         }else if(($t1value!='') && ($t2value=='')){
             $str = $t1value;
         }else if(($t1value=='') && ($t2value!='')){
