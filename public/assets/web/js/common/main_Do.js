@@ -38,28 +38,6 @@ $(document).ready(function () {
         }
     });
 
-    $('#btnHSearch').on('click',function(){
-        const skey = $('#h_sKey').val();
-        if(skey==''){
-            Make_Toast('검색어를 입력하세요.');
-            $('#h_sKey').focus();
-            return;
-        }
-        Search_Product(skey);
-    });
-
-    $('#h_sKey').on('keypress',function(e){
-        if (e.which === 13 || e.keyCode === 13) {
-            const skey = $('#h_sKey').val();
-            if(skey==''){
-                Make_Toast('검색어를 입력하세요.');
-                $('#h_sKey').focus();
-                return;
-            }
-            Search_Product(skey);
-        }
-    })
-
 
     Make_Html();
 

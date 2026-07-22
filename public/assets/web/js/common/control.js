@@ -112,13 +112,12 @@ function setTopMenuHighlight() {
     }
 }
 
-
 function Make_delcode(sn,typ=1){
     let del = ['직배','퀵','경동','대신','로젠','롯데','천일','한진'];
     let str = '';
 
     if(typ==1) {
-        str = '<td><select name="delitype" id="delitype_' + sn + '" class="selectType2">';
+        str = '<td class="row "><select name="delitype" id="delitype_' + sn + '" class="delitype">';
         str += '<option value="0">선택</option>';
     }else{
         str = '<option value="0">선택</option>';
@@ -732,6 +731,19 @@ function go_materialList(){
     }else{
         let tUrl = $('#tUrl').val();
         url = tUrl + "/materialList";
+        $(location).attr("href", url);
+    }
+}
+
+function go_materialLog(){
+    let uid = $('#tUid').val();
+    let url = '';
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    }else{
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/materialLog";
         $(location).attr("href", url);
     }
 }

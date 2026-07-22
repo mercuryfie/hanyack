@@ -119,7 +119,7 @@ $(document).ready(function(){
         let params = {optimal_stock:opstock,sn:sn};
         let response = await Model.decoc_m.Update_Decoc_Info(params);
         if(response.effect > 0){
-            $('#op_' + sn).text((number_format(opstock) + 'g'));
+            $('#op_' + sn).text(formatWeight(opstock));
             $('#op1_' + sn).data('opstock',opstock);
         }
     });
@@ -335,12 +335,12 @@ async function Make_Html(params){
                     <tr>  
                         <td class=""><div class="flexType1"><p class="mr10">${el.mm_title}</p></div></td>
                         <td>${el.mm_medicine}</td>
-                        <td>${number_format(el.totalStock)}g</td>
-                        <td>${number_format(el.stock)}g</td>
-                        <td>${number_format(el.stock_ware)}g</td>
-                        <td>${number_format(el.stock_week)}g</td>
-                        <td>${number_format(el.stock_month)}g</td>
-                        <td id="op_${el.sn}">${number_format(el.optimal_stock)}g</td>
+                        <td>${formatWeight(el.totalStock)}</td>
+                        <td>${formatWeight(el.stock)}</td>
+                        <td>${formatWeight(el.stock_ware)}</td>
+                        <td>${formatWeight(el.stock_week)}</td>
+                        <td>${formatWeight(el.stock_month)}</td>
+                        <td id="op_${el.sn}">${formatWeight(el.optimal_stock)}</td>
                         <td class="stock_status scidx1-9">${subHtml}</td>
                         <td><button class="bestpri btntype2" type="button" name="popBuy" data-medicode="${el.medicode}" data-mmcode="${el.mm_medicine}" data-week="${el.stock_week}" data-stock="${el.totalStock}" data-month="${el.stock_month}" data-title="${el.mm_title}">구입</button></td>
                     </tr>

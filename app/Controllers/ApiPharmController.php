@@ -83,7 +83,10 @@ class ApiPharmController extends BaseController
             return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
         }
         $pcode = $params['pcode'] ?? '';
-        if (empty($pcode)) {
+        $packageStep = $params['pstep'] ?? '';
+        $orderStep = $params['ostep'] ?? '';
+
+        if (empty($pcode) || empty($packageStep) || empty($orderStep)) {
             return $this->respond(ResultDTO::fail('Error004', [], '잘못된 접근입니다.'));
         }
         $order_m = model('Order_m');
@@ -94,8 +97,8 @@ class ApiPharmController extends BaseController
         $order_m = model('Order_m');
         $Rs = $order_m->Load_Order_Package_List($pcode);
         $t_arr = array_column($Rs, 'fk_gdcode');
-        $rCnt = $order_m->Process_Order_StepInfo($t_arr, ORDER_DELIVERY_READY);
-        $param = ['p_type' => PACKAGE_SHIP_READY];
+        $rCnt = $order_m->Process_Order_StepInfo($t_arr, $orderStep);
+        $param = ['p_type' => $packageStep];
         $Cnt = $order_m->Update_Package_StepInfo($pcode, $param);
         $i_arr = ['ecnt' => $Cnt];
         return $this->respond(ResultDTO::success($i_arr));

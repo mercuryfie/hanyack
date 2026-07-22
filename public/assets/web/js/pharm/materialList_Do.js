@@ -1,8 +1,13 @@
 $(document).ready(function() {
 
+    $('button[name="h_add"]').click(function () {
+        $('#pop_addMaterial').css('display', 'block');
+    });
 
     $('button[name="h_input"]').click(function () {
-        $('#pop_addMaterial').css('display', 'block');
+        console.log('bello,world!');
+        $('#pop_inMaterial').show();
+        $('#pop_inMaterial').css('display', 'block');
     });
 
     $('button[name="h_output"]').click(function () {
@@ -12,6 +17,7 @@ $(document).ready(function() {
     $('#Xbtn,#Xbtn2').on('click',function(e){
         // INI_Matching_pop();
         $('#pop_addMaterial').hide();
+        $('#pop_inMaterial').hide();
         $('#pop_outMaterial').hide();
     });
 

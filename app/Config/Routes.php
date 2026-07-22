@@ -147,6 +147,7 @@ $routes->GET('Board/burkOrder','BoardController::burkOrder');
 $routes->GET('Mypharm/','HerbPharmController::herbList');
 $routes->GET('Mypharm/dashBoard','HerbPharmController::dashBoard');
 $routes->GET('Mypharm/materialList','HerbPharmController::materialList');
+$routes->GET('Mypharm/materialLog','HerbPharmController::materialLog');
 $routes->GET('Mypharm/prodList','HerbPharmController::prodList');
 $routes->GET('Mypharm/herbList','HerbPharmController::herbList');
 $routes->GET('Mypharm/herbReg','HerbPharmController::register');

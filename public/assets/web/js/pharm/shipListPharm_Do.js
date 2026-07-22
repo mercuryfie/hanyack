@@ -147,6 +147,25 @@ $(document).ready(function () {
         openPopup(url,1200,800,'prnPackage');
     });
 
+    $(document).on('click', 'button[name="btnDeliveryInput"]', function() {
+        let $row = $(this).closest('tr');
+        let deliType = $row.find('select[name="delitype"]').val();
+        let deliCode = $row.find('input[name="delicode"]').val();
+        let pcode = $(this).data('pcode');
+        if(deliType === "0") {
+            alert("배송업체를 선택해주세요.");
+            return;
+        }
+        if(!deliCode.trim()) {
+            alert("송장번호를 입력해주세요.");
+            return;
+        }
+
+
+    });
+
+
+
     Make_Html(Make_Option());
 });
 
@@ -174,17 +193,17 @@ async function Make_Html(params){
                 delcode_html = Make_delcode(el.sn,1);
                 subHhtml = `
                             ${delcode_html}
-                            <td><input type="text" name="delicode"  placeholder="송장번호 입력" class=""></td>
-                            <td><button class="btnType1" type="button" name="btnDeliveryInput"  data-pcode="${el.pcode}" onclick="Insert_Package('${el.sn}','${el.pcode}')">송장입력</button></td>
+                            <td><input type="text" name="delicode"  placeholder="송장번호 입력" class="row delicode"></td>
+                            <td class="row deli_btn"><button class="btnType1" type="button" name="btnDeliveryInput"  data-pcode="${el.pcode}" >송장입력</button></td>
                         `;
-                prn_html = `<button class="btnType10" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">재출력하기</button>`;
+                prn_html = `<button class="btnType10-1" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">재출력하기</button>`;
             }else if (el.p_type == PACKAGE_SHIP_START) {
                 subHhtml = `
                             <td>${Make_delcode_str(el.delitype)}</td>
                             <td><a href="#" role="button" class="delicodeA">${el.delicode}</a></td>
                             <td></td>
                         `;
-                prn_html = `<button class="btnType10" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">재출력하기</button>`;
+                prn_html = `<button class="btnType10-1" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">재출력하기</button>`;
             }
 
             html += `
@@ -238,7 +257,7 @@ function Make_Option(){
 async function Insert_delicode(deltype,delcode,pcode){
     try {
         start_spinner();
-        let dataarr = {"deltype": deltype,"delcode": delcode,"pcode": pcode};
+        let dataarr = {"deliType": deltype,"deliCode": delcode,"pCode": pcode};
         let url = APIURL + '/Insert_Package_Deli_Data';
         let result = await Load_API(url,dataarr);
         if (result.get('status') == 'NoLogin') {

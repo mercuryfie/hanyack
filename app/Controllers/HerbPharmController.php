@@ -568,6 +568,48 @@ class HerbPharmController extends BaseController
         }
     }
 
+    public function materialLog()
+    {
+        $sessinarr = $this->GetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else {
+
+            $skey = ($this->request->getPost('skey')=='') ? '' : $this->request->getPost('skey');
+            $page = ($this->request->getPost('page')=='') ? 1 : $this->request->getPost('page');
+            $limit = 50;
+
+            $s_data = [];
+
+            $metaarr = [
+                'h_title' => '상품리스트',
+                'h_type' => 1
+            ];
+
+            $body = [
+                'skey' => $skey,
+                'page' => $page,
+                'limit' => $limit
+            ];
+
+            $form = new Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr),
+                'search' => $form->fnMake_Search($s_data),
+                'body' => $body
+            ];
+
+            if(!fn_MobileCheck()){
+                return view('web/pharm/materialLog_View', $main_data);
+            }else{
+                return view('mobile/pharm/materialLog_View', $main_data);
+            }
+
+        }
+    }
+
     public function prodList()
     {
         $sessinarr = $this->GetSessionData();

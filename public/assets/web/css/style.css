@@ -1449,7 +1449,7 @@ input[type="radio"] {
 .common_pop_conkol.add_material_con {
     width:480px;
     height:480px;
-    padding: 10px;
+    padding: 20px 20px 10px 20px;
 }
 
 .add_material_con .cat {
@@ -1476,6 +1476,43 @@ input[type="radio"] {
 }
 
 /* pop_AddMaterial_View end  -------------------------------- */
+/* pop_InMaterial_View start  -------------------------------- */
+
+
+.common_pop_wrap.in_material_wrap {
+    /*display: block;*/
+}
+
+.common_pop_conkol.in_material_con {
+    width:480px;
+    height:480px;
+    padding: 10px 10px 10px 20px;
+}
+
+.in_material_con .cat {
+    color: #8c8c8c;
+    width: 100px;
+    margin-right: 20px;
+}
+
+.in_material_con .select_type,
+.in_material_con .input_type {
+    border:1px solid #ccc;
+    border-radius: 5px;
+    width: 240px;
+    height:32px;
+}
+
+.in_material_con textarea {
+    border:1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    resize: none;
+    width: 240px;
+    height: 140px;
+}
+
+/* pop_InMaterial_View end  -------------------------------- */
 /* pop_OutMaterial_View start  -------------------------------- */
 
 .common_pop_wrap.out_material_wrap {
@@ -1486,7 +1523,7 @@ input[type="radio"] {
     /*display: block;*/
     width:480px;
     height:480px;
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
 }
 
 .out_material_con .cat {
@@ -1517,7 +1554,7 @@ input[type="radio"] {
 
 
 .common_pop_wrap.dd {
-    display:block;
+    /*display:block;*/
 }
 
 .common_pop_conkol.confirm_odr_con {
@@ -4929,10 +4966,10 @@ main,
 .dec_orderli {
     width: 840px;
     margin-bottom: 20px;
-    min-height: 200px;
+    min-height: 160px;
     height: auto;
     border-radius: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     background-color: #fff;
 
 }
@@ -4996,22 +5033,22 @@ main,
 }
 .dec_orderli_ttl .titleBox {
     margin-left: 20px;
-
-    width: 460px;
+    width: auto;
     height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
     font-size: 14px;
     color: var(--gray-cart001);
 }
 
+.dec_orderli_ttl .deli_box .delicode.title,
 .dec_orderli_ttl .titleBox .title {
     width: 60px;
     margin-right: 10px;
 }
-.dec_orderli_ttl .titleBox .orderNo {
-    margin-left: 10px;
+
+.dec_orderli_ttl .titleBox .orderNo,
+.dec_orderli_ttl .deli_box .delicode.carrier,
+.dec_orderli_ttl .deli_box .delicode.code {
+    color: #5c5c5c;
 }
 
 .dec_orderli1-1 .right {
@@ -5086,6 +5123,10 @@ main,
     min-width: 80px;
 }
 
+.orderBox-aaa {
+    height: 100px;
+
+}
 .orderBox-aaa .pharm {
     min-width: 60px;
     width: auto;
@@ -5115,15 +5156,39 @@ main,
 
 .orderBox-aaa .busTrack {
     /*padding-left: 20px;*/
-    border-bottom: 1px solid #ccc;
-    width: 550px;
+    width: 520px;
     height: 20px;
-    position: relative;
-    z-index: 10;
     margin-left: 40px;
-
+    margin-bottom: 10px;
+    position: relative;
 }
 
+.orderBox-aaa .bus_line {
+    z-index: 10;
+    width: 480px;
+    border-bottom: 1px solid #ccc;
+    position: absolute;
+    top:20px;
+}
+.orderBox-aaa .bus_box {
+    /*position: absolute;*/
+    /*top:12px;*/
+    margin-top: 40px;
+    margin-left: -40px;
+}
+
+
+.orderBox-aaa .bus_box .data {
+    min-width: 80px;
+    font-size: 14px;
+    color: #9d9d9d;
+    text-align: center;
+    text-wrap: nowrap;
+}
+.orderBox-aaa .bus_box .data.active {
+    color: var(--main-color);
+
+}
 .orderBox-aaa .busBox {
     width: 550px;
     display: flex;
@@ -5134,12 +5199,12 @@ main,
     color:#ccc;
 
 }
-.busColor1 {
+.busColor {
     background-color: #fff;
     color:#ccc;
 }
 
-.busColor2 {
+.busColor.active {
     background-color: #fff;
     color:var(--second-color);
 }
@@ -5155,17 +5220,6 @@ main,
 
 }
 
-.orderBox-aaa .stt_str_box .data {
-    min-width: 80px;
-    font-size: 14px;
-    color: #9d9d9d;
-    text-align: center;
-    text-wrap: nowrap;
-}
-.orderBox-aaa .stt_str_box .data.active {
-    color: var(--main-color);
-
-}
 
 
 .deli_boxe4z .title {
@@ -5233,11 +5287,6 @@ main,
     margin-bottom: 2px;
 }
 
-.orderBox-aaa {
-    /*margin-bottom: 10px;*/
-}
-
-
 .orderBox-aaa .buyType {
     margin-top: 10px;
 }
@@ -5245,7 +5294,7 @@ main,
 .orderBox-aaa .buyType,
 .orderBox-aaa .priceBox {
     padding-left: 30px;
-    width: 720px;
+    width: 820px;
 
 }
 
@@ -5254,7 +5303,7 @@ main,
 
 .orderBox-aaa .buyType .left,
 .orderBox-aaa .priceBox .left {
-    width: 520px;
+    width: auto;
     height: 32px;
 }
 
@@ -5286,13 +5335,6 @@ main,
 
 
 .orderBox-aaa .buyType .msg {
-    /*border:1px solid #ccc;*/
-    /*border-radius: 5px;*/
-    /*color:red;*/
-    /*width: 112px;*/
-    /*height: 24px;*/
-    /*line-height: 24px;*/
-    /*color:#5c5c5c;*/
     padding: 0 10px;
     background-color: #ececec;
     width: auto;
@@ -5303,31 +5345,19 @@ main,
 }
 
 
-.orderBox-aaa .buyType .delayed {
-    background-color: #fa622f;
-    color:#fff;
-    width: 100px;
-    height: 20px;
-    line-height: 20px;
-    font-size: 12px;
-    text-align: center;
-}
-
-
-.orderBox-aaa .priceBox .price {
+.orderBox-aaa .buyType .price {
     font-weight: bold;
     font-size: 16px;
     margin-right: 10px;
 }
 
-.orderBox-aaa .priceBox .count {
+.orderBox-aaa .buyType .count {
     width: auto;
     color: #848f9a;
     font-size: 14px;
     text-align: center;
     height: 32px;
     line-height: 32px;
-    /*margin-left: 20px;*/
 
 }
 .orderBox-aaa .priceBox .blank {
@@ -6921,8 +6951,6 @@ th, td {
     color: green;
 }
 
-
-
 /*shipListPharm_View start ---------------------*/
 
 .common_list_wrap.slp_wrap .area2 .input_date{
@@ -6945,6 +6973,23 @@ th, td {
 
 }
 
+.common_list_wrap.slp_wrap .slp_table td select.delitype {
+    border:1px solid #ccc;
+    border-radius: 5px;
+    height: 24px;
+    font-size: 14px;
+}
+.common_list_wrap.slp_wrap .slp_table td input.delicode {
+    border:1px solid #ccc;
+    border-radius: 5px;
+    height: 24px;
+    padding-left: 5px;
+}
+.common_list_wrap.slp_wrap .slp_table td.deli_btn .btnType1{
+    font-size: 14px;
+
+
+}
 .common_list_wrap.slp_wrap .slp_table td.row2 a{
     text-decoration: underline;
     cursor: pointer;
@@ -6955,6 +7000,8 @@ th, td {
     width:180px;
 
 }
+
+
 /*shipListPharm_View end ---------------------*/
 /*materialList_View start ---------------------*/
 
@@ -6968,9 +7015,28 @@ th, td {
 }
 
 .common_list_wrap.mlp_wrap .common_table th.h_name {
-    width: 220px;
+    width: 360px;
 }
+
+.common_list_wrap.mlp_wrap .common_table td.row.trash i{
+    color: #5c5c5c;
+}
+
 /*materialList_View end ---------------------*/
+/*materialLog_View start ---------------------*/
+
+
+.common_list_wrap.mlogp_wrap .area2 .cat{
+    color:#5c5c5c;
+    width:100px;
+    margin-right: 20px;
+}
+
+.common_list_wrap.mlogp_wrap .area2 .data {
+
+}
+
+/*materialLog_View end ---------------------*/
 /*ProdList_View start ---------------------*/
 
 .common_list_wrap.plp_wrap {
@@ -10371,6 +10437,21 @@ button, i {
 }
 
 
+.btnType10-1 {
+    border: 1px solid #fb932b;
+    /*background-color: #fb932b;*/
+    background-color: #fff;
+    color:#fb932b;
+    border-radius: 5px;
+    width: auto;
+    height: 24px;
+    padding: 0px 10px;
+    font-size: 14px;
+    text-align: center;
+
+}
+
+
 .btnType11 {
     border: 1px solid #ccc;
     background-color: #fff;
@@ -10493,7 +10574,7 @@ button, i {
 .input_type {
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding-left: 10px;
+    padding-left: 5px;
 
 }
 
