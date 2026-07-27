@@ -8,8 +8,8 @@
         <div class="  flexType3 mb10">
             <div class="left flexType2">
                 <div class="left period_box flexType2 mr10">
-                    <a href="#" role="button"  class="period active">전체</a>
-                    <a href="#" role="button"  class="period">오늘</a>
+                    <a href="#" role="button"  class="period active">오늘</a>
+                    <a href="#" role="button"  class="period">1주일</a>
                     <a href="#" role="button" class="period">3개월</a>
                     <a href="#" role="button" class="period">6개월</a>
                 </div>

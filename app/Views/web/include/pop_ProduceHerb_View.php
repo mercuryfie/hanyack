@@ -10,14 +10,22 @@
             <!--                <p class="cat">약재코드</p>-->
             <!--                <p class="data">-</p>-->
             <!--            </div>-->
-            <div class="row flexType1">
+<!--            <div class="row flexType1">-->
 <!--                <p class="cat"></p>-->
-                <button class="btnType32 active mr10" id="" onclick="Produce_Herb();">생산하기</button>
-                <button class="btnType32 " id="" onclick="Log_Produce_Herb();">로그보기</button>
-            </div>
+<!--                <button class="btnType32 active mr10" id="" onclick="Produce_Herb();">생산하기</button>-->
+<!--                <button class="btnType32 " id="" onclick="Log_Produce_Herb();">로그보기</button>-->
+<!--            </div>-->
             <div class="row flexType2">
                 <p class="cat">약재명</p>
                 <p class="data">감초</p>
+            </div>
+            <div class="row flexType2">
+                <p class="cat">원재료명</p>
+                <input type="search" class="input_type mr10" placeholder="원재료명 입력 후 엔터" id="m_skey" name="m_skey">
+                <!--            <button class="btnType32-2" id="" data-sn="">확인</button>-->
+                <div class="result_box flexCol" id="m_list" name="m_list">
+                    <a href="javascript:;" class="data">hello22</a>
+                </div>
             </div>
             <div class="row flexType2">
                 <p class="cat">제조연월일</p>

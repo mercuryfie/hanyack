@@ -27,10 +27,22 @@ class Order_m extends Model
         return $affected_rows;
     }
 
-    public function Process_Order_StepInfo($in_sql,$step) {
+    public function Process_Order_StepInfo($in_sql,$params) {
+        $this->db->transStart();
+        $builder = $this->db->table('v_order_goods_info');
+        $builder->whereIn('gd_code', $in_sql);
+        $builder->update($params);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Process_Order_StepInfo2($in_sql,$step) {
         $this->db->transStart();
         $builder = $this->db->table('v_order_goods_info');
         $builder->set('gd_status', $step);
+
         $builder->whereIn('gd_code', $in_sql);
         $builder->update();
         $affected_rows = $this->db->affectedRows();
@@ -159,7 +171,9 @@ class Order_m extends Model
             $builder->where('od_regdate >=', $params['sdate'].' 00:00:00');
             $builder->where('od_regdate <=', $params['edate'].' 23:59:59');
         }else{
-            $builder->where('delicode','');
+            //$builder->where('delicode','');
+            $builder->where('od_regdate >=', Carbon::now()->startOfDay()->toDateTimeString());
+            $builder->where('od_regdate <=', Carbon::now()->endOfDay()->toDateTimeString());
         }
         if(!empty($params['delistatus'])){
             $builder->where('gd_status',$params['delistatus']);
@@ -189,7 +203,9 @@ class Order_m extends Model
             $builder->where('od_regdate >=', $params['sdate'].' 00:00:00');
             $builder->where('od_regdate <=', $params['edate'].' 23:59:59');
         }else{
-            $builder->where('delicode','');
+            //$builder->where('delicode','');
+            $builder->where('od_regdate >=', Carbon::now()->startOfDay()->toDateTimeString());
+            $builder->where('od_regdate <=', Carbon::now()->endOfDay()->toDateTimeString());
         }
         if(!empty($params['delistatus'])){
             $builder->where('gd_status',$params['delistatus']);

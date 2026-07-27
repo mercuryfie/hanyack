@@ -48,6 +48,15 @@ $routes->match(['GET', 'POST'], 'Api/Update_Pharm_OrderByStep', 'ApiPharmControl
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Package', 'ApiPharmController::Load_Pharm_Package');
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_PackageDetail', 'ApiPharmController::Load_Pharm_PackageDetail');
 $routes->match(['GET', 'POST'], 'Api/Update_Pharm_Delivery_Info', 'ApiPharmController::Update_Pharm_Delivery_Info');
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_Vendor_All', 'ApiPharmController::Load_Pharm_Vendor_All');
+$routes->match(['GET', 'POST'], 'Api/Insert_Pharm_Vendor', 'ApiPharmController::Insert_Pharm_Vendor');
+$routes->match(['GET', 'POST'], 'Api/Update_Pharm_Vendor', 'ApiPharmController::Update_Pharm_Vendor');
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_Material_All', 'ApiPharmController::Load_Pharm_Material_All');
+$routes->match(['GET', 'POST'], 'Api/Insert_Pharm_Material', 'ApiPharmController::Insert_Pharm_Material');
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_Material_Log', 'ApiPharmController::Load_Pharm_Material_Log');
+$routes->match(['GET', 'POST'], 'Api/Delete_Pharm_Material', 'ApiPharmController::Delete_Pharm_Material');
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_VendorForSearch', 'ApiPharmController::Load_Pharm_VendorForSearch');
+$routes->match(['GET', 'POST'], 'Api/Input_Pharm_Material_InOut', 'ApiPharmController::Input_Pharm_Material_InOut');
 
 
 $routes->match(['GET', 'POST'], 'Api/Load_Medicine', 'ApiController::Load_Medicine');
@@ -148,6 +157,9 @@ $routes->GET('Mypharm/','HerbPharmController::herbList');
 $routes->GET('Mypharm/dashBoard','HerbPharmController::dashBoard');
 $routes->GET('Mypharm/materialList','HerbPharmController::materialList');
 $routes->GET('Mypharm/materialLog','HerbPharmController::materialLog');
+$routes->GET('Mypharm/transactionList','HerbPharmController::transactionList');
+$routes->GET('Mypharm/vendorList','HerbPharmController::vendorList');
+$routes->GET('Mypharm/customerList','HerbPharmController::customerList');
 $routes->GET('Mypharm/prodList','HerbPharmController::prodList');
 $routes->GET('Mypharm/herbList','HerbPharmController::herbList');
 $routes->GET('Mypharm/herbReg','HerbPharmController::register');

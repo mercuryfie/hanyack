@@ -83,7 +83,7 @@ $(document).ready(function() {
 });
 
 function INI_Form(){
-    $('#herbList').empty();
+    $('#v_list').empty();
 }
 
 function Make_Option(){
@@ -167,16 +167,15 @@ async function Make_Html(params){
             html += ` 
                       <tr id="line_${el.sn}"> 
                         <td class="firstCol">${el.hn_code}</td>
-                        <td>${el.hn_name}</td>
-                        <td>${el.hn_batch_no}</td>
-                        <td>${el.hn_product_date}</td>
-                        <td>${el.hn_expired_date}</td>
+                        <td>${el.hn_name}</td> 
                         <td>${el.n_value}</td>
                         <td>${el.option_str}</td>
                         <td>${el.defaultCnt}(${el.packageStr})</td>
                         <td>${el.w_name}</td>
                         <td>${number_format(el.geunPrice || 0)}원</td>
                         <td>${number_format(el.totalPrice || 0)}원</td>
+                        <td>10,000g</td>
+                        <td>10,000g</td> 
                         <td><button class="btnType1 " type="button" onclick="Produce_Herb('${el.hn_code}');"><i class="fa-solid fa-plus"></i></button></td>
                         <td><button class="btnType1 " type="button" onclick="go_prodList('${el.hn_code}');">재고</button></td>
                         <td><button class="btnType1 editHerb" type="button" onclick="Edit_Herb('${el.hn_code}');">수정</button></td> 

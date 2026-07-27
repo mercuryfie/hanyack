@@ -10,9 +10,9 @@ $(document).ready(function () {
                     Make_Toast('잘못된 접근입니다.');
                 } else {
                     let params = {
-                        pcode:pcode,
-                        ostep:ORDER_DELIVERY_READY,
-                        pstep:PACKAGE_SHIP_READY
+                        pCode:pcode,
+                        oStep:ORDER_DELIVERY_READY,
+                        pStep:PACKAGE_SHIP_READY
                     };
                     const response = await Model.pharm_m.Update_Pharm_Delivery_Info(params);
                     if(response.effect > 0){

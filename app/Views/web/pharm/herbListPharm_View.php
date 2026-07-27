@@ -19,15 +19,17 @@
             <tr>
                 <th class="merlirow">약재코드</th>
                 <th class="merlirow">약재명</th>
-                <th class="merlirow">제조번호</th>
-                <th class="merlirow">생산일자</th>
-                <th class="merlirow">유통기한</th>
+<!--                <th class="merlirow">제조번호</th>-->
+<!--                <th class="merlirow">생산일자</th>-->
+<!--                <th class="merlirow">유통기한</th>-->
                 <th class="merlirow">원산지</th>
                 <th class="merlirow">구분/가공방법</th>
                 <th class="merlirow">단위갯수</th>
                 <th class="merlirow">단위무게(g)</th>
                 <th class="merlirow">근당가격</th>
                 <th class="merlirow">판매가격</th>
+                <th class="merlirow">총재고</th>
+                <th class="merlirow">적정재고</th>
                 <th class="merlirow">생산</th>
                 <th class="merlirow">재고</th>
                 <th class="merlirow">수정</th>

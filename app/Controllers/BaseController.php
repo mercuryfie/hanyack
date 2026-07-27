@@ -697,7 +697,7 @@ abstract class BaseController extends Controller
         $timeNow = date("Ymd");
         if($type==1){
             $rnd = mt_rand(10000, 99999);
-            $code = 'PRD'. $timeNow.$rnd;
+            $code = 'PA'. $timeNow.$rnd;
         }else if($type==2){
             $rnd = mt_rand(100000, 999999);
             $code = 'DC'. $timeNow.$rnd;
@@ -713,6 +713,15 @@ abstract class BaseController extends Controller
         }else if($type==6){
             $rnd = mt_rand(100000, 999999);
             $code = 'AP'. $timeNow.$rnd;
+        }else if($type==7){
+            $rnd = mt_rand(100000, 999999);
+            $code = 'HB'. $timeNow.$rnd;
+        }else if($type==8){
+            $rnd = mt_rand(100000, 999999);
+            $code = 'PRD'. $timeNow.$rnd;
+        }else if($type==9){
+            $rnd = mt_rand(100000, 999999);
+            $code = 'TD'. $timeNow.$rnd;
         }
 
         return $code;

@@ -23,9 +23,7 @@ application/logs/*
 .env
 .idea/
 
-writable/debugbar/
-writable/cache/
-writable/logs/
-writable/session/
-
-
+writable/debugbar/*
+writable/cache/*
+writable/logs/*
+writable/session/*

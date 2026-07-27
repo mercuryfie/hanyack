@@ -8,7 +8,7 @@
     <div class="common_list_wrap slp_wrap">
         <p class="main_title">배송내역</p>
         <div class="area area2 mt10">
-            <div class="left flexType2">
+            <div class="left flexType2 ">
                 <div class="left period_box flexType2 mr10">
                     <a href="#" role="button"  class="period active" >전체</a>
                     <a href="#" role="button" class="period">3개월</a>

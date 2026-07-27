@@ -114,8 +114,6 @@ async function Load_HnInfo(hncode){
     }
 }
 
-
-
 async function Search_HnCode(hnname){
     try {
         start_spinner();

@@ -545,9 +545,7 @@ class HerbPharmController extends BaseController
             ];
 
             $body = [
-                'skey' => $skey,
-                'page' => $page,
-                'limit' => $limit
+                'pCnt' => 30
             ];
 
             $form = new Form;
@@ -569,6 +567,46 @@ class HerbPharmController extends BaseController
     }
 
     public function materialLog()
+    {
+        $sessinarr = $this->GetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else {
+
+            $mtcode = $this->request->getGet('mc') ?? '';
+            $mtname = $this->request->getGet('mn') ??'';
+
+            $s_data = [];
+
+            $metaarr = [
+                'h_title' => '상품리스트',
+                'h_type' => 1
+            ];
+
+            $body = [
+                'mtcode' => $mtcode,
+                'mtname' => $mtname,
+                'pCnt' => 30
+            ];
+
+            $form = new Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr),
+                'search' => $form->fnMake_Search($s_data),
+                'body' => $body
+            ];
+
+            if(!fn_MobileCheck()){
+                return view('web/pharm/materialLog_View', $main_data);
+            }else{
+                return view('mobile/pharm/materialLog_View', $main_data);
+            }
+
+        }
+    }
+    public function transactionList()
     {
         $sessinarr = $this->GetSessionData();
         if(!$sessinarr['islogin']){
@@ -602,9 +640,9 @@ class HerbPharmController extends BaseController
             ];
 
             if(!fn_MobileCheck()){
-                return view('web/pharm/materialLog_View', $main_data);
+                return view('web/pharm/transactionList_View', $main_data);
             }else{
-                return view('mobile/pharm/materialLog_View', $main_data);
+                return view('mobile/pharm/transactionList_View', $main_data);
             }
 
         }
@@ -647,6 +685,90 @@ class HerbPharmController extends BaseController
                 return view('web/pharm/prodList_View', $main_data);
             }else{
                 return view('mobile/pharm/prodList_View', $main_data);
+            }
+
+        }
+    }
+
+    public function vendorList()
+    {
+        $sessinarr = $this->GetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else {
+
+            $skey = ($this->request->getPost('skey')=='') ? '' : $this->request->getPost('skey');
+            $page = ($this->request->getPost('page')=='') ? 1 : $this->request->getPost('page');
+            $limit = 50;
+
+            $s_data = [];
+
+            $metaarr = [
+                'h_title' => '상품리스트',
+                'h_type' => 1
+            ];
+
+            $body = [
+                'skey' => $skey,
+                'page' => $page,
+                'limit' => $limit
+            ];
+
+            $form = new Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr),
+                'search' => $form->fnMake_Search($s_data),
+                'body' => $body
+            ];
+
+            if(!fn_MobileCheck()){
+                return view('web/pharm/vendorList_View', $main_data);
+            }else{
+                return view('mobile/pharm/vendorList_View', $main_data);
+            }
+
+        }
+    }
+
+    public function customerList()
+    {
+        $sessinarr = $this->GetSessionData();
+        if(!$sessinarr['islogin']){
+            return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
+        }else {
+
+            $skey = ($this->request->getPost('skey')=='') ? '' : $this->request->getPost('skey');
+            $page = ($this->request->getPost('page')=='') ? 1 : $this->request->getPost('page');
+            $limit = 50;
+
+            $s_data = [];
+
+            $metaarr = [
+                'h_title' => '상품리스트',
+                'h_type' => 1
+            ];
+
+            $body = [
+                'skey' => $skey,
+                'page' => $page,
+                'limit' => $limit
+            ];
+
+            $form = new Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'left_menu' => $form->fnMake_Left($sessinarr),
+                'search' => $form->fnMake_Search($s_data),
+                'body' => $body
+            ];
+
+            if(!fn_MobileCheck()){
+                return view('web/pharm/customerList_View', $main_data);
+            }else{
+                return view('mobile/pharm/customerList_View', $main_data);
             }
 
         }

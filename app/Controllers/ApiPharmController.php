@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\DTOs\ResultDTO;
 use App\Libraries\Utils;
 use CodeIgniter\API\ResponseTrait;
+use Carbon\Carbon;
 
 class ApiPharmController extends BaseController
 {
@@ -16,60 +17,505 @@ class ApiPharmController extends BaseController
         $this->Check_Auth($Auth);
     }
 
-
-    public function Update_Deli_Data(){
+    public function Input_Pharm_Material_InOut()
+    {
         $sessinarr = $this->GetSessionData();
         if (!$sessinarr['islogin']) {
-            $result = 'NoLogin';
-            $message = '로그인을 하셔야 합니다.';
-        } else {
-            $mi_type = $sessinarr['user']['mi_type'];
-            $mi_code = $sessinarr['user']['mi_code'];
-            if ($mi_type != 'pharm') {
-                $result = 'type111';
-                $message = '권한이외의 접근입니다.';
-            } else {
-                $pcode = ($this->request->getPost('pcode') == '') ? '' : $this->request->getPost('pcode');
-                if ($pcode == '') {
-                    $result = 'type112';
-                    $message = '출하 정보를 확인하세요.';
-                } else {
-                    $order_m = model('Order_m');
-                    $Rs = $order_m->Load_Order_Package_List($pcode);
-                    if (fn_ArrayCnt($Rs) <= 0) {
-                        $result = 'type113';
-                        $message = '해당 출고코드에 등록되어 있는 약재가 없습니다.';
-                    } else {
-                        $t_arr = [];
-                        foreach ($Rs as $d) {
-                            $t_arr[] = $d['oSN'];
-                        }
-                        $herb_m = model('Herb_m');
-                        $rCnt = $herb_m->Process_Order_StepInfo($t_arr, ORDER_DELIVERY_READY);
-
-                        $param = [
-                            'p_type' => PACKAGE_SHIP_READY
-                        ];
-                        $Cnt = $order_m->Update_Package_StepInfo($pcode, $param);
-
-                        $result = 'ok';
-                        $message = '';
-                    }
-                }
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $mtcode = $params['mtcode'] ?? '';
+        $typ = $params['typ'] ?? '';
+        $stock = $params['stock'] ?? 0;
+        $reason = $params['reason'] ?? '';
+        $vcode = $params['vcode'] ?? '';
+        $v_price= $params['v_price'] ?? '';
+        $v_unitprice = $params['v_unitprice'] ?? '';
+        $in_memo = $params['in_memo'] ?? '';
+        $indate = $params['indate'] ?? '';
+        if(empty($mtcode) || empty($typ) || empty($stock) || empty($reason) || empty($indate)) {
+            return $this->respond(ResultDTO::fail('Error004', [], '필수항목이 누락되었습니다.'));
+        }
+        if(!empty($vcode)){
+            if(empty($v_price)  || empty($v_unitprice)){
+                return $this->respond(ResultDTO::fail('Error005', [], '거래내역 필수항목이 누락되었습니다.'));
             }
         }
-        $return = [
-            'result' => $result,
-            'message' => $message
+        $pharm_m = model('Pharm_m');
+        $sRs = $pharm_m->Load_Pharm_StockLog_Limit($mi_code,$mtcode);
+        $nowStock = (empty($sRs)) ? 0 : $sRs[0]['total'];
+        if($typ==1){
+            $newStock = $nowStock+$stock;
+            $m_input = $stock;
+            $m_output = 0;
+        }else{
+            $newStock = $nowStock-$stock;
+            $m_input = 0;
+            $m_output = $stock;
+        }
+        $datas = [
+            'fk_mtcode' => $mtcode,
+            'fk_micode' => $mi_code,
+            'total' => $newStock,
+            'm_input' => $m_input,
+            'm_output' => $m_output,
+            'memo'=> $in_memo,
+            'reason' =>$reason,
+            'indate' => $indate
         ];
-        return $this->respond($return);
+        $effect = $pharm_m->Insert_Pharm_StockLog($datas);
+        if(!empty($vcode)){
+            $datas2 = [
+                'tcode' => $this->Make_Code(9),
+                'fk_vcode' => $vcode,
+                'tradetype' => 1,
+                'logtype' => $typ,
+                'mtcode' => $mtcode,
+                'fk_micode'=>$mi_code,
+                'quantity' => $stock,
+                'price' => $v_price,
+                'unit_price' => $v_unitprice,
+            ];
+            $effec2 =$pharm_m->Insert_Pharm_TransactionLog($datas2);
+        }
+        $i_arr = [
+            'ecnt' => $effect
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+    public function Load_Pharm_VendorForSearch()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $skey = $params['skey'] ?? '';
+        if (empty($skey)) {
+            return $this->respond(ResultDTO::fail('Error004', [], '잘못된 접근입니다.'));
+        }
+        $datas = [
+            'skey' => $skey,
+            'micode' => $mi_code,
+        ];
+        $list = [];
+        $pharm_m = model('Pharm_m');
+        $vRs = $pharm_m->Load_Pharm_Vendor_Search($datas);
+        if(!empty($vRs)){
+            foreach ($vRs as $d){
+                $t_arr = [
+                    'vecode' => $d['ve_code'],
+                    'vename' => $d['ve_name'],
+                ];
+
+                $list[] = $t_arr;
+            }
+        }
+
+        $i_arr = [
+            'list' => $list,
+            'tcnt' => count($list)
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+    public function Delete_Pharm_Material()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $mtcode = $params['mtcode'] ?? '';
+        if (empty($mtcode)) {
+            return $this->respond(ResultDTO::fail('Error004', [], '잘못된 접근입니다.'));
+        }
+        $datas = ['is_del' => 1];
+        $pharm_m = model('Pharm_m');
+        $effect = $pharm_m->Update_Pharm_Material($mtcode,$mi_code,$datas);
+        $i_arr = [
+            'ecnt' => $effect
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+
+    public function Load_Pharm_Material_Log()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $mtcode = $params['mtcode'] ?? '';
+        if (empty($mtcode)) {
+            return $this->respond(ResultDTO::fail('Error004', [], '잘못된 접근입니다.'));
+        }
+        $page = $params['page'] ?? 1;
+        $pCnt = $params['pCnt'] ?? 10;
+
+        $datas = [
+            'mtcode' => $mtcode,
+            'page' => $page,
+            'pcnt' => $pCnt,
+            'micode' => $mi_code,
+            'sdate' => $params['sdate'] ?? '',
+            'edate' => $params['edate'] ?? '',
+            'skey' => $params['$searchkey'] ?? ''
+        ];
+        $list = [];
+        $pharm_m = model('Pharm_m');
+        $totalRs =$pharm_m->Cnt_Pharm_Material_LogAll($datas);
+        $Rs = $pharm_m->Load_Pharm_Material_LogAll($datas);
+        if(!empty($Rs)){
+            foreach ($Rs as $d) {
+                $t_arr = [
+                    'total' => $d['total'],
+                    'm_input' => $d['m_input'],
+                    'm_output' => $d['m_output'],
+                    'memo' => $d['memo'],
+                    'reason' => $d['reason'],
+                    'indate' => fn_Short_Date($d['indate'])
+                ];
+                $list[] = $t_arr;
+            }
+        }
+
+        $i_arr = [
+            'list' => $list,
+            'tcnt' => count($list),
+            'nPage' => $page+1,
+            'totalRs' => $totalRs
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+    public function Insert_Pharm_Material()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $mtname = $params['mtname'] ?? '';
+        $waste_rate = $params['waste_rate'] ?? '';
+        $optimal_stock = $params['optimal_stock'] ?? '';
+        $memo = $params['memo'] ?? '';
+        if(empty($mtname) || empty($waste_rate) || empty($optimal_stock)){
+            return $this->respond(ResultDTO::fail('Error004', [], '필수항목이 누락되었습니다.'));
+        }
+        $datas = [
+            'mtcode' => $this->Make_Code(7),
+            'mtname' => $mtname,
+            'waste_rate' => $waste_rate,
+            'optimal_stock' => $optimal_stock,
+            'memo' => $memo,
+            'fk_micode' => $mi_code
+        ];
+        $pharm_m = model('Pharm_m');
+        $effect = $pharm_m->Insert_Pharm_Material($datas);
+        $i_arr = [
+            'ecnt' => $effect
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+
+    }
+
+    public function Load_Pharm_Material_All()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $page = $params['page'] ?? 1;
+        $pCnt = $params['pcnt'] ?? 30;
+
+        $datas = [
+            'page' => $page,
+            'pcnt' => $pCnt,
+            'micode' => $mi_code,
+        ];
+        $list = [];
+        $pharm_m = model('Pharm_m');
+        $totalRs =$pharm_m->Cnt_Pharm_Material_All($datas);
+        $Rs = $pharm_m->Load_Pharm_Material_All($datas);
+        if(!empty($Rs)){
+            foreach ($Rs as $d) {
+                $optimal_stock = $d['optimal_stock'];
+                $current_stock = $d['current_stock'];
+                $stock_status = ($current_stock > $optimal_stock) ? 'high' : 'low';
+                $t_arr = [
+                    'mtcode' => $d['mtcode'],
+                    'micode' => $d['fk_micode'],
+                    'mtname' => $d['mtname'],
+                    'optimal_stock' => $optimal_stock,
+                    'waste_rate' => $d['waste_rate'],
+                    'memo' => $d['memo'],
+                    'reg_date' => fn_Short_Date($d['reg_date']),
+                    'update_date' => fn_Short_Date($d['update_date']),
+                    'current_stock' => $current_stock,
+                    'last_stock_update' => (is_null($d['last_stock_update'])) ? '' : fn_Short_Date($d['last_stock_update']),
+                    'stock_status' => $stock_status
+                ];
+                $list[] = $t_arr;
+            }
+        }
+
+        $i_arr = [
+            'list' => $list,
+            'tcnt' => count($list),
+            'nPage' => $page+1,
+            'totalRs' => $totalRs
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+    public function Update_Pharm_Vendor()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $vecode = $params['vecode'] ?? '';
+        if (is_array($vecode)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '잘못된 접근입니다.'));
+        }
+        $datas = [];
+        if(!empty($params['vename'] ?? '')){
+            $datas['ve_name'] = $params['vename'];
+        }
+        if(!empty($params['vedesc'] ?? '')){
+            $datas['ve_desc'] = $params['vedesc'];
+        }
+        if(!empty($params['veemail'] ?? '')){
+            $datas['ve_email'] = $params['veemail'];
+        }
+        if(!empty($params['vebusino'] ?? '')){
+            $datas['ve_busino'] = $params['vebusino'];
+        }
+        if(!empty($params['vebusiemail'] ?? '')){
+            $datas['ve_busiemail'] = $params['vebusiemail'];
+        }
+        if(!empty($params['vubusizip'] ?? '')){
+            $datas['ve_busizip'] = $params['vebusizip'];
+        }
+        if(!empty($params['vubusiaddr1'] ?? '')){
+            $datas['ve_busiaddr1'] = $params['vebusiaddr1'];
+        }
+        if(!empty($params['vubusiaddr2'] ?? '')){
+            $datas['ve_busiaddr2'] = $params['vebusiaddr2'];
+        }
+        if(!empty($params['vubusitel'] ?? '')){
+            $datas['ve_busitel'] = $params['vebusitel'];
+        }
+        if(!empty($params['veisdel'] ?? '')){
+            $datas['ve_isdel'] = $params['veisdel'];
+        }
+
+        if(empty($datas)){
+            return $this->respond(ResultDTO::fail('Error004', [], '수정하실 정보가 없습니다. '));
+        }
+        $pharm_m = model('Pharm_m');
+        $effect = $pharm_m->Update_Pharm_Vendor_Info($mi_code,$params);
+        if($effect<=0){
+            return $this->respond(ResultDTO::fail('Error005', [], '수정에 실패하였습니다.\n다시 시도하여주세요.'));
+        }
+        $i_arr = [
+            'ecnt' => $effect
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+
+    }
+
+    public function Insert_Pharm_Vendor()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+
+        $params = array(
+            'fk_micode' => $mi_code,
+            've_name' => $params['vename'] ?? '',
+            've_desc' => $params['vedesc'] ?? '',
+            've_email' => $params['veemail'] ?? '',
+            've_busino' => $params['vebusino'] ?? '',
+            've_busiemail' => $params['vebusiemail'] ?? '',
+            've_busizip' => $params['vebusizip'] ?? '',
+            've_busiaddr1' => $params['vebusiaddr1'] ?? '',
+            've_busiaddr2' => $params['vebusiaddr2'] ?? '',
+            've_busitel' => $params['vebusitel'] ?? ''
+        );
+        $pharm_m = model('Pharm_m');
+        $effect = $pharm_m->Insert_Pharm_Vendor_Info($params);
+
+        if($effect<=0){
+            return $this->respond(ResultDTO::fail('Error004', [], '등록에 실패하였습니다.\n다시 시도하여주세요.'));
+        }
+        $i_arr = [
+            'ecnt' => $effect
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+
+    }
+
+    public function Load_Pharm_Vendor_All()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $page = $params['page'] ?? 1;
+        $pCnt = $params['pcnt'] ?? 10;
+        $skey = $params['skey'] ?? '';
+
+        $datas = [
+            'page' => $page,
+            'pcnt' => $pCnt,
+            'micode' => $mi_code,
+            'skey' => $skey
+        ];
+        $list = [];
+        $pharm_m = model('Pharm_m');
+        $totalRs =$pharm_m->Cnt_Pharm_Vendor_All($datas);
+        $Rs = $pharm_m->Load_Pharm_Vendor_All($datas);
+        if(!empty($Rs)){
+            foreach ($Rs as $d) {
+                $t_arr = [
+                    've_code' => $d['ve_code'],
+                    've_name' => $d['ve_name'],
+                    've_desc' => $d['ve_desc'],
+                    've_email' => $d['ve_email'],
+                    've_busino' => $d['ve_busino'],
+                    've_busiemail' => $d['ve_busiemail'],
+                    've_busizip' => $d['ve_busizip'],
+                    've_busiaddr1' => $d['ve_busiaddr1'],
+                    've_busiaddr2' => $d['ve_busiaddr2'],
+                    've_busitel' => $d['ve_busitel'],
+                    've_indate' => fn_Short_Date($d['ve_indate'])
+                ];
+                $list[] = $t_arr;
+            }
+        }
+
+        $i_arr = [
+            'list' => $list,
+            'tcnt' => count($list),
+            'nPage' => $page+1,
+            'totalRs' => $totalRs
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
     }
 
     public function Update_Pharm_Delivery_Info()
     {
         $sessinarr = $this->GetSessionData();
         if (!$sessinarr['islogin']) {
-            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
         }
         if (!Check_Token($sessinarr)) {
             return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
@@ -82,9 +528,11 @@ class ApiPharmController extends BaseController
         if (!is_array($params) || empty($params)) {
             return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
         }
-        $pcode = $params['pcode'] ?? '';
-        $packageStep = $params['pstep'] ?? '';
-        $orderStep = $params['ostep'] ?? '';
+        $pcode = $params['pCode'] ?? '';
+        $packageStep = $params['pStep'] ?? '';
+        $orderStep = $params['oStep'] ?? '';
+        $deliType = $params['deliType'] ?? '';
+        $deliCode = $params['deliCode'] ?? '';
 
         if (empty($pcode) || empty($packageStep) || empty($orderStep)) {
             return $this->respond(ResultDTO::fail('Error004', [], '잘못된 접근입니다.'));
@@ -97,10 +545,27 @@ class ApiPharmController extends BaseController
         $order_m = model('Order_m');
         $Rs = $order_m->Load_Order_Package_List($pcode);
         $t_arr = array_column($Rs, 'fk_gdcode');
-        $rCnt = $order_m->Process_Order_StepInfo($t_arr, $orderStep);
-        $param = ['p_type' => $packageStep];
-        $Cnt = $order_m->Update_Package_StepInfo($pcode, $param);
-        $i_arr = ['ecnt' => $Cnt];
+
+        if(!empty($deliType) || !empty($deliCode)){
+            $params1 = [
+                'gd_status' => $orderStep,
+                'delicode' =>$deliCode,
+                'delitype' => $deliType,
+                'delidate' => Carbon::now()->toDateTimeString()
+            ];
+            $params2 = [
+                'p_type' => $packageStep,
+                'delicode' =>$deliCode,
+                'delitype' => $deliType,
+                'delidate' => Carbon::now()->toDateTimeString()
+            ];
+        }else {
+            $params1 = ['gd_status' => $orderStep];
+            $params2 = ['p_type' => $packageStep];
+        }
+        $Cnt1 = $order_m->Process_Order_StepInfo($t_arr, $params1);
+        $Cnt2 = $order_m->Update_Package_StepInfo($pcode, $params2);
+        $i_arr = ['ecnt' => $Cnt2];
         return $this->respond(ResultDTO::success($i_arr));
     }
 
@@ -109,7 +574,7 @@ class ApiPharmController extends BaseController
     {
         $sessinarr = $this->GetSessionData();
         if (!$sessinarr['islogin']) {
-            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
         }
         if (!Check_Token($sessinarr)) {
             return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
@@ -159,7 +624,7 @@ class ApiPharmController extends BaseController
     {
         $sessinarr = $this->GetSessionData();
         if (!$sessinarr['islogin']) {
-            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
         }
         if (!Check_Token($sessinarr)) {
             return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
@@ -229,7 +694,7 @@ class ApiPharmController extends BaseController
     {
         $sessinarr = $this->GetSessionData();
         if (!$sessinarr['islogin']) {
-            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
         }
         if (!Check_Token($sessinarr)) {
             return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
@@ -315,7 +780,7 @@ class ApiPharmController extends BaseController
     {
         $sessinarr = $this->GetSessionData();
         if (!$sessinarr['islogin']) {
-            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
         }
         if (!Check_Token($sessinarr)) {
             return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
@@ -385,7 +850,7 @@ class ApiPharmController extends BaseController
     public function Search_Medicine_Pharm(){
         $sessinarr = $this->GetSessionData();
         if (!$sessinarr['islogin']) {
-            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
         }
         if (!Check_Token($sessinarr)) {
             return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
@@ -430,7 +895,7 @@ class ApiPharmController extends BaseController
     public function Load_Pharm_Order(){
         $sessinarr = $this->GetSessionData();
         if (!$sessinarr['islogin']) {
-            return $this->respond(ResultDTO::fail('NoLog', [], '로그인이 필요합니다.'));
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
         }
         if (!Check_Token($sessinarr)) {
             return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));

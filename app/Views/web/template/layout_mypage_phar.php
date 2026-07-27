@@ -12,6 +12,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
 integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
 crossorigin="anonymous"
 referrerpolicy="no-referrer" />
+<!--daum 주소 api-->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!--CSS section-->
 <link rel="stylesheet" href="/assets/web/css/style.css?rnd=<?echo(rand()); ?>">
 <!--###############-->

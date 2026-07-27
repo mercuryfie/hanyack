@@ -134,7 +134,7 @@
                         <? } else if ($header['mitype'] == AUTH_PHARM) { ?>
                             <li>
                                 <a href="javascript:;" class="top_menu down_4" onclick="go_materialList('');"
-                                   data-menu="stocklist">입출고관리</a>
+                                   data-menu="stocklist">원재료관리</a>
                             </li>
                             <li>
                                 <a href="javascript:;" class="top_menu down_5" onclick="go_herbList('');"
@@ -180,8 +180,8 @@
                         </div>
                     <? } else if ($header['mitype'] == AUTH_PHARM) { ?>
                         <div class="sub_menu_box ">
-                            <a href="javascript:void(0);" onclick="go_materialList();" class="sub_menu">원재료관리</a>
-<!--                            <a href="javascript:void(0);" onclick="go_prodList();" class="sub_menu">생산관리</a>-->
+                            <a href="javascript:void(0);" onclick="go_materialList();" class="sub_menu">입출고 관리</a>
+                            <a href="javascript:void(0);" onclick="go_vendorList();" class="sub_menu">거래처 관리</a>
                         </div>
                         <div class="sub_menu_box ">
                             <a href="javascript:void(0);" onclick="go_herbList();" class="sub_menu">전체약재</a>

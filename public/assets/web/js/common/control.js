@@ -112,12 +112,13 @@ function setTopMenuHighlight() {
     }
 }
 
+
 function Make_delcode(sn,typ=1){
     let del = ['직배','퀵','경동','대신','로젠','롯데','천일','한진'];
     let str = '';
 
     if(typ==1) {
-        str = '<td class="row "><select name="delitype" id="delitype_' + sn + '" class="delitype">';
+        str = '<select name="delitype" id="delitype_' + sn + '" class="selectType2">';
         str += '<option value="0">선택</option>';
     }else{
         str = '<option value="0">선택</option>';
@@ -127,7 +128,7 @@ function Make_delcode(sn,typ=1){
     }
 
     if(typ==1) {
-        str += '</select></td>';
+        str += '</select>';
     }
 
     return str;
@@ -747,6 +748,46 @@ function go_materialLog(){
         $(location).attr("href", url);
     }
 }
+
+function go_transactionList(){
+    let uid = $('#tUid').val();
+    let url = '';
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    }else{
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/transactionList";
+        $(location).attr("href", url);
+    }
+}
+
+function go_vendorList(){
+    let uid = $('#tUid').val();
+    let url = '';
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    }else{
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/vendorList";
+        $(location).attr("href", url);
+    }
+}
+
+function go_customerList(){
+    let uid = $('#tUid').val();
+    let url = '';
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    }else{
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/customerList";
+        $(location).attr("href", url);
+    }
+}
+
 function go_prodList(){
     let uid = $('#tUid').val();
     let url = '';
@@ -759,6 +800,7 @@ function go_prodList(){
         $(location).attr("href", url);
     }
 }
+
 function go_herbList(){
     let uid = $('#tUid').val();
     let url = '';
@@ -1171,4 +1213,48 @@ function formatWeight(grams, precision = 2) {
         unit = 'kg';
     }
     return Number(value.toFixed(precision)) + unit;
+}
+/**
+ * 입력된 적정재고량과 단위를 받아 g(그램) 기준으로 환산하는 함수
+ * @param {number|string} stock - 입력받은 재고 수량
+ * @param {string} unit - 선택된 단위 코드 ("1": g, "2": kg, "3": t)
+ * @returns {number|null} g으로 환산된 숫자 (유효하지 않은 입력 시 null)
+ */
+function formatWeightConvert(stock, unit) {
+    const numericStock = parseFloat(stock);
+
+    if (isNaN(numericStock) || numericStock < 0) {
+        return 0;
+    }
+    let grams = 0;
+    switch (String(unit)) {
+        case '1': // g
+            grams = numericStock;
+            break;
+        case '2': // kg -> g (x 1,000)
+            grams = numericStock * 1000;
+            break;
+        case '3': // t -> g (x 1,000,000)
+            grams = numericStock * 1000000;
+            break;
+        default:
+            grams = numericStock;
+    }
+    return Math.round(grams * 10000) / 10000;
+}
+
+/**
+ * 입출고 사유 String
+ * @param {number|string} reason - 입력받은 재고 수량
+ * @returns {string}
+ */
+function Material_InStock_Reason(reason){
+    let val = parseInt(reason,10);
+    switch(val){
+        case 1: return "매입";
+        case 2: return "반품";
+        case 3: return "교환";
+        case 4: return "기타";
+        default: return '기타';
+    }
 }
