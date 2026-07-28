@@ -612,22 +612,18 @@ class HerbPharmController extends BaseController
         if(!$sessinarr['islogin']){
             return redirect()->to('/Member/Login')->with('msg','로그인이 필요합니다.');
         }else {
-
-            $skey = ($this->request->getPost('skey')=='') ? '' : $this->request->getPost('skey');
-            $page = ($this->request->getPost('page')=='') ? 1 : $this->request->getPost('page');
-            $limit = 50;
-
             $s_data = [];
 
             $metaarr = [
-                'h_title' => '상품리스트',
+                'h_title' => ' 거래내역',
                 'h_type' => 1
             ];
 
+            $vcode = $this->request->getGet('cd') ?? '';
+
             $body = [
-                'skey' => $skey,
-                'page' => $page,
-                'limit' => $limit
+                'pCnt' => 30,
+                'vcode' => $vcode
             ];
 
             $form = new Form;

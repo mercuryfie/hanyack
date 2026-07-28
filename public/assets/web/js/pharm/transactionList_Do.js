@@ -71,6 +71,16 @@ $(document).ready(function(){
         $('#edate').val(endDate ? formatDate(endDate) : '');
     });
 
+    $('#btnTSearch').on('click',function(){
+        $('#pageArea').data('page',1);
+        Ini_Form();
+        Make_Html(Make_Option());
+    });
+
+
+    const today = new Date();
+    $('#sdate').val(formatDate(today));
+    $('#edate').val(formatDate(today));
     Make_Html(Make_Option());
 });
 
@@ -78,16 +88,19 @@ $(document).ready(function(){
 function Make_Option(){
     return {
         'page' : $('#pageArea').data('page'),
+        'pCnt' : $('#pageArea').data('pcnt'),
         'sdate' : $('#sdate').val(),
         'edate' : $('#edate').val(),
-        'pCnt' : $('#pageArea').data('pcnt'),
-        'searchType' : $('#searchType').val(),
-        'mtcode' : $('#mtcode').text()
+        'stype' : $('#stype').val(),
+        'vendor' : $('#pageArea').data('vcode'),
+        'skey' : $('#skey').val(),
+        'tradetype' : 1
     };
 }
 
 async function Make_Html(params){
-    const response = await Model.pharm_m.Load_Pharm_Material_Log(params);
+    const response = await Model.pharm_m.Load_Pharm_TransactionList(params);
+    console.log(response);
     const list = response.list;
     const listCnt = response.total;
     const nPage = response.nPage;
@@ -95,20 +108,27 @@ async function Make_Html(params){
     let html = '';
     if(listCnt > 0) {
         $.each(list, function (index, el) {
-            let strstock = (el.m_input > 0) ? '입고' : '출고';
-            let stock = (el.m_input > 0) ? el.m_input : el.m_output;
+            let strstock = (el.logtype ==1) ? '매입' : '판매';
+
             html += `
-                <tr>
-                    <td>${el.indate}</td>
+                 <tr>
+                    <td>${el.tcode}</td>
+                    <td>${el.mtname}</td>
+                    <td>${el.ve_name}</td>
                     <td>${strstock}</td>
-                    <td>${formatWeight(stock)}</td>
-                    <td>${Material_InStock_Reason(el.reason)}</td>
-                    <td>${el.memo}</td>
+                    <td>${el.ve_name}</td>
+                    <td>${formatWeight(el.quantity || 0)}</td>
+                    <td>${number_format(el.unit_price || 0)}원</td>
+                    <td>${number_format(el.price || 0)}원</td>
+                    <td>${el.reg_date}</td> 
+                    <td class="row receipt">
+                        <button type="button" class="btnType1 " name="" ><i class="fa-solid fa-receipt"></i></button>
+                    </td>
                 </tr>
-                `;
+           `;
         });
     }else{
-        html = `<tr><td colspan="5">등록된 입출고 로그가 없습니다.</td>`;
+        html = `<tr><td colspan="10">검색된 정보가 없습니다.</td>`;
     }
     $('#dataList').append(html);
     let options = {

@@ -6,6 +6,7 @@ $(document).ready(function() {
         });
         $('#pop_inMaterial').show();
     });
+    // dd
 
     $('button[name="OutMaterial"]').on('click',function(e){
         $('#pop_outMaterial .out_material_con').css({

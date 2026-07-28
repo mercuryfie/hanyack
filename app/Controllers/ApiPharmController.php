@@ -17,6 +17,69 @@ class ApiPharmController extends BaseController
         $this->Check_Auth($Auth);
     }
 
+    public function Load_Pharm_TransactionList()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $page = $params['page'] ?? 1;
+        $pCnt = $params['pCnt'] ?? 10;
+
+        $datas = [
+            'page' => $page,
+            'pcnt' => $pCnt,
+            'micode' => $mi_code,
+            'sdate' => $params['sdate'] ?? '',
+            'edate' => $params['edate'] ?? '',
+            'skey' => $params['$searchkey'] ?? '',
+            'vendor' => $params['vendor'] ?? '',
+            'stype' => $params['stype'] ?? '',
+            'tradetype' => $params['tradetype'] ?? ''
+        ];
+        $list = [];
+        $pharm_m = model('Pharm_m');
+        $fieleds = ['a.*','b.ve_name','c.mtname'];
+        $totalRs =$pharm_m->Cnt_Pharm_Transcaction_LogAll($datas);
+        $Rs = $pharm_m->Load_Pharm_Transcaction_LogAll($datas,$fieleds);
+        if(!empty($Rs)){
+            foreach ($Rs as $d) {
+                $t_arr = [
+                    'tcode' => $d['tcode'],
+                    've_name' => $d['ve_name'],
+                    'mtname' => $d['mtname'],
+                    'logtype' => $d['logtype'],
+                    'quantity' => $d['quantity'],
+                    'unit_price' => $d['unit_price'],
+                    'price' => $d['price'],
+                    'reg_date'  => fn_Short_Date($d['reg_date'])
+                ];
+                $list[] = $t_arr;
+            }
+        }
+
+        $i_arr = [
+            'list' => $list,
+            'tcnt' => count($list),
+            'nPage' => $page+1,
+            'totalRs' => $totalRs
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+
     public function Input_Pharm_Material_InOut()
     {
         $sessinarr = $this->GetSessionData();
@@ -114,10 +177,12 @@ class ApiPharmController extends BaseController
             return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
         }
         $skey = $params['skey'] ?? '';
-        if (empty($skey)) {
+        $vcode = $params['vcode'] ?? '';
+        if (empty($skey) && empty($vcode)) {
             return $this->respond(ResultDTO::fail('Error004', [], '잘못된 접근입니다.'));
         }
         $datas = [
+            'vcode' => $vcode,
             'skey' => $skey,
             'micode' => $mi_code,
         ];
@@ -127,8 +192,17 @@ class ApiPharmController extends BaseController
         if(!empty($vRs)){
             foreach ($vRs as $d){
                 $t_arr = [
-                    'vecode' => $d['ve_code'],
-                    'vename' => $d['ve_name'],
+                    've_code' => $d['ve_code'],
+                    've_name' => $d['ve_name'],
+                    've_desc' => $d['ve_desc'],
+                    've_email' => $d['ve_email'],
+                    've_busino' => $d['ve_busino'],
+                    've_busiemail' => $d['ve_busiemail'],
+                    've_busizip' => $d['ve_busizip'],
+                    've_busiaddr1' => $d['ve_busiaddr1'],
+                    've_busiaddr2' => $d['ve_busiaddr2'],
+                    've_busitel' => $d['ve_busitel'],
+                    've_indate' => fn_Short_Date($d['ve_indate'])
                 ];
 
                 $list[] = $t_arr;
@@ -810,21 +884,41 @@ class ApiPharmController extends BaseController
         $mRs = $herb_m->Load_Pharm_Medicine_All($datas);
         if(!empty($mRs)){
             foreach ($mRs as $d){
-                $unitInfo = $this->getUnitInfo($d['hn_package_type'],$d['hn_package_cnt'],$d['w_value'],1,$d['price']);
+                if(is_null($d['hp_code'])){
+                    $totalPrice = '';
+                    $packageStr = '';
+                    $geunPrice = '';
+                    $defaultCnt = '';
+                }else{
+                    $unitInfo = $this->getUnitInfo($d['hn_package_type'],$d['hn_package_cnt'],$d['w_value'],1,$d['price']);
+                    $totalPrice = $unitInfo['totalPrice'];
+                    $packageStr = $unitInfo['packageStr'];
+                    $geunPrice = $unitInfo['geunPrice'];
+                    $defaultCnt = $unitInfo['defaultCnt'];
+                }
+
+                $optimal_stock = $d['optimal_stock'];
+                $current_stock = $d['total_stock'];
+                $stock_status = ($current_stock > $optimal_stock) ? 'high' : 'low';
+
+
                 $t_arr = [
                     'sn' => $d['sn'],
                     'hn_code' => $d['hn_code'],
                     'hn_name' => $d['hn_name'],
+                    'optimal_stock' => $d['optimal_stock'],
+                    'total_stock' => $d['total_stock'],
+                    'stock_status' => $stock_status,
                     'hp_code' => $d['hp_code'],
                     'hn_batch_no' => $d['hn_batch_no'],
                     'hn_product_date' => fn_Short_Date($d['hn_product_date']),
                     'hn_expired_date' => fn_Short_Date($d['hn_expired_date']),
                     'hn_package_type' => $d['hn_package_type'],
                     'hn_package_cnt' => $d['hn_package_cnt'],
-                    'totalPrice' => $unitInfo['totalPrice'],
-                    'packageStr' => $unitInfo['packageStr'],
-                    'geunPrice' => $unitInfo['geunPrice'],
-                    'defaultCnt' => $unitInfo['defaultCnt'],
+                    'totalPrice' => $totalPrice,
+                    'packageStr' => $packageStr,
+                    'geunPrice' => $geunPrice,
+                    'defaultCnt' => $defaultCnt,
                     'option_str' => $this->Product_Option_str($d['t1_name'], $d['t2_name']),
                     'w_name' => $d['w_name'],
                     'w_value' => $d['w_value'],

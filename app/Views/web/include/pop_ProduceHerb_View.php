@@ -28,6 +28,10 @@
                 </div>
             </div>
             <div class="row flexType2">
+                <p class="cat">제조번호</p>
+                <input type="search" class="input_type" name="">
+            </div>
+            <div class="row flexType2">
                 <p class="cat">제조연월일</p>
                 <input type="date" class="input_date btnType32 date" name="birthDate">
             </div>

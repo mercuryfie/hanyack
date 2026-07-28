@@ -23,9 +23,7 @@
             <p class="cat">업체명</p>
             <div class="search_box" id="s_list">
                 <input type="search" class="input_type mr10" placeholder="업체명 입력 후 엔터" id="v_skey" name="v_skey">
-                <!--            <button class="btnType32-2" id="" data-sn="">확인</button>-->
                 <div class="result_box flexCol" id="v_list" name="v_list">
-                    <a href="javascript:;" class="data">hello22</a>
                 </div>
                 <p class="nodata">검색 결과가 없습니다.</p>
             </div>

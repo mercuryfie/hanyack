@@ -93,7 +93,9 @@ function setTopMenuHighlight() {
         $('.top_gnb_ul .top_menu.down_5').addClass('highlight');
 
     } else if (
-        path.indexOf('materiallist') > -1
+        path.indexOf('materiallist') > -1 ||
+        path.indexOf('transactionlist') > -1 ||
+        path.indexOf('vendorlist') > -1
     ) {
         $('.top_gnb_ul .top_menu.down_4').addClass('highlight');
 

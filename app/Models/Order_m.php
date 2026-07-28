@@ -85,8 +85,6 @@ class Order_m extends Model
         if(!empty($params['sdate']) && !empty($params['edate'])) {
             $builder->where('pa_regdate >=', $params['sdate'].' 00:00:00');
             $builder->where('pa_regdate <=', $params['edate'].' 23:59:59');
-        }else{
-            $builder->where('delicode','');
         }
         if(!empty($params['delistatus'])){
             $builder->where('p_type',$params['delistatus']);
@@ -109,8 +107,6 @@ class Order_m extends Model
         if(!empty($params['sdate']) && !empty($params['edate'])) {
             $builder->where('pa_regdate >=', $params['sdate'].' 00:00:00');
             $builder->where('pa_regdate <=', $params['edate'].' 23:59:59');
-        }else{
-            $builder->where('delicode','');
         }
         if(!empty($params['delistatus'])){
             $builder->where('p_type',$params['delistatus']);

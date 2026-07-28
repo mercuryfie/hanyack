@@ -16,8 +16,8 @@
 <!--                <a href="javascript:;" class="manage_customer" onclick="go_customerList()">매출처 관리</a>-->
             </div>
             <div class="flexType2">
-                <input type="search" name="" id="" class="input_type2 h32 mr10" placeholder="업체명을 검색하십시오.">
-                <button class="btnType32-2 mr10" id="btnOrderSearch" type="button">검색</button>
+                <input type="search" name="v_skey" id="v_skey" class="input_type2 h32 mr10" placeholder="업체명 입력 후 엔터">
+<!--                <button class="btnType32-2 mr10" id="fkey" type="button">검색</button>-->
 
                 <button type="button" class="btnType32-1 " id="add_vendor" name="add_vendor" >거래처 등록</button>
             </div>
@@ -26,15 +26,17 @@
             <table class="common_table ">
                 <thead>
                 <tr>
-                    <th class="row ">업체명</th>
-                    <th class="row ">사업자번호</th>
+                    <th class="row v_name">업체명</th>
+                    <th class="row v_no">사업자번호</th>
                     <th class="row ">연락처</th>
                     <th class="row ">메일</th>
                     <th class="row ">회계용 메일</th>
                     <th class="row ">주소</th>
                     <th class="row ">상세주소</th>
                     <th class="row ">비고</th>
-                    <th class="row ">삭제</th>
+                    <th class="row ">거래내역</th>
+                    <th class="row edit">수정</th>
+                    <th class="row del">삭제</th>
                 </tr>
                 </thead>
                 <tbody class="" id="v_list">

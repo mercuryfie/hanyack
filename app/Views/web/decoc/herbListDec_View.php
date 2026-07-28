@@ -61,7 +61,8 @@
                 <tr>
                     <td class="merlirow">약재코드</td>
                     <td class="merlirow">매칭여부</td>
-                    <td class="merlirow">약재명</td>
+                    <td class="merlirow">약재명
+                    </td>
                     <td class="merlirow">원산지</td>
                     <td class="merlirow">제약사</td>
                     <td class="merlirow">적정재고</td>

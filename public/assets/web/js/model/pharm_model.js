@@ -132,7 +132,7 @@ const pharm_m = {
     },
     /*
          Use > 매입처 정보 수정
-         params > vuname : 회사명,vudesc:상세정보,vuemail : 회사이메일, vubusino : 사업자등록번호,vubusiemail : 세금계산서이메일,vubusizip : 사업자우편번호,vubusiaddr1 : 사업자주소1,vubusiaddr2 : 사업자주소2,vubusitel : 담당자전화번호,vuisdel:삭제여부
+         params > vename : 회사명,vedesc:상세정보,veemail : 회사이메일, vebusino : 사업자등록번호,vubusiemail : 세금계산서이메일,vubusizip : 사업자우편번호,vubusiaddr1 : 사업자주소1,vubusiaddr2 : 사업자주소2,vubusitel : 담당자전화번호,vuisdel:삭제여부
          return > effect : 처리 갯수
          */
     async Update_Pharm_Vendor(params) {
@@ -145,7 +145,7 @@ const pharm_m = {
     },
     /*
          Use > 원자재 리스트
-         params > pcnt : 페이지당갯수, page : 현재 페이지
+         params > pcnt : 페이지당갯수, page : 현재 페이지,
          return > list : 데이터 , total:갯수, totalRs :전체갯수,nPage:다음페이지
          */
     async Load_Pharm_Material_All(params) {
@@ -226,6 +226,22 @@ const pharm_m = {
         const [item = {}] = res.data || [];
         return  {
             effect : item.ecnt || 0
+        };
+    },
+    /*
+         Use > 원자재 거래 리스트
+         params > pcnt : 페이지당갯수, page : 현재 페이지,sdate:시작일,edata:종료일,vendor:업체코드
+         return > list : 데이터 , total:갯수, totalRs :전체갯수,nPage:다음페이지
+         */
+    async Load_Pharm_TransactionList(params) {
+        const res = await commonRequest('/Load_Pharm_TransactionList', params);
+        if (!res) return { list : [],total : 0,totalRs : 0,nPage :0};
+        const [item = {}] = res.data || [];
+        return {
+            list: item.list || [],
+            total: item.tcnt || 0,
+            totalRs : item.totalRs || 0,
+            nPage : item.nPage ||0
         };
     }
 

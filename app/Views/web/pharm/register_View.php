@@ -43,7 +43,7 @@
 
                 <div class="herbbtn1-4">
                     <p class="HDName">-</p>
-                    <p>ex. "ㄱㅊ" 혹은 "감초"로 검색하십시오. </p>
+                    <p>약재명으로 검색하세요.</p>
                 </div>
                 <div class="col2 idx1-2 btnon">
                     <button onclick="Search_HDMedicine(this,1,'ㄱ');" type="button" class="btn_cho">ㄱ</button>

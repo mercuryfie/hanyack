@@ -24,7 +24,7 @@
                 </select>
             </div>
             <div class="flexType2">
-                <button type="button" class="btnType32-2 mr10" id="" name="" onclick="go_transactionList();">거래 목록</button>
+<!--                <button type="button" class="btnType32-2 mr10" id="" name="" onclick="go_transactionList();">거래 목록</button>-->
                 <button type="button" class="btnType32-1 " id="btnMtReg" name="btnMtReg" >원재료 등록</button>
             </div>
 

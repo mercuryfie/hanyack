@@ -48,8 +48,8 @@
                 <thead>
                 <tr>
                     <th class="row h_code">날짜</th>
-                    <th class="row h_name">무게</th>
-                    <th class="row ">입/출고</th>
+                    <th class="row h_name">입/출고</th>
+                    <th class="row ">입/출고 용량</th>
                     <th class="row ">사유</th>
                     <th class="row">비고</th>
                 </tr>

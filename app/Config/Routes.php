@@ -57,6 +57,7 @@ $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Material_Log', 'ApiPharmControll
 $routes->match(['GET', 'POST'], 'Api/Delete_Pharm_Material', 'ApiPharmController::Delete_Pharm_Material');
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_VendorForSearch', 'ApiPharmController::Load_Pharm_VendorForSearch');
 $routes->match(['GET', 'POST'], 'Api/Input_Pharm_Material_InOut', 'ApiPharmController::Input_Pharm_Material_InOut');
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_TransactionList', 'ApiPharmController::Load_Pharm_TransactionList');
 
 
 $routes->match(['GET', 'POST'], 'Api/Load_Medicine', 'ApiController::Load_Medicine');

@@ -181,6 +181,7 @@
                     <? } else if ($header['mitype'] == AUTH_PHARM) { ?>
                         <div class="sub_menu_box ">
                             <a href="javascript:void(0);" onclick="go_materialList();" class="sub_menu">입출고 관리</a>
+                            <a href="javascript:void(0);" onclick="go_transactionList();" class="sub_menu">거래내역</a>
                             <a href="javascript:void(0);" onclick="go_vendorList();" class="sub_menu">거래처 관리</a>
                         </div>
                         <div class="sub_menu_box ">

@@ -10,7 +10,8 @@
         <div class="area area2 mt10">
             <div class="left flexType2 ">
                 <div class="left period_box flexType2 mr10">
-                    <a href="#" role="button"  class="period active" >전체</a>
+                    <a href="#" role="button"  class="period active" >오늘</a>
+                    <a href="#" role="button" class="period">1개월</a>
                     <a href="#" role="button" class="period">3개월</a>
                     <a href="#" role="button" class="period">6개월</a>
                 </div>
@@ -49,7 +50,7 @@
                     <th class="merlirow">총 무게</th>
                     <th class="merlirow">발송타입</th>
                     <th class="merlirow">송장번호</th>
-                    <th class="merlirow">확인</th>
+                    <th class="merlirow"></th>
                     <th class="merlirow">출력</th>
                     <th class="merlirow">등록일</th>
                 </tr>

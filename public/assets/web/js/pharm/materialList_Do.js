@@ -18,6 +18,15 @@ $(document).ready(function() {
         $('#pop_inMaterial').hide();
     });
 
+    $('#OutXbtn2,#OutXbtn').on('click',function (){
+        Ini_OutPop();
+        $('#vendor1').css('display','none');
+        $('#vendor2').css('display','none');
+        $('#vendor3').css('display','none');
+        Ini_Vendor();
+        $('#pop_outMaterial').hide();
+    });
+
     $(document).on('click','button[name="btnLinkPaging"]',function(){
         $('#pageArea').data('page',$(this).data('page'));
         Ini_Form();
@@ -34,6 +43,16 @@ $(document).ready(function() {
         $('#v_list').empty();
     });
 
+    $(document).on('click','.btnVendor2' , function(){
+        const vcode = $(this).data('vcode');
+        const vname =$(this).text();
+        $('#vo_skey').val(vname);
+        $('#vo_skey').removeClass('active');
+        $('#vo_list').removeClass('active');
+        $('#btnOutStockDo').data('vcode',vcode);
+        $('#vo_list').empty();
+    });
+
     $('#in_reason').on('change', function() {
         var selectedVal = $(this).val();
         if (selectedVal === '1') {
@@ -48,10 +67,32 @@ $(document).ready(function() {
         }
     });
 
+    $('#out_reason').on('change', function() {
+        var selectedVal = $(this).val();
+        if (selectedVal === '1') {
+            $('#vendor4').css('display','flex');
+            $('#vendor5').css('display','flex');
+            $('#vendor6').css('display','flex');
+        } else {
+            $('#vendor4').css('display','none');
+            $('#vendor5').css('display','none');
+            $('#vendor6').css('display','none');
+            Ini_Vendor2();
+        }
+    });
+
+
     $('#v_skey').on('keypress',function(e){
         if (e.which === 13 || e.keyCode === 13) {
             const params = {skey : $(this).val()};
             Make_Vendor_List(params);
+        }
+    });
+
+    $('#vo_skey').on('keypress',function(e){
+        if (e.which === 13 || e.keyCode === 13) {
+            const params = {skey : $(this).val()};
+            Make_Vendor_List2(params);
         }
     });
 
@@ -87,10 +128,12 @@ $(document).ready(function() {
     });
 
     $(document).on('click','button[name="btnStockOutout"]',function(){
+        Ini_OutPop();
         const $row = $(this).closest('tr');
         const mtcode = $row.find('td').eq(0).text().trim();
         const mtname = $row.find('td').eq(1).text().trim();
-
+        $('#out_mtname').text(mtname);
+        $('#btnOutStockDo').data('mtcode',mtcode);
         $('#pop_outMaterial').show();
     });
 
@@ -101,7 +144,8 @@ $(document).ready(function() {
         const $row = $(this).closest('tr');
         const mtcode = $row.find('td').eq(0).text().trim();
         const mtname = $row.find('td').eq(1).text().trim();
-
+        $('#in_mtname').text(mtname);
+        $('#btnInStockDo').data('mtcode',mtcode);
         const url = "/Mypharm/materialLog?mc=" + mtcode + "&mn=" + mtname;
         $(location).attr("href", url);
     });
@@ -145,7 +189,7 @@ $(document).ready(function() {
     });
 
     $('#btnInStockDo').on('click',async function(){
-        if(window.confirm('입고 하시겠습니까')==true){
+        if(window.confirm('입고하시겠습니까?')==true){
             const mtcode = $(this).data('mtcode');
             if(mtcode==''){
                 Make_Toast('약재코드를 확인하세요.');
@@ -192,6 +236,63 @@ $(document).ready(function() {
                 v_unitprice : v_unitprice,
                 in_memo : in_memo,
                 indate : in_indate
+            };
+            const response  = await Model.pharm_m.Input_Pharm_Material_InOut(params);
+            if(response.effect > 0){
+                Make_Toast('등록하였습니다.');
+                location.reload();
+            }
+        }
+    });
+
+    $('#btnOutStockDo').on('click',async function(){
+        if(window.confirm('출고 하시겠습니까')==true){
+            const mtcode = $(this).data('mtcode');
+            if(mtcode==''){
+                Make_Toast('약재코드를 확인하세요.');
+                return '';
+            }
+            const vcode = $(this).data('vcode');
+            const v_price = $('#vo_price').val();
+            const v_unitprice = $('#vo_unitprice').val();
+            if(vcode!=''){
+                if(v_price==''){
+                    Make_Toast('매입사유에서 매입가격은 필수항목입니다.');
+                    $('#vo_price').focus();
+                    return '';
+                }
+                if(v_price==''){
+                    Make_Toast('매입사유에서 매입단가는 필수항목입니다.');
+                    $('#vo_unitprice').focus();
+                    return '';
+                }
+            }
+            const stock = $('#out_stock').val();
+            if(stock==''){
+                Make_Toast('출고량을 입력하세요.');
+                $('#out_stock').focus();
+                return '';
+            }
+            const outReason = $('#out_reason').val();
+            if(outReason==''){
+                Make_Toast('입고사유를 선택하세요.');
+                $('#out_reason').focus();
+                return '';
+            }
+
+            const stockType  = $('#out_stockType').val();
+            const out_indate = $('#out_indate').val();
+            const out_memo = $('#out_memo').val();
+            const params = {
+                mtcode : mtcode,
+                typ : 2,
+                stock : formatWeightConvert(stock,stockType),
+                reason : outReason,
+                vcode : vcode,
+                v_price : v_price,
+                v_unitprice : v_unitprice,
+                in_memo : out_memo,
+                indate : out_indate
             };
             const response  = await Model.pharm_m.Input_Pharm_Material_InOut(params);
             if(response.effect > 0){
@@ -284,11 +385,34 @@ function Ini_InPop(){
     $('#btnInStockDo').data('vcode','');
 }
 
+
+function Ini_OutPop(){
+    $('#out_mtname').text('');
+    $('#out_reason').val('');
+    const today = new Date();
+    $('#out_indate').val(formatDate(today));
+    $('#out_stock').val('');
+    $('#out_stockType').val(1);
+    $('#out_memo').val('');
+    $('#btnOutStockDo').data('mtcode','');
+    $('#btnOutStockDo').data('vcode','');
+}
+
+
+
 function Ini_Vendor(){
     $('#v_list').empty();
     $('#v_skey').val('');
     $('#v_price').val('');
     $('#v_unitprice').val('');
+}
+
+
+function Ini_Vendor2(){
+    $('#vo_list').empty();
+    $('#vo_skey').val('');
+    $('#vo_price').val('');
+    $('#vo_unitprice').val('');
 }
 
 async function Make_Vendor_List(params){
@@ -301,7 +425,7 @@ async function Make_Vendor_List(params){
         $.each(list, function (index, el) {
             html += `
                 <div class="v_box">
-                    <a href="javascript:void(0);" class="data btnVendor" data-vcode="${el.vecode}" >${el.vename}</a>
+                    <a href="javascript:void(0);" class="data btnVendor" data-vcode="${el.ve_code}" >${el.ve_name}</a>
                 </div>
             `;
             $('#v_skey').addClass('active');
@@ -315,6 +439,36 @@ async function Make_Vendor_List(params){
         $('#s_list p.nodata').addClass('active');
     }
 
+    console.log(html);
+
     $('#v_list').empty();
     $('#v_list').append(html);
+}
+
+async function Make_Vendor_List2(params){
+    const response = await Model.pharm_m.Load_Pharm_VendorForSearch(params);
+    console.log(response);
+    const list = response.list;
+    const tcnt = response.total;
+    let html = '';
+    if(tcnt > 0){
+        $.each(list, function (index, el) {
+            html += `
+                <div class="v_box">
+                    <a href="javascript:void(0);" class="data btnVendor2" data-vcode="${el.ve_code}" >${el.ve_name}</a>
+                </div>
+            `;
+            $('#vo_skey').addClass('active');
+            $('#vo_list').addClass('active');
+            $('#so_list p.nodata').removeClass('active');
+        });
+    }else{
+        html = `<p class="nodata">검색 결과가 없습니다.</p>`
+        $('#vo_skey').removeClass('active');
+        $('#vo_list').removeClass('active');
+        $('#so_list p.nodata').addClass('active');
+    }
+
+    $('#vo_list').empty();
+    $('#vo_list').append(html);
 }

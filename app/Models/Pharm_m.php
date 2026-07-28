@@ -15,6 +15,59 @@ class Pharm_m extends Model
         $this->db = Database::connect('default');
     }
 
+    public function Cnt_Pharm_Transcaction_LogAll($params){
+        $builder = $this->db->table('herb_pharm_transaction_log a');
+        $builder->join('herb_vendor b', 'a.fk_vcode = b.ve_code', 'inner');
+        $builder->join('herb_pharm_material c', 'a.mtcode = c.mtcode','inner');
+        $builder->where('a.fk_micode', $params['micode']);
+        $builder->where('a.tradetype', $params['tradetype']);
+        if(!empty($params['sdate']) && !empty($params['edate'])) {
+            $builder->where('a.reg_date >=', $params['sdate'].' 00:00:00');
+            $builder->where('a.reg_date <=', $params['edate'].' 23:59:59');
+        }
+        if(!empty($params['stype'])){
+            $builder->where('a.logtype', $params['stype']);
+        }
+        if(!empty($params['vendor'])){
+            $builder->where('a.fk_vcode', $params['vendor']);
+        }
+        if(!empty($params['skey'])) {
+            $builder->like('c.mtname', $params['skey'], 'both');
+        }
+        return $builder->countAllResults();
+    }
+
+    public function Load_Pharm_Transcaction_LogAll($params, $fields = ['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_pharm_transaction_log a');
+        $builder->join('herb_vendor b', 'a.fk_vcode = b.ve_code', 'inner');
+        $builder->join('herb_pharm_material c', 'a.mtcode = c.mtcode','inner');
+        $builder->select($separated_val);
+        $builder->where('a.fk_micode', $params['micode']);
+        $builder->where('a.tradetype', $params['tradetype']);
+
+        if(!empty($params['sdate']) && !empty($params['edate'])) {
+            $builder->where('a.reg_date >=', $params['sdate'].' 00:00:00');
+            $builder->where('a.reg_date <=', $params['edate'].' 23:59:59');
+        }
+        if(!empty($params['stype'])){
+            $builder->where('a.logtype', $params['stype']);
+        }
+        if(!empty($params['vendor'])){
+            $builder->where('a.fk_vcode', $params['vendor']);
+        }
+        if(!empty($params['skey'])) {
+            $builder->like('c.mtname', $params['skey'], 'both');
+        }
+        $builder->orderBy('seq','DESC');
+        $offset = ($params['page'] - 1) * $params['pcnt'];
+        $builder->limit($params['pcnt'], $offset);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+
+
     public function Insert_Pharm_TransactionLog($param){
         $this->db->transStart();
         $builder = $this->db->table('herb_pharm_transaction_log');
@@ -57,7 +110,12 @@ class Pharm_m extends Model
         $builder = $this->db->table('herb_vendor');
         $builder->select($separated_val);
         $builder->where('fk_micode', $params['micode']);
-        $builder->like('ve_name', $params['skey'], 'both');
+        if(!empty($params['vcode'])){
+            $builder->where('ve_code', $params['vcode']);
+        }
+        if(!empty($params['skey'])) {
+            $builder->like('ve_name', $params['skey'], 'both');
+        }
         $query = $builder->get();
         return $query->getResultArray();
     }
@@ -155,6 +213,17 @@ class Pharm_m extends Model
         $builder->orderBy('ve_code','DESC');
         $offset = ($params['page'] - 1) * $params['pcnt'];
         $builder->limit($params['pcnt'], $offset);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Load_Pharm_Vendor($micode, $fields = ['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_vendor');
+        $builder->select($separated_val);
+        $builder->where('fk_micode',$micode);
+        $builder->where('ve_isdel',0);
+        $builder->orderBy('ve_name','DESC');
         $query = $builder->get();
         return $query->getResultArray();
     }

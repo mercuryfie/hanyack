@@ -65,6 +65,9 @@ $(document).ready(function () {
 
         $('#sdate').val(startDate ? formatDate(startDate) : '');
         $('#edate').val(endDate ? formatDate(endDate) : '');
+        $('#pageArea').data('page',1);
+        Ini_Form();
+        Make_Html(Make_Option());
     });
 
 
@@ -160,23 +163,28 @@ $(document).ready(function () {
             alert("송장번호를 입력해주세요.");
             return;
         }
-
-        let params = {
-            pCode:pcode,
-            oStep:ORDER_DELIVERING,
-            pStep:PACKAGE_SHIP_START,
-            deliType : deliType,
-            deliCode : deliCode
-        };
-        const response = await Model.pharm_m.Update_Pharm_Delivery_Info(params);
-        if(response.effect > 0) {
-            $row.find('td[name="tdDeliType"]').html('');
-            $row.find('td[name="tdDeliCode"]').text(deliCode);
-            $row.find('td[name="tdDeliBtn"]').html('');
-            Make_Toast('배송정보 등록이 완료 되었습니다.');
+        if(window.confirm('송장번호를 등록하시겠습니까?')==true) {
+            let params = {
+                pCode: pCode,
+                oStep: ORDER_DELIVERING,
+                pStep: PACKAGE_SHIP_START,
+                deliType: deliType,
+                deliCode: deliCode
+            };
+            const response = await Model.pharm_m.Update_Pharm_Delivery_Info(params);
+            if (response.effect > 0) {
+                $row.find('td[name="tdDeliType"]').html(Make_delcode_str(deliType));
+                $row.find('td[name="tdDeliCode"]').text(deliCode);
+                $row.find('td[name="tdDeliBtn"]').html('');
+                Make_Toast('배송정보 등록이 완료 되었습니다.');
+            }
         }
     });
 
+
+    const today = new Date();
+    $('#sdate').val(formatDate(today));
+    $('#edate').val(formatDate(today));
     Make_Html(Make_Option());
 });
 
