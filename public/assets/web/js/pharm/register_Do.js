@@ -1,16 +1,6 @@
 $(document).ready(function() {
 
-    $("#txtHD").on("keypress", function (key) {
-        if (key.keyCode == 13) {
-            $word = $('#txtHD').val();
-            if ($word == '') {
-                alert('검색어를 입력하세요.');
-                $('#txtHD').focus();
-            } else {
-                Search_HDMedicine(this,2, $word);
-            }
-        }
-    });
+
 
     $("#txtHD").focusout(function () {
         ini_Form4();
@@ -125,6 +115,10 @@ $(document).ready(function() {
         $('#attachFile').val('');
 
     });
+
+
+
+
 
 
     $("#submitBtn").on('click',function(e){
@@ -405,10 +399,216 @@ $(document).ready(function() {
         SettingData(rCode);
     }
 
+    $(document).on('click','button[name="btnSelectHD"]',  function() {
+        const mdcode = $(this).data('mdcode');
+        const mdMediName = $(this).data('mdmediname');
+        const mdMedi = $(this).data('mdmedi');
+        const params = {mdcode:mdcode};
+        ini_Form3();
+        Make_Select_HD(params);
+        $('#HDName').html(mdMediName);
+        $('#tHdName').html(mdMediName);
+
+    });
+
+    $(document).on('click','button[name="btnSearchHD"]', function(){
+        ini_Form1();
+        const word = $(this).data('word');
+        const target = 1;
+        const params = {
+            word : word,
+            target : target
+        };
+        Make_Search_HDMedicine(params);
+        if(target==1) $(this).addClass("checkedGreen");
+    });
+
+    $("#txtHD").on("keypress", function (e) {
+        if (e.which === 13 || e.keyCode === 13) {
+            const word = $('#txtHD').val();
+            if (word == '') {
+                alert('검색어를 입력하세요.');
+                $('#txtHD').focus();
+                return '';
+            }
+            ini_Form1();
+            const params = {
+                word : word,
+                target : 2
+            };
+            Make_Search_HDMedicine(params);
+        }
+    });
 
 
 });
-/////////////////  function ////////////////////////////////////////
+
+async function Make_Select_HD(params) {
+    const response = await Model.common_m.Load_Medicine_Option1(params);
+    let option = response.list;
+    let ocnt = response.total;
+    let html ='';
+    if(ocnt > 0){
+        html = '<option value="" selected>선택하세요.</option>';
+        $.each(option,function (index,el){
+            html += `<option value="${el.t1_code}">${el.t1_value}</option>`;
+        });
+        $('#gubun1').append(html);
+    }else{
+        html = '<option value="" selected>옵션없음.</option>';
+    }
+    $('#gubun1').append(html);
+
+
+    const response1 = await Model.pharm_m.Load_Pharm_Medicine_SearchByMdcode(params);
+    let list = response1.list;
+    let ccnt = response1.total;
+    let html1 = '';
+    if(ccnt > 0){
+        $.each(list,function (index,el){
+            html1 += `<button class="herboption" type="button" data-hncode="${el.hn_code}">${el.hn_name}[약재코드:${el.hn_code}]</button>`;
+        });
+        $('#HD_List2').append(html1);
+        $('#hdlist_cmt').html('이전 등록 약재를 선택하세요');
+    }else{
+        $('#hdlist_cmt').html('등록된 이전 약재 정보 없습니다.');
+    }
+}
+
+
+function Select_HD(mdcode, name, medicode) {
+    $('#HDName').html(name);
+    $('#mdcode').val(mdcode);
+    $('#medicode').val(medicode);
+    $('#mdname').val(name);
+    ini_Form3();
+
+    if(medicode!=''){
+        $.ajax({
+            type:"POST",
+            url:"/Api/Load_Medicine_Option1",
+            dataType:"json",
+            data : { "mdcode" : medicode},
+            success : function(data) {
+                if(data.result == 'ok'){
+                    let Cnt = data.list.info ? data.list.info.length : 0;
+                    if(Cnt>0){
+                        let arr = data.list.info;
+                        let html = '<option value="0" selected>선택하세요.</option>';
+                        $.each(arr,function (index,el){
+                            html += '<option value="' + el.t1_code + '">' + el.t1_value + '</option>';
+
+                        });
+                        $('#gubun1').append(html);
+                    }else{
+                        let html = '<option value="0" selected>옵션없음</option>';
+                        $('#gubun1').append(html);
+                    }
+                }else if(data.result == 'type101'){
+                    alert('잘못된 접근입니다.\n 다시 시도 하여주세요.(101)');
+                }else if(data.result == 'type102'){
+                    alert('통신장애로 데이터로드에 실패하였습니다. .\n 다시 시도 하여주세요.(101)');
+                }else{
+                    alert('통신에러 Error(101)');
+                }
+            },
+            error : function(xhr, status, error) {
+                alert("에러발생");
+            }
+        });
+
+        $.ajax({
+            type:"POST",
+            url:"/Api/Load_Product_Before",
+            dataType:"json",
+            data : { "mdcode" : mdcode},
+            success : function(data) {
+                if(data.result == 'ok'){
+                    let Cnt = data.list.info ? data.list.info.length : 0;
+                    if(Cnt>0){
+                        let arr = data.list.info;
+                        let html = '';
+                        $.each(arr,function (index,el){    // 약재복사 template
+                            html += `<button class="herboption" type="button" onclick="SettingData('${el.hn_code}');">${el.hn_name} [제조번호:${el.hn_number}][약재코드:${el.hn_code}]</button>`;
+                        });
+                        $('#HD_List2').append(html);
+                        $('#hdlist_cmt').html('이전 등록 약재를 선택하세요');
+                    }else{
+                        $('#hdlist_cmt').html('등록된 이전 약재 정보 없습니다.');
+                    }
+                }else if(data.result == 'type101'){
+                    alert('잘못된 접근입니다.\n 다시 시도 하여주세요.(101)');
+                }else if(data.result == 'type102'){
+                    alert('통신장애로 데이터로드에 실패하였습니다. .\n 다시 시도 하여주세요.(101)');
+                }else{
+                    alert('통신에러 Error(101)');
+                }
+            },
+            error : function(xhr, status, error) {
+                alert("에러발생");
+            }
+        });
+
+
+    }
+}
+
+
+async function Make_Search_HDMedicine(params){
+    const response  = await Model.common_m.Load_Herb_Info(params);
+    console.log(response);
+    const list = response.list;
+    const tCnt = response.total;
+    let html = '';
+    if (tCnt > 0) {
+        $.each(list,function (index,el){
+            html += `
+                    <button class="herboption" type="button" name="btnSelectHD" data-mdcode="${el.mdCode}" data-mdmediname="${el.mdMediName}" data-mdmedi="${el.mdMedi}">${el.mdMediName}[${el.mdCode}]</button>
+                `;
+        });
+        console.log(html);
+        $('#HD_List').append(html);
+        $('#HD_List').css('display','flex');
+    }
+}
+
+
+async function Search_HDMedicine(form,target,val){
+    try {
+        start_spinner();
+        ini_Form1();
+        let dataarr = { "word" : val,"target" : target};
+        let url = APIURL + "/Load_Medicine";
+        let result = await Load_API(url, dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        } else if (result.get('status') == 'ok') {
+            let html = '';
+            let data = result.get('data');
+            let arr = (data && data.list) ? data.list : [];
+            let Cnt = arr.length;
+            if (Cnt > 0) {
+                $.each(arr,function (index,el){
+                    html += '<button class="herboption" type="button" onclick="Select_HD(\'' + el.mdCode + '\',\''+el.mdMediName+'\',\''+el.mdMedi+'\');">' + el.mdMediName + ' [' + el.mdCode  + '] </button>';
+                });
+                $('#HD_List').append(html);
+                $('#HD_List').css('display','flex');
+                if(target==1) $(form).addClass("checkedGreen");
+            }else{
+                Make_Toast(result.get('message'));
+            }
+        }else{
+            ini_Form1();
+            Make_Toast(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+
 
 
 async function Product_Reg() {
@@ -546,43 +746,9 @@ function updateOptions(list) {
     }
 }
 
-async function Search_HDMedicine(form,target,val){
-    try {
-        start_spinner();
-        ini_Form1();
-        let dataarr = { "word" : val,"target" : target};
-        let url = APIURL + "/Load_Medicine";
-        let result = await Load_API(url, dataarr);
-        if (result.get('status') == 'NoLogin') {
-            go_login();
-        } else if (result.get('status') == 'ok') {
-            let html = '';
-            let data = result.get('data');
-            let arr = (data && data.list) ? data.list : [];
-            let Cnt = arr.length;
-            if (Cnt > 0) {
-                $.each(arr,function (index,el){
-                    html += '<button class="herboption" type="button" onclick="Select_HD(\'' + el.mdCode + '\',\''+el.mdMediName+'\',\''+el.mdMedi+'\');">' + el.mdMediName + ' [' + el.mdCode  + '] </button>';
-                });
-                $('#HD_List').append(html);
-                $('#HD_List').css('display','flex');
-                if(target==1) $(form).addClass("checkedGreen");
-            }else{
-                Make_Toast(result.get('message'));
-            }
-        }else{
-            ini_Form1();
-            Make_Toast(result.get('message'));
-        }
-        stop_spinner();
-    } catch (error) {
-        Make_Toast('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
-        stop_spinner();
-    }
-}
 
 function ini_Form1(){
-    $('.HDName').html('-');
+    $('#HDName').html('-');
     $('.HDName').text('-');
     $('#mdcode').val('');
     $('#medicode').val('');
@@ -595,7 +761,7 @@ function ini_Form1(){
 }
 
 function ini_Form2(){
-    $('.HDName').html('-');
+    $('#HDName').html('-');
     $('#mdcode').val('');
     $('#medicode').val('');
     $('#mdname').val('');
@@ -610,7 +776,7 @@ function ini_Form3(){
 }
 
 function ini_Form4(){
-    $('.HDName').html('-');
+    $('#HDName').html('-');
     $('#txtHD').val('');
     $('#mdcode').val('');
     $('#medicode').val('');
@@ -692,82 +858,6 @@ async function SettingData(code){
 
 }
 
-function Select_HD(mdcode,name,medicode){
-    $('.HDName').html(name);
-    $('#mdcode').val(mdcode);
-    $('#medicode').val(medicode);
-    $('#mdname').val(name);
-    ini_Form3();
-
-    if(medicode!=''){
-        $.ajax({
-            type:"POST",
-            url:"/Api/Load_Medicine_Option1",
-            dataType:"json",
-            data : { "mdcode" : medicode},
-            success : function(data) {
-                if(data.result == 'ok'){
-                    let Cnt = data.list.info ? data.list.info.length : 0;
-                    if(Cnt>0){
-                        let arr = data.list.info;
-                        let html = '<option value="0" selected>선택하세요.</option>';
-                        $.each(arr,function (index,el){
-                            html += '<option value="' + el.t1_code + '">' + el.t1_value + '</option>';
-
-                        });
-                        $('#gubun1').append(html);
-                    }else{
-                        let html = '<option value="0" selected>옵션없음</option>';
-                        $('#gubun1').append(html);
-                    }
-                }else if(data.result == 'type101'){
-                    alert('잘못된 접근입니다.\n 다시 시도 하여주세요.(101)');
-                }else if(data.result == 'type102'){
-                    alert('통신장애로 데이터로드에 실패하였습니다. .\n 다시 시도 하여주세요.(101)');
-                }else{
-                    alert('통신에러 Error(101)');
-                }
-            },
-            error : function(xhr, status, error) {
-                alert("에러발생");
-            }
-        });
-
-        $.ajax({
-            type:"POST",
-            url:"/Api/Load_Product_Before",
-            dataType:"json",
-            data : { "mdcode" : mdcode},
-            success : function(data) {
-                if(data.result == 'ok'){
-                    let Cnt = data.list.info ? data.list.info.length : 0;
-                    if(Cnt>0){
-                        let arr = data.list.info;
-                        let html = '';
-                        $.each(arr,function (index,el){    // 약재복사 template
-                            html += `<button class="herboption" type="button" onclick="SettingData('${el.hn_code}');">${el.hn_name} [제조번호:${el.hn_number}][약재코드:${el.hn_code}]</button>`;
-                        });
-                        $('#HD_List2').append(html);
-                        $('#hdlist_cmt').html('이전 등록 약재를 선택하세요');
-                    }else{
-                        $('#hdlist_cmt').html('등록된 이전 약재 정보 없습니다.');
-                    }
-                }else if(data.result == 'type101'){
-                    alert('잘못된 접근입니다.\n 다시 시도 하여주세요.(101)');
-                }else if(data.result == 'type102'){
-                    alert('통신장애로 데이터로드에 실패하였습니다. .\n 다시 시도 하여주세요.(101)');
-                }else{
-                    alert('통신에러 Error(101)');
-                }
-            },
-            error : function(xhr, status, error) {
-                alert("에러발생");
-            }
-        });
-
-
-    }
-}
 
 function on_method(method){
     // let $btn = $(btn);

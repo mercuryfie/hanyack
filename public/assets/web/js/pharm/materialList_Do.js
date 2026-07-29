@@ -1,6 +1,11 @@
 $(document).ready(function() {
 
+    $('#btnMtRegDo').hide();
+    $('#btnMtUpdate').hide();
     $('#btnMtReg').on('click',function(){
+        $('#pop_addMaterial #p_title').html('원재료 등록하기');
+        $('#btnMtRegDo').show();
+        $('#btnMtUpdate').hide();
         $('#pop_addMaterial').show();
     });
 
@@ -25,6 +30,33 @@ $(document).ready(function() {
         $('#vendor3').css('display','none');
         Ini_Vendor();
         $('#pop_outMaterial').hide();
+    });
+
+    const $optimalStock = $('#optimal_stock');
+    console.log('this:', $optimalStock);
+
+    $optimalStock.data('original', Number($optimalStock.val()) || 0);
+    console.log('this2:', $optimalStock);
+
+    $('#real_rate').on('change', function () {
+        const unit = $(this).val();
+        const originalValue = Number($optimalStock.data('origin')) || 0;
+
+        let viewValue = originalValue;
+
+        if (unit === '1') {
+            viewValue = originalValue;
+
+        } else if (unit === '2') {
+            // kg
+            viewValue = originalValue / 1000;
+
+        } else if (unit === '3') {
+            // t
+            viewValue = originalValue / 10000;
+        }
+
+        $optimalStock.val(viewValue);
     });
 
     $(document).on('click','button[name="btnLinkPaging"]',function(){
@@ -313,8 +345,30 @@ async function Make_Html(params){
     const nPage = response.nPage;
     const totalCnt = response.totalRs
     let html = '';
+
+    console.log(list);
     if(listCnt > 0){
         $.each(list, function (index, el) {
+            // let params = {
+            //     mtcode:el.mtcode,
+            //     mtname:el.mtname,
+            //     opimal_stock:el.opimal_stock,
+            //     waste_rate:el.waste_rate,
+            //     memo:el.memo
+            //     // waste_rate:${el.waste_rate}
+            // };
+            const params = [
+                {
+                    mtcode:el.mtcode,
+                    mtname:el.mtname,
+                    optimal_stock:el.optimal_stock,
+                    waste_rate:el.waste_rate,
+                    memo:el.memo
+                }
+            ];
+            console.log('params1:',params);
+            const e_params = encodeURIComponent(JSON.stringify(params));
+            console.log('params2:',e_params);
             let s_stats = (el.stock_status=='low') ? '<p class="stock_status active">부족</p>' : '<p class="stock_status ">정상</p>';
             html +=`
                 <tr id="tr_${el.mtcode}">
@@ -333,6 +387,11 @@ async function Make_Html(params){
                     <td>
                         <button type="button" class="btnType1" name="btnMtLog"  >
                             <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btnType1" name="btnMtEdit" data-params="${e_params}" onclick="Edit_Material(this);" >
+                            수정
                         </button>
                     </td>
                     <td class="row trash">
@@ -471,4 +530,55 @@ async function Make_Vendor_List2(params){
 
     $('#vo_list').empty();
     $('#vo_list').append(html);
+}
+
+function Edit_Material(button) {
+    const params = JSON.parse(
+        decodeURIComponent($(button).attr('data-params'))
+    );
+
+    console.log(params);
+    console.log(params[0].mtcode);
+    let list = params[0];
+    let mtname = $('#mtname').val(list.mtname);
+    let params2= [ {
+        mtname:mtname
+    }
+    ];
+
+    $('#mtname').val(list.mtname);
+    $('#waste_rate').val(list.waste_rate);
+    $('#optimal_stock').val(list.optimal_stock).data('origin',list.optimal_stock);
+    $('#real_rate').val(1);
+    $('#memo').val(list.memo);
+    $('#btnMtUpdate').data('params',params2);
+
+    $('#pop_addMaterial #p_title').html('원재료 수정하기');
+    $('#btnMtUpdate').show();
+    $('#btnMtRegDo').hide();
+    $('#pop_addMaterial').show();
+
+}
+
+
+function Update_Material(button) {
+    // const params = JSON.parse(
+    //     decodeURIComponent($(button).attr('data-params'))
+    // );
+
+    let params = $(this).data('params');
+    console.log('1516');
+    console.log(params);
+    console.log(params[0].mtcode);
+    let list = params[0];
+
+    // $('#pop_addMaterial').show();
+    // $('#pop_addMaterial #p_title').html('원재료 수정하기');
+    // $('#mtname').val(list.mtname);
+    // $('#waste_rate').val(list.waste_rate);
+    // $('#optimal_stock').val(list.optimal_stock).data('origin',list.optimal_stock);
+    // $('#real_rate').val(1);
+    // $('#memo').val(list.memo);
+
+
 }

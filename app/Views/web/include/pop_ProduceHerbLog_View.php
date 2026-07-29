@@ -6,11 +6,11 @@
         </div>
         <div class="area area2 ">
 
-            <div class="row flexType1">
-                <!--                <p class="cat"></p>-->
-                <button class="btnType32 mr10" id="" onclick="Produce_Herb();">생산하기</button>
-                <button class="btnType32 active" id="" onclick="Log_Produce_Herb();">로그보기</button>
-            </div>
+<!--            <div class="row flexType1">-->
+<!--                                <p class="cat"></p>-->
+<!--                <button class="btnType32 mr10" id="" onclick="Produce_Herb('');">생산하기</button>-->
+<!--                <button class="btnType32 active" id="" onclick="Log_Produce_Herb();">로그보기</button>-->
+<!--            </div>-->
             <div class="row flexType2">
                 <p class="cat">약재코드</p>
                 <p class="data">-</p>

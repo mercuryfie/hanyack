@@ -22,6 +22,7 @@ $routes->GET('Order/Cart','OrderController::Cart');
 //$routes->GET('Product/PList','UserController::PList');
 
 /* API  - decoc*/
+
 $routes->match(['GET', 'POST'], 'Api/Load_Medicine_decoc', 'ApiDecocController::Load_Medicine_decoc');
 $routes->match(['GET', 'POST'], 'Api/Load_Medicine_Decoc_Match', 'ApiDecocController::Load_Medicine_Decoc_Match');
 $routes->match(['GET', 'POST'], 'Api/Update_Medicine_Decoc_Match', 'ApiDecocController::Update_Medicine_Decoc_Match');
@@ -39,6 +40,10 @@ $routes->match(['GET', 'POST'], 'Api/Process_Herb_Like', 'ApiDecocController::Pr
 /* API  - common*/
 $routes->match(['GET', 'POST'], 'Api/Load_Herb_ListAll', 'ApiCommonController::Load_Herb_ListAll');
 $routes->match(['GET', 'POST'], 'Api/Load_Herb_ListByMain', 'ApiCommonController::Load_Herb_ListByMain');
+$routes->match(['GET', 'POST'], 'Api/Load_Herb_Info', 'ApiCommonController::Load_Herb_Info');
+$routes->match(['GET', 'POST'], 'Api/Load_Medicine_Option1', 'ApiCommonController::Load_Medicine_Option1');
+
+
 
 /* API  - pharm*/
 $routes->match(['GET', 'POST'], 'Api/Search_Medicine_Pharm', 'ApiPharmController::Search_Medicine_Pharm');
@@ -51,18 +56,21 @@ $routes->match(['GET', 'POST'], 'Api/Update_Pharm_Delivery_Info', 'ApiPharmContr
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Vendor_All', 'ApiPharmController::Load_Pharm_Vendor_All');
 $routes->match(['GET', 'POST'], 'Api/Insert_Pharm_Vendor', 'ApiPharmController::Insert_Pharm_Vendor');
 $routes->match(['GET', 'POST'], 'Api/Update_Pharm_Vendor', 'ApiPharmController::Update_Pharm_Vendor');
+$routes->match(['GET', 'POST'], 'Api/Delete_Pharm_Vendor', 'ApiPharmController::Delete_Pharm_Vendor');
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Material_All', 'ApiPharmController::Load_Pharm_Material_All');
 $routes->match(['GET', 'POST'], 'Api/Insert_Pharm_Material', 'ApiPharmController::Insert_Pharm_Material');
+$routes->match(['GET', 'POST'], 'Api/Update_Pharm_Material', 'ApiPharmController::Update_Pharm_Material');
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Material_Log', 'ApiPharmController::Load_Pharm_Material_Log');
 $routes->match(['GET', 'POST'], 'Api/Delete_Pharm_Material', 'ApiPharmController::Delete_Pharm_Material');
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_VendorForSearch', 'ApiPharmController::Load_Pharm_VendorForSearch');
 $routes->match(['GET', 'POST'], 'Api/Input_Pharm_Material_InOut', 'ApiPharmController::Input_Pharm_Material_InOut');
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_TransactionList', 'ApiPharmController::Load_Pharm_TransactionList');
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_Medicine_SearchByMdcode', 'ApiPharmController::Load_Pharm_Medicine_SearchByMdcode');
 
 
-$routes->match(['GET', 'POST'], 'Api/Load_Medicine', 'ApiController::Load_Medicine');
-$routes->match(['GET', 'POST'], 'Api/Load_Medicine_Option1', 'ApiController::Load_Medicine_Option1');
-$routes->match(['GET', 'POST'], 'Api/Load_Product_Before', 'ApiController::Load_Product_Before');
+
+
+
 $routes->match(['GET', 'POST'], 'Api/Load_Product_Info', 'ApiController::Load_Product_Info');
 $routes->match(['GET', 'POST'], 'Api/Upload_file', 'ApiController::Upload_file');
 $routes->match(['GET', 'POST'], 'Api/Upload_file_editor', 'ApiController::Upload_file_editor');

@@ -33,6 +33,34 @@ const common_m = {
             djmedi : item.djmedi,
             djcnt : item.dcnt || 0,
         };
+    },
+    /*
+    Use > 본초 검색
+    Prams >  word : 검색할 단어 , target > 1:초성,2:단어
+    return > list : 데이터, tcnt : 갯수
+     */
+    async Load_Herb_Info(params){
+        const res = await commonRequest('/Load_Herb_Info',params);
+        if (!res) return { list: [], total: 0 };
+        const [item = {}] = res.data || [];
+        return  {
+            list : item.list,
+            total : item.tcnt || 0
+        };
+    },
+    /*
+    Use > 본초별 옵션 가지고 오기
+    Prams >  mdcode
+    return > list : 데이터, tcnt : 갯수
+     */
+    async Load_Medicine_Option1(params){
+        const res = await commonRequest('/Load_Medicine_Option1',params);
+        if (!res) return { list: [], total: 0 };
+        const [item = {}] = res.data || [];
+        return  {
+            list : item.list,
+            total : item.tcnt || 0
+        };
     }
 };
 

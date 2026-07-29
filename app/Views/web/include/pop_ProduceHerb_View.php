@@ -1,10 +1,10 @@
 <div class="common_pop_wrap pop_produceherb_wrap" id="pop_produce_herb"  name="pop_produce_herb" style="">
     <div class="common_pop_conkol pop_produceherb_con">
         <div class="area area1">
-            <h2 class="pop_head_title" id="">생산하기</h2>
+            <h2 class="pop_head_title mb20" id="">생산하기</h2>
             <i class="fa-solid fa-xmark " id="Xbtn"></i>
         </div>
-        <div class="area area2 ">
+        <div class="area area2 flexType1">
 
             <!--            <div class="row flexType2">-->
             <!--                <p class="cat">약재코드</p>-->
@@ -15,41 +15,78 @@
 <!--                <button class="btnType32 active mr10" id="" onclick="Produce_Herb();">생산하기</button>-->
 <!--                <button class="btnType32 " id="" onclick="Log_Produce_Herb();">로그보기</button>-->
 <!--            </div>-->
-            <div class="row flexType2">
-                <p class="cat">약재명</p>
-                <p class="data">감초</p>
-            </div>
-            <div class="row flexType2">
-                <p class="cat">원재료명</p>
-                <input type="search" class="input_type mr10" placeholder="원재료명 입력 후 엔터" id="m_skey" name="m_skey">
-                <!--            <button class="btnType32-2" id="" data-sn="">확인</button>-->
-                <div class="result_box flexCol" id="m_list" name="m_list">
-                    <a href="javascript:;" class="data">hello22</a>
+            <div class="left mr20">
+                <div class="row flexType2">
+                    <p class="cat">약재명</p>
+                    <p class="data">감초</p>
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">원재료명</p>
+                    <input type="search" class="input_type3 mr10" placeholder="원재료명 입력 후 엔터" id="m_skey" name="m_skey">
+                    <!--            <button class="btnType32-2" id="" data-sn="">확인</button>-->
+                    <div class="result_box flexCol" id="m_list" name="m_list">
+                        <a href="javascript:;" class="data">hello22</a>
+                    </div>
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">제조번호</p>
+                    <input type="search" class="input_type3" name="">
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">제조연월일</p>
+                    <input type="date" class="input_date btnType32 date" name="birthDate">
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">소비기한</p>
+                    <input type="date" class="input_date btnType32 date" name="birthDate">
+                    <!--                <p class="data">2026.01.01</p>-->
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">시험성적서</p>
+                    <input type="file" class="input_file">
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">생산량</p>
+                    <div class="unit_box flexType2">
+                        <input type="search" class="input_type3 mr10" placeholder="숫자만">
+                        <p class="unit">g</p>
+                    </div>
                 </div>
             </div>
-            <div class="row flexType2">
-                <p class="cat">제조번호</p>
-                <input type="search" class="input_type" name="">
-            </div>
-            <div class="row flexType2">
-                <p class="cat">제조연월일</p>
-                <input type="date" class="input_date btnType32 date" name="birthDate">
-            </div>
-            <div class="row flexType2">
-                <p class="cat">소비기한</p>
-                <input type="date" class="input_date btnType32 date" name="birthDate">
-                <!--                <p class="data">2026.01.01</p>-->
-            </div>
-            <div class="row flexType2">
-                <p class="cat">시험성적서</p>
-                <input type="file" class="input_file">
-            </div>
-            <div class="row flexType2">
-                <p class="cat">생산량</p>
-                <div class="unit_box flexType2">
-                    <input type="search" class="input_type mr10" placeholder="숫자만">
-                    <p class="unit">g</p>
+            <div class="right">
+                <div class="row flexType2">
+                    <p class="cat">근당가격</p>
+                    <input type="search" class="input_type3 " placeholder="숫자만">
+                    <p class="unit">원</p>
                 </div>
+                <div class="row flexType2">
+                    <p class="cat">포장가격</p>
+                    <p class="data">10,000</p>
+                    <p class="unit">원</p>
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">등급 A</p>
+                    <input type="search" class="input_type3 " placeholder="숫자만" value="500">
+                    <p class="unit">원</p>
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">등급 B</p>
+                    <input type="search" class="input_type3 " placeholder="숫자만">
+                    <p class="unit">원</p>
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">등급 C</p>
+                    <input type="search" class="input_type3 " placeholder="숫자만">
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">등급 D</p>
+                    <input type="search" class="input_type3 " placeholder="숫자만">
+                </div>
+                <div class="row flexType2">
+                    <p class="cat">등급 E</p>
+                    <input type="search" class="input_type3 " placeholder="숫자만">
+                </div>
+
             </div>
         </div>
         <div class="area lastArea">

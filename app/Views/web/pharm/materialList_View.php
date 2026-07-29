@@ -42,6 +42,7 @@
                     <th class="row status">상태</th>
                     <th class="row">최종일자</th>
                     <th class="row">로그</th>
+                    <th class="row">수정</th>
                     <th class="row">삭제</th>
                 </tr>
                 </thead>

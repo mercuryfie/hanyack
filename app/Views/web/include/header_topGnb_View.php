@@ -186,6 +186,7 @@
                         </div>
                         <div class="sub_menu_box ">
                             <a href="javascript:void(0);" onclick="go_herbList();" class="sub_menu">전체약재</a>
+                            <a href="javascript:void(0);" onclick="go_prodList();" class="sub_menu">생산 관리</a>
                             <a href="javascript:void(0);" onclick="go_herbReg();" class="sub_menu">약재등록</a>
                             <a href="javascript:void(0);" onclick="go_herbRegAll();" class="sub_menu">약재등록(일괄)</a>
                         </div>

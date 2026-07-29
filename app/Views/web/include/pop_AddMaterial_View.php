@@ -1,7 +1,7 @@
  <div class="common_pop_wrap add_material_wrap" id="pop_addMaterial" name="pop_addMaterial">
     <div class="common_pop_conkol add_material_con">
         <div class="area area1 flexType1 mb20">
-            <p class="pop_head_title">원재료 등록하기</p>
+            <p class="pop_head_title" id="p_title">원재료 등록하기</p>
             <i class="fa-solid fa-xmark " id="Xbtn"></i>
         </div>
         <div class="area">
@@ -38,7 +38,8 @@
         </div>
         <div class="lastArea flexType1">
             <button class="btnType32 mr10" id="Xbtn2">취소</button>
-            <button class="btnType32-1" id="btnMtRegDo" name="btnMtRegDo"  >확인</button>
+            <button class="btnType32-1" id="btnMtRegDo" name="btnMtRegDo" onclick="" >확인</button>
+            <button class="btnType32-1" id="btnMtUpdate" name="btnMtUpdate" data-params="" onclick="Update_Material(this);" >확인</button>
         </div>
     </div>
 </div>

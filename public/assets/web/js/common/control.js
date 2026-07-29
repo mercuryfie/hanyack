@@ -1246,6 +1246,36 @@ function formatWeightConvert(stock, unit) {
 }
 
 /**
+ * 무게(g)를 입력받아 적절한 단위(g, kg, t)로 변환
+ * @param {number|string} grams - g 단위의 무게 값
+ * @returns {{ value: string, unit: string, formatted: string }}
+ */
+function formatWeightConvertForUnit(grams) {
+    let gram = parseFloat(grams);
+    let value = 0;
+    let unit = '';
+    if (isNaN(gram) || gram < 0) {
+        return { value: "0", unit: "g", formatted: "0g" };
+    }
+    if (gram >= 1000000) {
+        value = gram / 1000000;
+        unit = "t";
+    } else if (gram >= 1000) {
+        value = gram / 1000;
+        unit = "kg";
+    }else{
+        value = gram;
+        unit = "g"
+    }
+    var formattedValue = Number(value.toFixed(2)).toLocaleString();
+    return {
+        value: formattedValue,
+        unit: unit,            //
+        formatted: formattedValue + unit
+    };
+}
+
+/**
  * 입출고 사유 String
  * @param {number|string} reason - 입력받은 재고 수량
  * @returns {string}

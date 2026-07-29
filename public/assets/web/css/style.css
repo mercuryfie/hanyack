@@ -2268,10 +2268,13 @@ input[type="radio"] {
 /* pop_Price_View end --------------- */
 /* pop_ProduceHerb_View start --------------- */
 
+#pop_produce_herb{
+    /*display: block;*/
+}
 .pop_produceherb_con {
     /*color:red;*/
-    width: 500px;
-    height: 440px;
+    width: 840px;
+    height: 600px;
     padding: 20px;
 }
 
@@ -2282,10 +2285,24 @@ input[type="radio"] {
 .pop_produceherb_con .area .cat {
     width: 100px;
     margin-right: 20px;
-    color:#5c5c5c;
+    color:#8d8d8d;
+}
+.pop_produceherb_con p.data {
+    width: 220px;
+    margin-right: 5px;
+
 }
 
+.pop_produceherb_con .input_type3 {
+    /*font-size: 18px;*/
+    margin-right: 5px;
 
+}
+
+.pop_produceherb_con .unit {
+    font-size: 14px;
+    color: #8d8d8d;
+}
 .pop_produceherb_con .area.area2 .left,
 .pop_produceherb_con .area.area2 .right{
     width: 100%;
@@ -2314,10 +2331,6 @@ input[type="radio"] {
     width: 160px;
 }
 
-.pop_produceherb_con .input_type {
-    width:220px;
-    height:32px;
-}
 
 .pop_produceherblog_con .btnType32,
 .pop_produceherblog_con .btnType32-1,
@@ -6656,7 +6669,7 @@ main,
 }
 
 .merinfo > p:nth-child(2) {
-    width: 120px;
+    width: 100px;
     margin-right: 20px;
     font-size: 14px;
 }
@@ -7943,6 +7956,60 @@ p.stock_status.active {
     left:10px;
 }
 
+/* register_View start -----*/
+
+.merright.herbRegister {
+
+}
+
+.merright.herbRegister .area.price{
+    padding: 20px 0;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-bottom: 20px;
+
+}
+
+.merright.herbRegister .area.price .sub_ttl {
+    /*margin-top: 20px;*/
+    margin-left: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 500;
+
+}
+.merright.herbRegister .area.price .option_type {
+    margin-left: 40px;
+    height:30px;
+}
+
+.merright.herbRegister .area.price .cat {
+    width: 100px;
+    margin-right: 20px;
+}
+
+
+.merright.herbRegister .area.price p.data {
+    width:240px;
+}
+
+.merright.herbRegister .inputType240 {
+    border:none;
+    border-radius: 0;
+    border-bottom: 2px solid #000;
+
+}
+/* register_View end -----*/
+/* prodList_View start -----*/
+
+.plp_wrap .area3{
+    /*width: 100%;*/
+    /*height: 430px;*/
+    /*border:1px solid red;*/
+
+}
+
+/* prodList_View end -----*/
 /* main_ver2_View start -----*/
 
 .mer_wrap {
@@ -10986,6 +11053,14 @@ button, i {
     border:none;
     border-radius: 5px;
     background-color: #ececec60;
+    padding-left: 5px;
+}
+
+.input_type3 {
+    border:none;
+    border-bottom: 2px solid #000;
+    width: 220px;
+    height: 32px;
     padding-left: 5px;
 }
 

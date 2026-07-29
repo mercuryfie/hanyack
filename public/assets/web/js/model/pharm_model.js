@@ -173,12 +173,38 @@ const pharm_m = {
         };
     },
     /*
+         Use > 원자재 수정
+         params > mtcode,mtname,opimal_stock,waste_rate,memo
+         return > effect : 처리 갯수
+         */
+    async Update_Pharm_Material(params) {
+        const res = await commonRequest('/Update_Pharm_Material', params);
+        if (!res) return { ecnt: 0 };
+        const [item = {}] = res.data || [];
+        return  {
+            effect : item.ecnt || 0
+        };
+    },
+    /*
          Use > 원자재 삭제
          params > mtcode
          return > effect : 처리 갯수
          */
     async Delete_Pharm_Material(params) {
         const res = await commonRequest('/Delete_Pharm_Material', params);
+        if (!res) return { ecnt: 0 };
+        const [item = {}] = res.data || [];
+        return  {
+            effect : item.ecnt || 0
+        };
+    },
+    /*
+         Use > 벤더 삭제
+         params > vecode
+         return > effect : 처리 갯수
+         */
+    async Delete_Pharm_Vendor(params) {
+        const res = await commonRequest('/Delete_Pharm_Vendor', params);
         if (!res) return { ecnt: 0 };
         const [item = {}] = res.data || [];
         return  {
@@ -242,6 +268,20 @@ const pharm_m = {
             total: item.tcnt || 0,
             totalRs : item.totalRs || 0,
             nPage : item.nPage ||0
+        };
+    },
+    /*
+    Use > 이전 약재등록 검색
+    Prams >  mdcode
+    return > list : 데이터, tcnt : 갯수
+     */
+    async Load_Pharm_Medicine_SearchByMdcode(params){
+        const res = await commonRequest('/Load_Pharm_Medicine_SearchByMdcode',params);
+        if (!res) return { list: [], total: 0 };
+        const [item = {}] = res.data || [];
+        return  {
+            list : item.list,
+            total : item.tcnt || 0
         };
     }
 

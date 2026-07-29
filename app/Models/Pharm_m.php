@@ -248,10 +248,10 @@ class Pharm_m extends Model
         return $insertID;
     }
 
-    public function Update_Pharm_Vendor_Info($bucode,$params){
+    public function Update_Pharm_Vendor_Info($vecode,$micode,$params){
         $this->db->transStart();
         $builder = $this->db->table('herb_vendor');
-        $builder->where('ve_code', $bucode);
+        $builder->where('ve_code', $vecode);
         $builder->update($params);
         $affected_rows = $this->db->affectedRows();
         $this->db->transComplete();

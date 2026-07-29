@@ -9,6 +9,74 @@ class ApiCommonController extends BaseController
 {
     use ResponseTrait;
 
+
+
+    public function Load_Medicine_Option1(){
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $mdcode = $params['mdcode'];
+        if(empty($mdcode)){
+            return $this->respond(ResultDTO::fail('Error004', [], '잘못된 접근입니다.'));
+        }
+        $herb_m = model('Herb_m');
+        $fields = ['t1_code', 't1_value'];
+        $Rs = $herb_m->Load_option1($mdcode, $fields);
+        $list = empty($Rs) ? [] : $Rs;
+        $i_arr = [
+            'list' => $list,
+            'tcnt' => count($list)
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+
+    public function Load_Herb_Info()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $word = $params['word'] ?? '';
+        $target = $params['target'] ?? '';
+        if(empty($word) || empty($target)){
+            return $this->respond(ResultDTO::fail('Error004', [], '잘못된 접근입니다.'));
+        }
+
+        //$tUrl = fn_ENV_URL();
+        $tUrl = 'https://api.djmedi.net';
+        if ($target == 1) {
+            $apiUrl = $tUrl . "/manager/medicine/?apiCode=medicinelist&language=kor&ckCfcode=dj&reData=herbGanada2&searchGanada={$word}&searchMedi=&ckStaffid=&v=";
+        } else {
+            $apiUrl = $tUrl . "/manager/medicine/?apiCode=medicinelist&language=kor&ckCfcode=dj&ckStaffid=&v=&reData=admmedilist2&page=&searchTxt={$word}&searchType=&id=";
+        }
+        $retVal = fn_CURL($apiUrl, 'get');
+        if(empty($retVal)){
+            return $this->respond(ResultDTO::fail('Error005', [], '네트웍크 장애로 인해 검색에 실패 하였습니다.'));
+        }
+        $list  = empty($retVal['list']) ? [] : $retVal['list'];
+        $i_arr = [
+            'list' => $list,
+            'tcnt' => count($list)
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
     public function Load_Herb_ListAll()
     {
         $sessinarr = $this->GetSessionData();

@@ -15,7 +15,16 @@ class Herb_m extends Model
         $this->db = Database::connect('default');
     }
 
+    public function Load_Medicine_infoByMdcode($params,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->select($separated_val);
+        $builder->where('fk_micode', $params['micode']);
+        $builder->where('fk_mdcode', $params['mdcode']);
+        $query = $builder->get();
 
+        return $query->getResultArray();
+    }
 
 
     public function Load_Medicine_info($hncode,$fields=['ALL']){
@@ -40,6 +49,7 @@ class Herb_m extends Model
                 ->groupEnd();
         }
         $builder->orderBy('sn','DESC');
+        $builder->orderBy('is_del','DESC');
         $offset = ($params['page'] - 1) * $params['pcnt'];
         $builder->limit($params['pcnt'], $offset);
         $query = $builder->get();
