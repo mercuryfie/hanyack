@@ -1,0 +1,32 @@
+$(document).ready(function () {
+    let pcode = $("#barcodeDiv").data("pcode");
+    Prn_Barcode(pcode);
+
+    $(document).on('click','#btn_close',function(){
+        window.close();
+    });
+
+    $(document).on('click','#btn_prn',function(){
+        printWindow('org_area');
+    });
+
+
+});
+
+function Prn_Barcode(pcode) {
+    console.log("cpcode=" + pcode);
+    if (pcode == "") {
+        alert("잘못된 접근입니다.");
+        window.close();
+    } else {
+        $("#barcodeDiv").barcode(pcode, "code128", {
+            barWidth: 1,
+            barHeight: 32,
+            fontSize: 12
+        });
+        $("#barcodeDiv").css("overflow", "hidden");
+        // $("#barcodeDiv").css("width", "auto");
+        $("#barcodeDiv").css("height", "52px");
+
+    }
+}

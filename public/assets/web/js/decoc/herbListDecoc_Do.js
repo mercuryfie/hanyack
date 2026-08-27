@@ -1,0 +1,257 @@
+$(document).ready(function () {
+    let MaxCnt = 100;
+    Load_Herb(1, MaxCnt);
+
+    $('input[name="herbFilter"]').change(function () {
+        INI_Load_List();
+        let value = $('input[name="herbFilter"]:checked').val();
+        Load_Herb(1, value);
+    });
+
+    $('#popMatch').on('click', function (e) {
+        try{
+            if (window.confirm('매칭 하시겠습니까?') == true) {
+                let hn_code = $('#popMatch').data('hncode');
+                let mm_origin = $('#popMatch').data('mm_origin');
+                let mm_medicine = $('#popMatch').data('mm_medicine');
+                let mm_title_kor = $('#popMatch').data('mm_title_kor');
+                let mm_origin_kor = $('#popMatch').data('mm_origin_kor');
+
+                if ((hn_code == '') || (mm_origin == '') || (mm_medicine == '') || (mm_title_kor == '') || (mm_origin_kor == '')) {
+                    alert('매칭할 탕전실 약재를 선택 하여주세요.');
+                } else {
+                    let data = {
+                        "typ": 2,
+                        "hn_code": hn_code,
+                        "mm_origin": mm_origin,
+                        "mm_medicine": mm_medicine,
+                        "mm_title_kor": mm_title_kor,
+                        "mm_origin_kor": mm_origin_kor
+                    }
+                    add_Match(data);
+                }
+            }
+        } catch (error) {
+            alert(error);
+            stop_spinner();
+        }
+    });
+
+    $('#selectView').on('click', function (e) {
+        $('input[name="chkproduct"]').each(function (e) {
+            if ($(this).is(':checked') == false) {
+                $(this).parent().parent().css('display', 'none');
+            }
+        });
+    });
+
+    $('#AllView').on('click', function (e) {
+        $('input[name="chkproduct"]').each(function (e) {
+            $(this).parent().parent().css('display', '');
+        });
+    });
+
+    $('#btnclose').on('click',function(e){
+        $('#btnorder').data('odcode','');
+        $('#pop_confirm_odr').css('display','none');
+    });
+
+    $("#more,#more2").on("click", function (key) {
+        let page = $('#more').data('page');
+        Load_Herb(page,'');
+    });
+
+    $('#btn_close').on('click',function(e){
+        Ini_popReject();
+        $('#matchingpop').hide();
+    });
+});
+
+
+async function add_Match(data){
+    try {
+        start_spinner();
+        let dataarr = data;
+        let url = APIURL + '/Match_Proc';
+        let result = await Load_API(url,dataarr);
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if(result.get('status') == 'ok') {
+            $(location).attr('href', '/Mydecoc/herbList');
+        }else{
+            alert(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error.get('message') + '}');
+        stop_spinner();
+    }
+
+}
+
+function Ini_popReject(){
+    $('#reject_issue').val(0);
+    $('#reject_memo').val('');
+    $('#btn_reject').data('hncode','');
+}
+
+function INI_Matching_pop() {
+    $('#yaklist').empty();
+    $('#yakorigin').html('');
+    $('#yakcode').html('');
+    $('#yakname').html('');
+    $('#yakcompany').val();
+    $('#yakherb').val();
+    $('#popMatch').data('hncode', '');
+    $('#popMatch').data('mm_origin', '');
+    $('#popMatch').data('mm_medicine', '');
+    $('#popMatch').data('mm_title_kor', '');
+    $('#popMatch').data('mm_origin_kor', '');
+}
+
+function INI_Load_List(){
+    $('.moreListBox').css('display','');
+    $('#herblist').empty();
+}
+
+async function Load_Herb(page, maxcnt) {
+    try {
+        start_spinner();
+        let url = APIURL + '/Load_herb_Decoc';
+        let dataarr = {"page": page, "maxcnt": maxcnt};
+        let result = await Load_API(url,dataarr);
+
+        if (result.get('status') == 'NoLogin') {
+            go_login();
+        }else if (result.get('status') == 'ok') {
+            let html = '';
+            let data = result.get('data');
+            let arr = (data && data.list) ? data.list : [];
+            let Cnt = arr.length;
+            if (Cnt > 0) {
+                $.each(arr, function (index, el) {
+                    let match_html = '';
+                    if(el.match_sn==''){
+                        match_html = `<button class="colorRed machingOption btntype2" type="button" onclick="reg_Match('${el.mdMedi}')">미매칭</button>`;
+                    }else{
+                        match_html = `<button class="colorGreen machingOption btntype2" type="button" onclick="del_Match('${el.match_sn}')">매칭</button>`;
+                    }
+
+                    html +=`
+                        <tr>
+                            <td>${el.mm_medicine}</td>
+                            <td>${match_html}</td>
+                            <td class="hbname mached"><p>${el.md_title_kor} /  ${el.mm_title_kor}</p></td>
+                            <td>${el.mm_origin}</td>
+                            <td>${el.md_maker}</td>
+                            <td>${el.mm_stable}</td>
+                        </tr>
+                    `;
+                });
+                $('#herblist').append(html);
+                $('#more').data('page',result.get('data').page);
+            } else {
+                let tcnt = $('#herblist tr').length;
+                if(tcnt > 0) alert('마지막 입니다.');
+                $('.moreListBox').css('display','none');
+            }
+        }else{
+            alert(result.get('message'));
+        }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+async function reg_Match(md_code,mm_medicine,mm_title_kor,mm_origin,mm_stable) {
+    try {
+        start_spinner();
+        INI_Matching_pop();
+
+        let dataarr = {"mdcode" : md_code};
+        let url = APIURL + '/Load_Decoc_Match';
+        let result = await Load_API(url,dataarr);
+
+        console.log(result);
+
+        $('#matchingpop').css('display', 'flex');
+
+        // if (result.get('status') == 'NoLogin') {
+        //     go_login();
+        // }else if(result.get('status') == 'ok') {
+        //     // $('#yakcompany').html(result.get('data').mi_name);
+        //     // $('#yakherb').html(result.get('data').hn_name);
+        //     // $('#popMatch').data('hncode', hn_code);
+        //     let html = '';
+        //     let arr = result.get('data').list;
+        //     let Cnt = arr.length;
+        //     if (Cnt > 0) {
+        //         $.each(arr, function (index, el) {
+        //             html += `<buttion class="machingOption" onclick="setMatch('${el.hn_code}','${el.mi_code}','${md_code}','${mm_medicine}','${mm_title_kor}','${mm_origin}','${mm_stable}')">[${mm_origin}] [${el.mi_name}] ${el.hn_name} </buttion>`;
+        //         });
+        //     }
+        //     $('#yaklist').html(html);
+        //     $('#matchingpop').css('display', 'flex');
+        // } else {
+        //     alert(result.msg);
+        // }
+        stop_spinner();
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+async function del_Match(hncode) {
+    try {
+        if (window.confirm('선택되신 약재의 매칭을 삭제하시겠습니까?') == true) {
+            start_spinner();
+            let dataarr = {"hn_code" : hncode,"typ": 1};
+            let url = APIURL + '/Match_Proc';
+            let result = await Load_API(url,dataarr);
+            if (result.get('status') == 'NoLogin') {
+                go_login();
+            }else if(result.get('status') == 'ok') {
+                $(location).attr('href', '/Mydecoc/herbList');
+            }else{
+                alert(result.get('message'));
+            }
+            stop_spinner();
+        }
+    } catch (error) {
+        alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
+        stop_spinner();
+    }
+}
+
+
+
+function setMatch(val1, val2, val3, val4) {
+    $('#yakorigin').html(val4);
+    $('#yakcode').html(val2);
+    let tname = val3 + ' [' + val1 + ']';
+    $('#yakname').html(tname);
+
+    $('#popMatch').data('mm_origin', val4);
+    $('#popMatch').data('mm_medicine', val2);
+    $('#popMatch').data('mm_title_kor', val3);
+    $('#popMatch').data('mm_origin_kor', val1);
+}
+
+function chk_product(form,price){
+    let Cnt = $(form).parent().parent().find('#price_cnt').html();
+    let total = $('#totalprice').data('tprice');
+    let n_price = 0;
+    let t_price = 0;
+    let str_price = '';
+    if($(form).is(":checked")==false){
+        n_price = Number(Cnt) * Number(price);
+        t_price = Number(total) - Number(n_price);
+        str_price = "총 " + number_format(t_price) + "원";
+        $('#totalprice').html(str_price);
+        $('#totalprice').data('tprice',t_price);
+        $(form).parent().parent().find('#price_cnt').html('0');
+    }
+}

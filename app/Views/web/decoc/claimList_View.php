@@ -1,0 +1,58 @@
+<?= $this->extend("/web/template/layout_mypage_dec") ?>
+<?= $this->section("content") ?>
+
+<script src="<?=URL_DECOC_ASSETS?>/claimList_Do.js?rnd=<?=rand();?>"></script>
+
+<!-- calendar ----------------------------  -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"> </script>
+
+<section class="orderlist_dec">
+    <!--    <div class="decorderli1-0">-->
+    <!--    </div>-->
+    <div class="decodr decorderli1-1">
+        <div class="common_list_wrap">
+            <p class="main_title">취소·반품 내역</p>
+            <div class="flexType3">
+                <div class="orderList_boxpq8 flexType2">
+                    <input type="search" name="" id="" class=""
+                           placeholder="약재명을 검색하십시오.">
+                    <button class="btn_secondary">조회하기</button>
+                </div>
+                <div class="decorderli1-1-1-1">
+                    <button class="btn_secondary active">전체</button>
+                    <button class="btn_secondary">취소</button>
+                    <button class="btn_secondary">반품</button>
+                    <button class="btn_secondary">교환</button>
+                    <select name="" id="pharli" class="select_type">
+                        <option value="">제약사</option>
+                        <option value="">전체</option>
+                        <option value="광명당">광명당</option>
+                        <option value="대연제약">대연제약</option>
+                        <option value="디제이허브">디제이허브</option>
+                        <option value="바른한방">바른한방</option>
+                        <option value="영천">영천</option>
+                        <option value="CJ">CJ</option>
+                        <option value="CK">CK</option>
+                        <option value="허브팜">허브팜dd</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    여기서 시작 -->
+    <div class="claimList"  id="cList" name="cList" style="">
+
+    </div>
+<!--    <div class="more_box flexType1" type="button" name="more" id="more">-->
+<!--        <button class="moreList2" id="btnmore1" name="btnmore1" type="button" data-page="">-->
+<!--            더보기-->
+<!--        </button>-->
+<!--        <i class="fa-solid fa-angle-down" id="more2" name="btnmore2" data-page=""></i>-->
+<!--    </div>-->
+
+    <?= $this->include('/web/include/pop_DeliveryStatus_View') ?>
+    <?= $this->include('/web/include/pop_CancelOrderDecoc_View') ?>
+</section>
+
+<?= $this->endSection() ?>

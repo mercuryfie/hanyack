@@ -1,0 +1,1512 @@
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+use Config\Database;
+
+class Herb_m extends Model
+{
+    protected $db; 
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->db = Database::connect('default');
+    }
+
+    public function Load_Medicine_infoByMdcode($params,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->select($separated_val);
+        $builder->where('fk_micode', $params['micode']);
+        $builder->where('fk_mdcode', $params['mdcode']);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+
+    public function Load_Medicine_info($hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->select($separated_val);
+        $builder->where('hn_code', $hncode);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Pharm_Medicine_All($params,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->select($separated_val);
+        $builder->where('fk_micode',$params['micode']);
+        if(!empty($params['skey'])){
+            $builder->groupStart()
+                ->like('hn_code', $params['skey'])
+                ->orLike('hn_name', $params['skey'])
+                ->groupEnd();
+        }
+        $builder->orderBy('sn','DESC');
+        $builder->orderBy('is_del','DESC');
+        $offset = ($params['page'] - 1) * $params['pcnt'];
+        $builder->limit($params['pcnt'], $offset);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Cnt_Pharm_Medicine_All($params){
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->where('fk_micode',$params['micode']);
+        if(!empty($params['skey'])){
+            $builder->groupStart()
+                ->like('hn_code', $params['skey'])
+                ->orLike('hn_name', $params['skey'])
+                ->groupEnd();
+        }
+        return $builder->countAllResults();
+    }
+
+    public function Load_Product_PrdInfo($hncode,$hpcode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine a');
+        $builder->join('herb_company b', 'a.fk_micode = b.mi_code', 'inner');
+        $builder->select($separated_val);
+        $builder->where('hn_code', $hncode);
+        $builder->where('hp_code', $hpcode);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Insert_Product_Like($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_like');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }
+        return $insertID;
+    }
+
+    public function Delete_Product_Like($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_like');
+        $builder->where('fk_hncode',$param['fk_hncode']);
+        $builder->where('cfcode',$param['cfcode']);
+        $builder->where('ptype',1);
+        $builder->delete($param);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }
+        return $affected_rows;
+
+    }
+
+    public function Cnt_Product_Like($hncode,$cfcode){
+        $builder = $this->db->table('herb_medicine_like');
+        $cnt = $builder->where('fk_hncode', $hncode)
+            ->where('cfcode', $cfcode)
+            ->countAllResults();
+        return $cnt;
+    }
+
+    public function Load_Herb_ListAll($params,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->select($separated_val);
+        $builder->where('hn_isok', 100);
+        if(!empty($params['skey'])) {
+            $builder->like('hn_name', $params['skey'], 'both');
+        }
+        $builder->orderBy('sn', 'DESC');
+        $offset = ($params['page'] - 1) * $params['pcnt'];
+        $builder->limit($params['pcnt'], $offset);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Cnt_Herb_CountAll($params) {
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->where('hn_isok', 100);
+        if(!empty($params['skey'])) {
+            $builder->like('hn_name', $params['skey'], 'both');
+        }
+        return $builder->countAllResults();
+    }
+
+
+
+    public function Load_Herb_MainAll($fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_medicine_event a');
+        $builder->select($separated_val);
+        $builder->join('v_pharm_medicine b', 'a.fk_hncode = b.hn_code', 'INNER');
+        $builder->where('b.hn_isok', 100);
+
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Insert_Order_Single_Goods($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_order_goods');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return false;
+        }
+        return $insertID;
+    }
+
+    public function Delete_Cart($sn){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_cart');
+        $builder->set('is_del',1);
+        $builder->where('sn',$sn);
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return false;
+        }
+        return $affected_rows;
+    }
+
+
+    public function distinct_Cart($cfcode)
+    {
+        $builder = $this->db->table('V_CART_INFO');
+        $builder->distinct();
+        $builder->select('fk_macode as maker');
+        $builder->where('cfcode', $cfcode);
+        $builder->where('is_del', 0);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Update_Cart($sn,$param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_cart');
+        $builder->where('sn',$sn);
+        $builder->update($param);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return false;
+        }
+        return $affected_rows;
+    }
+
+
+    public function Load_Cart_InfoByMaker($cfcode,$macode,$fields=['ALL'])
+    {
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_cart_info');
+        $builder->select($separated_val);
+        $builder->where('cfcode',$cfcode);
+        $builder->where('fk_macode',$macode);
+        $builder->where('is_del',0);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Load_Cart_Cfcode($cfcode,$hncode,$fields=['ALL'])
+    {
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_cart_info');
+        $builder->select($separated_val);
+        $builder->where('cfcode',$cfcode);
+        $builder->where('fk_hncode',$hncode);
+        $builder->where('is_del',0);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Load_Cart_InfoByHncode($cfcode,$hncode,$fields=['ALL'])
+    {
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_cart_info');
+        $builder->select($separated_val);
+        $builder->where('cfcode',$cfcode);
+        $builder->where('fk_hncode',$hncode);
+        $builder->where('is_del',0);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Count_Cart_InfoByHncode($micode,$hncode)
+    {
+        $builder = $this->db->table('herb_cart');
+        $builder->where('fk_micode', $micode);
+        $builder->where('fk_hncode', $hncode);
+        $builder->where('is_del', 0);
+        return (int)$builder->countAllResults();
+
+    }
+
+    public function Load_Pharm_Info($hncode,$fields = ['ALL'])
+    {
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->select($separated_val);
+        $builder->where('hn_code',$hncode);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Update_Decoc_Medicine_Info($sn,$datas)
+    {
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_decoc');
+        $builder->where('sn', $sn);
+        $builder->update($datas);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return false;
+        }
+        return $affected_rows;
+    }
+
+
+    public function Load_Decoc_Match_Product($cfcode,$mm_medicine,$fields = ['ALL'])
+    {
+        $separated_val = fn_Make_Fields($fields);
+
+        $builder = $this->db->table('herb_medicine_decoc_match a');
+        $builder->select($separated_val);
+        $builder->join('herb_medicine_decoc b', 'a.mm_medicine = b.mm_medicine AND a.cfcode=b.cfcode', 'inner');
+        $builder->join('v_pharm_medicine c', 'a.fk_hncode = c.hn_code', 'inner');
+        $builder->orderBy('price','ASC');
+        $builder->where([
+            'a.cfcode'      => $cfcode,
+            'a.mm_medicine' => $mm_medicine
+        ]);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+
+    public function Insert_Medicine_Decoc_Match($data)
+    {
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_decoc_match');
+        $builder->insert($data);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return false;
+        }
+        return $affected_rows;
+    }
+
+    public function Count_Medicine_Decoc_Match($cfcode, $Matchsn)
+    {
+        $builder = $this->db->table('herb_medicine_decoc_match');
+        $builder->where(['cfcode' => $cfcode, 'sn' => $Matchsn]);
+        return $builder->countAllResults();
+    }
+
+    public function Count_Medicine_Decoc_Match3($cfcode, $mm_medicine)
+    {
+        $builder = $this->db->table('herb_medicine_decoc_match');
+        $builder->where(['cfcode' => $cfcode, 'mm_medicine' => $mm_medicine, 'is_del' => 0,'is_use' => 1]);
+        return $builder->countAllResults();
+    }
+
+    public function Count_Medicine_Decoc_Match2($cfcode, $hncode)
+    {
+        $builder = $this->db->table('herb_medicine_decoc_match');
+        $builder->where(['cfcode' => $cfcode, 'fk_hncode' => $hncode]);
+        return $builder->countAllResults();
+    }
+
+    public function Delete_Medicine_Decoc_Match($cfcode, $Matchsn)
+    {
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_decoc_match');
+        $builder->where(['cfcode' => $cfcode, 'sn' => $Matchsn]);
+        $builder->delete();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return false;
+        }
+        return $affected_rows;
+    }
+
+
+    public function Search_Medicine_Pharm($skey,$fields = ['ALL'])
+    {
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->select($separated_val);
+        $builder->like('hn_name', $skey, 'both');
+        $builder->where('is_del',0);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+
+    public function Load_Madicine_Decoc_Matching($cfcode,$medicode,$fields = ['ALL'])
+    {
+        $separated_val = fn_Make_Fields($fields);
+        $subQuery = $this->db->table('herb_medicine_decoc_match')
+            ->select('COUNT(*)')
+            ->where('cfcode', $cfcode)
+            ->where('fk_hncode = a.hn_code', null, false)
+            ->getCompiledSelect();
+
+        $builder = $this->db->table('v_pharm_medicine a');
+        $builder->select($separated_val)
+            ->where([
+                'a.fk_medicode' => $medicode,
+                'a.is_del'      => 0
+            ])
+            ->where("($subQuery) <= 0", null, false);
+
+        return $builder->get()->getResultArray();
+    }
+
+    public function Load_Medicine_Decoc_Matched($cfcode, $mmcode, $fields = ['ALL'])
+    {
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_medicine_decoc_match a');
+        $builder->select($separated_val)
+            ->join('v_pharm_medicine b', 'a.fk_hncode = b.hn_code', 'inner')
+            ->where([
+                'a.cfcode'      => $cfcode,
+                'a.mm_medicine' => $mmcode,
+                'a.is_del'      => 0,
+                'a.is_use'      => 1
+            ]);
+
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Cnt_Medicine_Decoc_All($cfcode,$searchStr)
+    {
+        $builder = $this->db->table('herb_medicine_decoc');
+        $builder->where('cfcode', $cfcode);
+        if (!empty($searchStr)) {
+             $builder->groupStart()
+                ->like('mm_title', $searchStr)
+                ->orLike('mm_medicine', $searchStr)
+                ->groupEnd();
+        }
+        return $builder->countAllResults();
+    }
+
+
+    public function Load_Medicine_Decoc_All($cfcode, $params, $fields=['ALL'])
+    {
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_medicine_decoc a');
+        $builder->select($separated_val);
+        $builder->where('cfcode', $cfcode);
+        if(!empty($params['sStr'])){
+            $builder->groupStart()
+                ->like('mm_title', $params['sStr'])
+                ->orLike('mm_medicine', $params['sStr'])
+                ->groupEnd();
+        }
+        $stock_level = STOCK_LEVEL;
+        $opt = $params['opt'];
+        if($opt==1){
+            $builder->orderBy('is_manage=1','DESC',false);
+            $builder->orderBy("(IFNULL(stock, 0) - (IFNULL(stock_month, 0)*{$stock_level})) ASC", false);
+            $builder->orderBy('(IFNULL(stock + stock_ware, 0)-IFNULL(optimal_stock, 0)) ASC',false);
+        }else if($opt==2){
+            $builder->orderBy('is_manage=1','DESC',false);
+            $builder->orderBy("(IFNULL(stock, 0) - (IFNULL(stock_month, 0)*{$stock_level})) DESC", false);
+            $builder->orderBy('(IFNULL(stock + stock_ware, 0)-IFNULL(optimal_stock, 0)) DESC',false);
+        }else if($opt==3){
+            $builder->orderby('mm_title','DESC');
+        }else if($opt==4){
+            $builder->orderby('mm_title','ASC');
+        }else if($opt==5){
+            $builder->orderby('(stock+stock_ware)','DESC');
+        }else if($opt==6){
+            $builder->orderby('(stock+stock_ware)','ASC');
+        }else if($opt==7){
+            $builder->where('is_manage',1);
+            $builder->orderby('(stock+stock_ware)','DESC');
+        }else if($opt==8){
+            $builder->where('is_manage',0);
+            $builder->orderby('(stock+stock_ware)','DESC');
+        }
+        $offset = ($params['page'] - 1) * $params['pCnt'];
+        $builder->limit($params['pCnt'], $offset);
+
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Update_Medicine_Stock($cfcode, $mm_medicine, $params)
+    {
+        $this->db->table('herb_medicine_decoc')
+            ->where(['cfcode' => $cfcode,'mm_medicine' => $mm_medicine])
+            ->update($params);
+        return $this->db->affectedRows();
+    }
+
+    public function Chk_Medicine_Info($cfcode, $mm_medicine)
+    {        return $this->db->table('herb_medicine_decoc')
+            ->where('cfcode', $cfcode)
+            ->where('mm_medicine', $mm_medicine)
+            ->countAllResults();
+    }
+
+    public function Insert_Medicine_Info($param) {
+        $this->db->transStart();
+
+        $builder = $this->db->table('herb_medicine_decoc');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return false;
+        }
+        return $insertID;
+    }
+
+
+    public function Load_LowPrice($medicode,$price,$ptype){
+        $sql = "SELECT Count(*) as Cnt FROM herb_product_price WHERE fk_medicode=:MEDICODE: AND hn_gPrice < :PRICE: AND hn_method=:PTYPE: ORDER BY hn_gPrice ASC;";
+        $bindparam = [
+            'MEDICODE' => $medicode,
+            'PRICE' => $price,
+            'PTYPE' => $ptype
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        $row = $Query->getRow();
+        $Cnt = ($row) ? $row->Cnt : 0;
+        return $Cnt;
+    }
+
+    public function Cnt_MyCart_Item($cfcode){
+        return $this->db->table('V_CART_INFO')
+            ->where('cfcode', $cfcode)
+            ->where('is_del', 0)
+            ->countAllResults();
+    }
+
+
+    public function Load_Cart_Pharm($micode,$macode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from V_CART_INFO WHERE fk_micode=:MICODE: and fk_macode=:MACODE: and is_del=0 order by sn desc;";
+        $bindparam = [
+            'MICODE' => $micode,
+            'MACODE' => $macode
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+
+    public function Load_Product_Code($hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('hn_code', $hncode);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product_Sn($sn,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('sn', $sn);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    // hereisok
+    public function Load_Product_Code2($hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('hn_code', $hncode);
+        $builder->where('hn_isok', 100);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product_File_Code($hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_Product_file');
+        $builder->select($separated_val);
+        $builder->where('fk_fncode', $hncode);
+        $builder->where('isDel', 0);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product_Price($hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from herb_product_price WHERE fk_hncode=:HNCODE: and hn_isDel=0 order by hn_method;";
+        $bindparam = [
+            'HNCODE' => $hncode
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Load_Product_mdMedi($mdMedi,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from v_product_info_all WHERE fk_medicode=:MDMEDI: and hn_isok=100 order by sn desc;";
+        $bindparam = [
+            'MDMEDI' => $mdMedi
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Load_Product_mdMedi2($mdMedi,$nation,$notin,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        if(fn_ArrayCnt($notin)<=0){
+            $sql = "SELECT {$separated_val} from v_product_info_all WHERE fk_medicode=:MDMEDI: and n_key=:NKEY: and hn_isok=100 order by sn desc;";
+            $bindparam = [
+                'MDMEDI' => $mdMedi,
+                'NKEY' => $nation
+            ];
+        }else{
+            $sql = "SELECT {$separated_val} from v_product_info_all WHERE fk_medicode=:MDMEDI: and n_key=:NKEY: and hn_code not in :NOTIN: and hn_isok=100 order by sn desc;";
+            $bindparam = [
+                'MDMEDI' => $mdMedi,
+                'NKEY' => $nation,
+                'NOTIN' => $notin
+            ];
+        }
+
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Load_Product_Match1($mm_medicine,$chcode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from herb_Product_Match a,v_product_info_all b WHERE a.fk_Hncode=b.hn_code and a.fk_cfcode=:CFCODE: and a.mm_medicine=:MDMEDI: order by a.sn desc;";
+        $bindparam = [
+            'CFCODE' => $chcode,
+            'MDMEDI' => $mm_medicine
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+
+    public function Cnt_Product_Match($mdmedi,$chcode,$mm_code,$fields=['ALL']){
+        $sql = "SELECT COUNT(*) AS Cnt from herb_Product_Match WHERE fk_cfcode = :CFCODE: AND fk_mdMedi = :MDMEDI: AND mm_medicine=:MMMEDI: order by sn desc;";
+        $bindparam = [
+            'CFCODE' => $chcode,
+            'MDMEDI' => $mdmedi,
+            'MMMEDI' => $mm_code
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        $row = $Query->getRow();
+        $Cnt = ($row) ? $row->Cnt : 0;
+        return $Cnt;
+    }
+
+    public function Cnt_Product_Match2($hncode,$chcode,$fields=['ALL']){
+        $sql = "SELECT COUNT(*) AS Cnt from herb_Product_Match WHERE fk_cfcode = :CFCODE: AND fk_hncode=:HNCODE:  order by sn desc;";
+        $bindparam = [
+            'CFCODE' => $chcode,
+            'HNCODE' => $hncode
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        $row = $Query->getRow();
+        $Cnt = ($row) ? $row->Cnt : 0;
+        return $Cnt;
+    }
+
+    public function Load_Decoc_List($my_type,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from herb_company WHERE mi_type=:MITYPE: and mi_use='Y'";
+        $bindparam = [
+            'MITYPE' => $my_type
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+
+    public function Load_Product_Price_Type($hncode,$typ,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from herb_product_price WHERE fk_hncode=:HNCODE: and hn_method=:METHOD: and hn_isDel=0 order by hn_method;";
+        $bindparam = [
+            'HNCODE' => $hncode,
+            'METHOD' => $typ
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Update_Product_Price_All($hncode,$param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_price');
+        $builder->where('fk_hncode',$hncode);
+        $builder->update($param);
+
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+
+
+    public function Load_Product_isOk($hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_Product_Reject');
+        $builder->select($separated_val);
+        $builder->where('fk_hncode', $hncode);
+        $builder->orderBy('sn','DESC');
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+
+    public function Update_Product_Info($hncode,$param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product');
+        $builder->where('hn_code',$hncode);
+        $builder->update($param);
+
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Update_Product_Info_Sn($sn,$param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product');
+        $builder->where('sn',$sn);
+        $builder->update($param);
+
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Update_Product_Info_Wherein($in_hncode,$param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product');
+        $builder->whereIn('hn_code',$in_hncode);
+        $builder->update($param);
+
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Load_ProductEvent ($fk_hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} FROM herb_product_event a , herb_product b WHERE a.fk_hncode = b.hn_code AND a.fk_hncode = :FK_HNCODE:";
+        $bindparam = [
+            'FK_HNCODE' => $fk_hncode
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Load_ProductEvent_Only ($hncode,$typ,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} FROM herb_product_event WHERE fk_hncode = :FK_HNCODE: AND f_type=:FTYPE:";
+        $bindparam = [
+            'FK_HNCODE' => $hncode,
+            'FTYPE' => $typ
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Cnt_Event($hncode,$fields=['ALL']){
+        $sql = "SELECT COUNT(*) AS Cnt from herb_product_event WHERE fk_hncode = :FK_HNCODE: order by sn desc;";
+        $bindparam = [
+            'FK_HNCODE' => $hncode,
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        $row = $Query->getRow();
+        $Cnt = ($row) ? $row->Cnt : 0;
+        return $Cnt;
+    }
+
+
+    public function Insert_ProductEvent($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_event');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+
+        return $insertID;
+    }
+
+    public function Delete_ProductEvent($hncode,$param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_event');
+        $builder->where('fk_hncode',$hncode);
+        $builder->delete($param);
+
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Load_DelInfo ($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} FROM herb_company_address WHERE fk_micode=:FK_MICODE: ORDER BY isDefault DESC, sn DESC;";
+        $bindparam = [
+            'FK_MICODE' => $param['fk_micode']
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Load_Company_Address ($micode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} FROM herb_company_address WHERE fk_micode=:FK_MICODE: and isDefault=1 ORDER BY sn DESC limit 1;";
+        $bindparam = [
+            'FK_MICODE' => $micode
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Load_DelInfo_Sn ($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} FROM herb_company_address WHERE sn=:SN: ;";
+        $bindparam = [
+            'SN' => $param['sn']
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Update_DeliInfo_SetAllAsZero($mi_code,$isZero){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_company_address');
+        $builder->set('isDefault',$isZero);
+        $builder->where('fk_micode',$mi_code);
+        $builder->where('isDefault',1);
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Update_DelInfo($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_company_address');
+
+        $builder->set('fk_micode',$param['fk_micode']);
+        $builder->set('mi_zip',$param['mi_zip']);
+        $builder->set('mi_Address1',$param['mi_Address1']);
+        $builder->set('mi_Address2',$param['mi_Address2']);
+        $builder->set('mi_name',$param['mi_name']);
+        $builder->set('mi_tel',$param['mi_tel']);
+        $builder->set('isDefault',$param['isDefault']);
+
+        $builder->where('sn',$param['sn']);
+
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Insert_DelInfo($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_company_address');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+
+        return $insertID;
+    }
+
+    public function Delete_DelInfo($sn){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_company_address');
+        $builder->where('sn', $sn);
+        $affected = $builder->delete();
+        $this->db->transComplete();
+
+        return $affected;
+    }
+
+    public function Insert_Reject_Data($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_reject');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+
+        return $insertID;
+    }
+
+    public function Update_Product_isSell($fk_mdcode,$hn_code,$hn_isok){
+        $this->db->transStart();
+        $builder = $this->db->table('v_product_info_all');
+        $builder->set('hn_isSell',$hn_isok);
+        $builder->where('fk_mdcode',$fk_mdcode);
+        $builder->where('hn_code<>',$hn_code);
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+
+    public function Load_Product_All($fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->orderBy('sn','DESC');
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product_limit($tcnt,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_pharm_medicine');
+        $builder->select($separated_val);
+        $builder->orderBy('sn','DESC');
+        $builder->limit($tcnt);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+
+
+    public function Load_Product_info2($mdcode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('fk_mdcode', $mdcode);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product_MatchedForDecoc($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_product_match');
+        $builder->select($separated_val);
+        $builder->where('fk_micode', $param['micode']);
+        $builder->where('fk_mdMedi', $param['mdmedi']);
+        $builder->where('mm_medicine', $param['mmmedi']);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Matched_HerbInfo($param,$typ,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} FROM v_product_info_all a , herb_product_match b WHERE a.hn_code = b.fk_hncode AND b.mm_medicine = :MM_MEDICINE:";
+        $bindparam = [
+            'MM_MEDICINE' => $param['mmmedi']
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Load_Product_MatchedForPharm($hncode,$cfCode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} FROM herb_Product_Match WHERE fk_hncode = :HNCODE: and fk_cfcode=:CFCODE:";
+        $bindparam = [
+            'HNCODE' => $hncode,
+            'CFCODE' => $cfCode
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Cnt_Product_MatchedForPharm($hncode,$fields=['ALL']){
+        $sql = "SELECT COUNT(*) AS Cnt FROM herb_Product_Match WHERE fk_hncode = :HNCODE:";
+        $bindparam = [
+            'HNCODE' => $hncode
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        $row = $Query->getRow();
+        $Cnt = ($row) ? $row->Cnt : 0;
+        return $Cnt;
+    }
+
+
+    public function Cnt_Order_Step_Check2($in_sql,$step,$fk_micode,$fields=['ALL']){
+        $sql = "SELECT COUNT(*) AS Cnt from v_order_goods_info WHERE sn IN(:INSQL:) AND gd_status<>:STATUS: AND fk_micode = :MICODE:; ";
+        $bindparam = [
+            'INSQL' => $in_sql,
+            'STATUS' => $step,
+            'MICODE' => $fk_micode
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        $row = $Query->getRow();
+        $Cnt = ($row) ? $row->Cnt : 0;
+        return $Cnt;
+    }
+
+    public function Load_Product_Page($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('fk_micode', $param['micode']);
+        $builder->orderBy('sn','DESC');
+        $query = $builder->get($param['limit'],$param['offset']);
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product_Page_All($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->orderBy('sn','DESC');
+        $query = $builder->get($param['limit'],$param['offset']);
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product_Page_All2($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('fk_micode',$param['micode']);
+        $builder->orderBy('sn','DESC');
+        $query = $builder->get($param['limit'],$param['offset']);
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product_Page_Sale($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $Asql = '';
+        $Bsql = "SELECT {$separated_val} FROM v_product_info_all a, herb_product_price b WHERE a.hn_code = b.fk_hncode and a.hn_isSell=1 and a.hn_isok=100 ";
+        if(($param['ptyp']==1) || ($param['ptyp']==2)) $Asql = 'and b.hn_method=:METHOD: ';
+        if($param['micode']!='') $Asql .= 'and a.fk_micode=:MICODE: ';
+        if($param['skey']!='') $Asql .=  'and a.hn_name like :SKEY: ';
+        $like = ($param['skey']!='') ? "%{$param['skey']}%" : '';
+        $Asql .= 'order by a.hn_code DESC ';
+        if($param['offset']!='') $Asql .=  'LIMIT :LIMIT: OFFSET :OFFSET:';
+        $bindparam = [
+            'SKEY' => $like,
+            'LIMIT' => $param['limit'],
+            'OFFSET' => $param['offset'],
+            'METHOD' => $param['ptyp'],
+            'MICODE' => $param['micode']
+        ];
+
+        $sql = $Bsql.$Asql;
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+
+
+    public function Cnt_Product_Page_Sale($param,$fields=['ALL']){
+        $Asql = '';
+        $Bsql = "SELECT COUNT(*) AS Cnt FROM v_product_info_all a, herb_product_price b WHERE a.hn_code = b.fk_hncode and a.hn_isSell=1 and a.hn_isok=100 ";
+        if(($param['ptyp']==1) || ($param['ptyp']==2)) $Asql = 'and b.hn_method=:METHOD: ';
+        if($param['micode']!='') $Asql .= 'and a.fk_micode=:MICODE: ';
+        if($param['skey']!='') $Asql .=  'and a.hn_name like :SKEY: ';
+        $like = ($param['skey']!='') ? "%{$param['skey']}%" : '';
+        $bindparam = [
+            'SKEY' => $like,
+            'METHOD' => $param['ptyp'],
+            'MICODE' => $param['micode']
+        ];
+        $sql = $Bsql.$Asql;
+        $Query = $this->db->query($sql, $bindparam);
+        $row = $Query->getRow();
+        $Cnt = ($row) ? $row->Cnt : 0;
+        return $Cnt;
+    }
+
+    public function Load_Product_SellListPage($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('hn_isSell', 1);
+        $builder->where('hn_isok', 100);
+        if($param['skey']=='unmatched'){
+            $builder->where('fk_mmsn', 0);
+        }else if($param['skey']=='matched'){
+            $builder->where('fk_mmsn>', 0);
+        }
+        $builder->orderBy('sn','DESC');
+        $query = $builder->get($param['limit'],$param['offset']);
+
+        return $query->getResultArray();
+    }
+
+    public function GetMyDecocPharmList($params,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        if($params['search_maker']!=''){
+            $builder->where('fk_micode', $params['search_maker']);
+        }
+        if($params['search_title']!=''){
+            $builder->like('hn_name', $params['search_title']);
+        }
+        if($params['searh_origin']=='kr'){
+            $builder->where('n_key', 'kr');
+        }else if($params['searh_origin']=='except'){
+            $builder->where('n_key <>', 'kr');
+        }
+        if($params['sort_sell']=='1'){
+            $builder->orderBy('SellCnt', 'DESC');
+        }
+
+        $query = $builder->get($params['limit'],$params['offset']);
+        return $query->getResultArray();
+    }
+
+    public function GetMyDecocPharmListCount($params) {
+        $builder = $this->db->table('v_product_info_all');
+        if ($params['search_maker'] != '') {
+            $builder->where('fk_micode', $params['search_maker']);
+        }
+        if ($params['search_title'] != '') {
+            $builder->like('hn_name', $params['search_title']);
+        }
+        if ($params['searh_origin'] == 'kr') {
+            $builder->where('n_key', 'kr');
+        } else if ($params['searh_origin'] == 'except') {
+            $builder->where('n_key <>', 'kr');
+        }
+        return $builder->countAllResults();
+    }
+
+
+    public function Load_Product_SearchPage($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->like('hn_name',$param['skey']);
+
+        $query = $builder->get($param['limit'],$param['offset']);
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product_SearchPage2($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('fk_micode', $param['micode']);
+        $builder->like('hn_name',$param['skey']);
+
+        $query = $builder->get($param['limit'],$param['offset']);
+
+        return $query->getResultArray();
+    }
+
+
+    public function Load_Product($micode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('fk_micode', $micode);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product2($micode,$skey,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('fk_micode', $micode);
+        $builder->like('hn_name',$skey);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_Product3($param,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('v_product_info_all');
+        $builder->select($separated_val);
+        $builder->where('fk_micode', $param['micode']);
+        $builder->where('fk_mdcode', $param['mdcode']);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+
+    public function Load_option1($medicode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_option_type1');
+        $builder->select($separated_val);
+        $builder->where('fk_medicode', $medicode);
+        $builder->where('t1_isuse',1);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+
+    public function Load_option2($fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_option_type2');
+        $builder->select($separated_val);
+        $builder->where('t2_isuse',1);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_option3($fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_option_weight');
+        $builder->select($separated_val);
+        $builder->where('w_isuse',1);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Load_option_nation($fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_option_nation');
+        $builder->select($separated_val);
+        $builder->where('n_isuse',1);
+        $builder->orderBy('n_value', 'asc');
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function Insert_Product($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_Product');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+
+        return $insertID;
+    }
+
+
+
+    public function Insert_Product_Reject($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_Product_Reject');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+
+        return $insertID;
+    }
+
+    public function Insert_Product_price($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_price');
+        $affected = $builder->insertBatch($param);
+        $this->db->transComplete();
+
+        return $affected;
+    }
+
+    public function Insert_Product_Matches($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_match');
+        $affected = $builder->insertBatch($param);
+        $this->db->transComplete();
+
+        return $affected;
+    }
+
+    public function Delete_Product_Matches($chcode,$mdMedi,$sn){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_match');
+        $affected = $builder->whereIn('sn', $sn)
+                            ->where('fk_cfcode',$chcode)
+                            ->where('fk_mdMedi',$mdMedi)
+                            ->delete();
+        $this->db->transComplete();
+
+        return $affected;
+    }
+
+    public function Delete_Product_Matches2($chcode,$sn){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_match');
+        $affected = $builder->whereIn('sn', $sn)
+            ->where('fk_cfcode',$chcode)
+            ->delete();
+        $this->db->transComplete();
+
+        return $affected;
+    }
+
+
+
+    public function Insert_Attach_File($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_Product_file');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+
+        return $insertID;
+    }
+
+    public function DO_isDell($fileID) {
+
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_file');
+        $builder->set('isDell', 1);  // 삭제 처리
+        $builder->where('id', $fileID);
+        $builder->update();
+    }
+
+
+    public function Update_Order_Step3($sn,$step) {
+        $this->db->transStart();
+        $builder = $this->db->table('v_order_goods_info');
+        $builder->set('gd_status', $step);
+        $builder->set('gd_delicomplete', date('Y-m-d H:i:s'));
+        $builder->where('sn', $sn);
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Update_Order_Step2($in_sql,$step) {
+
+        $this->db->transStart();
+        $builder = $this->db->table('v_order_goods_info');
+        $builder->set('gd_status', $step);
+        $builder->whereIn('sn', $in_sql);
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Update_Order_delicode($in_sql,$delicode,$delitype) {
+        $this->db->transStart();
+        $builder = $this->db->table('herb_order_goods');
+        $builder->set('delicode', $delicode);
+        $builder->set('delitype', $delitype);
+        $builder->whereIn('sn', $in_sql);
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+
+
+
+    public function Insert_Product_Match($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_match');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+
+        return $insertID;
+    }
+
+    public function Insert_Order($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_order');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+
+        return $insertID;
+    }
+
+    public function Insert_Order_Goods($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_order_goods');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+
+        return $insertID;
+    }
+
+    public function Insert_Order_Goods2($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_order_goods');
+        $affected = $builder->insertBatch($param);
+        $this->db->transComplete();
+
+        return $affected;
+    }
+
+    public function Insert_Cart_Many($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_cart');
+        $affected = $builder->insertBatch($param);
+        $this->db->transComplete();
+
+        return $affected;
+    }
+
+    public function Insert_Cart($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_cart');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+
+        return $insertID;
+    }
+
+
+
+
+    public function Update_Product_Match($fk_mmsn,$param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_match');
+        $builder->where('sn',$fk_mmsn);
+        $builder->update($param);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Update_Product_File($hncode,$typ,$param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_file');
+        $builder->where('fk_fncode',$hncode);
+        $builder->where('typ',$typ);
+        $builder->update($param);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+    public function Update_Product_File2($hncode,$typ,$sn,$param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_product_file');
+        $builder->where('fk_fncode',$hncode);
+        $builder->where('typ',$typ);
+        $builder->where('sn<>',$sn);
+        $builder->update($param);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+
+
+
+   public function Update_medicine_decoc($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_decoc');
+        $builder->set('hd_wish',$param['hdWish']);
+        $builder->where('seq',$param['seq']);
+        $builder->where('hd_use','Y');
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+
+   public function Product_Match_Load($hncode,$fields=['ALL']){
+       $separated_val = fn_Make_Fields($fields);
+       $sql = "SELECT {$separated_val} from herb_product_match a,v_product_info_all b WHERE a.fk_hncode=b.hn_code and a.fk_hncode=:ID:;";
+       $bindparam = [
+           'ID' => $hncode
+       ];
+       $Query = $this->db->query($sql,$bindparam);
+       return $Query->getResultArray();
+   }
+    public function Load_Product_Match_info($micode,$hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from herb_product_match WHERE fk_hncode=:ID: AND fk_micode=:MICODE:;";
+        $bindparam = [
+            'ID' => $hncode,
+            'MICODE' => $micode
+        ];
+        $Query = $this->db->query($sql,$bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Load_Product_Match_info2($cfcode,$hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from herb_product_match WHERE fk_hncode=:ID: AND fk_cfcode=:CFCODE:;";
+        $bindparam = [
+            'ID' => $hncode,
+            'CFCODE' => $cfcode
+        ];
+        $Query = $this->db->query($sql,$bindparam);
+        return $Query->getResultArray();
+    }
+
+
+    public function Decoc_Match_Load($micode,$mmcode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from herb_product_match where fk_micode=:MICODE: and mm_medicine=:MMCODE:";
+        $bindparam = [
+            'MICODE' => $micode,
+            'MMCODE' => $mmcode
+        ];
+        $Query = $this->db->query($sql,$bindparam);
+        return $Query->getResultArray();
+    }
+
+
+    public function Load_ItemDetail($hncode,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from v_product_info_all a WHERE a.hn_code=:HNCODE:;";
+        $bindparam = [
+            'HNCODE' => $hncode
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+    }
+
+    public function Load_Product_Like($hnname,$fields=['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $sql = "SELECT {$separated_val} from v_product_info_all a WHERE a.hn_name LIKE :HNNAME: and hn_isok=100";
+        $bindparam = [
+            'HNNAME' => "%{$hnname}%"
+        ];
+        $Query = $this->db->query($sql, $bindparam);
+        return $Query->getResultArray();
+
+    }
+
+}

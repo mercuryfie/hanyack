@@ -1,0 +1,416 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Libraries\Form;
+use App\Libraries\Utils;
+use CodeIgniter\API\ResponseTrait;
+
+class BoardController extends BaseController
+{
+    use ResponseTrait;
+
+    public function __construct()
+    {
+        $Auth = [AUTH_MASTER,AUTH_PHARM,AUTH_DECOC];
+        $this->Check_Auth($Auth);
+    }
+
+    public function bList(){
+        $sessinarr = $this->GetSessionData();
+
+        $bid = ($this->request->getGet('bid') == '') ? '1' : $this->request->getGet('bid');
+        $bcode = ($this->request->getGet('bcode') == '') ? '1' : $this->request->getGet('bcode');
+        $fk_bcode = ($this->request->getGet('fk_bcode') == '') ? '1' : $this->request->getGet('fk_bcode');
+        $page = ($this->request->getGet('page') == '') ? '1' : $this->request->getGet('page');
+        $limit = 15;
+
+        $metaarr = [
+            'h_title' => '게시판',
+            'h_type' => 1
+        ];
+
+        if($sessinarr['islogin']==true) {
+            $mi_type = $sessinarr['user']['mi_type'];
+            $uid = $sessinarr['user']['uid'];
+        }  else {
+            $mi_type = '';
+            $url = '/';
+            fn_Alert('로그인 세션이 만료되었습니다. ',$url);
+        }
+
+        $board_m = model('Board_m');
+        $dataarr = [];
+        $env_data = $board_m->Load_Board_Env($bid);
+
+        if ($bid == 1) {
+            $view_name = 'web/common/board_Notice_View';
+        } else if ($bid == 2) {
+            $view_name = 'web/common/board_Faq_View';
+        } else if ($bid == 3) {
+            $view_name = 'web/common/board_Inquiry_View';
+        } else {
+            fn_Console_log('bid check.');
+        }
+
+        if(fn_ArrayCnt($env_data)<=0) {
+            fn_Alert('존재하지 않는 게시판입니다.');
+        } else{
+            $body_data = [
+                'mitype' => $mi_type,
+                'uid' => $uid,
+                'page' => $page,
+                'limit' => $limit,
+                'env' => $env_data[0],
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'body' => $body_data
+            ];
+            return view($view_name, $main_data);
+        }
+    }
+
+    public function boardForm()
+    {
+        $sessinarr = $this->GetSessionData();
+
+        $bid = ($this->request->getGet('bid') == '') ? '1' : $this->request->getGet('bid');
+        $bcode = ($this->request->getGet('bcode') == '') ? '1' : $this->request->getGet('bcode');
+
+        $metaarr = [
+            'h_title' => '게시판',
+            'h_type' => 1
+        ];
+        if ($sessinarr['islogin'] == true) {
+            $mi_type = $sessinarr['user']['mi_type'];
+            $uid = $sessinarr['user']['uid'];
+        } else {
+            $mi_type = '';
+            $url = '/';
+            fn_Alert('로그인 세션이 만료되었습니다. ', $url);
+        }
+
+
+        $board_m = model('Board_m');
+
+        $dataarr = [];
+        $env_data = $board_m->Load_Board_Env($bid);
+        if(fn_ArrayCnt($env_data)<=0) {
+            fn_Alert('존재하지 않는 게시판입니다.');
+        } else{
+            $body_data = [
+                'mitype' => $mi_type,
+                'uid' => $uid,
+                'env' => $env_data[0],
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'body' => $body_data
+            ];
+            return view('web/common/board_Form_View', $main_data);
+        }
+    }
+
+    public function editForm()
+    {
+        $sessinarr = $this->GetSessionData();
+
+        $bid = ($this->request->getGet('bid') == '') ? '1' : $this->request->getGet('bid');
+        $bcode = ($this->request->getGet('bcode') == '') ? '1' : $this->request->getGet('bcode');
+        $fk_bcode = ($this->request->getGet('fk_bcode') == '') ? '1' : $this->request->getGet('fk_bcode');
+
+        $metaarr = [
+            'h_title' => '게시판',
+            'h_type' => 1
+        ];
+        if ($sessinarr['islogin'] == true) {
+            $mi_type = $sessinarr['user']['mi_type'];
+            $uid = $sessinarr['user']['uid'];
+        } else {
+            $mi_type = '';
+            $url = '/';
+            fn_Alert('로그인 세션이 만료되었습니다. ', $url);
+        }
+
+        $dataarr = [];
+        $board_m = model('Board_m');
+        $env_data = $board_m->Load_Board_Env($bid);
+        $contents_data = $board_m->Load_Board_Contents($bcode);
+        if(fn_ArrayCnt($contents_data) <= 0) {
+            fn_Alert('게시글이 없습니다.');
+        } else {
+            foreach ($contents_data as $d) {
+
+                $temparr = [];
+                $temparr['bContent'] = $contents_data ?: [];
+
+                $bcode = $d['bcode'];
+                //파일정보 읽어오기
+                $att = $board_m->Load_Board_Attachment($bcode);
+                if (fn_ArrayCnt($att) <= 0)  {
+                    $result = 'type101';
+                    $message = '첨부 이미지가 없습니다. ';
+
+                } else {
+
+                    $temparr = [];
+                    $temparr['att'] = $att ?: [];
+
+                    $fileInfo = (is_array($att) && count($att) > 0) ? $att[0] : null;
+
+                    if ($fileInfo) {
+                        $filePath = $fileInfo['path'] . '/' . $fileInfo['fname'];
+                    } else {
+                        $filePath = '';
+                    }
+
+                    $temparr['filePath'] = $filePath;
+
+                }
+                //path / fname 파일경로 만들고
+                $reply = $board_m->Load_Board_RContent($bcode);
+                if (fn_ArrayCnt($reply) <= 0)  {
+                    $result = 'type102';
+                    $message = '답글이 없습니다. ';
+                } else {
+
+                    $temparr = [];
+                    $temparr['reply'] = $reply ?: [];
+                }
+
+                array_push($dataarr, $temparr);
+            }
+        }
+
+        if(fn_ArrayCnt($env_data)<=0) {
+            fn_Alert('존재하지 않는 게시판입니다.');
+        } else{
+            $body_data = [
+                'mitype' => $mi_type,
+                'uid' => $uid,
+                'env' => $env_data[0],
+                'bContent' => $contents_data[0],
+                'reply' => $reply,
+                'att' => $att
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'body' => $body_data
+            ];
+            return view('web/common/board_editForm_View', $main_data);
+        }
+    }
+
+    public function replyForm()
+    {
+        $sessinarr = $this->GetSessionData();
+
+        $bid = ($this->request->getGet('bid') == '') ? '1' : $this->request->getGet('bid');
+        $bcode = ($this->request->getGet('bcode') == '') ? '1' : $this->request->getGet('bcode');
+        $fk_bcode = ($this->request->getGet('fk_bcode') == '') ? '1' : $this->request->getGet('fk_bcode');
+
+        $metaarr = [
+            'h_title' => '게시판',
+            'h_type' => 1
+        ];
+        if ($sessinarr['islogin'] == true) {
+            $mi_type = $sessinarr['user']['mi_type'];
+            $uid = $sessinarr['user']['uid'];
+        } else {
+            $mi_type = '';
+            $url = '/';
+            fn_Alert('로그인 세션이 만료되었습니다. ', $url);
+        }
+
+        $dataarr = [];
+        $board_m = model('Board_m');
+        $env_data = $board_m->Load_Board_Env($bid);
+        $contents_data = $board_m->Load_Board_Contents($bcode);
+        if(fn_ArrayCnt($contents_data) <= 0) {
+            fn_Alert('게시글이 없습니다.');
+        } else {
+            foreach ($contents_data as $d) {
+
+                $temparr = [];
+                $temparr['bContent'] = $contents_data ?: [];
+
+                $bcode = $d['bcode'];
+                //파일정보 읽어오기
+                $att = $board_m->Load_Board_Attachment($bcode);
+                if (fn_ArrayCnt($att) <= 0)  {
+                    $result = 'type101';
+                    $message = '첨부 이미지가 없습니다. ';
+
+                } else {
+
+                    $temparr = [];
+                    $temparr['att'] = $att ?: [];
+
+                    $fileInfo = (is_array($att) && count($att) > 0) ? $att[0] : null;
+
+                    if ($fileInfo) {
+                        $filePath = $fileInfo['path'] . '/' . $fileInfo['fname'];
+                    } else {
+                        $filePath = '';
+                    }
+
+                    $temparr['filePath'] = $filePath;
+                }
+                //path / fname 파일경로 만들고
+                $reply = $board_m->Load_Board_RContent($bcode);
+                if (fn_ArrayCnt($reply) <= 0)  {
+                    $result = 'type102';
+                    $message = '답글이 없습니다. ';
+                } else {
+
+                    $temparr = [];
+                    $temparr['reply'] = $reply ?: [];
+                }
+
+                array_push($dataarr, $temparr);
+            }
+        }
+
+        if(fn_ArrayCnt($env_data)<=0) {
+            fn_Alert('존재하지 않는 게시판입니다.');
+        } else{
+            $body_data = [
+                'mitype' => $mi_type,
+                'uid' => $uid,
+                'env' => $env_data[0],
+                'bContent' => $contents_data[0],
+                'reply' => $reply,
+                'att' => $att
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'body' => $body_data
+            ];
+            return view('web/common/board_replyForm_View', $main_data);
+        }
+    }
+
+
+    public function InqForm()
+    {
+        $sessinarr = $this->GetSessionData();
+
+        $bid = ($this->request->getGet('bid') == '') ? '1' : $this->request->getGet('bid');
+        $bcode = ($this->request->getGet('bcode') == '') ? '1' : $this->request->getGet('bcode');
+        $fk_bcode = ($this->request->getGet('fk_bcode') == '') ? '1' : $this->request->getGet('fk_bcode');
+
+        $metaarr = [
+            'h_title' => '게시판',
+            'h_type' => 1
+        ];
+        if ($sessinarr['islogin'] == true) {
+            $mi_type = $sessinarr['user']['mi_type'];
+            $uid = $sessinarr['user']['uid'];
+        } else {
+            $mi_type = '';
+            $url = '/';
+            fn_Alert('로그인 세션이 만료되었습니다. ', $url);
+        }
+
+        $board_m = model('Board_m');
+        $env_data = $board_m->Load_Board_Env($bid);
+        $contents_data = $board_m->Load_Board($bid);
+        $reply = $board_m->Load_Board_RContent($fk_bcode);
+
+        if(fn_ArrayCnt($env_data)<=0) {
+            fn_Alert('존재하지 않는 게시판입니다.');
+        } else{
+            $array = [
+                'env' => $env_data[0],
+                'mitype' => $mi_type,
+                'uid' => $uid,
+                'content' => $contents_data[0],
+                'reply' => $reply[0]
+            ];
+
+            $form = New Form;
+            $main_data = [
+                'meta' => $form->fnMake_Meta($metaarr),
+                'header' => $form->fnMake_Header($sessinarr),
+                'body' => $array
+            ];
+            return view('web/common/board_InqForm_View',$main_data);
+        }
+    }
+
+    public function boardForm_Do(){
+        foreach ($this->request->getPost() as $key => $value) {
+            $post[$key] = $value;
+        }
+
+        if(empty($post)){
+            $result = 'type101';
+            $code = '';
+            $message = '필수 입력값을 확인하여주세요.';
+        }else{
+            $NewCode = $this->Make_Code(1);
+
+            $param = [
+                'uid' => $post['uid'],
+                'bid' => $post['bid'],
+                'bcode' => $NewCode,
+                'bTitle' => $post['bTitle'],
+                'bContent' => $post['bContent'],
+                'isDel' => 0,
+                'regidate' => NOW(),
+                'update_date' => NOW()
+            ];
+
+            $board_m = model('Board_m');
+            $Cnt = $board_m->Insert_Board($param);
+            if($Cnt > 0){
+                $result = 'ok';
+                $code = $NewCode;
+                $message  = 'success';
+            }
+            else{
+                $result = 'type102';
+                $code = '';
+                $message  = '';
+            }
+        }
+
+        $return = [
+            'result' => $result,
+            'code' => $code,
+            'msg' => $message
+        ];
+        return $this->respond($return);
+    }
+
+
+    public function inquiry_Form(){
+        $sessinarr = $this->GetSessionData();
+
+        $metaarr = [
+            'h_title' => '디제이메디',
+            'h_type' => 1
+        ];
+
+        $form = New Form;
+        $main_data = [
+            'meta' => $form->fnMake_Meta($metaarr),
+            'header' => $form->fnMake_Header($sessinarr)
+        ];
+
+        return view('web/common/board_Inquiry_Form_View',$main_data);
+    }
+}

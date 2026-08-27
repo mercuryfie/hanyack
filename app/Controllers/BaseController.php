@@ -1,0 +1,733 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Libraries\Auth;
+use App\Libraries\Utils;
+use CodeIgniter\Controller;
+use CodeIgniter\HTTP\CLIRequest;
+use CodeIgniter\HTTP\IncomingRequest;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Config\Services;
+use Psr\Log\LoggerInterface;
+
+
+/**
+ * Class BaseController
+ *
+ * BaseController provides a convenient place for loading components
+ * and performing functions that are needed by all your controllers.
+ * Extend this class in any new controllers:
+ *     class Home extends BaseController
+ *
+ * For security be sure to declare any new methods as protected or private.
+ */
+abstract class BaseController extends Controller
+{
+    /**
+     * Instance of the main Request object.
+     *
+     * @var CLIRequest|IncomingRequest
+     */
+    protected $request;
+
+    /**
+     * An array of helpers to be loaded automatically upon
+     * class instantiation. These helpers will be available
+     * to all other controllers that extend BaseController.
+     *
+     * @var array
+     */
+    protected $helpers = ['cookie'];
+
+    /**
+     * Constructor.
+     */
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+    {
+        parent::initController($request, $response, $logger);
+        $this->request = service('request');
+    }
+
+
+    public function GetSessionData()
+    {
+        $session = Services::session();
+        $tstr = $session->get('dj_Sstr');
+        if($tstr==''){
+            helper('cookie');
+            $cstr = get_cookie(COOKIE_KEY);
+            if($cstr==''){
+                $data = [
+                    'user' => '',
+                    'islogin' => false
+                ];
+            }else{
+                $auth = New Auth;
+                $info = $auth->Open_Key($cstr);
+                if(fn_ArrayCnt($info)<=0){
+                    $data = [
+                        'user' => '',
+                        'islogin' => false
+                    ];
+                }else{
+                    $user = [
+                        'uid' => $info['uid'],
+                        'userid' => $info['userid'],
+                        'grade' => $info['grade'],
+                        'name' => $info['name'],
+                        'mi_code' => $info['mi_code'],
+                        'mi_name' => $info['mi_name'],
+                        'mi_type' => $info['mi_type'],
+                        'mi_cf' => $info['mi_cfcode'],
+                        'token' => $info['token']
+                    ];
+
+                    $data = [
+                        'user' => $user,
+                        'islogin' => true
+                    ];
+                    $session->set(SESSION_KEY,$cstr);
+                }
+            }
+        }else{
+            $auth = New Auth;
+            $info = $auth->Open_Key($tstr);
+            if(fn_ArrayCnt($info)<=0){
+                $data = [
+                    'user' => '',
+                    'islogin' => false
+                ];
+            }else{
+                $user = [
+                    'uid' => $info['uid'],
+                    'userid' => $info['userid'],
+                    'grade' => $info['grade'],
+                    'name' => $info['name'],
+                    'mi_code' => $info['mi_code'],
+                    'mi_name' => $info['mi_name'],
+                    'mi_type' => $info['mi_type'],
+                    'mi_cf' => $info['mi_cfcode'],
+                    'token' => $info['token']
+                ];
+
+                $data = [
+                    'user' => $user,
+                    'islogin' => true
+                ];
+            }
+        }
+        return $data;
+    }
+
+    public function Load_CfCode($mi_code){
+        $member_m = model('Member_m');
+        $minfo = $member_m->Load_Company_micode($mi_code);
+        return (count($minfo) > 0) ? $minfo[0]['mi_cfcode'] : '';
+    }
+
+    public function Make_Params($params){
+        foreach ($params as $key => $value) {
+            if ($key === 'sn') continue;
+            $datas[$key] = $value;
+        }
+        return $datas;
+    }
+
+    public function Check_Stock_Status($opStock,$tStock,$chkStock){
+        $bool = true;
+        if($opStock > 0){
+            if($opStock > $tStock){
+                $bool = false;
+            }
+        }else{
+            if($tStock < ($chkStock * STOCK_LEVEL)){
+                $bool = false;
+            }
+        }
+        return $bool;
+    }
+
+    public function CancelorReturn($param){
+
+        $cfcode = $param['cfcode'];
+        $wicode = $param['wicodde'];
+        $process = $param['process'];
+        $nowCnt = $param['nowCnt'];
+        $msg = $param['msg'];
+        $sn = $param['sn'];
+
+        $order_m = model('Order_m');
+        $order = $order_m->Load_order_goods($sn);
+        if(fn_ArrayCnt($order)<=0){
+            $bool = false;
+        }else{
+            $d = $order[0];
+
+            $rCnt = 0;
+            $rprice = 0;
+            $rtype = 0;
+            $info = [];
+            $maxCnt = $d['gd_cnt'];
+            if($process==5){
+                $rCnt = $d['gd_cnt'];
+                $rprice = $d['gd_rPrice'];
+                $rtype = 1;
+                $info = ['gd_isdel' => 1];
+            }else if($process==6){
+                if($maxCnt <= $nowCnt){
+                    $rCnt = $d['gd_cnt'];
+                    $rprice = $d['gd_cnt'] * $d['gd_rPrice'];
+                    $rtype = 2;
+                    $info = ['gd_isdel' => 1];
+                }else if($maxCnt > $nowCnt){
+                    $rCnt = $nowCnt;
+                    $rprice = $nowCnt * $d['gd_rPrice'];
+                    $ocnt = ((int)$d['gd_cnt'] - (int)$nowCnt);
+                    $oprice = ((int)$d['gd_cnt'] - (int)$nowCnt) * $d['gd_rPrice'];
+                    $rtype = 3;
+                    $info = [
+                        'gd_price' => $oprice,
+                        'gd_cnt' => $ocnt,
+                        'gd_status' => ORDER_RETURNING
+                    ];
+                }
+            }else if($process==8){
+                if($maxCnt <= $nowCnt){
+                    $rCnt = $d['gd_cnt'];
+                    $rprice = $d['gd_cnt'] * $d['gd_rPrice'];
+                    $rtype = 4;
+                    $info = ['gd_isdel' => 1];
+                }else if($maxCnt > $nowCnt){
+                    $rCnt = $nowCnt;
+                    $rprice = $nowCnt * $d['gd_rPrice'];
+                    $ocnt = ((int)$d['gd_cnt'] - (int)$nowCnt);
+                    $oprice = ((int)$d['gd_cnt'] - (int)$nowCnt) * $d['gd_rPrice'];
+                    $rtype = 5;
+                    $info = [
+                        'gd_price' => $oprice,
+                        'gd_cnt' => $ocnt,
+                        'gd_status' => ORDER_EXCHANGING
+                    ];
+                }
+            }
+
+            $data = [
+                'rtyp' => $rtype,
+                'cfcode' => $cfcode,
+                'wicode' => $wicode,
+                'rsn' => $d['primarysn'],
+                'gd_code' => $d['gd_code'],
+                'fk_odcode' => $d['fk_odcode'],
+                'fk_hncode' => $d['hn_code'],
+                'gd_pType' => $d['gd_pType'],
+                'gd_price' => $rprice,
+                'gd_period' => $d['gd_period'],
+                'gd_cnt' => $rCnt,
+                'gd_rPrice' => $d['gd_rPrice'],
+                'gd_status' => $d['gd_status'],
+                'gd_isdel' => $d['gd_isdel'],
+                'gd_delidate' => $d['gd_delidate'],
+                'gd_delicomplete' => $d['gd_delicomplete'],
+                'od_regdate' => $d['od_regdate'],
+                'rmsg' => $msg
+            ];
+
+            $Cnt = $order_m->Insert_order_return($data);
+            if($Cnt > 0){
+                $Cnt2 = $order_m->Update_Order_Goods($sn,$info);
+                $bool = true;
+            }else{
+                $bool = false;
+            }
+        }
+        return $bool;
+    }
+
+    public function CancelorReturn_subtract($micode,$wicode,$cnt,$typ,$sn){
+        $order_m = model('Order_m');
+        $order = $order_m->Load_order_goods($sn);
+        if(fn_ArrayCnt($order)<=0){
+            $bool = false;
+        }else{
+            $d = $order[0];
+            $param = [
+                'rtyp' => $typ,
+                'micode' => $micode,
+                'wicode' => $wicode,
+                'rsn' => $d['sn'],
+                'gd_code' => $d['gd_code'],
+                'fk_odcode' => $d['fk_odcode'],
+                'fk_hncode' => $d['fk_hncode'],
+                'gd_pType' => $d['gd_pType'],
+                'gd_price' => ($cnt*$d['gd_rPrice']),
+                'gd_period' => $d['gd_period'],
+                'gd_cnt' => $cnt,
+                'gd_rPrice' => $d['gd_rPrice'],
+                'gd_status' => $d['gd_status'],
+                'gd_isdel' => $d['gd_isdel'],
+                'gd_delidate' => $d['gd_delidate'],
+                'gd_delicomplete' => $d['gd_delicomplete'],
+                'od_regdate' => $d['od_regdate']
+            ];
+
+            $new_Cnt = $d['gd_cnt'] - $cnt;
+            $new_price = $new_Cnt *  $d['gd_rPrice'];
+
+            $Cnt = $order_m->Insert_order_return($param);
+            if($Cnt > 0){
+                $param = [
+                    'gd_cnt' => $new_Cnt,
+                    'gd_price' => $new_price
+                ];
+                $Cnt = $order_m->Update_Order_Goods($sn,$param);
+                $bool = true;
+            }else{
+                $bool = false;
+            }
+        }
+        return $bool;
+    }
+
+    public function Total_Stock_Quantity($form,$cfcode){
+        $body = [
+            'apiCode' =>'medicinestatus',
+            'language' => 'kor',
+            'cfcode' => $cfcode
+        ];
+
+        $apiUrl = fn_ENV_URL() . "/djherb/";
+        $retVal = fn_CURL($apiUrl, 'POST',[],$body);
+        if (empty($retVal)) {
+            $return = [];
+        } else {
+            $stockarr = [
+                'tcnt' => $retVal['data']['tcnt'],
+                'acnt' => ($retVal['data']['tcnt'] - $retVal['data']['nctn']),
+                'nctn' => $retVal['data']['nctn'],
+                'percent' => fn_calculatePercentage(($retVal['data']['tcnt'] - $retVal['data']['nctn']), $retVal['data']['tcnt'])
+            ];
+            $return = $stockarr;
+        }
+
+        return $return;
+    }
+
+    public function Product_Option_str($t1value,$t2value){
+        $str = '';
+        if(($t1value=='') && ($t2value=='')){
+            $str = '';
+        }else if(($t1value!='') && ($t2value=='')){
+            $str = $t1value;
+        }else if(($t1value=='') && ($t2value!='')){
+            $str = $t2value;
+        }else{
+            $str = $t1value.'/'.$t2value;
+        }
+        return $str;
+    }
+
+    public function Order_Type_Name($ptype){
+        $name = '';
+        switch ($ptype) {
+            case 1:
+                $name = '일반';
+                break;
+            case 2:
+                $name = '정기';
+                break;
+            case 3:
+                $name = '대량';
+                break;
+        };
+
+        return $name;
+    }
+
+    public function Product_Option_Origin_Str($n_value){
+        $str = '';
+        if(($n_value=='한국') || ($n_value=='국산')){
+            $str = '국산';
+        } else{
+            $str = '수입';
+        }
+    }
+
+    function calculatePricePerGeun($price, $weight_g, $precision = 1, $standard_geun = 600) {
+        if ($weight_g <= 0) return 0;
+
+        $result = ($price / $weight_g) * $standard_geun;
+
+        if ($precision === 1) {
+            return round($result, $precision);
+        }
+        return $result;
+    }
+
+    public function Product_FileInfo($hncode){
+        $fname = [
+            'img' => '',
+            'data' => ''
+        ];
+        $herb_m = model('Herb_m');
+        $fRs = $herb_m->Load_Product_File_Code($hncode);
+        if(fn_ArrayCnt($fRs)>0){
+            foreach ($fRs as $c){
+                if($c['typ']==1){
+                    $fname['img'] = $c['fname'];
+                }else if($c['typ']==2){
+                    $fname['data'] = $c['fname'];
+                }
+            }
+        }
+
+        return $fname;
+    }
+
+    public function LowPrice($mdicode,$chkprice,$ptyp){
+        $herb_m = model('Herb_m');
+        $Cnt = $herb_m->Load_LowPrice($mdicode,$chkprice,$ptyp);
+        return $Cnt;
+    }
+
+    public function LoadAddress($micode){
+
+        $return = [];
+        if($micode==''){
+            $return = [];
+        }else{
+            $address1 = '';
+            $address2 = '';
+
+            $herb_m = model('Herb_m');
+            $Rs = $herb_m->Load_Company_Address($micode);
+            if(fn_ArrayCnt($Rs)<=0){
+                $member_m = model('Member_m');
+                $cRs = $member_m->Load_Company_micode($micode);
+                if(fn_ArrayCnt($cRs)<=0){
+                    $return = [];
+                }else{
+                    $t_arr = explode('|||',$cRs[0]['mi_busiaddr']);
+                    $return = [
+                        'address1' => $t_arr[0],
+                        'address2' => $t_arr[1]
+                    ];
+                }
+            }else{
+                $return = [
+                    'address1' => $Rs[0]['mi_address1'],
+                    'address2' => $Rs[0]['mi_address2']
+                ];
+            }
+        }
+        return $return;
+    }
+
+    public function ReturnStepName($step){
+        $name = '';
+        switch ($step) {
+            case 1:
+                $name = '취소';
+                break;
+            case 2:
+                $name = '전체반품';
+                break;
+            case 3:
+                $name = '부분반품';
+                break;
+            case 4:
+                $name = '전체교환';
+                break;
+            case 5:
+                $name = '부분교환';
+                break;
+            default:
+                $name = '';
+                break;
+        };
+        return $name;
+    }
+
+    public function OrderStepName($step){
+        $name = '';
+        switch ($step) {
+            case 0:
+                $name = '미확인';
+                break;
+            case 1:
+                $name = '제품준비중';
+                break;
+            case 2:
+                $name = '배송준비중';
+                break;
+            case 3:
+                $name = '배송중';
+                break;
+            case 4:
+                $name = '배송완료';
+                break;
+            case 5:
+                $name = '주문취소';
+                break;
+            case 6:
+                $name = '반품진행중';
+                break;
+            case 7:
+                $name = '반품완료';
+                break;
+            case 8:
+                $name = '교환진행중';
+                break;
+            case 9:
+                $name = '교환완료';
+                break;
+        };
+        return $name;
+    }
+
+    public function PackageStepName($step){
+        $name = '';
+        switch ($step) {
+            case 0:
+                $name = '제품준비중';
+                break;
+            case 1:
+                $name = '배송준비중';
+                break;
+            case 2:
+                $name = '배송중';
+                break;
+            case 3:
+                $name = '배송완료';
+                break;
+        };
+        return $name;
+    }
+
+    public function LoadDecoc($mitype){
+        $herb_m = model('Herb_m');
+
+        $r_arr = [];
+        $dRs = $herb_m->Load_Decoc_List($mitype);
+        if(fn_ArrayCnt($dRs)>0) {
+            foreach ($dRs as $d) {
+                $t_arr = [];
+                $t_arr['mi_cfcode'] = $d['mi_cfcode'];
+                $t_arr['mi_code'] = $d['mi_code'];
+                $t_arr['mi_name'] = $d['mi_name'];
+                array_push($r_arr,$t_arr);
+            }
+        }
+        return $r_arr;
+    }
+
+    public function LoadDecocOption($mitype,$selectcf){
+        $d_arr = $this->LoadDecoc($mitype);
+        $optionstr = '';
+        if(fn_ArrayCnt($d_arr)>0){
+            foreach ($d_arr as $c){
+                if($selectcf==$c['mi_cfcode']){
+                    $optionstr .= "<option selected value='{$c['mi_cfcode']}'>{$c['mi_name']}</option>";
+                }else{
+                    $optionstr .= "<option value='{$c['mi_cfcode']}'>{$c['mi_name']}</option>";
+                }
+            }
+        }
+        return $optionstr;
+    }
+
+    public function LoadNation(){
+        $herb_m = model('Herb_m');
+
+        $r_arr = [];
+        $dRs = $herb_m->Load_option_nation();
+        if(fn_ArrayCnt($dRs)>0) {
+            foreach ($dRs as $d) {
+                $t_arr = [];
+                $t_arr['n_key'] = $d['n_key'];
+                $t_arr['n_value'] = $d['n_value'];
+                array_push($r_arr,$t_arr);
+            }
+        }
+        return $r_arr;
+    }
+
+    public function LoadNationOption($select){
+        $d_arr = $this->LoadNation();
+        $optionstr = '';
+        if(fn_ArrayCnt($d_arr)>0){
+            foreach ($d_arr as $c){
+                if($select==$c['n_key']){
+                    $optionstr .= "<option selected value='{$c['n_key']}'>{$c['n_value']}</option>";
+                }else{
+                    $optionstr .= "<option value='{$c['n_key']}'>{$c['n_value']}</option>";
+                }
+            }
+        }
+        return $optionstr;
+    }
+
+    public function getUnitString(int $packageType, int $packageCnt){
+        $str = '';
+        if($packageType==1){
+            $str = '개';
+        }else{
+            $str = 'Box(' . $packageCnt .'개)';
+        }
+        return $str;
+    }
+
+    public function getUnitInfo(int $packageType, int $packageCnt,int $unitWeight, int $buyCnt, int $unitPrice): array
+    {
+        $info = [
+            'totalPrice' => 0,
+            'packageStr' => '',
+            'geunPrice' => 0,
+            'defaultCnt' => 0
+        ];
+        if ($buyCnt <= 0 || $unitPrice <= 0 || $unitWeight <= 0) {
+            return $info;
+        }
+        if($packageType==1){
+            $info['packageStr'] = '개';
+            $info['totalPrice'] = $buyCnt * $unitPrice;
+            $info['defaultCnt'] = $buyCnt * 1;
+        }else{
+            $info['packageStr'] = 'Box(' . $packageCnt .'개)';
+            $info['totalPrice'] = ($packageCnt * $buyCnt) * $unitPrice;
+            $info['defaultCnt'] = ($packageCnt*$buyCnt);
+        }
+        $oneGeun = 600;
+        $info['geunPrice'] =round( ($unitPrice / $unitWeight) * $oneGeun);
+        return $info;
+    }
+
+
+
+    public function LoadPrice($hncode){
+        $herb_m = model('Herb_m');
+
+        $pricearr = [
+            [
+                'hn_method' => '',
+                'hn_gPrice' => '',
+                'hn_pPrice' => '',
+                'hn_stock' => '',
+                'hn_period' => '',
+                'hn_sellmethod' => '',
+                'hn_weight' => '',
+            ],
+            [
+                'hn_method' => '',
+                'hn_gPrice' => '',
+                'hn_pPrice' => '',
+                'hn_stock' => '',
+                'hn_period' => '',
+                'hn_sellmethod' => '',
+                'hn_weight' => '',
+            ]
+        ];
+
+
+        $pRs = $herb_m->Load_Product_Price($hncode);
+        if(fn_ArrayCnt($pRs)>0){
+            foreach ($pRs as $p){
+                if($p['hn_method']==1){
+                    $posion = 0;
+                }else if($p['hn_method']==2){
+                    $posion = 1;
+                }else if($p['hn_method']==3){
+                    $posion = 2;
+                }
+                $pricearr[$posion]['hn_method'] = $p['hn_method'];
+                $pricearr[$posion]['hn_gPrice'] = $p['hn_gPrice'];
+                $pricearr[$posion]['hn_pPrice'] = $p['hn_pPrice'];
+                $pricearr[$posion]['hn_stock'] = $p['hn_stock'];
+                $pricearr[$posion]['hn_period'] = $p['hn_period'];
+            }
+        }
+
+        return $pricearr;
+
+    }
+
+    public function Log_Reg($micode,$typ,$Log){
+        $ip = $this->request->getIPAddress();
+        $param = [
+            'micode' => $micode,
+            'typ' => $typ,
+            'log' => $Log,
+            'ip' => $ip
+        ];
+        $log_m = model('Log_m');
+        $Cnt = $log_m->Insert_Log($param);
+    }
+
+    public function Check_Auth($AuthList){
+        $sessinarr = $this->GetSessionData();
+        if(!$sessinarr['islogin']){
+            fn_Href('/Member/Login');
+        } else {
+            $auth = $sessinarr['user']['mi_type'];
+
+            // $auth가 $AuthList 배열 안에 있는지 검사
+            if(!in_array($auth, $AuthList)){
+                fn_Alert('접근 권한이 없는 기능입니다. 다시 시도하여주세요', '/');
+            }
+        }
+    }
+
+    public function Check_Auth_API($AuthList){
+        $bool = true;
+        $sessinarr = $this->GetSessionData();
+        if(!$sessinarr['islogin']){
+            $bool = false;
+        } else {
+            $auth = $sessinarr['user']['mi_type'];
+            if(!in_array($auth, $AuthList)){
+                $bool = false;
+            }
+        }
+        return $bool;
+    }
+
+    public function Make_Code($type){
+        $code = '';
+        $timeNow = date("Ymd");
+        if($type==1){
+            $rnd = mt_rand(10000, 99999);
+            $code = 'PA'. $timeNow.$rnd;
+        }else if($type==2){
+            $rnd = mt_rand(100000, 999999);
+            $code = 'DC'. $timeNow.$rnd;
+        }else if($type==3){
+            $rnd = mt_rand(100000, 999999);
+            $code = 'OD'. $timeNow.$rnd;
+        }else if($type==4){
+            $rnd = mt_rand(100000, 999999);
+            $code = 'OP'. $timeNow.$rnd;
+        }else if($type==5){
+            $rnd = mt_rand(100000, 999999);
+            $code = 'DA'. $timeNow.$rnd;
+        }else if($type==6){
+            $rnd = mt_rand(100000, 999999);
+            $code = 'AP'. $timeNow.$rnd;
+        }else if($type==7){
+            $rnd = mt_rand(100000, 999999);
+            $code = 'HB'. $timeNow.$rnd;
+        }else if($type==8){
+            $rnd = mt_rand(100000, 999999);
+            $code = 'PRD'. $timeNow.$rnd;
+        }else if($type==9){
+            $rnd = mt_rand(10000, 99999);
+            $code = 'TDM'. $timeNow.$rnd;
+        }else if($type==10){
+            $rnd = mt_rand(10000, 99999);
+            $code = 'TDH'. $timeNow.$rnd;
+        }
+
+        return $code;
+    }
+
+}

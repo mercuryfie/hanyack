@@ -1,0 +1,39 @@
+const APIURL = '/Api';
+const DECOCURL = '/Mydecoc';
+const PHARMURL = '/Mypharm';
+const BOARDURL = '/Board';
+const ORDERURL = '/Order';
+
+const ORDER_UNCONFIRM =1;
+const ORDER_PROCESSING = 2;
+const ORDER_DELIVERY_READY = 3;
+const ORDER_DELIVERING = 4;
+const ORDER_DELIVERED = 5;
+const ORDER_CANCEL = 6;
+const ORDER_RETURNING = 7;
+const ORDER_RETURNED = 8;
+const ORDER_EXCHANGING = 9;
+const ORDER_EXCHANGED = 10;
+
+
+const ORDER_TYPE_1 = '일반구매';
+const ORDER_TYPE_2 = '정기구독';
+const ORDER_TYPE_3 = '대량구매';
+
+const PACKAGE_READY = 1;
+const PACKAGE_SHIP_READY = 2;
+const PACKAGE_SHIP_START = 3;
+const PACKAGE_SHIP_END = 4;
+
+
+const PRODUCT_IMG_URL = '/assets/product/image';
+
+const RETURN_TYPE_1 = 1; //취소
+const RETURN_TYPE_2 = 2; //전체반품완료
+const RETURN_TYPE_3 = 3; //부분반품완료
+const RETURN_TYPE_4 = 4; //전체교환완료
+const RETURN_TYPE_5 = 5; //부분교환완료
+
+const AUTH_DECOC = 'decoc';
+const AUTH_MASTER = 'master';
+const AUTH_PHARM = 'pharm';
