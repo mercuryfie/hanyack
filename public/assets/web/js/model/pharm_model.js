@@ -45,6 +45,23 @@ const pharm_m = {
             nPage : item.nPage ||0
         };
     },
+
+    /*
+     Use > 약재상 약재로드
+     params > pcnt : 페이지당갯수, skey : 검색어, page
+     return > list : 데이터 , total:갯수, totalRs :전체갯수,nPage:다음페이지
+     */
+    async Load_Pharm_MedicineLog(params) {
+        const res = await commonRequest('/Load_Pharm_MedicineLog', params);
+        if (!res) return { list : [],total : 0,totalRs : 0,nPage :0};
+        const [item = {}] = res.data || [];
+        return {
+            list: item.list || [],
+            total: item.tcnt || 0,
+            totalRs : item.totalRs || 0,
+            nPage : item.nPage ||0
+        };
+    },
     /*
     Use > 주문확인처리
     Params > sn:주문sn, status:현스텝
@@ -325,6 +342,33 @@ const pharm_m = {
             total: item.tcnt || 0,
             totalRs : item.totalRs || 0,
             nPage : item.nPage ||0
+        };
+    },
+    /*
+        Use > 업체별 가격 그룹 로드
+        Prams >
+        return > list : 데이터, tcnt : 갯수
+    */
+    async Load_Pharm_Medicine_GPrice(params){
+        const res = await commonRequest('/Load_Pharm_Medicine_GPrice',params);
+        if (!res) return { list: [], total: 0 };
+        const [item = {}] = res.data || [];
+        return  {
+            list : item.list,
+            total : item.tcnt || 0
+        };
+    },
+    /*
+        Use > 업체별 가격 그룹 등록
+        Prams > gradea,gradeb,gradec,graded,gradee
+        return > effect 적용유무
+    */
+    async Insert_Pharm_Medicine_GPrice(params){
+        const res = await commonRequest('/Insert_Pharm_Medicine_GPrice',params);
+        if (!res) return { ecnt: 0 };
+        const [item = {}] = res.data || [];
+        return  {
+            effect : item.ecnt || 0
         };
     }
 

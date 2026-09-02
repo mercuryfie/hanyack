@@ -549,13 +549,14 @@ input[type="radio"] {
 
 
 .common_list_wrap {
+    margin-top: 20px;
     width: 1180px;
     height: auto;
-    min-height: 620px;
+    min-height: 780px;
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     position:relative;
 
 }
@@ -1503,6 +1504,25 @@ input[type="radio"] {
     display: block;
 }
 
+/* pop_SetPrice_View start  -------------------------------- */
+
+.common_pop_conkol.set_price_con {
+    width:560px;
+    height:440px;
+}
+
+.common_pop_conkol.set_price_con .row {
+    margin-bottom: 10px;
+}
+.common_pop_conkol.set_price_con .cat {
+    width: 100px;
+    margin-right: 20px;
+}
+.common_pop_conkol.set_price_con .unit {
+    color: #5c5c5c;
+    margin-left: 20px;
+}
+/* pop_SetPrice_View end  -------------------------------- */
 /* pop_AddVendor_View start  -------------------------------- */
 
 .common_pop_wrap.add_vendor_wrap {
@@ -4045,15 +4065,6 @@ main,
     width: 1180px;
     display: flex;
     flex-flow: column;
-}
-
-.mypageHeader {
-    margin: 0 auto;
-    width: 1180px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-
 }
 
 .mypageContent {
@@ -7479,6 +7490,20 @@ th, td {
     text-decoration: underline;
     cursor: pointer;
 }
+
+.common_list_wrap.slp_wrap .slp_table_detail th,
+.common_list_wrap.slp_wrap .slp_table_detail td {
+    padding: 5px;
+}
+
+.common_list_wrap.slp_wrap .slp_table_detail th.fixed_w {
+    width:180px;
+}
+
+.common_list_wrap.slp_wrap .slp_table_detail th.fixed_w2 {
+    width:160px;
+
+}
 .common_list_wrap.slp_wrap .slp_table_detail tbody td.row1,
 .common_list_wrap.slp_wrap .slp_table_detail tbody td.row2,
 .common_list_wrap.slp_wrap .slp_table_detail tbody td.row3 {
@@ -7486,7 +7511,21 @@ th, td {
 
 }
 
+.common_list_wrap .common_table.slp_table_detail {
+    margin-bottom: 60px;
 
+}
+
+.common_list_wrap .common_table.slp_table_detail .code_box{
+}
+
+.common_list_wrap .common_table.slp_table_detail .code_box p.data {
+    text-wrap: nowrap;
+}
+
+.common_list_wrap .common_table.slp_table_detail p.t_value {
+    color: #8d8d8d;
+}
 /*shipListPharm_View end ---------------------*/
 /*vendorList_View start ---------------------*/
 
@@ -10614,6 +10653,10 @@ button, i {
 .rightBox {
     width: 1180px;
     /*width: 840px;*/
+}
+
+.rightBox.hbsearch {
+    margin-top: 20px;
 }
 
 .highlight {

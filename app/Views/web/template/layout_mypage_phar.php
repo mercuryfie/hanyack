@@ -31,8 +31,6 @@ referrerpolicy="no-referrer" />
 <main >
 <section class="merregister greenmain" >
     <div class="merwrap">
-        <dic class="mypageHeader">
-        </dic>
         <div class="mypageContent">
             <?= $this->renderSection("content") ?>
             <!--            <div class="merleft">-->

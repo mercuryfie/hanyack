@@ -68,9 +68,10 @@ $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Material_TradeList', 'ApiPharmCo
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Medicine_SearchByMdcode', 'ApiPharmController::Load_Pharm_Medicine_SearchByMdcode');
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Medicine_Product', 'ApiPharmController::Load_Pharm_Medicine_Product');
 $routes->match(['GET', 'POST'], 'Api/Input_Pharm_Medicine_InOut', 'ApiPharmController::Input_Pharm_Medicine_InOut');
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_MedicineLog', 'ApiPharmController::Load_Pharm_MedicineLog');
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Medicine_TradeList', 'ApiPharmController::Load_Pharm_Medicine_TradeList');
-
-
+$routes->match(['GET', 'POST'], 'Api/Load_Pharm_Medicine_GPrice', 'ApiPharmController::Load_Pharm_Medicine_GPrice');
+$routes->match(['GET', 'POST'], 'Api/Insert_Pharm_Medicine_GPrice', 'ApiPharmController::Insert_Pharm_Medicine_GPrice');
 
 
 
@@ -194,6 +195,7 @@ $routes->GET('Mypharm/settings/prdBarcodePreview','HerbPharmController::prdBarco
 $routes->GET('Mypharm/claimList','HerbPharmController::claimList');
 $routes->GET('Mypharm/deliveryInfo','HerbPharmController::deliveryInfo');
 $routes->GET('Mypharm/PrnInfo','HerbPharmController::PrnInfo');
+$routes->GET('Mypharm/setprice','HerbPharmController::SetPrice');
 
 /*  탕전실   */
 $routes->GET('Mydecoc/','HerbDecocController::dashBoard');

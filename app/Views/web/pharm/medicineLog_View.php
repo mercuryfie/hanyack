@@ -2,7 +2,7 @@
 <?= $this->section("content") ?>
 <script src="<?=URL_PHARM_ASSETS?>/medicineLog_Do.js?rnd=<?echo(rand()); ?>"> </script>
 <section class="merright">
-    <?= print_r($body)?>
+<!--    --><?php //= print_r($body)?>
     <div class="common_list_wrap mlogp_wrap">
         <div class="area mb10">
             <p class="main_title ">약재 입출고 로그</p>

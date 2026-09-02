@@ -71,12 +71,12 @@ function Make_Option(){
         'edate' : $('#edate').val(),
         'pCnt' : $('#pageArea').data('pcnt'),
         'searchType' : $('#searchType').val(),
-        'mtcode' : $('#prdcode').html()
+        'prdcode' : $('#prdcode').html()
     };
 }
 
 async function Make_Html(params){
-    const response = await Model.pharm_m.Load_Pharm_Medicine_All(params);
+    const response = await Model.pharm_m.Load_Pharm_MedicineLog(params);
     const list = response.list;
     const listCnt = response.total;
     const nPage = response.nPage;

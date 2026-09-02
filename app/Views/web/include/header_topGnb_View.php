@@ -144,6 +144,10 @@
                                 <a href="javascript:;" class="top_menu down_6" onclick="go_orderList('');"
                                    data-menu="orderlist">주문</a>
                             </li>
+                            <li>
+                                <a href="javascript:;" class="top_menu down_7" onclick="go_setPrice('');"
+                                   data-menu="orderlist">환경설정</a>
+                            </li>
                         <? } else { ?>
                             <li>
                                 <a href="javascript:;" class="top_menu down_4" onclick="go_herbList();"
@@ -187,11 +191,16 @@
                         <div class="sub_menu_box ">
                             <a href="javascript:void(0);" onclick="go_herbList();" class="sub_menu">약재관리</a>
                             <a href="javascript:void(0);" onclick="go_tradeMedicineList();" class="sub_menu">거래내역</a>
+                            <a href="javascript:void(0);" onclick="go_tradeMedicineList();" class="sub_menu">영업사원주문</a>
                         </div>
                         <div class="sub_menu_box ">
                             <a href="javascript:void(0);" onclick="go_orderList();" class="sub_menu">주문내역</a>
-                            <a href="javascript:void(0);" onclick="go_shipList();" class="sub_menu">배송작업</a>
+                            <a href="javascript:void(0);" onclick="go_shipList();" class="sub_menu">배송내역</a>
                             <a href="javascript:void(0);" onclick="go_claimList();" class="sub_menu">취소·반품내역</a>
+                        </div>
+                        <div class="sub_menu_box ">
+                            <a href="javascript:void(0);" onclick="go_setPrice();" class="sub_menu">나의정보</a>
+                            <a href="javascript:void(0);" onclick="go_setPrice();" class="sub_menu">가격설정</a>
                         </div>
 <!--                        <div class="sub_menu_box ">-->
 <!--                        </div>-->

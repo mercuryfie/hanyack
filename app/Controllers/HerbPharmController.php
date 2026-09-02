@@ -1389,6 +1389,55 @@ class HerbPharmController extends BaseController
         return view('web/pharm/prn_Info_View', $main_data);
     }
 
+    public function SetPrice(){
+        $sessinarr = $this->GetSessionData();
+        if(!$sessinarr['islogin']) {
+            return redirect()->to('/Member/Login')->with('msg', '로그인이 필요합니다.');
+        }
+//        $hncode = $this->request->getGet('hn') ?? [];
+//        $hpcode = $this->request->getGet('hp') ?? [];
+//        if(empty($hncode) || empty($hpcode)){
+//            fn_AlertClose('잘못된 접근입니다.');
+//            return;
+//        }
+        $metaarr = [
+            'h_title' => '등급별 가격 설정',
+            'h_type' => 1
+        ];
+
+        $herb_m = model('Herb_m');
+//        $fRs = $herb_m->Load_Product_PrdInfo($hncode,$hpcode);
+//        if(empty($fRs)){
+//            fn_AlertClose('존재하지 않는 생산 정보입니다.');
+//            return;
+//        }
+
+//        $body_data = [
+//            'hpcode' => $fRs[0]['hp_code'],
+//            'mi_name' => $fRs[0]['mi_name'],
+//            'hnname' => $fRs[0]['hn_name'],
+//            'mi_address' => str_replace('|||' , '  ' ,$fRs[0]['mi_busiaddr']),
+//            'mi_tel' => '',
+//            'mi_weigth' => $fRs[0]['w_name'],
+//            'mi_nation' => $fRs[0]['n_value'],
+//            'hn_batch_no' => $fRs[0]['hn_batch_no'],
+//            'hn_expired_date' => $fRs[0]['hn_expired_date']
+//        ];
+        $form = new Form;
+        $main_data = [
+            'meta' => $form->fnMake_Meta($metaarr),
+            'header' => $form->fnMake_Header($sessinarr),
+            'left_menu' => $form->fnMake_Left($sessinarr),
+//            'body' => $body_data
+        ];
+
+        if(!fn_MobileCheck()){
+            return view('web/pharm/SetPrice_View', $main_data);
+        }else{
+            return view('mobile/pharm/SetPrice_View', $main_data);
+        }
+    }
+
     public function orderList()
     {
         $sessinarr = $this->GetSessionData();

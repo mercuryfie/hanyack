@@ -37,7 +37,7 @@
         </div>
     </div> -->
     <div class="merlibox1-1">
-        <p>배송작업</p>
+        <p>배송내역</p>
         <!-- <button>새 창</button> -->
         <div class="odrbox1-1">
             <div class="odrbox1-1-1">

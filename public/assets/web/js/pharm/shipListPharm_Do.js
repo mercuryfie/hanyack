@@ -123,22 +123,42 @@ $(document).ready(function () {
                 if(status >= 3){
                     gdstatus = 'disabled';
                 }
+                let t1 = el.t1_value || '11';
+                let t2 = el.t2_value || '22';
+                let t_value = '';
+
+                if (t1 !== '') {
+                    t_value = t1;
+                }
+                if (t2 !== '') {
+                    t_value += (t_value !== '' ? ' / ' : '') + t2;
+                }
+
                 html += `
                         <tr>
-                            <td class="row row1">${el.pa_code}</td>
-                            <td class="row row2">${el.fk_pcode}</td>
-                            <td class="row row3">${el.fk_hncode}</td>
-                            <td>${el.hn_name}</td>
-                            <td>${el.t1_value}</td>
-                            <td>${el.t2_value}</td>
+                            <td class="row row1">
+                                <div class="code_box flexCol2">
+                                    <p class="data">${el.pa_code}</p>
+                                    <p class="data">${el.fk_pcode}</p>
+                                    <p class="data">${el.fk_hncode}</p>
+                                </div>
+                            </td> 
+                            <td class="row row2">
+                                <div class="h_info_box flexType1">
+                                    <p class="h_name mr10">${el.hn_name}</p>
+                                    <p class="t_value">${t_value}</p> 
+                                    
+                                </div>
+                            </td> 
                             <td>${el.t_cnt}개</td>
-                            <td>${formatWeight(el.t_weight)}</td>
+                            <td>${formatWeight(el.t_weight)}</td> 
                             <td>${el.delidate}</td>
+                              
                         </tr>
                     `;
             });
         } else {
-            html = '<td colspan="10">출하 상품 정보가 없습니다.</td>';
+            html = '<td colspan="9">출하 상품 정보가 없습니다.</td>';
         }
         $('#packagelistinfo').empty();
         $('#packagelistinfo').append(html);
@@ -198,6 +218,7 @@ async function Make_Html(params){
     if(tcnt > 0) {
         $.each(list, function (index, el) {
             let subHhtml = '';
+            let subHhtml2 = '';
             let delcode_html = '';
             let prn_html = '';
 
@@ -231,15 +252,12 @@ async function Make_Html(params){
                     <td class="row row2"><a href="javascript:void(0);" class="btnPackageDetail" data-pcode="${el.pcode}">${el.pcode}</a></td>
                     <td>${el.cfname}</td>
                     <td>${el.t_cnt}개</td>
-                    <td>${formatWeight(el.t_weight)}</td>
-                    ${subHhtml}
-                    <td>${prn_html}</td>
-                    <td>${el.pa_regdate}</td>
+                    <td>${formatWeight(el.t_weight)}</td> 
                 </tr>    
             `;
         });
     }else{
-        html = '<td colspan="10">검색된 정보가 없습니다.</td>';
+        html = '<td colspan="5">검색된 정보가 없습니다.</td>';
     }
 
     $('#packagelist').append(html);

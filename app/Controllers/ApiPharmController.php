@@ -17,6 +17,80 @@ class ApiPharmController extends BaseController
         $this->Check_Auth($Auth);
     }
 
+    public function Insert_Pharm_Medicine_GPrice()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $datas = [
+            'fk_micode' =>$mi_code,
+            'grade_a' => $params['grade_a'] ?? 0,
+            'grade_b' => $params['grade_b'] ?? 0,
+            'grade_c' => $params['grade_c'] ?? 0,
+            'grade_d' => $params['grade_d'] ?? 0,
+            'grade_e' => $params['grade_e'] ?? 0
+        ];
+        $pharm_m = model('Pharm_m');
+        $nowseq = $pharm_m->Insert_Pharm_Medicine_GPrice($datas);
+        $effect = $pharm_m->Delete_Pharm_Medicine_GPrice($mi_code,$nowseq);
+        $i_arr = [
+            'ecnt' => 1
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+    public function Load_Pharm_Medicine_GPrice()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $list = [];
+        $mi_code = $sessinarr['user']['mi_code'];
+        $pharm_m = model('Pharm_m');
+        $gRs = $pharm_m->Load_Pharm_Medicine_GPrice($mi_code);
+//        echo ($gRs);
+//        exit();
+        if(empty($gRs)){
+            $list['a'] = PRICE_GROUP_A;
+            $list['b'] = PRICE_GROUP_B;
+            $list['c'] = PRICE_GROUP_C;
+            $list['d'] = PRICE_GROUP_D;
+            $list['e'] = PRICE_GROUP_E;
+        }else{
+            $list['a'] = $gRs[0]['grade_a'];
+            $list['b'] = $gRs[0]['grade_b'];
+            $list['c'] = $gRs[0]['grade_c'];
+            $list['d'] = $gRs[0]['grade_d'];
+            $list['e'] = $gRs[0]['grade_e'];
+        }
+        $i_arr = [
+            'list' => $list,
+            'tcnt' => count($list)
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
     public function Load_Pharm_Medicine_Product()
     {
         $sessinarr = $this->GetSessionData();
@@ -1213,12 +1287,10 @@ class ApiPharmController extends BaseController
                     'optimal_stock' => $d['optimal_stock'],
                     'total_stock' => $d['total_stock'],
                     'stock_status' => $stock_status,
-                    'm_input' => $d['m_input'],
-                    'm_output' => $d['memo'],
-                    'memo' => $d['memo'],
-                    'reason' => $d['reason'],
-                    'indate' => fn_Short_Date($d['indate']),
-                    'regdate' => fn_Short_Date($d['regdate']),
+                    'hp_code' => $d['hp_code'],
+                    'hn_batch_no' => $d['hn_batch_no'],
+                    'hn_product_date' => fn_Short_Date($d['hn_product_date']),
+                    'hn_expired_date' => fn_Short_Date($d['hn_expired_date']),
                     'hn_package_type' => $d['hn_package_type'],
                     'hn_package_cnt' => $d['hn_package_cnt'],
                     'totalPrice' => $totalPrice,
@@ -1232,6 +1304,70 @@ class ApiPharmController extends BaseController
                     't1_name' => $d['t1_name'],
                     't2_name' => $d['t2_name'],
                     'thumnail' => $d['thumnail']
+                ];
+                $list[] = $t_arr;
+            }
+        }
+        $i_arr = [
+            'list' => $list,
+            'tcnt' => count($list),
+            'nPage' => $page+1,
+            'totalRs' => $totalRs
+        ];
+
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
+
+    public function Load_Pharm_MedicineLog()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $page = $params['page'] ?? 1;
+        $pcnt = $params['pcnt'] ?? 30;
+        $skey = $params['skey'] ?? '';
+        $mtcode = $params['prdcode'];
+        $datas = [
+            'page' => $page,
+            'pcnt' => $pcnt,
+            'skey' => $skey,
+            'micode' =>$mi_code,
+            'prdcode' =>$mtcode
+        ];
+
+        $list = [];
+        $pharm_m = model('Pharm_m');
+        $totalRs =$pharm_m->Cnt_Pharm_Medicine_StockLog($datas);
+        $mRs = $pharm_m->Load_Pharm_Medicine_StockLog($datas);
+        if(!empty($mRs)){
+            foreach ($mRs as $d){
+
+                $t_arr = [
+                    'seq' => $d['seq'],
+                    'fk_hpcode' => $d['fk_hpcode'],
+                    'fk_hncode' => $d['fk_hncode'],
+                    'fk_micode' => $d['fk_micode'],
+                    'total' => $d['total'],
+                    'm_input' => $d['m_input'],
+                    'm_output' => $d['m_output'],
+                    'memo' => $d['memo'],
+                    'reason' => $d['reason'],
+                    'indate' => fn_Short_Date($d['indate']),
+                    'regdate' => fn_Short_Date($d['regdate']),
                 ];
                 $list[] = $t_arr;
             }

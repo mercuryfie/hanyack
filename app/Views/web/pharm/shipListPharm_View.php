@@ -48,11 +48,6 @@
                     <th class="merlirow">업체명</th>
                     <th class="merlirow">총 갯수</th>
                     <th class="merlirow">총 무게</th>
-                    <th class="merlirow">발송타입</th>
-                    <th class="merlirow">송장번호</th>
-                    <th class="merlirow"></th>
-                    <th class="merlirow">출력</th>
-                    <th class="merlirow">등록일</th>
                 </tr>
                 </thead>
                 <tbody id="packagelist" name="packagelist">
@@ -60,33 +55,36 @@
                 </tbody>
             </table>
         </div>
-        <div class="main1-1">
-            <div class="merbox">
-            </div>
-
-            <div class="common_page_box flexType1" id="pageArea" data-page="1" >
-            </div>
-        </div>
-        <div class="shipBox shipBox1-3">
         <div class="area area5">
             <p class="sub_title">배송 상세</p>
         </div>
-        <div class="shipBox shipBox1-2">
 
         <div class="area area6">
 <!--            table2-->
             <table class="common_table slp_table_detail">
                 <thead>
                 <tr>
-                    <th class="merlirow">요청코드</th>
-                    <th class="merlirow">배송코드</th>
-                    <th class="merlirow">제품코드</th>
-                    <th class="merlirow">약재명</th>
-                    <th class="merlirow">구분</th>
-                    <th class="merlirow">가공방법</th>
+                    <th class="merlirow fixed_w">
+                        <div class="flexCol2">
+                            <p class="cat">요청코드</p>
+                            <p class="cat">배송코드</p>
+                            <p class="cat">제품코드</p>
+                        </div>
+                    </th>
+                    <th class="merlirow fixed_w">
+                        <div class="h_name_box flexCol2">
+                            <p class="h_name">약재명</p>
+                            <p class="t_value">구분/가공방법</p>
+                        </div>
+                    </th>
                     <th class="merlirow">갯수</th>
                     <th class="merlirow">포장단위(g)</th>
-                    <th class="merlirow">출하예정일자</th>
+                    <th class="merlirow fixed_w2">출하예정일자</th>
+                    <th class="merlirow">발송타입</th>
+                    <th class="merlirow fixed_w2">송장번호</th>
+                    <th class="merlirow fixed_w2">등록일</th>
+                    <th class="merlirow">출력</th>
+                    <th class="merlirow">초기화</th>
                 </tr>
                 </thead>
 
@@ -95,6 +93,12 @@
 
                 </tbody>
             </table>
+        </div>
+
+        <div class="area area7">
+            <div class="common_page_box flexType1" id="pageArea" data-page="1" >
+            </div>
+
         </div>
     </div>
 </section>

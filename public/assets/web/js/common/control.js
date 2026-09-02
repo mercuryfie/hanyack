@@ -111,6 +111,10 @@ function setTopMenuHighlight() {
         path.indexOf('mypage') > -1
     ) {
         $('.top_gnb_ul .top_menu.down_6').addClass('highlight');
+    } else if (
+        path.indexOf('setprice') > -1
+    ) {
+        $('.top_gnb_ul .top_menu.down_7').addClass('highlight');
     }
 }
 
@@ -788,6 +792,19 @@ function go_tradeMedicineList(){
     }
 }
 
+function go_tradeMedicineList(){
+    let uid = $('#tUid').val();
+    let url = '';
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    }else{
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/tradeMedicineList";
+        $(location).attr("href", url);
+    }
+}
+
 function go_vendorList(){
     let uid = $('#tUid').val();
     let url = '';
@@ -875,6 +892,32 @@ function go_orderList(){
     }else{
         let tUrl = $('#tUrl').val();
         url = tUrl + "/orderList";
+        $(location).attr("href", url);
+    }
+}
+
+function go_setPrice(){
+    let uid = $('#tUid').val();
+    let url = '';
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    }else{
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/setprice";
+        $(location).attr("href", url);
+    }
+}
+
+function go_setPrice(){
+    let uid = $('#tUid').val();
+    let url = '';
+    if(uid==''){
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    }else{
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/setprice";
         $(location).attr("href", url);
     }
 }

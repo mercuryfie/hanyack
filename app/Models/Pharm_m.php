@@ -15,6 +15,44 @@ class Pharm_m extends Model
         $this->db = Database::connect('default');
     }
 
+    public function Insert_Pharm_Medicine_GPrice($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_pharm_medicine_price_group');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }
+        return $insertID;
+    }
+
+    public function Delete_Pharm_Medicine_GPrice($micode,$nowseq){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_pharm_medicine_price_group');
+        $builder->where('fk_micode', $micode);
+        $builder->where('seq !=', $nowseq);
+        $builder->set('is_del', 1);
+        $builder->update();
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+
+        return $affected_rows;
+    }
+
+
+    public function Load_Pharm_Medicine_GPrice($micode, $fields = ['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_pharm_medicine_price_group');
+        $builder->select($separated_val);
+        $builder->where('fk_micode', $micode);
+        $builder->where('is_del', 0);
+        $builder->limit(1);
+        $builder->orderBy('seq','DESC');
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
     public function Load_Pharm_Medicine_ProductByHncode($hncode, $fields = ['ALL']){
         $separated_val = fn_Make_Fields($fields);
         $builder = $this->db->table('v_Pharm_medicine_product');
@@ -94,6 +132,8 @@ class Pharm_m extends Model
         return $builder->countAllResults();
     }
 
+
+
     public function Load_Pharm_TradeMedicine_LogAll($params, $fields = ['ALL']){
         $separated_val = fn_Make_Fields($fields);
         $builder = $this->db->table('herb_pharm_medicine_trade_log a');
@@ -158,16 +198,30 @@ class Pharm_m extends Model
         return $insertID;
     }
 
-    public function Insert_Pharm_Medicine_StockLog($param){
-        $this->db->transStart();
+    public function Load_Pharm_Medicine_StockLog($params,$fields = ['ALL'])
+    {
+        $separated_val = fn_Make_Fields($fields);
+//        $this->db->transStart();
         $builder = $this->db->table('herb_pharm_medicine_stocklog');
-        $builder->insert($param);
-        $insertID = $this->db->insertID();
-        $this->db->transComplete();
-        if ($this->db->transStatus() === false) {
-            return 0;
-        }
-        return $insertID;
+        $builder->select($separated_val);
+//        $builder->where('fk_micode', $micode);
+//        $builder->where('fk_hpcode', $hpcode);
+        $builder->where('fk_hpcode', $params['prdcode']);
+        $builder->where('fk_micode', $params['micode']);
+        $builder->orderBy('seq', 'DESC');
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Cnt_Pharm_Medicine_StockLog($params,$fields = ['ALL']){
+
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_pharm_medicine_stocklog');
+        $builder->select($separated_val);
+        $builder->where('fk_hpcode', $params['prdcode']);
+        $builder->where('fk_micode', $params['micode']);
+//        $builder->where('is_del',0);
+        return $builder->countAllResults();
     }
 
     public function Load_Pharm_Medicine_StockLog_Limit($micode,$hpcode,$fields = ['ALL'])
@@ -181,6 +235,18 @@ class Pharm_m extends Model
         $builder->limit(1);
         $query = $builder->get();
         return $query->getResultArray();
+    }
+
+    public function Insert_Pharm_Medicine_StockLog($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_pharm_medicine_stocklog');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }
+        return $insertID;
     }
 
     public function Load_Pharm_MaterialStockLog_Limit($micode,$mtcode,$fields = ['ALL'])

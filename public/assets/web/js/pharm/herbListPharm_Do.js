@@ -9,6 +9,19 @@ $(document).ready(function() {
         $('#pop_produce_herb').hide();
     });
 
+    $('#popSetPrice #clearPrice').click(function () {
+        INI_SetPrice();
+    });
+    $('#popSetPrice #Xbtn, #popSetPrice #Xbtn2').click(function () {
+        INI_SetPrice();
+        $('#popSetPrice').hide();
+    });
+
+    $('#btnSetPrice').on('click',function(){
+        $('#popSetPrice').show();
+        Load_SetPrice();
+    });
+
     $('.authStatus').each(function() {
         var value = $(this).text().trim();
         if (value === "1") {
@@ -30,6 +43,28 @@ $(document).ready(function() {
         }
     });
 
+    $('#btnSavePrice').on('click',function(){
+
+        // INI_SetPrice();
+
+        let class_a = $('#class_a').val();
+        let class_b = $('#class_b').val();
+        let class_c = $('#class_c').val();
+        let class_d = $('#class_d').val();
+        let class_e = $('#class_e').val();
+        let datas = {
+            grade_a:class_a,
+            grade_b:class_b,
+            grade_c:class_c,
+            grade_d:class_d,
+            grade_e:class_e,
+        }
+        console.log(datas);
+
+
+        Insert_NewPrice(datas);
+
+    });
     $('#btnMedicinSearch').on('click',function(){
         $('#pageArea').data('page',1);
         INI_Form();
@@ -78,6 +113,14 @@ $(document).ready(function() {
     Make_Html(Make_Option());
 
 });
+
+function INI_SetPrice(){
+    $('#class_a').val('');
+    $('#class_b').val('');
+    $('#class_c').val('');
+    $('#class_d').val('');
+    $('#class_e').val('');
+}
 
 function INI_Form(){
     $('#herbList').empty();
@@ -144,6 +187,39 @@ async function Re_APP(hncode,sn){
         alert('오류가 발생하였습니다. 다시 시도하여주세요.\n[ERROR : ' + error + '}');
         stop_spinner();
     }
+}
+
+async function Load_SetPrice(){
+    const response = await Model.pharm_m.Load_Pharm_Medicine_GPrice( );
+    let list = response.list;
+    let total = response.total;
+    if(total > 0) {
+        $('#class_a').val(list.a);
+        $('#class_b').val(list.b);
+        $('#class_c').val(list.c);
+        $('#class_d').val(list.d);
+        $('#class_e').val(list.e);
+
+    } else {
+        INI_SetPrice();
+    }
+
+
+}
+
+async function Insert_NewPrice(params){
+    const response = await Model.pharm_m.Insert_Pharm_Medicine_GPrice(params);
+    console.log(response);
+    let eff = response.effect;
+    console.log(eff);
+    if (eff > 0) {
+        Make_Toast(eff + '건 수정 완료하였습니다');
+        $('#popSetPrice').hide();
+    } else {
+        Make_Toast('수정 실패 혹은 변경 사항이 없습니다');
+
+    }
+
 }
 
 async function Make_Html(params){
