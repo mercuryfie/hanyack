@@ -6,6 +6,15 @@ $(document).ready(function(){
         Make_Html(Make_Option());
     });
 
+    $(document).on('click','button[name="open_statement"]',function(){
+        // $('#pageArea').data('page',$(this).data('page'));
+        // Ini_Form();
+        // Make_Html(Make_Option());
+        printWindow('org_area');
+        console.log('dawn12');
+
+    });
+
     $("#sdate , #edate").on("click", function () {
         if (this.showPicker) {
             this.blur();
@@ -126,7 +135,7 @@ async function Make_Html(params){
                     <td>${number_format(el.price || 0)}원</td>
                     <td>${el.reg_date}</td> 
                     <td class="row receipt">
-                        <button type="button" class="btnType1 " name="" ><i class="fa-solid fa-receipt"></i></button>
+                        <button type="button" class="btnType1 " name="open_statement"  ><i class="fa-solid fa-receipt"></i></button>
                     </td>
                 </tr>
            `;

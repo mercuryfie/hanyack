@@ -76,5 +76,4 @@
 
 <?= $this->include("/web/include/pop_SetPrice_View") ?>
 <?= $this->include("/web/include/pop_ProduceHerbLog_View") ?>
-<?= $this->include("/web/include/pop_ProduceHerb_View") ?>
 <?= $this->endSection() ?>

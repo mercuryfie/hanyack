@@ -155,10 +155,10 @@ define("RETURN_TYPE_4","4");
 define("RETURN_TYPE_5","5");
 
 
-define("PRICE_GROUP_A","10");
-define("PRICE_GROUP_B","5");
+define("PRICE_GROUP_A","-10");
+define("PRICE_GROUP_B","-5");
 define("PRICE_GROUP_C","0");
-define("PRICE_GROUP_D","-5");
-define("PRICE_GROUP_E","-10");
+define("PRICE_GROUP_D","5");
+define("PRICE_GROUP_E","10");
 
 

@@ -116,6 +116,10 @@ $(document).ready(function () {
         const tcnt = response.total;
         const list = response.list;
         let html = '';
+        let c_row = $(this).data('pcode');
+        $(`#ship_list_tbl tr`).removeClass('active');
+        $(`#tr_`+c_row).addClass('active');
+        console.log(c_row);
         if(tcnt > 0){
             $.each(list, function (index, el) {
                 let gdstatus = '';
@@ -136,11 +140,12 @@ $(document).ready(function () {
 
                 html += `
                         <tr>
+                            <td class="row"> 
+                                <input type="checkbox" name="" id="" class="input_check">
+                            </td>
                             <td class="row row1">
                                 <div class="code_box flexCol2">
-                                    <p class="data">${el.pa_code}</p>
-                                    <p class="data">${el.fk_pcode}</p>
-                                    <p class="data">${el.fk_hncode}</p>
+                                    <p class="data">${el.pa_code}</p> 
                                 </div>
                             </td> 
                             <td class="row row2">
@@ -153,12 +158,17 @@ $(document).ready(function () {
                             <td>${el.t_cnt}개</td>
                             <td>${formatWeight(el.t_weight)}</td> 
                             <td>${el.delidate}</td>
+                            <td> 
+                                <button type="button" class="btnType32" onclick="">
+                            초기화
+                                </button>
+                            </td>
                               
                         </tr>
                     `;
             });
         } else {
-            html = '<td colspan="9">출하 상품 정보가 없습니다.</td>';
+            html = '<td colspan="5">출하 상품 정보가 없습니다.</td>';
         }
         $('#packagelistinfo').empty();
         $('#packagelistinfo').append(html);
@@ -196,7 +206,7 @@ $(document).ready(function () {
                 $row.find('td[name="tdDeliType"]').html(Make_delcode_str(deliType));
                 $row.find('td[name="tdDeliCode"]').text(deliCode);
                 $row.find('td[name="tdDeliBtn"]').html('');
-                Make_Toast('배송정보 등록이 완료 되었습니다.');
+                Make_Toast('송장번호를 등록하였습니다.');
             }
         }
     });
@@ -215,6 +225,7 @@ async function Make_Html(params){
     let mTotal = response.totalRs;
     let nPage = response.nPage;
     let html = '';
+    console.log(list);
     if(tcnt > 0) {
         $.each(list, function (index, el) {
             let subHhtml = '';
@@ -223,7 +234,7 @@ async function Make_Html(params){
             let prn_html = '';
 
             if (el.p_type == PACKAGE_READY) {
-                prn_html = `<button class="btnType1-2 h32" type="button" name="btnPrnDelivery" data-pcode="${el.pcode}" >출력</button>`;
+                prn_html = `<button class="prn_label btnType1-2 h32" type="button" name="btnPrnDelivery" data-pcode="${el.pcode}" >출력</button>`;
                 subHhtml = `
                             <td name="tdDeliType"></td>
                             <td name="tdDeliCode"></td>
@@ -234,30 +245,33 @@ async function Make_Html(params){
                 subHhtml = `
                             <td name="tdDeliType" class="row">${delcode_html}</td>
                             <td name="tdDeliCode" class="row deli_btn"><input type="text" name="delicode"  placeholder="송장번호 입력" class="inputType1"></td>
-                            <td name="tdDeliBtn"><button class="btnType1 h32" type="button" name="btnDeliveryInput"  data-pcode="${el.pcode}" >송장입력</button></td>
+                            <td name="tdDeliBtn"><button class="fs14 btnType1 h32" type="button" name="btnDeliveryInput"  data-pcode="${el.pcode}" >송장입력</button></td>
                         `;
-                prn_html = `<button class="btnType10-1 h32" type="button" name="btnPrnDelivery"  data-pcode="${el.pcode}">재출력</button>`;
+                prn_html = `<button class="prn_label btnType10-1 h32" type="button" name="btnPrnDelivery"  data-pcode="${el.pcode}">재출력</button>`;
             }else if (el.p_type == PACKAGE_SHIP_START) {
                 subHhtml = `
                             <td name="tdDeliCode" class="row">${Make_delcode_str(el.delitype)}</td>
                             <td name="tdDeliCode" class="row deli_btn"><a href="#" role="button" class="delicodeA">${el.delicode}</a></td>
                             <td name="tdDeliBtn"></td>
                         `;
-                prn_html = `<button class="btnType10-1 h32" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">재출력</button>`;
+                prn_html = `<button class="prn_label btnType10-1 h32" type="button" name="btn_print" id="btn_print_${el.sn}" onclick="Prn_Package('${el.pcode}')">재출력</button>`;
             }
 
             html += `
-                <tr>
+                <tr class="" id="tr_${el.pcode}">
                     <td class="">${Package_Step_Name(el.p_type)}</td>
                     <td class="row row2"><a href="javascript:void(0);" class="btnPackageDetail" data-pcode="${el.pcode}">${el.pcode}</a></td>
                     <td>${el.cfname}</td>
                     <td>${el.t_cnt}개</td>
-                    <td>${formatWeight(el.t_weight)}</td> 
+                    <td>${formatWeight(el.t_weight)}</td>    
+                    ${subHhtml}
+                    <td>${prn_html}</td>
+                    <td>${el.pa_regdate}</td>
                 </tr>    
             `;
         });
     }else{
-        html = '<td colspan="5">검색된 정보가 없습니다.</td>';
+        html = '<td colspan="10">검색된 정보가 없습니다.</td>';
     }
 
     $('#packagelist').append(html);

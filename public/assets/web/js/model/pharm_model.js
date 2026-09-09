@@ -370,6 +370,19 @@ const pharm_m = {
         return  {
             effect : item.ecnt || 0
         };
+    },
+    /*
+        Use > 약재 생산
+        Prams > hncode , mtcode ,inputMaterial,outputMaterial,p_batchno,birthDate,periodDate,price,gPrice,grade_a,grade_b,grade_c,grade_d,grade_e,test_file
+        return > effect 적용유무
+    */
+    async Insert_Pharm_Medicine_Product(params){
+        const res = await commonRequest('/Insert_Pharm_Medicine_Product',params);
+        if (!res) return { ecnt: 0 };
+        const [item = {}] = res.data || [];
+        return  {
+            effect : item.ecnt || 0
+        };
     }
 
 

@@ -13,11 +13,11 @@
         </div>
         <div class="area filter_box flexType3 mb10">
             <div class="left flexType2">
-                <select name="" id="" class="select_type h32 mr10">
-                    <option value="1">30개</option>
-                    <option value="2">50개</option>
-                    <option value="3">100개</option>
-                </select>
+<!--                <select name="" id="" class="select_type h32 mr10">-->
+<!--                    <option value="1">30개</option>-->
+<!--                    <option value="2">50개</option>-->
+<!--                    <option value="3">100개</option>-->
+<!--                </select>-->
                 <div class="period_box flexType2 mr10">
                     <a href="#" role="button"  class="period active" >오늘</a>
                     <a href="#" role="button" class="period">1개월</a>
@@ -38,23 +38,37 @@
                     <option value="">업체선택</option>
                     <?=$body['option'];?>
                 </select>
+                <button type="button" id="btnTSearch" name="btnTSearch" class="btnType32 ">거래명세서 출력</button>
+
+
+            </div>
+            <div class="right">
                 <input type="search" class="input_search mr10" id="skey" name="skey" placeholder="약재명을 검색하십시오.">
                 <button type="button" id="btnTSearch" name="btnTSearch" class="btnType32-1 ">검색</button>
 
+                <?if(!empty($body['vcode'])){?>
+                    <button type="button" class="btnType32-2 " onclick="go_tradeMedicineList();">전체보기</button>
+                <?}?>
             </div>
-            <?if(!empty($body['vcode'])){?>
-            <button type="button" class="btnType32-2 " onclick="go_tradeMedicineList();">전체보기</button>
-            <?}?>
 
         </div>
-        <div class="dd">
-
-        </div>
+<!--        <div class="area flexType3 mb10">-->
+<!--            <div class="left  ">-->
+<!--                <button type="button" id="btnTSearch" name="btnTSearch" class="btnType32 ">거래명세서 출력</button>-->
+<!---->
+<!--            </div>-->
+<!--            <div class="right">-->
+<!--            </div>-->
+<!---->
+<!--        </div>-->
 
         <div class="area area2">
             <table class="common_table">
                 <thead>
                 <tr>
+                    <th class="ph10">
+                        <input type="checkbox" name="" id="" class=""  >
+                    </th>
                     <th class="row ">날짜</th>
                     <th class="row ">구매/판매</th>
                     <th class="row h_name">약재명</th>
@@ -65,7 +79,7 @@
                     <th class="row ">총 가격</th>
                     <th class="row ">거래일자</th>
                     <th class="row h_code">거래코드</th>
-                    <th class="row">거래명세서</th>
+<!--                    <th class="row">거래명세서</th>-->
                 </tr>
                 </thead>
                 <tbody id="dataList">

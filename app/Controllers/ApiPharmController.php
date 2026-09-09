@@ -17,6 +17,71 @@ class ApiPharmController extends BaseController
         $this->Check_Auth($Auth);
     }
 
+    public function Insert_Pharm_Medicine_Product()
+    {
+        $sessinarr = $this->GetSessionData();
+        if (!$sessinarr['islogin']) {
+            return $this->respond(ResultDTO::fail('NoLogin', [], '로그인이 필요합니다.'));
+        }
+        if (!Check_Token($sessinarr)) {
+            return $this->respond(ResultDTO::fail('Error001', [], '잘못된 토큰입니다.'));
+        }
+        $mi_type = $sessinarr['user']['mi_type'];
+        if (($mi_type != AUTH_MASTER)  && ($mi_type != AUTH_PHARM)) {
+            return $this->respond(ResultDTO::fail('Error002', [], '접근권한이 없습니다.'));
+        }
+        $params = $this->request->getPost('params') ?? [];
+        if (!is_array($params) || empty($params)) {
+            return $this->respond(ResultDTO::fail('Error003', [], '올바른 데이터 형식이 아닙니다.'));
+        }
+        $mi_code = $sessinarr['user']['mi_code'];
+        $file = $this->request->getFile('params.test_file');
+        $uploadedFileName = null;
+        $originalFileName = null;
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $originalFileName = $file->getClientName();
+            $uploadedFileName = $file->getRandomName();
+            $uploadPath = '/assets/product/file/';
+            $file->move($uploadPath, $uploadedFileName);
+        } else {
+            return $this->respond(ResultDTO::fail('Error004', [], '시험성적서 파일 업로드에 실패했습니다.'));
+        }
+
+        $hncode = $params['hncode'];
+        $hpcode = $this->Make_Code(8);
+        $pharm_m = model('Pharm_m');
+        $fields = ['hp_code'];
+        $hnarr = $pharm_m->Load_Pharm_Medicine_Product($hncode,$fields);
+        if(!empty($hnarr)){
+            $batchs = ['is_del' => 1];
+            $hpcodelist = array_column($hnarr, 'hp_code');
+            $Cnt = $pharm_m->Batch_Pharm_Medicine_Price($hpcodelist,$batchs);
+        }
+        $prices = [
+            'fk_hpcode' => $hpcode,
+            'price' => $params['gPrice'],
+            'grade_a' => $params['grade_a'],
+            'grade_b' => $params['grade_b'],
+            'grade_c' => $params['grade_c'],
+            'grade_d' => $params['grade_d'],
+            'grade_e' => $params['grade_e']
+        ];
+        $Cnt = $pharm_m->Insert_Pharm_Medicine_Price($prices);
+        $products = [
+            'hp_code' => $hpcode,
+            'fk_hncode' => $hncode,
+            'hn_batch_no' => $params['p_batchno'],
+            'hn_product_date' => $params['birthDate'],
+            'hn_expired_date' => $params['periodDate'],
+            'hn_exam' => $uploadedFileName
+        ];
+        $effect = $pharm_m->Insert_Pharm_Medicine_Product($products);
+        $i_arr = [
+            'ecnt' => $effect
+        ];
+        return $this->respond(ResultDTO::success($i_arr));
+    }
+
     public function Insert_Pharm_Medicine_GPrice()
     {
         $sessinarr = $this->GetSessionData();

@@ -173,6 +173,13 @@ input[type="radio"] {
 
 
 /* common pop style start  */
+
+.unitType1 {
+    font-size: 14px;
+    margin-left: 10px;
+    color: #5c5c5c;
+}
+
 .common_pop_wrap {
     display: none;
     position: fixed;
@@ -510,102 +517,6 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-
-/* common list style start --------- */
-
-
-.common_page_box {
-    margin-top: 20px;
-    width: 1140px;
-    position:absolute;
-    bottom:20px;
-    left:50%;
-    transform: translateX(-50%);
-}
-
-.common_page_box i {
-    color: #8d8d8d;
-}
-/*order list decoc type page box ---*/
-.common_page_box.old_type {
-    width: 840px;
-
-}
-
-.common_page_box .page {
-    border: none;
-    background-color: transparent;
-    width: 32px;
-    height: 32px;
-}
-
-.common_page_box .page .page_p.active {
-    border-radius: 50%;
-    background-color: var(--main-color);
-    color: #fff;
-    width: 22px;
-    height: 22px;
-}
-
-
-.common_list_wrap {
-    margin-top: 20px;
-    width: 1180px;
-    height: auto;
-    min-height: 780px;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    /*margin-top: 20px;*/
-    position:relative;
-
-}
-
-.common_list_wrap .main_title {
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.common_list_wrap .common_table {
-    /*margin: 0px 20px auto;*/
-    width: 1140px;
-    height: auto;
-    font-size: 14px;
-    border-collapse: collapse;
-    text-align: center;
-
-}
-
-.common_list_wrap .common_table th {
-    font-weight: normal;
-    height: 40px;
-    text-align: center;
-    background-color: #ececec60;
-
-}
-
-.common_list_wrap .common_table td {
-    border-bottom: 1px solid #ccc;
-    height: 40px;
-    text-align: center;
-
-}
-
-.common_list_wrap .common_table .select_type {
-    width: 120px;
-    height: 32px;
-
-}
-
-.common_list_wrap.so_wrap .common_table td:first-child {
-    width: 220px;
-}
-.common_list_wrap.so_wrap .common_table td:nth-child(2) {
-    width: 180px;
-
-}
-
-/* common list style end --------- */
 /* smartOrder_View srart  -------------------------------- */
 .smartwrap {
     width: 1180px;
@@ -2546,6 +2457,22 @@ input[type="radio"] {
     -webkit-box-orient: vertical;
 }
 /* pop_ProduceHerb_View end --------------- */
+/* pop_EditProdHerb_View start --------------- */
+
+.common_pop_wrap .pop_editprodherb_con {
+    /*border:1px solid red;*/
+    width:440px;
+    height: 600px;
+}
+.pop_editprodherb_con .row {
+    margin-bottom: 12px;
+}
+.pop_editprodherb_con .cat {
+    width: 100px;
+    margin-right: 20px;
+    color: #5c5c5c;
+}
+/* pop_EditProdHerb_View end --------------- */
 /* pop_ProduceHerbLog_View start --------------- */
 
 .pop_produceherblog_con {
@@ -7344,7 +7271,6 @@ th, td {
 /*statement_View start ------------*/
 
 .tbl_statement td {
-    border:1px solid red;
     height: 32px !important;
 }
 
@@ -7469,6 +7395,12 @@ th, td {
 
 }
 
+.common_list_wrap.slp_wrap .slp_table .prn_label {
+    width: 66px;
+    font-size: 14px;
+    background-color: transparent;
+}
+
 .common_list_wrap.slp_wrap .slp_table td select.delitype {
     border:1px solid #ccc;
     border-radius: 5px;
@@ -7481,10 +7413,14 @@ th, td {
     height: 24px;
     padding-left: 5px;
 }
+
 .common_list_wrap.slp_wrap .slp_table td.deli_btn .btnType1{
     font-size: 14px;
 
+}
 
+.common_list_wrap.slp_wrap .slp_table tr.active {
+    background-color: var(--main-color20);
 }
 .common_list_wrap.slp_wrap .slp_table td.row2 a{
     text-decoration: underline;
@@ -7525,6 +7461,44 @@ th, td {
 
 .common_list_wrap .common_table.slp_table_detail p.t_value {
     color: #8d8d8d;
+}
+
+.common_list_wrap.slp_wrap .area7 {
+    width: 100%;
+    border-top: 1px solid #ccc;
+}
+
+.common_list_wrap.slp_wrap .set_delityp {
+    /*background-color: #ececec60;*/
+    width: auto;
+    height: 160px;
+    margin-top: 10px;
+    /*margin-top: 20px;*/
+    /*padding-top: 20px;*/
+    /*border-radius: 10px;*/
+    /*border:1px solid red;*/
+}
+
+.common_list_wrap.slp_wrap .delityp {
+    /*margin-right: 40px;*/
+    /*border:1px solid red;*/
+}
+
+.common_list_wrap.slp_wrap .set_delityp div.flexType5 {
+    /*justify-content: flex-end;*/
+    /*border:1px saddlebrown;*/
+    width: 280px;
+    height: 32px;
+    /*margin-bottom: 10px;*/
+}
+.common_list_wrap.slp_wrap .set_delityp .cat {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.common_list_wrap.slp_wrap .set_delityp input,
+.common_list_wrap.slp_wrap .set_delityp select {
+    width: 160px;
 }
 /*shipListPharm_View end ---------------------*/
 /*vendorList_View start ---------------------*/
@@ -7611,9 +7585,6 @@ th, td {
 /*customerList_View end ---------------------*/
 /*materialList_View start ---------------------*/
 
-.common_list_wrap.mlp_wrap {
-    margin-top: 0;
-}
 
 .common_list_wrap.mlp_wrap .common_table th{
     background-color: #ececec60;
@@ -7666,7 +7637,7 @@ p.stock_status.active {
 /*ProdList_View start ---------------------*/
 
 .common_list_wrap.plp_wrap {
-    margin-top: 0;
+    margin-top: 20px;
 }
 
 .common_list_wrap.plp_wrap .common_table th{
@@ -9472,7 +9443,12 @@ p.stock_status.active {
     line-height: 30px;
 }
 
-.hbox1-1-1 > p {
+.hbox1-1-1 span {
+    margin: 0 8px;
+    color: #ccc;
+}
+
+.hbox1-1-1 .text {
     margin-right: 10px;
     color: #5c5c5c;
     cursor: pointer;
@@ -9655,6 +9631,113 @@ p.stock_status.active {
 /*    margin-right: 0px;*/
 /*}*/
 
+
+/* page_box style start --------- */
+
+.page_box {
+    margin: 20px 0;
+    width: 1140px;
+}
+/* page_box style end --------- */
+
+/* common list style start --------- */
+
+
+.common_page_box {
+    /*margin: 20px 0;*/
+    margin-top: 20px;
+    width: 1140px;
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.page_box i,
+.common_page_box i {
+    color: #8d8d8d;
+}
+/*order list decoc type page box ---*/
+.common_page_box.old_type {
+    width: 840px;
+
+}
+.page_box .page,
+.common_page_box .page {
+    border: none;
+    background-color: transparent;
+    width: 32px;
+    height: 32px;
+}
+
+.page_box .page .page_p.active,
+.common_page_box .page .page_p.active {
+    border-radius: 50%;
+    background-color: var(--main-color);
+    color: #fff;
+    width: 22px;
+    height: 22px;
+}
+
+
+.common_list_wrap {
+    /*margin-top: 20px;*/
+    margin: 20px 0;
+    width: 1180px;
+    height: auto;
+    min-height: 780px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px 20px 100px 20px;
+    position:relative;
+
+}
+
+.common_list_wrap .main_title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.common_list_wrap .common_table {
+    /*margin: 0px 20px auto;*/
+    width: 1140px;
+    height: auto;
+    font-size: 14px;
+    border-collapse: collapse;
+    text-align: center;
+
+}
+
+.common_list_wrap .common_table th {
+    font-weight: normal;
+    height: 40px;
+    text-align: center;
+    background-color: #ececec60;
+
+}
+
+.common_list_wrap .common_table td {
+    border-bottom: 1px solid #ccc;
+    height: 40px;
+    text-align: center;
+
+}
+
+.common_list_wrap .common_table .select_type {
+    width: 120px;
+    height: 32px;
+
+}
+
+.common_list_wrap.so_wrap .common_table td:first-child {
+    width: 220px;
+}
+.common_list_wrap.so_wrap .common_table td:nth-child(2) {
+    width: 180px;
+
+}
+
+/* common list style end --------- */
 /* ------------ header_topGnb_View start */
 
 .hbox1-3 {
@@ -9944,6 +10027,132 @@ p.stock_status.active {
 
 
 /* ------------ login_View end */
+/* ------------ join_View start */
+
+.join_contents {
+    /*position: relative;*/
+
+}
+.join_wrap {
+    margin: 0 auto;
+    width:500px;
+    height: auto;
+    /*position: absolute;*/
+    /*left: 50%;*/
+    /*transform: translateX(-50%);*/
+}
+.join_wrap .area1 {
+    /*margin-top: 100px;*/
+    padding-top: 80px;
+    margin-bottom: 40px;
+}
+
+.join_wrap .area2 {
+    width: 100%;
+    border: 1px solid #ececec;
+    border-radius: 20px;
+    padding: 40px 0;
+
+}
+
+.join_wrap .data_box {
+    margin-bottom: 12px;
+}
+
+.join_wrap .data_box .cat{
+    width: 100px;
+    margin-right: 20px;
+    color: #5c5c5c;
+
+}
+
+.join_wrap .data_box .input_type {
+    width:220px;
+    height: 40px;
+    border:none;
+    border-radius: 0;
+    border-bottom: 1px solid #ccc;
+    /*background-color: #ececec40;*/
+}
+
+.join_wrap .data_box .input_type.typ2 {
+    width:70px;
+    height: 40px;
+    border:none;
+    border-radius: 0;
+    border-bottom: 1px solid #ccc;
+    /*background-color: #ececec40;*/
+}
+
+
+
+.join_wrap .data_box .input_type {
+
+}
+
+.join_wrap .btn_box {
+    margin-top: 20px;
+}
+.join_wrap .btn_box .btn_join {
+    /*padding-top: 20px;*/
+    border:none;
+    border-radius: 10px;
+    width: 340px;
+    height: 50px;
+    line-height: 50px;
+    background-color: var(--main-color);
+    font-size: 18px;
+    color: #fff;
+}
+
+.join_wrap #Xbtn {
+    /*color: red;*/
+    position: fixed;
+    top:20px;
+    left:40px;
+    font-size: 30px;
+    /*font-weight: 400;*/
+
+}
+.join_wrap .btn_box .msg {
+    padding: 10px 0;
+    color: #5c5c5c;
+    font-size: 14px;
+}
+
+
+.join_wrap .file_box {
+    width:220px;
+
+}
+.join_wrap .file_input {
+    display: none;
+}
+
+.file_btn {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.file_btn:hover {
+    background: #f5f5f5;
+}
+
+.file_name {
+    display: inline-block;
+    max-width: 220px;
+    margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+/* ------------ join_View end */
 /* itemDetail ------------------------------------------  */
 .detWrap {
     margin: 0 auto;
@@ -10185,7 +10394,7 @@ p.stock_status.active {
 }
 
 .detBox2-1 {
-    margin:40px 0;
+    margin:20px 0;
     width: 1180px;
     display: flex;
     justify-content: center;
@@ -10717,6 +10926,9 @@ button, i {
 
 .mr20 {
     margin-right: 20px;
+}
+.mr40 {
+    margin-right: 40px;
 }
 .ml5 {
     margin-left: 5px;
@@ -11542,6 +11754,9 @@ button, i {
     padding: 10px 0;
 }
 
+.ph10 {
+    padding: 0 10px;
+}
 .ph20 {
     padding: 0px 20px;
 }

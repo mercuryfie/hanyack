@@ -2,9 +2,9 @@ $(document).ready(function() {
     $(document).on('click','button[name="InProduct"]',function(){
         stopScroll();
         Ini_InPop();
-        const hnname = $('#hnname').text();
-        const hpcode = $(this).data('hpcode');
-        const hncode = $('#hncode').text();
+        let hnname = $('#hnname').text();
+        let hpcode = $(this).data('hpcode');
+        let hncode = $('#hncode').text();
         $('#in_hnname').html(hnname);
         $('#btnInStockDo').data('hncode',hncode);
         $('#btnInStockDo').data('hpcode',hpcode);
@@ -12,25 +12,53 @@ $(document).ready(function() {
     }) ;
 
     $(document).on('click','button[name="btnPrdLog"]',function(){
-        // console.log(hpcode);
         let hpcode = $(this).data('code');
         console.log(hpcode);
         go_medicineLog(hpcode);
-
-
-
     }) ;
-    // $(document).on('click','button[name="InProduct"]',function(){
-    //
-    // }
 
+    // $('#realPrice').on('input', function() {
+    $(document).on('click','#realPrice',function(){
+        // $('#realPrice, #defaultPrice').css('color','red');
+        $('#realPrice, #defaultPrice').removeClass('active');
+        $('#realPrice').addClass('active');
+        console.log('dawn21');
+        // $('#realPrice').attr('hello');
+        $('#p_PriceA').val('');
+        $('#p_PriceB').val('');
+        $('#p_PriceC').val('');
+        $('#p_PriceD').val('');
+        $('#p_PriceE').val('');
+    });
 
-    // function Produce_Herb(hncode){
-    //     $('#pop_producelog_herb').hide();
-    //     $('#pop_produce_herb').show();
-    //     console.log(hncode);
-    //
-    // }
+    $(document).on('click','#defaultPrice',function(){
+        const p_gPrice = $.trim($('#p_gPrice').val());
+        if (p_gPrice === '') {
+            alert('근당 가격을 입력하세요.');
+            $('#p_gPrice').focus();
+            return;
+        }
+
+        $('#realPrice').removeClass('active');
+        $('#defaultPrice').addClass('active');
+
+        updateGradePrices(p_gPrice);
+    });
+
+    $('#p_gPrice').on('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+        const gPrice = $(this).val();
+        const wValue = $('#p_hnname').data('wvalue');
+        console.log(wValue);
+        if (!gPrice || !wValue) {
+            $('#p_packagePrice').text('');
+            return;
+        }
+
+        const packagePrice = calculateTotalPriceByWeight(wValue, gPrice);
+        $('#p_packagePrice').text(packagePrice);
+    });
+
 
     $('#InXbtn, #InXbtn2').on('click',function(){
         startScroll();
@@ -53,9 +81,15 @@ $(document).ready(function() {
     });
 
     $('#pop_produce_herb #Xbtn,#pop_produce_herb #Xbtn2').on('click',function (){
-        // startScroll();
+        stopScroll();
         INI_ProdHerb();
         $('#pop_produce_herb').hide();
+    });
+
+    $('#EditProdHerbWrap #Xbtn,#EditProdHerbWrap #Xbtn2').on('click',function (){
+        stopScroll();
+        INI_ProdHerb();
+        $('#EditProdHerbWrap').hide();
     });
 
 
@@ -99,12 +133,34 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('click','a[name="mtname"]',function(){
+    $('#p_InputMaterail, #p_OutputMaterail').on('input', function() {
+        let val = this.value;
+        val = val.replace(/[^0-9.]/g, '');
+        val = val.replace(/^\./, '');
+        const parts = val.split('.');
+        if (parts.length > 2) {
+            val = parts[0] + '.' + parts.slice(1).join('');
+        }
+        this.value = val;
+    });
+
+    $('#p_InputMaterail').on('focusout',function(){
+        const skey = $('#p_InputMaterail').val();
+        if(skey==''){
+            alert('원재료 투입량을 입력하서야 합니다.');
+            setTimeout(function() {
+                $('#p_InputMaterail').focus();
+            }, 10);
+        }
+    });
+
+    $(document).on('click','a[data-role="mtname"]',function(){
         $('#m_skey').val($(this).text().trim());
         $('#mlist').removeClass('active');
         let mtcode = $(this).data('mtcode');
         $('#m_skey').data('mtcode',mtcode);
-        console.log(mtcode);
+        $('#p_InputMaterail').prop('disabled',false);
+        $('#p_InputMaterail').focus();
     });
 
     $('#m_skey').on('focusin',function(){
@@ -135,21 +191,17 @@ $(document).ready(function() {
             const list = response.list;
             const listCnt = response.total;
             let html = '';
-            console.log(response);
 
             if(listCnt > 0){
                 $.each(list, function (index, el) {
-
-                    console.log('dawn1',el.mtcode,el.mtname);
                     html +=`
-                <a href="javascript:;" class="data" data-mtcode="${el.mtcode}" name="mtname">${el.mtname}</a>  
-            `;
+                        <a href="javascript:;" class="data" data-mtcode="${el.mtcode}" data-role="mtname">${el.mtname}</a>  
+                    `;
                 });
             }else{
                 html = `
-                <a href="javascript:;" class="mname" data-mcode="">등록된 원재료가 없습니다.</a> 
-        `;
-                console.log('dawn12');
+                    <a href="javascript:;" class="mname" data-mcode="">등록된 원재료가 없습니다.</a> 
+                `;
             }
             $('#mlist').addClass('active');
             $('#mlist').empty();
@@ -158,46 +210,34 @@ $(document).ready(function() {
     });
 
     $('#prod_herb').on('click',function(e){
-
+        stopScroll();
 
         INI_ProdHerb();
-        console.log('dawn105233');
         let hnname = $(this).data('hnname');
-        $('#mtname').html(hnname);
-        console.log(hnname);
+        $('#p_hnname').html(hnname);
+        let wvalue = $(this).data('wvalue');
+        $('#p_hnname').data('wvalue',wvalue);
 
         $('#pop_produce_herb #mainTitle').html('생산하기');
         $('#pop_produce_herb #btnProdHerb').show();
-        $('#pop_produce_herb #btnEditHerb').hide();
 
         $('#pop_produce_herb').show();
 
     });
 
+    $('#periodDate, #birthDate').on('click', function() {
+        if (typeof this.showPicker === 'function') {
+            this.showPicker();
+        }
+    });
+
     $(document).on('click','button[name="btnEditPrice"]',async function(e){
-
-
-        const skey = $('#hnname').html();
-        const hncode = $('#hncode').html();
-        const skey2 = $('#hnname').data('hnname');
-        console.log(skey);
-        console.log(skey2);
-        console.log(hncode);
-
 
         let hpcode = $(this).data('code');
         INI_ProdHerb();
-        $('#mtname').html(hnname);
-        console.log(hnname);
+        // $('#defaultPrice').addClass('active');
 
-        $('#pop_produce_herb #mainTitle').html('가격 수정하기');
-        $('#pop_produce_herb #btnEditHerb').show();
-        $('#pop_produce_herb #btnProdHerb').hide();
-
-
-        $('#pop_produce_herb').show();
-    // $('button[name="btnEditPrice"]').on('click',function(e){
-
+        $('#EditProdHerbWrap').show();
 
     });
 
@@ -209,7 +249,7 @@ $(document).ready(function() {
     });
 
     $('#pop_produce_herb #Xbtn, #pop_produce_herb #Xbtn2').click(function () {
-
+        startScroll();
         INI_ProdHerb();
         // Ini_Form();
         $('#pop_produce_herb').hide();
@@ -425,9 +465,89 @@ $(document).ready(function() {
         }
     });
 
+    $('#btnProdHerb').on('click',async function(){
+        let hncode = $('#hncode').text();
+        if (!formValidate(hncode, '생산하실 약재를 선택하세요.',$('#hncode'))) return;
 
-    const hncode = $('#hncode').html();
-    let params = {hncode:hncode};
+        let mtcode = $('#m_skey').data('mtcode');
+        if (!formValidate(mtcode, '생산에 필요한 원재료를 검색하세요.')) return;
+
+        let tempMweight = $('#p_InputMaterail').val();
+        if (!formValidate(tempMweight, '생산에 필요한 원재료 투입량을 입력하세요.',$('#p_InputMaterail'))) return;
+        let pUnitType = $('#p_MUnitType').val();
+        let inputMaterial = formatWeightConvert(tempMweight,pUnitType);
+
+        let p_batchno = $('#p_batchno').val();
+        if (!formValidate(p_batchno, '제조번호를 입력하세요.',$('#p_batchno'))) return;
+
+        let birthDate = $('#birthDate').val();
+        if (!formValidate(birthDate, '제조일자를 선택하세요.',$('#birthDate'))) return;
+
+        let periodDate = $('#periodDate').val();
+        if (!formValidate(periodDate, '유통기한를 선택하세요.',$('#periodDate'))) return;
+
+        let tempOweight = $('#p_OutputMaterail').val();
+        if (!formValidate(tempOweight, '생산량을 입력하세요.',$('#p_OutputMaterail'))) return;
+        let oUnitType = $('#p_PUintType').val();
+        let outputMaterial = formatWeightConvert(tempOweight,oUnitType);
+
+        let p_gPrice = $('#p_gPrice').val();
+        if (!formValidate(p_gPrice, '근당가격을 입력하세요.',$('#p_gPrice'))) return;
+
+        let p_PriceA = $('#p_PriceA').val();
+        if (!formValidate(p_PriceA, '등급A 가격을 입력하세요.',$('#p_PriceA'))) return;
+
+        let p_PriceB = $('#p_PriceB').val();
+        if (!formValidate(p_PriceB, '등급B 가격을 입력하세요.',$('#p_PriceB'))) return;
+
+        let p_PriceC = $('#p_PriceC').val();
+        if (!formValidate(p_PriceC, '등급C 가격을 입력하세요.',$('#p_PriceC'))) return;
+
+        let p_PriceD = $('#p_PriceD').val();
+        if (!formValidate(p_PriceD, '등급D 가격을 입력하세요.',$('#p_PriceD'))) return;
+
+        let p_PriceE = $('#p_PriceE').val();
+        if (!formValidate(p_PriceE, '등급E 가격을 입력하세요.',$('#p_PriceE'))) return;
+
+        const fileInput = $('#test_file')[0];
+        if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+            Make_Toast('시험성적서 파일을 선택해주세요.');
+            return;
+        }
+        let test_file = fileInput.files[0];
+        if(window.confirm('생산을 진행하시겠습니까?')==true) {
+            let params = {
+                hncode: hncode,
+                mtcode: mtcode,
+                inputMaterial: inputMaterial,
+                outputMaterial: outputMaterial,
+                p_batchno: p_batchno,
+                birthDate: birthDate,
+                periodDate: periodDate,
+                price: $('#p_packagePrice').text(),
+                gPrice: p_gPrice,
+                grade_a: p_PriceA,
+                grade_b: p_PriceB,
+                grade_c: p_PriceC,
+                grade_d: p_PriceD,
+                grade_e: p_PriceE,
+                test_file: test_file
+            };
+
+            let response = await Model.pharm_m.Insert_Pharm_Medicine_Product(params);
+            let effect = response.effect;
+            if (effect > 0) {
+                Make_Toast('생산을 등록하였습니다.');
+                startScroll();
+                INI_ProdHerb();
+                $('#pop_produce_herb').hide();
+                $('#pageArea').data('page',1);
+                Make_Html(Make_Option());
+            }
+        }
+    });
+
+    let params = {hncode:$('#hncode').html()};
     Make_Html(params);
 });
 
@@ -594,29 +714,61 @@ function Ini_OutPop(){
 }
 
 function INI_ProdHerb() {
-    const $pop = $('#pop_produce_herb');
-
-    $pop.find('input').not(':button, :submit, :reset').val('');
-
-    $pop.find('input[type="file"]').val('');
-    $pop.find('#test_file_name').text('선택된 파일 없음');
-
-    $pop.find('select').prop('selectedIndex', 0);
-
-    $pop.find('#mtname').text('');
-
-    $pop.find('#mlist').empty();
-
-    $pop.find('.right .btnType32').removeClass('active');
-    $pop.find('.right .btnType32').first().addClass('active');
+    clearTestFile();
+    $('#p_MUnitType').val(1);
+    $('#p_PUintType').val(1);
+    // $('#realPrice, #defaultPrice').removeClass('active');
+    $('#m_skey').val('');
+    $('#m_skey').data('mtcode','');
+    $('#p_InputMaterail').val('');
+    $('#p_InputMaterail').prop('disabled',true);
+    $('#p_OutputMaterail').val('');
     $('#mlist').empty();
+    $('#p_batchno').val('');
+
+    const today = new Date();
+    $('#birthDate').val(formatDate(today));
+    $('#periodDate').val(formatDate(today));
+
+    $('#p_gPrice').val('');
+    $('#p_packagePrice').html('');
+    $('#p_PriceA').val('');
+    $('#p_PriceB').val('');
+    $('#p_PriceC').val('');
+    $('#p_PriceD').val('');
+    $('#p_PriceE').val('');
 }
 
 
 function Make_Option(){
     return {
-        'page' : 0,
-        'pCnt' : 0
+        page : $('#pageArea').data('page'),
+        pCnt : $('#pageArea').data('pcnt'),
+        hncode:$('#hncode').html()
     };
 }
 
+
+function updateGradePrices(p_gPrice) {
+    const $btn = $('#defaultPrice');
+    const gradeA = $btn.data('gradea');
+    const gradeB = $btn.data('gradeb');
+    const gradeC = $btn.data('gradec');
+    const gradeD = $btn.data('graded');
+    const gradeE = $btn.data('gradee');
+
+    $('#p_PriceA').val(getDiscountPrice(p_gPrice, gradeA));
+    $('#p_PriceB').val(getDiscountPrice(p_gPrice, gradeB));
+    $('#p_PriceC').val(getDiscountPrice(p_gPrice, gradeC));
+    $('#p_PriceD').val(getDiscountPrice(p_gPrice, gradeD));
+    $('#p_PriceE').val(getDiscountPrice(p_gPrice, gradeE));
+}
+
+function clearTestFile() {
+    $('#test_file').val('');
+    if ($('#test_file')[0]) {
+        $('#test_file')[0].value = '';
+    }
+
+    $('#test_file_name').text('선택된 파일 없음');
+}

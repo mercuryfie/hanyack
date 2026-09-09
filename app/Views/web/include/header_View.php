@@ -78,7 +78,9 @@
 
                 <div class="hbox1-1">
                     <div class="hbox1-1-1">
-                        <p><a href="javascript:void(0);" onclick="go_login();">로그인</a></p>
+                        <a href="javascript:void(0);" onclick="go_login();" class="text">로그인</a>
+                        <span> | </span>
+                        <a href="javascript:void(0);" onclick="go_join();" class="text">회원가입</a>
                     </div>
                 </div>
                 <div class="hbox1-2">

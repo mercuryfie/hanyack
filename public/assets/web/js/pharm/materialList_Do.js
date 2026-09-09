@@ -431,15 +431,16 @@ async function Make_Html(params){
                     <td>${el.mtcode}</td>
                     <td>${el.mtname}</td>
                     <td>${formatWeight(el.current_stock)}</td>
-                    <td>${formatWeight(el.optimal_stock)}</td>
-                    <td>
-                        <button type="button" class="btnType1 mr5" name="btnStockInput" >입고</button>
-                        <button type="button" class="btnType1" name="btnStockOutout" >출고</button>
-                    </td>
+                    <td>${formatWeight(el.optimal_stock)}</td> 
                     <td>
                         ${s_stats}
                     </td>
                     <td>${el.last_stock_update}</td>
+                    
+                    <td>
+                        <button type="button" class="btnType1 mr5" name="btnStockInput" >입고</button>
+                        <button type="button" class="btnType1" name="btnStockOutout" >출고</button>
+                    </td>
                     <td>
                         <button type="button" class="btnType1" name="btnMtLog"  >
                             <i class="fa-solid fa-ellipsis-vertical"></i>

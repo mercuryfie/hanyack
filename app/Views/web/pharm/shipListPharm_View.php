@@ -40,20 +40,29 @@
             <p class="sub_title">배송 목록</p>
         </div>
         <div class="area area4">
-            <table class="common_table slp_table">
+            <table class="common_table slp_table" id="ship_list_tbl" name="">
                 <thead>
                 <tr>
                     <th class="merlirow">상태</th>
                     <th class="merlirow">배송코드</th>
                     <th class="merlirow">업체명</th>
-                    <th class="merlirow">총 갯수</th>
+                    <th class="merlirow">총 수량</th>
                     <th class="merlirow">총 무게</th>
+                    <th class="merlirow">배송타입</th>
+                    <th class="merlirow">송장번호</th>
+                    <th class="merlirow">입력</th>
+                    <th class="merlirow">출력</th>
+                    <th class="merlirow">등록일</th>
                 </tr>
                 </thead>
                 <tbody id="packagelist" name="packagelist">
 
                 </tbody>
             </table>
+        </div><div class="area area8">
+            <div class="page_box flexType1" id="pageArea" data-page="1" >
+            </div>
+
         </div>
         <div class="area area5">
             <p class="sub_title">배송 상세</p>
@@ -64,11 +73,14 @@
             <table class="common_table slp_table_detail">
                 <thead>
                 <tr>
+                    <th class="merlirow">
+                        <input type="checkbox" name="" id="" class="input_check">
+                    </th>
                     <th class="merlirow fixed_w">
                         <div class="flexCol2">
                             <p class="cat">요청코드</p>
-                            <p class="cat">배송코드</p>
-                            <p class="cat">제품코드</p>
+<!--                            <p class="cat">배송코드</p>-->
+<!--                            <p class="cat">제품코드</p>-->
                         </div>
                     </th>
                     <th class="merlirow fixed_w">
@@ -77,29 +89,49 @@
                             <p class="t_value">구분/가공방법</p>
                         </div>
                     </th>
-                    <th class="merlirow">갯수</th>
+                    <th class="merlirow">수량</th>
                     <th class="merlirow">포장단위(g)</th>
                     <th class="merlirow fixed_w2">출하예정일자</th>
-                    <th class="merlirow">발송타입</th>
-                    <th class="merlirow fixed_w2">송장번호</th>
-                    <th class="merlirow fixed_w2">등록일</th>
-                    <th class="merlirow">출력</th>
                     <th class="merlirow">초기화</th>
                 </tr>
                 </thead>
 
                 <tbody id="packagelistinfo" name="packagelistinfo">
 
-
                 </tbody>
             </table>
         </div>
 
-        <div class="area area7">
-            <div class="common_page_box flexType1" id="pageArea" data-page="1" >
+        <div class="area area7 flexType3-1">
+            <div class="left"></div>
+            <div class="set_delityp flexType2-1">
+                <div class="delityp flexType2 mr40 mb10">
+                    <p class="cat mr10">배송방법</p>
+                    <select name="" id="" class="inputType1">
+                        <option value="">11</option>
+                        <option value="">22</option>
+                        <option value="">33</option>
+                    </select>
+                </div>
+                <div class="delityp flexType2 mr40 mb10">
+                    <p class="cat mr10">송장번호</p>
+                    <input type="search" name="" id="" class="inputType1" placeholder="송장번호 입력">
+                </div>
+                <div class="delityp flexType2  mb10">
+
+                    <button type="button" class="btnType32" onclick="go_productList('2')">
+                        확인
+                    </button>
+                </div>
             </div>
 
+
         </div>
+<!--        <div class="area area8">-->
+<!--            <div class="common_page_box flexType1" id="pageArea" data-page="1" >-->
+<!--            </div>-->
+<!---->
+<!--        </div>-->
     </div>
 </section>
 

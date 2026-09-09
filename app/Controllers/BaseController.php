@@ -664,16 +664,27 @@ abstract class BaseController extends Controller
         $Cnt = $log_m->Insert_Log($param);
     }
 
+
     public function Check_Auth($AuthList){
+
+        $request = service('request');
+
+        $isAjax = $request->isAJAX();
+        $isJson = $request->hasHeader('Content-Type') && str_contains($request->header('Content-Type')->getValue(), 'application/json');
+        $wantsJson = $request->hasHeader('Accept') && str_contains($request->header('Accept')->getValue(), 'application/json');
+        $isApi = ($isAjax || $isJson || $wantsJson);
+
         $sessinarr = $this->GetSessionData();
         if(!$sessinarr['islogin']){
-            fn_Href('/Member/Login');
+            if (!$isApi) {
+                fn_Href('/Member/Login');
+            }
         } else {
             $auth = $sessinarr['user']['mi_type'];
-
-            // $auth가 $AuthList 배열 안에 있는지 검사
             if(!in_array($auth, $AuthList)){
-                fn_Alert('접근 권한이 없는 기능입니다. 다시 시도하여주세요', '/');
+                if (!$isApi) {
+                    fn_Alert('접근 권한이 없는 기능입니다. 다시 시도하여주세요', '/');
+               }
             }
         }
     }
@@ -717,7 +728,7 @@ abstract class BaseController extends Controller
             $rnd = mt_rand(100000, 999999);
             $code = 'HB'. $timeNow.$rnd;
         }else if($type==8){
-            $rnd = mt_rand(100000, 999999);
+            $rnd = mt_rand(10000, 99999);
             $code = 'PRD'. $timeNow.$rnd;
         }else if($type==9){
             $rnd = mt_rand(10000, 99999);

@@ -53,13 +53,23 @@ async function commonRequest(endpoint, params) {
                     requestBody.append(`params[${key}]`, value);
                 }
             }
-        } else {
+        }else if (params && typeof params === 'object' && Object.values(params).some(v => v instanceof Blob || v instanceof File)) {
+            requestBody = new FormData();
+            for (let key in params) {
+                if (params[key] !== undefined && params[key] !== null) {
+                    requestBody.append(`params[${key}]`, params[key]);
+                }
+            }
+        }else {
             requestBody = (params && params.hasOwnProperty('params')) ? params : { params: params };
         }
 
         const res = await Fetch_API(endpoint, requestBody);
         if (!res) return null;
         if (res.status === 'ok') return res;
+        if (res.status === 'NoAuth') {
+            Make_Toast('접근 권한이 없는 기능입니다.');
+        }
         if (res.status === 'NoLogin') {
             console.warn('로그인 세션이 만료되었습니다.');
             if (!isRedirectingToLogin) {

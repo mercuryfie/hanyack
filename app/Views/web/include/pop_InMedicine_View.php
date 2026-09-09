@@ -6,10 +6,12 @@
             <i class="fa-solid fa-xmark " id="InXbtn"></i>
         </div>
         <div class="area flexType2 mb10">
+            <p class="must"></p>
             <p class="cat">약재명</p>
             <p class="data" id="in_hnname"></p>
         </div>
         <div class="area flexType2 mb10">
+            <p class="must"></p>
             <p class="cat">사유</p>
             <select name="input_cause" id="in_reason" class="select_type">
                 <option value="">선택하세요.</option>
@@ -20,6 +22,7 @@
             </select>
         </div>
         <div class="area vendor mb10 flexType2-1" id="vendor1">
+            <p class="must"></p>
             <p class="cat">업체명</p>
             <div class="search_box" id="s_list">
                 <input type="search" class="input_type mr10" placeholder="업체명 입력 후 엔터" id="v_skey" name="v_skey">
@@ -29,10 +32,12 @@
             </div>
         </div>
         <div class="area  mb10 flexType2"  id="">
+            <p class="must"></p>
             <p class="cat">단위 무게</p>
             <p class="data">600g</p>
         </div>
         <div class="area price mb10 flexType2"  id="vendor3">
+            <p class="must"></p>
             <p class="cat">구매 단가</p>
             <input type="number" class="input_type" id="v_unitprice" placeholder="숫자만">원
         </div>
@@ -44,18 +49,22 @@
 <!--            </div>-->
         </div>
         <div class="area  mb10 flexType2"  id="">
+            <p class="must"></p>
             <p class="cat">총 무게</p>
             <p class="data">-</p>
         </div>
         <div class="area price mb10 flexType2"  id="vendor2">
+            <p class="must"></p>
             <p class="cat">구매 총액</p>
             <input type="number" class="input_type" id="v_price" placeholder="숫자만">원
         </div>
         <div class="area flexType2 mb10" id="">
+            <p class="must"></p>
             <p class="cat">날짜</p>
             <input type="date" class="input_date" id="in_indate">
         </div>
         <div class="area  flexType2-1 mb10">
+            <p class="notmust"></p>
             <p class="cat">비고</p>
             <textarea  id="in_memo" cols="30" rows="10" placeholder=""></textarea>
 

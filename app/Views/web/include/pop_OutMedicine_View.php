@@ -5,10 +5,12 @@
             <i class="fa-solid fa-xmark " id="OutXbtn"></i>
         </div>
         <div class="area  flexType2 mb10">
+            <p class="must"></p>
             <p class="cat">약재명</p>
             <p class="data" id="out_hnname"></p>
         </div>
         <div class="area  flexType2 mb10">
+            <p class="must"></p>
             <p class="cat">사유</p>
             <select name="out_reason" id="out_reason" class="select_type">
                 <option value="">선택하세요.</option>
@@ -19,7 +21,10 @@
             </select>
         </div>
         <div class="area vendor mb10 flexType2-1" id="vendor4">
-            <p class="cat">업체명</p>
+            <div class="flexType2">
+                <p class="must"></p>
+                <p class="cat">업체명</p>
+            </div>
             <div class="search_box" id="so_list">
                 <input type="search" class="input_type mr10" placeholder="업체명 입력 후 엔터" id="vo_skey" name="vo_skey">
                 <div class="result_box flexCol" id="vo_list" name="vo_list">
@@ -28,27 +33,33 @@
             </div>
         </div>
         <div class="area  mb10 flexType2"  id="">
+            <p class="must"></p>
             <p class="cat">단위 무게</p>
             <p class="data">600g</p>
         </div>
         <div class="area price mb10 flexType2"  id="vendor6">
+            <p class="must"></p>
             <p class="cat">판매 단가</p>
             <input type="number" class="input_type" id="vo_unitprice">원
         </div>
         <div class="area flexType2 mb10 unit">
+            <p class="must"></p>
             <p class="cat">수량</p>
             <input type="number" class="input_type" id="in_stock">
             <p class="ml5 unit">개</p>
         </div>
         <div class="area  mb10 flexType2"  id="">
+            <p class="must"></p>
             <p class="cat">총 무게</p>
             <p class="data">-</p>
         </div>
         <div class="area price mb10 flexType2"  id="vendor5">
+            <p class="must"></p>
             <p class="cat">판매 총액</p>
             <input type="number" class="input_type" id="vo_price">원
         </div>
         <div class="area flexType2 mb10" >
+            <p class="must"></p>
             <p class="cat">날짜</p>
             <input type="date" class="input_date" id="out_indate">
         </div>
@@ -64,6 +75,7 @@
 <!--            </div>-->
 <!--        </div>-->
         <div class="area  flexType2-1 mb10">
+            <p class="notmust"></p>
             <p class="cat">비고</p>
             <textarea name="out_memo" id="out_memo" cols="" rows="" placeholder="비고란입니다"></textarea>
 

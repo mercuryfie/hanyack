@@ -81,7 +81,9 @@
 
                 <div class="hbox1-1">
                     <div class="hbox1-1-1">
-                        <p><a href="javascript:void(0);" onclick="go_login();">로그인</a></p>
+                        <p><a href="javascript:void(0);" onclick="go_login();">로그인11</a></p>
+                        <span> | </span>
+                        <a href="javascript:void(0);" onclick="go_join();">회원가입</a>
                     </div>
                 </div>
                 <div class="hbox1-2">
@@ -199,8 +201,8 @@
                             <a href="javascript:void(0);" onclick="go_claimList();" class="sub_menu">취소·반품내역</a>
                         </div>
                         <div class="sub_menu_box ">
-                            <a href="javascript:void(0);" onclick="go_setPrice();" class="sub_menu">나의정보</a>
-                            <a href="javascript:void(0);" onclick="go_setPrice();" class="sub_menu">가격설정</a>
+                            <a href="javascript:void(0);" onclick="go_memberList();" class="sub_menu">회원관리</a>
+<!--                            <a href="javascript:void(0);" onclick="go_setPrice();" class="sub_menu">가격설정</a>-->
                         </div>
 <!--                        <div class="sub_menu_box ">-->
 <!--                        </div>-->

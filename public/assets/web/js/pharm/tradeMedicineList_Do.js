@@ -116,6 +116,9 @@ async function Make_Html(params){
 
             html += `
                  <tr>
+                    <td>
+                        <input type="checkbox" name="" id="" class=""  >
+                    </td>
                     <td>${el.reg_date}</td>
                     <td>${strstock}</td>
                     <td>${el.hnname}</td> 
@@ -126,10 +129,7 @@ async function Make_Html(params){
                     <td>-</td>  
                     <td>${number_format(el.price || 0)}원</td>
                     <td>${el.reg_date}</td> 
-                    <td>${el.tcode}</td> 
-                    <td class="row receipt">
-                        <button type="button" class="btnType1 " name="" ><i class="fa-solid fa-receipt"></i></button>
-                    </td>
+                    <td>${el.tcode}</td>  
                 </tr>
            `;
         });

@@ -20,7 +20,7 @@
             </div>
             <div class="right">
                 <button type="button" id="" name="" class="btnType32-2 mr10" onclick="go_herbList()" >목록으로</button>
-                <button type="button" id="prod_herb" name="prod_herb" class="btnType32-1" data-hnname="<?=$body['hnname'];?>">생산하기</button>
+                <button type="button" id="prod_herb" name="prod_herb" class="btnType32-1" data-hnname="<?=$body['hnname'];?>" data-wvalue="<?=$body['wvalue'];?>">생산하기</button>
 
             </div>
         </div>
@@ -54,7 +54,7 @@
         </div>
 
         <div class="common_page_box flexType1 " id="pageArea" data-page="1" data-pcnt="<?=$body['pcnt'];?>">
-<!--        <div class="common_page_box flexType1 " id="" data-page="1" data-pcnt="">-->
+
         </div>
 
     </div>
@@ -64,5 +64,6 @@
 <?= $this->include("/web/include/pop_InMedicine_View") ?>
 <?= $this->include("/web/include/pop_OutMedicine_View") ?>
 <?= $this->include("/web/include/pop_ProduceHerb_View") ?>
+<?= $this->include("/web/include/pop_EditProdHerb_View") ?>
 
 <?= $this->endSection() ?>

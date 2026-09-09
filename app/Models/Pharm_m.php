@@ -15,6 +15,78 @@ class Pharm_m extends Model
         $this->db = Database::connect('default');
     }
 
+    public function Insert_Pharm_Medicine_Price($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_pharm_price');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }
+        return $insertID;
+    }
+
+    public function Batch_Pharm_Medicine_Price($hnarr,$params){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_pharm_price');
+        $builder->whereIn('fk_hpcode', $hnarr);
+        $builder->update($params);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }
+        return $affected_rows;
+    }
+
+    public function Update_Pharm_Medicine_Price($hpcode,$params){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_pharm_price');
+        $builder->where('fk_hncode', $hpcode);
+        $builder->update($params);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }
+        return $affected_rows;
+    }
+
+    public function Load_Pharm_Medicine_Product($hncode, $fields = ['ALL']){
+        $separated_val = fn_Make_Fields($fields);
+        $builder = $this->db->table('herb_medicine_pharm_product');
+        $builder->select($separated_val);
+        $builder->where('fk_hncode', $hncode);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function Update_Pharm_Medicine_Product($hncode,$params){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_pharm_product');
+        $builder->where('fk_hncode', $hncode);
+        $builder->update($params);
+        $affected_rows = $this->db->affectedRows();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }
+        return $affected_rows;
+    }
+
+    public function Insert_Pharm_Medicine_Product($param){
+        $this->db->transStart();
+        $builder = $this->db->table('herb_medicine_pharm_product');
+        $builder->insert($param);
+        $insertID = $this->db->insertID();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }
+        return $insertID;
+    }
+
     public function Insert_Pharm_Medicine_GPrice($param){
         $this->db->transStart();
         $builder = $this->db->table('herb_pharm_medicine_price_group');

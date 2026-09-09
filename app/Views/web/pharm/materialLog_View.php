@@ -4,7 +4,7 @@
 <section class="merright">
     <div class="common_list_wrap mlogp_wrap">
         <div class="area mb10">
-            <p class="main_title ">원재료 입출고 로그</p>
+            <p class="main_title ">원재료 입출고 내역</p>
         </div>
         <div class="area area2 mb10 flexType3-1">
             <div class="left">

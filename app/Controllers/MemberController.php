@@ -150,4 +150,38 @@ class MemberController extends BaseController
 
 
     }
+
+    public function Join()
+    {
+        $sessinarr = $this->GetSessionData();
+
+        helper(filenames: 'cookie');
+        $saveid = get_cookie(index: 'dj_save');
+
+        $prev_url = previous_url();
+        if ($prev_url == '' || stripos($prev_url, 'login') !== false) {
+            $rec_url = '';
+        } else {
+            $rec_url = $prev_url;
+        }
+
+        $data = [
+            'saveid' => $saveid,
+            'rec_url' => $rec_url
+        ];
+
+        $metaarr = [
+            'h_title' => '로그인',
+            'h_type' => 1
+        ];
+
+        $form = new Form;
+        $main_data = [
+            'meta' => $form->fnMake_Meta($metaarr),
+            'header' => $form->fnMake_Header($sessinarr),
+            'main' => $data
+        ];
+
+        return view('web/common/join_View', $main_data);
+    }
 }

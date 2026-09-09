@@ -42,9 +42,9 @@
                     <th class="row h_name">약재명</th>
                     <th class="row ">총재고</th>
                     <th class="row ">적정재고</th>
-                    <th class="row">입출고</th>
                     <th class="row status">상태</th>
                     <th class="row">최종일자</th>
+                    <th class="row">입출고</th>
                     <th class="row">입출고내역</th>
                     <th class="row">수정</th>
                     <th class="row">삭제</th>

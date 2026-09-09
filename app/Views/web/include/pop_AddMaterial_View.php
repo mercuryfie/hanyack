@@ -13,14 +13,18 @@
             </div>
         </div>
         <div class="area  flexType2 mb10">
+            <p class="must"></p>
             <p class="cat">이름</p>
             <input type="search" class="input_type" id="mtname" name="mtname">
         </div>
         <div class="area  flexType2 mb10">
+            <p class="must"></p>
             <p class="cat">기본손실률</p>
-            <input type="number" class="input_type" id="waste_rate" name="waste_rate"> %
+            <input type="number" class="input_type" id="waste_rate" name="waste_rate">
+            <p class="unit">%</p>
         </div>
         <div class="area optimal flexType2 mb10">
+            <p class="must"></p>
             <p class="cat">적정재고량</p>
             <div class="wrap_div flexType2">
                 <input type="number" class="input_type" id="optimal_stock" name="optimal_stock">
@@ -32,6 +36,7 @@
             </div>
         </div>
         <div class="area  flexType2-1 mb10">
+            <p class="notmust"></p>
             <p class="cat">비고</p>
             <textarea name="memo" id="memo" cols="30" rows="10" placeholder="비고란입니다"></textarea>
 

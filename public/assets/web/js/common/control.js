@@ -336,16 +336,16 @@ function Package_Step_Name(step) {
 
 
 function Make_Toast(msg){
-    const div = document.createElement('div');
-    div.classList.add('toastBox');
-    div.innerHTML = msg.replace(/\n/g, '<br>');  // \n을 <br>로 바꿈
-    document.body.appendChild(div);
-
-    setTimeout(() => {
-        div.remove();
-    }, 1500);
-    // const formattedMsg = msg.replace(/\\n/g, '\n');
-    // alert(formattedMsg);
+    // const div = document.createElement('div');
+    // div.classList.add('toastBox');
+    // div.innerHTML = msg.replace(/\n/g, '<br>');  // \n을 <br>로 바꿈
+    // document.body.appendChild(div);
+    //
+    // setTimeout(() => {
+    //     div.remove();
+    // }, 1500);
+    const formattedMsg = msg.replace(/\\n/g, '\n');
+    alert(formattedMsg);
 }
 
 
@@ -470,6 +470,11 @@ function go_logout(){
 
 function go_login(){
     var url = "/Member/Login";
+    $(location).attr("href", url);
+}
+
+function go_join(){
+    var url = "/Member/Join";
     $(location).attr("href", url);
 }
 
@@ -909,7 +914,7 @@ function go_setPrice(){
     }
 }
 
-function go_setPrice(){
+function go_memberList(){
     let uid = $('#tUid').val();
     let url = '';
     if(uid==''){
@@ -917,7 +922,7 @@ function go_setPrice(){
         $(location).attr("href", url);
     }else{
         let tUrl = $('#tUrl').val();
-        url = tUrl + "/setprice";
+        url = tUrl + "/memberlist";
         $(location).attr("href", url);
     }
 }
@@ -1163,6 +1168,20 @@ function barcodePreview(code) {
 }
 
 
+function statementPreview(code) {
+    let uid = $('#tUid').val();
+    let url = '';
+    if (uid == '') {
+        url = '/Member/Login';
+        $(location).attr("href", url);
+    } else {
+        let tUrl = $('#tUrl').val();
+        url = tUrl + "/settings/prdBarcodePreview?hn=" + code;
+        window.open(url, 'barcodePopup', 'width=800,height=1080,resizable=yes,scrollbars=yes');
+    }
+}
+
+
 
 function dataCopy(text) {
     let textArea = document.createElement("textarea");
@@ -1380,4 +1399,62 @@ function Material_InStock_Reason(reason){
         case 4: return "기타";
         default: return '기타';
     }
+}
+
+/**
+ * 원래 가격과 변동률(%)을 받아 최종 조정 금액을 반환
+ * - rate > 0 : 인상(할증)
+ * - rate === 0: 원래 가격
+ * - rate < 0 : 할인(인하)
+ * @param {number|string} price - 원래 가격 (예: 10000, "10,000")
+ * @param {number|string} rate - 변동률 (%) (예: 10, 0, -20)
+ * @returns {number} 최종 금액
+ */
+ function getDiscountPrice(price, rate) {
+    // 콤마 및 문자 제거 후 숫자로 변환 (음수 부호 '-' 유지)
+    const p = parseFloat(String(price).replace(/[^0-9.-]/g, '')) || 0;
+    const r = parseFloat(String(rate).replace(/[^0-9.-]/g, '')) || 0;
+
+    // 0이면 원가 그대로 반환
+    if (r === 0) {
+        return p;
+    }
+
+    // rate > 0 이면 더해지고(+), rate < 0 이면 차감(-) 처리
+    return Math.floor(p * (1 + r / 100));
+}
+
+/**
+ * 총 무게(g)와 1근(600g) 가격을 받아 총 가격을 계산
+ * @param {number|string} totalWeight - 총 무게(g) (예: 1200, "1,200g")
+ * @param {number|string} pricePerGeun - 1근(600g)당 가격 (예: 15000, "15,000")
+ * @returns {number} 계산된 총 가격
+ */
+function calculateTotalPriceByWeight(totalWeight, pricePerGeun) {
+    const weight = parseFloat(String(totalWeight).replace(/[^0-9.-]/g, '')) || 0;
+    const price = parseFloat(String(pricePerGeun).replace(/[^0-9.-]/g, '')) || 0;
+
+    if (weight <= 0 || price <= 0) return 0;
+
+    return Math.floor((weight / 600) * price);
+}
+
+/**
+ * 입력값의 유효성(빈 값 및 공백 여부)을 검증하고 실패 시 안내 메시지와 포커스를 처리하는 함수
+ *
+ * @param {string|number} value - 검증할 값
+ * @param {string} msg - 검증 실패 시 표시할 토스트 메시지
+ * @param {jQuery} [$focusTarget] - (선택) 검증 실패 시 포커스를 이동할 jQuery 요소 객체
+ * @returns {boolean} 값이 유효하면 true, 빈 값이면 false 반환
+ *
+ * @example
+ * if (!validate($('#m_skey').val(), '원재료명을 입력하세요.', $('#m_skey'))) return;
+ */
+function formValidate(value, msg, $focusTarget) {
+    if (!value || !$.trim(value)) {
+        Make_Toast(msg);
+        if ($focusTarget) $focusTarget.focus();
+        return false;
+    }
+    return true;
 }

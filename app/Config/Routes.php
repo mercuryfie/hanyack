@@ -11,11 +11,11 @@ $routes->GET('/', 'MainController::Main');
 
 /* Login */
 $routes->GET('Member/Login','MemberController::Login');
+$routes->GET('Member/Join','MemberController::Join');
 $routes->match(['GET', 'POST'], 'Member/Login_Do', 'MemberController::Login_Do');
 $routes->GET('Member/Logout','MemberController::LogOut');
 
 /* Order */
-
 $routes->GET('Order/Cart','OrderController::Cart');
 
 /* Product */
@@ -72,7 +72,7 @@ $routes->match(['GET', 'POST'], 'Api/Load_Pharm_MedicineLog', 'ApiPharmControlle
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Medicine_TradeList', 'ApiPharmController::Load_Pharm_Medicine_TradeList');
 $routes->match(['GET', 'POST'], 'Api/Load_Pharm_Medicine_GPrice', 'ApiPharmController::Load_Pharm_Medicine_GPrice');
 $routes->match(['GET', 'POST'], 'Api/Insert_Pharm_Medicine_GPrice', 'ApiPharmController::Insert_Pharm_Medicine_GPrice');
-
+$routes->match(['GET', 'POST'], 'Api/Insert_Pharm_Medicine_Product', 'ApiPharmController::Insert_Pharm_Medicine_Product');
 
 
 $routes->match(['GET', 'POST'], 'Api/Load_Product_Info', 'ApiController::Load_Product_Info');
@@ -196,6 +196,7 @@ $routes->GET('Mypharm/claimList','HerbPharmController::claimList');
 $routes->GET('Mypharm/deliveryInfo','HerbPharmController::deliveryInfo');
 $routes->GET('Mypharm/PrnInfo','HerbPharmController::PrnInfo');
 $routes->GET('Mypharm/setprice','HerbPharmController::SetPrice');
+$routes->GET('Mypharm/memberlist','HerbPharmController::MemberList');
 
 /*  탕전실   */
 $routes->GET('Mydecoc/','HerbDecocController::dashBoard');
